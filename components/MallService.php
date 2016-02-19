@@ -14,21 +14,21 @@ class MallService {
 	public static function  getMainPage()
 	{
 		$response = array(
-			'1' => 'True',
-			'2' => 'True',
-			'3' => 'True',
-			'4' => 'True',
-			'5' => 'True',
-			'6' => 'True',
-			'7' => 'True',
-			'8' => 'True',
-			'9' => 'True',
-			'10' => 'True',
-			'11' => 'True',
-			'12' => 'True',
-			'13' => 'True',
-			'14' => 'True',
-			'15' => 'True',
+			'1' => 'Open',
+			'2' => 'Open',
+			'3' => 'Open',
+			'4' => 'Open',
+			'5' => 'Open',
+			'6' => 'Open',
+			'7' => 'Open',
+			'8' => 'Open',
+			'9' => 'Open',
+			'10' => 'Open',
+			'11' => 'Open',
+			'12' => 'Open',
+			'13' => 'Open',
+			'14' => 'Open',
+			'15' => 'Close',
 		);
 		return $response;
 	}
