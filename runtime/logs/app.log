@@ -26772,3 +26772,354 @@ Stack trace:
     'REQUEST_TIME_FLOAT' => 1455700095.735
     'REQUEST_TIME' => 1455700095
 ]
+2016-02-19 06:28:45 [192.168.9.164][100][-][error][yii\base\ErrorException:2] exception 'yii\base\ErrorException' with message 'json_decode() expects parameter 1 to be string, array given' in /var/www/cruiseapi/controllers/MallController.php:24
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): app\controllers\MallController->actionGetmainpage()
+#1 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): ::call_user_func_array()
+#2 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams()
+#3 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction()
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest()
+#6 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#7 {main}
+2016-02-19 06:28:45 [192.168.9.164][100][-][info][application] $_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.9.164'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '0'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at 192.168.9.164 Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => '192.168.9.164'
+    'SERVER_ADDR' => '192.168.9.164'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.9.164'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '44138'
+    'REDIRECT_URL' => '/mall/getmainpage'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/mall/getmainpage'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/mall/getmainpage'
+    'PATH_TRANSLATED' => 'redirect:/index.php/mall/getmainpage/getmainpage'
+    'PHP_SELF' => '/index.php/mall/getmainpage'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1455863325.773
+    'REQUEST_TIME' => 1455863325
+]
+2016-02-19 06:29:53 [192.168.9.164][-][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request: mall/getcomment' in /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php:122
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('getcomment', Array)
+#1 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('mall/getcomment', Array)
+#2 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#3 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#4 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Page not found.' in /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php:96
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2016-02-19 06:29:53 [192.168.9.164][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.9.164
+    in /var/www/cruiseapi/views/layouts/main.php:70
+2016-02-19 06:29:53 [192.168.9.164][-][-][info][application] $_POST = [
+    'product_id' => '49'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.9.164'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '13'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at 192.168.9.164 Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => '192.168.9.164'
+    'SERVER_ADDR' => '192.168.9.164'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.9.164'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '44147'
+    'REDIRECT_URL' => '/mall/getcomment'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/mall/getcomment'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/mall/getcomment'
+    'PATH_TRANSLATED' => 'redirect:/index.php/mall/getcomment/getcomment'
+    'PHP_SELF' => '/index.php/mall/getcomment'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1455863393.147
+    'REQUEST_TIME' => 1455863393
+]
+2016-02-19 06:40:17 [192.168.9.164][100][-][error][yii\base\ErrorException:2] exception 'yii\base\ErrorException' with message 'Illegal offset type' in /var/www/cruiseapi/components/MallService.php:17
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): app\controllers\MallController->actionGetmainpage()
+#1 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): ::call_user_func_array()
+#2 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams()
+#3 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction()
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest()
+#6 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#7 {main}
+2016-02-19 06:40:17 [192.168.9.164][100][-][info][application] $_POST = [
+    'product_id' => '49'
+]
+
+$_COOKIE = [
+    '_csrf' => 'efdbed2227d8facb0387e2be11eef0077b39438f1278eb87298b563c2806453fa:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"JTth6x6jBBY0Dv1Fvr89gKHmWkoS97bd\";}'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.9.164'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '13'
+    'HTTP_COOKIE' => '_csrf=efdbed2227d8facb0387e2be11eef0077b39438f1278eb87298b563c2806453fa%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22JTth6x6jBBY0Dv1Fvr89gKHmWkoS97bd%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at 192.168.9.164 Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => '192.168.9.164'
+    'SERVER_ADDR' => '192.168.9.164'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.9.164'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '44634'
+    'REDIRECT_URL' => '/mall/getmainpage'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/mall/getmainpage'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/mall/getmainpage'
+    'PATH_TRANSLATED' => 'redirect:/index.php/mall/getmainpage/getmainpage'
+    'PHP_SELF' => '/index.php/mall/getmainpage'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1455864017.715
+    'REQUEST_TIME' => 1455864017
+]
+2016-02-19 06:40:37 [192.168.9.164][100][-][error][yii\base\ErrorException:2] exception 'yii\base\ErrorException' with message 'Illegal offset type' in /var/www/cruiseapi/components/MallService.php:17
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): app\controllers\MallController->actionGetmainpage()
+#1 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): ::call_user_func_array()
+#2 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams()
+#3 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction()
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest()
+#6 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#7 {main}
+2016-02-19 06:40:37 [192.168.9.164][100][-][info][application] $_POST = [
+    'product_id' => '49'
+]
+
+$_COOKIE = [
+    '_csrf' => 'efdbed2227d8facb0387e2be11eef0077b39438f1278eb87298b563c2806453fa:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"JTth6x6jBBY0Dv1Fvr89gKHmWkoS97bd\";}'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.9.164'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '13'
+    'HTTP_COOKIE' => '_csrf=efdbed2227d8facb0387e2be11eef0077b39438f1278eb87298b563c2806453fa%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22JTth6x6jBBY0Dv1Fvr89gKHmWkoS97bd%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at 192.168.9.164 Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => '192.168.9.164'
+    'SERVER_ADDR' => '192.168.9.164'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.9.164'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '44638'
+    'REDIRECT_URL' => '/mall/getmainpage'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/mall/getmainpage'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/mall/getmainpage'
+    'PATH_TRANSLATED' => 'redirect:/index.php/mall/getmainpage/getmainpage'
+    'PHP_SELF' => '/index.php/mall/getmainpage'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1455864037.687
+    'REQUEST_TIME' => 1455864037
+]
+2016-02-19 06:40:55 [192.168.9.164][100][-][error][yii\base\ErrorException:2] exception 'yii\base\ErrorException' with message 'Illegal offset type' in /var/www/cruiseapi/components/MallService.php:17
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): app\controllers\MallController->actionGetmainpage()
+#1 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): ::call_user_func_array()
+#2 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams()
+#3 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction()
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest()
+#6 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#7 {main}
+2016-02-19 06:40:55 [192.168.9.164][100][-][info][application] $_POST = [
+    'product_id' => '49'
+]
+
+$_COOKIE = [
+    '_csrf' => 'efdbed2227d8facb0387e2be11eef0077b39438f1278eb87298b563c2806453fa:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"JTth6x6jBBY0Dv1Fvr89gKHmWkoS97bd\";}'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.9.164'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '13'
+    'HTTP_COOKIE' => '_csrf=efdbed2227d8facb0387e2be11eef0077b39438f1278eb87298b563c2806453fa%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22JTth6x6jBBY0Dv1Fvr89gKHmWkoS97bd%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at 192.168.9.164 Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => '192.168.9.164'
+    'SERVER_ADDR' => '192.168.9.164'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.9.164'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '44639'
+    'REDIRECT_URL' => '/mall/getmainpage'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/mall/getmainpage'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/mall/getmainpage'
+    'PATH_TRANSLATED' => 'redirect:/index.php/mall/getmainpage/getmainpage'
+    'PHP_SELF' => '/index.php/mall/getmainpage'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1455864055.009
+    'REQUEST_TIME' => 1455864055
+]
+2016-02-19 06:41:09 [192.168.9.164][100][-][error][yii\base\ErrorException:2] exception 'yii\base\ErrorException' with message 'Illegal offset type' in /var/www/cruiseapi/components/MallService.php:18
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): app\controllers\MallController->actionGetmainpage()
+#1 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): ::call_user_func_array()
+#2 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams()
+#3 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction()
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest()
+#6 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#7 {main}
+2016-02-19 06:41:09 [192.168.9.164][100][-][info][application] $_POST = [
+    'product_id' => '49'
+]
+
+$_COOKIE = [
+    '_csrf' => 'efdbed2227d8facb0387e2be11eef0077b39438f1278eb87298b563c2806453fa:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"JTth6x6jBBY0Dv1Fvr89gKHmWkoS97bd\";}'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.9.164'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '13'
+    'HTTP_COOKIE' => '_csrf=efdbed2227d8facb0387e2be11eef0077b39438f1278eb87298b563c2806453fa%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22JTth6x6jBBY0Dv1Fvr89gKHmWkoS97bd%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at 192.168.9.164 Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => '192.168.9.164'
+    'SERVER_ADDR' => '192.168.9.164'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.9.164'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '44640'
+    'REDIRECT_URL' => '/mall/getmainpage'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/mall/getmainpage'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/mall/getmainpage'
+    'PATH_TRANSLATED' => 'redirect:/index.php/mall/getmainpage/getmainpage'
+    'PHP_SELF' => '/index.php/mall/getmainpage'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1455864069.452
+    'REQUEST_TIME' => 1455864069
+]

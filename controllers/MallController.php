@@ -16,7 +16,14 @@ use app\models\ProductComment;
 
 class MallController extends MyActiveController
 {
-
+	public function actionGetmainpage()
+	{
+		$response = array();
+		$menu = MallService::getMainPage();
+		$response['data'] = $menu;
+		return $response;
+	}
+	
 	public function actionMainpage()
 	{
 		$cruise_id = isset($_POST['cruise_id']) ? $_POST['cruise_id'] : '1';

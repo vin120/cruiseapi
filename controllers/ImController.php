@@ -530,37 +530,6 @@ class ImController extends MyActiveController
 
 			if(!empty($member_id))
 			{
-// 				$sql_friend = 'SELECT id FROM vcos_im_friend 
-// 						WHERE member_id= \''.$member_id.'\' AND (friend_id = \''.$search_name.'\' OR friend_name = \''.$search_name.'\')';
-// 				$friend_array = Yii::$app->db->createCommand($sql_friend)->queryAll();
-					
-// 				if($friend_array)
-// 				{
-// 					$response['data']['is_friend'] = 1;
-// 				}
-// 				else {
-// 					$response['data']['is_friend'] = 0;
-// 				}
-				
-// 				$sql_group = 'SELECT id FROM vcos_im_group_member
-// 						WHERE member_id= \''.$member_id.'\' AND (group_id = \''.$search_name.'\')';
-// 				$in_group = Yii::$app->db->createCommand($sql_group)->queryAll();
-
-
-// 				foreach($group_array as $group){
-// 					$params_group = [':member_id'=>$member_id,':group_id'=>$group['group_id']];
-// 					$sql_group = 'SELECT id FROM vcos_im_group_member WHERE member_id=:member_id AND group_id =:group_id';				
-// 					$in_group = Yii::$app->db->createCommand($sql_group,$params_group)->queryOne();
-// 					if($in_group)
-// 					{
-// 						$group_array['is_group'] = 1;
-// 					}else
-// 					{
-// 						$group_array['is_group'] = 0;
-// 					}
-					
-// 				}
-
 				for($i = 0; $i<count($member_array); $i++)
 				{
 					$params_member = [':member_id'=>$member_id,':search_name'=>$search_name];
@@ -576,8 +545,8 @@ class ImController extends MyActiveController
 
 				for($i = 0; $i<count($group_array); $i++)
 				{
-					$params_group = [':member_id'=>$member_id,':group_id'=>$group_array[$i]['group_id']];
-					$sql_group = 'SELECT id FROM vcos_im_group_member WHERE member_id=:member_id AND group_id =:group_id';
+					$sql_member = ' SELECT id FROM vcos_im_friend WHERE member_id=\''.$member_id.'\' AND (friend_id=\''.$search_name.'\' OR friend_name=\''.$search_name.'\' )';
+					$in_friend[$i] = Yii::$app->db->createCommand($sql_member,$params_member)->queryOne();
 					$in_group[$i] = Yii::$app->db->createCommand($sql_group,$params_group)->queryOne();
 					if($in_group[$i]){
 						$group_array[$i]['is_group'] = 1;

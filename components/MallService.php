@@ -11,6 +11,28 @@ use Yii;
  */
 class MallService {
 	
+	public static function  getMainPage()
+	{
+		$response = array(
+			'1' => 'True',
+			'2' => 'True',
+			'3' => 'True',
+			'4' => 'True',
+			'5' => 'True',
+			'6' => 'True',
+			'7' => 'True',
+			'8' => 'True',
+			'9' => 'True',
+			'10' => 'True',
+			'11' => 'True',
+			'12' => 'True',
+			'13' => 'True',
+			'14' => 'True',
+			'15' => 'True',
+		);
+		return $response;
+	}
+	
 	public static function getShowNavigation($cruise_id,$style_type)
 	{
 		$sql_value = 'SELECT navigation_id,navigation_name,activity_id,sort_order,is_main,is_category FROM vcos_navigation  
