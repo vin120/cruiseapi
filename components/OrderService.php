@@ -220,7 +220,6 @@ class OrderService {
 		$order_no_str_sql_in = '\''.join('\',\'', $order_no_array).'\'';
 		
 		$curr_time= '\''.date('Y-m-d H:i:s').'\'';
-		//$order_status = 1;
 		
 		$response = array();
 		if($pay_type != 3){
@@ -242,7 +241,7 @@ class OrderService {
 						$response['error'] = array('error_code'=>2,'message'=>'Membership amount update fail');
 					}else{
 						//更新订单信息
-						$update_order_sql = 'UPDATE vcos_member_order SET pay_type='.$pay_type.',pay_time='.$curr_time.',order_status=1 WHERE order_serial_num IN ('.$order_no_str_sql_in.') AND membership_code=\''.$member->member_code.'\'';
+						$update_order_sql = 'UPDATE vcos_member_order SET pay_type='.$pay_type.',pay_time='.$curr_time.',order_status=1 , user_operation=1 WHERE order_serial_num IN ('.$order_no_str_sql_in.') AND membership_code=\''.$member->member_code.'\'';
 						Yii::$app->db->createCommand($update_order_sql)->execute();
 					
 						if($iscart == 1){
@@ -264,7 +263,7 @@ class OrderService {
 						$response['error'] = array('error_code'=>2,'message'=>'Membership amount update fail');
 					}else{
 						//更新订单信息
-						$update_order_sql = 'UPDATE vcos_member_order SET pay_type='.$pay_type.',pay_time='.$curr_time.',order_status=1 WHERE order_serial_num IN ('.$order_no_str_sql_in.') AND membership_code=\''.$member->member_code.'\'';
+						$update_order_sql = 'UPDATE vcos_member_order SET pay_type='.$pay_type.',pay_time='.$curr_time.',order_status=1 , user_operation=1 WHERE order_serial_num IN ('.$order_no_str_sql_in.') AND membership_code=\''.$member->member_code.'\'';
 						Yii::$app->db->createCommand($update_order_sql)->execute();
 						if($iscart == 1){
 							//从购物车下单，下完单后删除购物车内容
@@ -279,7 +278,7 @@ class OrderService {
 		}else{
 			//到付
 			//更新订单信息
-			$update_order_sql = 'UPDATE vcos_member_order SET pay_type='.$pay_type.',pay_time='.$curr_time.',order_status=0 WHERE order_serial_num IN ('.$order_no_str_sql_in.') AND membership_code=\''.$member->member_code.'\'';
+			$update_order_sql = 'UPDATE vcos_member_order SET pay_type='.$pay_type.',pay_time='.$curr_time.',order_status=0 ,user_operation=0 WHERE order_serial_num IN ('.$order_no_str_sql_in.') AND membership_code=\''.$member->member_code.'\'';
 			Yii::$app->db->createCommand($update_order_sql)->execute();
 			if($iscart == 1){
 				//从购物车下单，下完单后删除购物车内容

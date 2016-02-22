@@ -213,7 +213,7 @@ class OrderController extends MyActiveController
 						$member_order->pay_type = $pay_type;
 						$member_order->pay_time = date('Y-m-d H:i:s');
 						$member_order->order_status = 1;	//0等待付款,1卖家发货,2等待收获,3完成，4取消订单，5，申请退款,6.交易失败,7.删除订单
-						
+						$member_order->user_operation = 1;  //'0提交订单,1支付3评价4取消订单，5申请退款,7.删除订单',
 						if($pay_type != 3){
 							if($pay_type == 1){
 								//卡支付
@@ -258,6 +258,7 @@ class OrderController extends MyActiveController
 						}else{
 							//货到付款
 							$member_order->order_status = 0;
+							$member_order->user_operation = 0;
 							$member_order->save();
 							$response['data'] = array('code'=>1,'message'=>'Pay for success');
 						}
@@ -271,7 +272,6 @@ class OrderController extends MyActiveController
 			}else {
 				$response['error'] = array('error_code'=>6,'message'=>'Membership order does not exist');
 			}
-			
 		}
 		
 		return $response;
@@ -496,6 +496,7 @@ class OrderController extends MyActiveController
 				$order = MemberOrder::find()->where(['order_serial_num' => $order_serial_num,'membership_code'=>$member->member_code,'order_status'=>0])->one();
 				if(!empty($order)){
 					$order->order_status = 4;
+					$order->user_operation = 4;
 					$order->remark =$remark;
 					$count = $order->save();
 					if($count){
@@ -529,6 +530,7 @@ class OrderController extends MyActiveController
 				$order = MemberOrder::find()->where(['order_serial_num' => $order_serial_num,'membership_code'=>$member->member_code,'order_status'=>[3,4,6]])->one();
 				if(!empty($order)){
 					$order->order_status = 7;
+					$order->user_operation = 7;
 					$count = $order->save();
 					if($count){
 						$response['data'] = array('code'=>1,'message'=>'Delete order success');
@@ -560,6 +562,7 @@ class OrderController extends MyActiveController
 				$order = MemberOrder::find()->where(['order_serial_num' => $order_serial_num,'membership_code'=>$member->member_code,'order_status'=>[1,2]])->one();
 				if(!empty($order)){
 					$order->order_status = 5;
+					$order->user_operation = 5;
 					$count = $order->save();
 					if($count){
 						$response['data'] = array('code'=>1,'message'=>'Refund order success');

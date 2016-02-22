@@ -27123,3 +27123,124 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1455864069.452
     'REQUEST_TIME' => 1455864069
 ]
+2016-02-22 08:35:41 [192.168.9.190][100][-][error][yii\base\ErrorException:8] exception 'yii\base\ErrorException' with message 'Undefined variable: app' in /var/www/cruiseapi/controllers/MallController.php:575
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): ::call_user_func_array()
+#1 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams()
+#2 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction()
+#3 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest()
+#5 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#6 {main}
+2016-02-22 08:35:41 [192.168.9.190][100][-][info][application] $_POST = [
+    'comment_content' => '啦啦啦'
+    'comment_type' => '1'
+    'order_serial_num' => 'CM2016300958533983'
+    'product_id' => '19'
+    'score' => '2'
+    'sign' => '684ac1a92487017d36218f1c5722fece'
+    'url_img1' => ''
+    'url_img2' => ''
+    'url_img3' => ''
+    'url_img4' => ''
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.9.164'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '194'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_USER_AGENT' => 'CruiseTone/1.0.3 (iPhone; iOS 9.2.1; Scale/3.00)'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-Hans-CN;q=1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at 192.168.9.164 Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => '192.168.9.164'
+    'SERVER_ADDR' => '192.168.9.164'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.9.190'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '54837'
+    'REDIRECT_URL' => '/mall/submitcommect'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/mall/submitcommect'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/mall/submitcommect'
+    'PATH_TRANSLATED' => 'redirect:/index.php/mall/submitcommect/submitcommect'
+    'PHP_SELF' => '/index.php/mall/submitcommect'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => ''
+    'REQUEST_TIME_FLOAT' => 1456130141.511
+    'REQUEST_TIME' => 1456130141
+]
+2016-02-22 08:39:04 [192.168.9.164][100][-][error][yii\base\ErrorException:8] exception 'yii\base\ErrorException' with message 'Undefined variable: app' in /var/www/cruiseapi/controllers/MallController.php:575
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): ::call_user_func_array()
+#1 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams()
+#2 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction()
+#3 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest()
+#5 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#6 {main}
+2016-02-22 08:39:04 [192.168.9.164][100][-][info][application] $_POST = [
+    'sign' => '684ac1a92487017d36218f1c5722fece'
+    'comment_type' => '1'
+    'order_serial_num' => 'CM2016300958533983'
+    'product_id' => '19'
+    'score' => '2comment_content=很好'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.9.164'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '132'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at 192.168.9.164 Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => '192.168.9.164'
+    'SERVER_ADDR' => '192.168.9.164'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.9.164'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '51451'
+    'REDIRECT_URL' => '/mall/submitcommect'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/mall/submitcommect'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/mall/submitcommect'
+    'PATH_TRANSLATED' => 'redirect:/index.php/mall/submitcommect/submitcommect'
+    'PHP_SELF' => '/index.php/mall/submitcommect'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1456130344.023
+    'REQUEST_TIME' => 1456130344
+]

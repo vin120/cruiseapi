@@ -571,6 +571,8 @@ class MallController extends MyActiveController
 					$productComment->reply_create_time = $reply_create_time;
 					$productComment->save ();
 					
+					$sql_order = " UPDATE vcos_member_order SET user_operation=3 WHERE order_serial_num='$order_serial_num'";
+					Yii::$app->db->createCommand($sql_order)->execute();
 					$response = array ();
 					$response ['data'] = array (
 							'code' => 1,
