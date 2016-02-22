@@ -14,6 +14,7 @@ class MallService {
 	public static function  getMainPage()
 	{
 		$response = array(
+			'0' => 'Open',
 			'1' => 'Open',
 			'2' => 'Open',
 			'3' => 'Open',
