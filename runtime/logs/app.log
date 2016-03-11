@@ -27244,3 +27244,2480 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1456130344.023
     'REQUEST_TIME' => 1456130344
 ]
+2016-02-25 11:38:59 [192.168.9.164][-][-][error][yii\base\ErrorException:4] exception 'yii\base\ErrorException' with message 'syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';'' in /var/www/cruiseapi/controllers/SiteController.php:65
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(563): ::spl_autoload_call()
+#1 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(563): ::class_exists()
+#2 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(521): yii\base\Module->createControllerByID()
+#3 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(449): yii\base\Module->createController()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction()
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest()
+#6 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#7 {main}
+2016-02-25 11:38:59 [192.168.9.164][-][-][info][application] $_SERVER = [
+    'HTTP_HOST' => '192.168.9.164'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at 192.168.9.164 Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => '192.168.9.164'
+    'SERVER_ADDR' => '192.168.9.164'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.9.164'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '40291'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1456371539.38
+    'REQUEST_TIME' => 1456371539
+]
+2016-02-25 11:52:38 [192.168.9.164][-][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request: site/send' in /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php:122
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('send', Array)
+#1 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('site/send', Array)
+#2 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#3 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#4 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Page not found.' in /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php:96
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2016-02-25 11:52:38 [192.168.9.164][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.9.164
+    in /var/www/cruiseapi/views/layouts/main.php:70
+2016-02-25 11:52:37 [192.168.9.164][-][-][info][application] $_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.9.164'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at 192.168.9.164 Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => '192.168.9.164'
+    'SERVER_ADDR' => '192.168.9.164'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.9.164'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '40444'
+    'REDIRECT_URL' => '/site/send'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/site/send'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/site/send'
+    'PATH_TRANSLATED' => 'redirect:/index.php/site/send/send'
+    'PHP_SELF' => '/index.php/site/send'
+    'REQUEST_TIME_FLOAT' => 1456372357.94
+    'REQUEST_TIME' => 1456372357
+]
+2016-02-25 13:54:02 [192.168.9.164][-][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request: site/find' in /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php:122
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('find', Array)
+#1 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('site/find', Array)
+#2 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#3 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#4 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Page not found.' in /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php:96
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2016-02-25 13:54:02 [192.168.9.164][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.9.164
+    in /var/www/cruiseapi/views/layouts/main.php:70
+2016-02-25 13:54:02 [192.168.9.164][-][-][info][application] $_COOKIE = [
+    '_csrf' => 'cfdba97e281e5fc492f00eaaab02fb0be2b86f112edd2580972e301bff459c39a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"PM_cpscmhRReWLnq4Bjk9ePCZUWsE35q\";}'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.9.164'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4'
+    'HTTP_COOKIE' => '_csrf=cfdba97e281e5fc492f00eaaab02fb0be2b86f112edd2580972e301bff459c39a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22PM_cpscmhRReWLnq4Bjk9ePCZUWsE35q%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at 192.168.9.164 Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => '192.168.9.164'
+    'SERVER_ADDR' => '192.168.9.164'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.9.164'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '41650'
+    'REDIRECT_URL' => '/site/find'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/site/find'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/site/find'
+    'PATH_TRANSLATED' => 'redirect:/index.php/site/find/find'
+    'PHP_SELF' => '/index.php/site/find'
+    'REQUEST_TIME_FLOAT' => 1456379642.173
+    'REQUEST_TIME' => 1456379642
+]
+2016-02-25 13:58:27 [192.168.9.164][-][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request: site/find' in /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php:122
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('find', Array)
+#1 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('site/find', Array)
+#2 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#3 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#4 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Page not found.' in /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php:96
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2016-02-25 13:58:27 [192.168.9.164][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.9.164
+    in /var/www/cruiseapi/views/layouts/main.php:70
+2016-02-25 13:58:27 [192.168.9.164][-][-][info][application] $_COOKIE = [
+    '_csrf' => 'cfdba97e281e5fc492f00eaaab02fb0be2b86f112edd2580972e301bff459c39a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"PM_cpscmhRReWLnq4Bjk9ePCZUWsE35q\";}'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.9.164'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4'
+    'HTTP_COOKIE' => '_csrf=cfdba97e281e5fc492f00eaaab02fb0be2b86f112edd2580972e301bff459c39a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22PM_cpscmhRReWLnq4Bjk9ePCZUWsE35q%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at 192.168.9.164 Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => '192.168.9.164'
+    'SERVER_ADDR' => '192.168.9.164'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.9.164'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '41788'
+    'REDIRECT_URL' => '/site/find'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/site/find'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/site/find'
+    'PATH_TRANSLATED' => 'redirect:/index.php/site/find/find'
+    'PHP_SELF' => '/index.php/site/find'
+    'REQUEST_TIME_FLOAT' => 1456379907.803
+    'REQUEST_TIME' => 1456379907
+]
+2016-02-25 13:58:41 [192.168.9.164][-][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request: site/find' in /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php:122
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('find', Array)
+#1 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('site/find', Array)
+#2 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#3 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#4 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Page not found.' in /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php:96
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2016-02-25 13:58:41 [192.168.9.164][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.9.164
+    in /var/www/cruiseapi/views/layouts/main.php:70
+2016-02-25 13:58:41 [192.168.9.164][-][-][info][application] $_COOKIE = [
+    '_csrf' => 'cfdba97e281e5fc492f00eaaab02fb0be2b86f112edd2580972e301bff459c39a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"PM_cpscmhRReWLnq4Bjk9ePCZUWsE35q\";}'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.9.164'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4'
+    'HTTP_COOKIE' => '_csrf=cfdba97e281e5fc492f00eaaab02fb0be2b86f112edd2580972e301bff459c39a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22PM_cpscmhRReWLnq4Bjk9ePCZUWsE35q%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at 192.168.9.164 Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => '192.168.9.164'
+    'SERVER_ADDR' => '192.168.9.164'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.9.164'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '41793'
+    'REDIRECT_URL' => '/site/find'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/site/find'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/site/find'
+    'PATH_TRANSLATED' => 'redirect:/index.php/site/find/find'
+    'PHP_SELF' => '/index.php/site/find'
+    'REQUEST_TIME_FLOAT' => 1456379921.359
+    'REQUEST_TIME' => 1456379921
+]
+2016-02-25 13:58:42 [192.168.9.164][-][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request: site/find' in /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php:122
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('find', Array)
+#1 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('site/find', Array)
+#2 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#3 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#4 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Page not found.' in /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php:96
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2016-02-25 13:58:42 [192.168.9.164][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.9.164
+    in /var/www/cruiseapi/views/layouts/main.php:70
+2016-02-25 13:58:42 [192.168.9.164][-][-][info][application] $_COOKIE = [
+    '_csrf' => 'cfdba97e281e5fc492f00eaaab02fb0be2b86f112edd2580972e301bff459c39a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"PM_cpscmhRReWLnq4Bjk9ePCZUWsE35q\";}'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.9.164'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4'
+    'HTTP_COOKIE' => '_csrf=cfdba97e281e5fc492f00eaaab02fb0be2b86f112edd2580972e301bff459c39a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22PM_cpscmhRReWLnq4Bjk9ePCZUWsE35q%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at 192.168.9.164 Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => '192.168.9.164'
+    'SERVER_ADDR' => '192.168.9.164'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.9.164'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '41795'
+    'REDIRECT_URL' => '/site/find'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/site/find'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/site/find'
+    'PATH_TRANSLATED' => 'redirect:/index.php/site/find/find'
+    'PHP_SELF' => '/index.php/site/find'
+    'REQUEST_TIME_FLOAT' => 1456379922.44
+    'REQUEST_TIME' => 1456379922
+]
+2016-02-25 13:58:43 [192.168.9.164][-][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request: site/find' in /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php:122
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('find', Array)
+#1 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('site/find', Array)
+#2 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#3 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#4 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Page not found.' in /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php:96
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2016-02-25 13:58:43 [192.168.9.164][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.9.164
+    in /var/www/cruiseapi/views/layouts/main.php:70
+2016-02-25 13:58:43 [192.168.9.164][-][-][info][application] $_COOKIE = [
+    '_csrf' => 'cfdba97e281e5fc492f00eaaab02fb0be2b86f112edd2580972e301bff459c39a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"PM_cpscmhRReWLnq4Bjk9ePCZUWsE35q\";}'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.9.164'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4'
+    'HTTP_COOKIE' => '_csrf=cfdba97e281e5fc492f00eaaab02fb0be2b86f112edd2580972e301bff459c39a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22PM_cpscmhRReWLnq4Bjk9ePCZUWsE35q%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at 192.168.9.164 Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => '192.168.9.164'
+    'SERVER_ADDR' => '192.168.9.164'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.9.164'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '41797'
+    'REDIRECT_URL' => '/site/find'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/site/find'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/site/find'
+    'PATH_TRANSLATED' => 'redirect:/index.php/site/find/find'
+    'PHP_SELF' => '/index.php/site/find'
+    'REQUEST_TIME_FLOAT' => 1456379923.873
+    'REQUEST_TIME' => 1456379923
+]
+2016-02-25 13:58:51 [192.168.9.164][-][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request: site/find' in /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php:122
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('find', Array)
+#1 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('site/find', Array)
+#2 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#3 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#4 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Page not found.' in /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php:96
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2016-02-25 13:58:51 [192.168.9.164][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.9.164
+    in /var/www/cruiseapi/views/layouts/main.php:70
+2016-02-25 13:58:51 [192.168.9.164][-][-][info][application] $_COOKIE = [
+    '_csrf' => 'cfdba97e281e5fc492f00eaaab02fb0be2b86f112edd2580972e301bff459c39a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"PM_cpscmhRReWLnq4Bjk9ePCZUWsE35q\";}'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.9.164'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4'
+    'HTTP_COOKIE' => '_csrf=cfdba97e281e5fc492f00eaaab02fb0be2b86f112edd2580972e301bff459c39a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22PM_cpscmhRReWLnq4Bjk9ePCZUWsE35q%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at 192.168.9.164 Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => '192.168.9.164'
+    'SERVER_ADDR' => '192.168.9.164'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.9.164'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '41798'
+    'REDIRECT_URL' => '/site/find'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/site/find'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/site/find'
+    'PATH_TRANSLATED' => 'redirect:/index.php/site/find/find'
+    'PHP_SELF' => '/index.php/site/find'
+    'REQUEST_TIME_FLOAT' => 1456379931.33
+    'REQUEST_TIME' => 1456379931
+]
+2016-02-25 13:58:52 [192.168.9.164][-][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request: site/find' in /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php:122
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('find', Array)
+#1 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('site/find', Array)
+#2 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#3 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#4 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Page not found.' in /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php:96
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2016-02-25 13:58:52 [192.168.9.164][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.9.164
+    in /var/www/cruiseapi/views/layouts/main.php:70
+2016-02-25 13:58:52 [192.168.9.164][-][-][info][application] $_COOKIE = [
+    '_csrf' => 'cfdba97e281e5fc492f00eaaab02fb0be2b86f112edd2580972e301bff459c39a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"PM_cpscmhRReWLnq4Bjk9ePCZUWsE35q\";}'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.9.164'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4'
+    'HTTP_COOKIE' => '_csrf=cfdba97e281e5fc492f00eaaab02fb0be2b86f112edd2580972e301bff459c39a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22PM_cpscmhRReWLnq4Bjk9ePCZUWsE35q%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at 192.168.9.164 Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => '192.168.9.164'
+    'SERVER_ADDR' => '192.168.9.164'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.9.164'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '41800'
+    'REDIRECT_URL' => '/site/find'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/site/find'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/site/find'
+    'PATH_TRANSLATED' => 'redirect:/index.php/site/find/find'
+    'PHP_SELF' => '/index.php/site/find'
+    'REQUEST_TIME_FLOAT' => 1456379932.722
+    'REQUEST_TIME' => 1456379932
+]
+2016-02-25 13:59:04 [192.168.9.164][-][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request: site/find' in /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php:122
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('find', Array)
+#1 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('site/find', Array)
+#2 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#3 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#4 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Page not found.' in /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php:96
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2016-02-25 13:59:04 [192.168.9.164][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.9.164
+    in /var/www/cruiseapi/views/layouts/main.php:70
+2016-02-25 13:59:04 [192.168.9.164][-][-][info][application] $_COOKIE = [
+    '_csrf' => 'cfdba97e281e5fc492f00eaaab02fb0be2b86f112edd2580972e301bff459c39a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"PM_cpscmhRReWLnq4Bjk9ePCZUWsE35q\";}'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.9.164'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4'
+    'HTTP_COOKIE' => '_csrf=cfdba97e281e5fc492f00eaaab02fb0be2b86f112edd2580972e301bff459c39a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22PM_cpscmhRReWLnq4Bjk9ePCZUWsE35q%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at 192.168.9.164 Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => '192.168.9.164'
+    'SERVER_ADDR' => '192.168.9.164'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.9.164'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '41800'
+    'REDIRECT_URL' => '/site/find'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/site/find'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/site/find'
+    'PATH_TRANSLATED' => 'redirect:/index.php/site/find/find'
+    'PHP_SELF' => '/index.php/site/find'
+    'REQUEST_TIME_FLOAT' => 1456379944.905
+    'REQUEST_TIME' => 1456379944
+]
+2016-02-25 13:59:18 [192.168.9.164][-][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request: site/find' in /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php:122
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('find', Array)
+#1 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('site/find', Array)
+#2 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#3 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#4 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Page not found.' in /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php:96
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2016-02-25 13:59:18 [192.168.9.164][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.9.164
+    in /var/www/cruiseapi/views/layouts/main.php:70
+2016-02-25 13:59:18 [192.168.9.164][-][-][info][application] $_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.9.164'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at 192.168.9.164 Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => '192.168.9.164'
+    'SERVER_ADDR' => '192.168.9.164'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.9.164'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '41828'
+    'REDIRECT_URL' => '/site/find'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/site/find'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/site/find'
+    'PATH_TRANSLATED' => 'redirect:/index.php/site/find/find'
+    'PHP_SELF' => '/index.php/site/find'
+    'REQUEST_TIME_FLOAT' => 1456379958.202
+    'REQUEST_TIME' => 1456379958
+]
+2016-03-10 17:43:31 [127.0.0.1][100][-][error][yii\base\ErrorException:8] exception 'yii\base\ErrorException' with message 'Undefined index: count' in /var/www/cruiseapi/components/MemberService.php:88
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): app\controllers\MembershipController->actionCardpay()
+#1 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): ::call_user_func_array()
+#2 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams()
+#3 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction()
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest()
+#6 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#7 {main}
+2016-03-10 17:43:31 [127.0.0.1][100][-][info][application] $_POST = [
+    'mcode' => '010000000203'
+    'order_num' => '2016030900010'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.cruiseapi.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '42'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at www.cruiseapi.com Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'www.cruiseapi.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '55853'
+    'REDIRECT_URL' => '/membership/cardpay'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/membership/cardpay'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/membership/cardpay'
+    'PATH_TRANSLATED' => 'redirect:/index.php/membership/cardpay/cardpay'
+    'PHP_SELF' => '/index.php/membership/cardpay'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1457603011.31
+    'REQUEST_TIME' => 1457603011
+]
+2016-03-10 17:45:07 [127.0.0.1][100][-][error][yii\base\ErrorException:1] exception 'yii\base\ErrorException' with message 'Cannot use object of type yii\db\DataReader as array' in /var/www/cruiseapi/components/MemberService.php:290
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): app\controllers\MembershipController->actionSalesreturn()
+#1 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): ::call_user_func_array()
+#2 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams()
+#3 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction()
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest()
+#6 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#7 {main}
+2016-03-10 17:45:07 [127.0.0.1][100][-][info][application] $_POST = [
+    'mcode' => '010000000203'
+    'order_num' => '2016030900010'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.cruiseapi.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '42'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at www.cruiseapi.com Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'www.cruiseapi.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '55860'
+    'REDIRECT_URL' => '/membership/salesreturn'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/membership/salesreturn'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/membership/salesreturn'
+    'PATH_TRANSLATED' => 'redirect:/index.php/membership/salesreturn/salesreturn'
+    'PHP_SELF' => '/index.php/membership/salesreturn'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1457603107.934
+    'REQUEST_TIME' => 1457603107
+]
+2016-03-10 17:46:20 [127.0.0.1][100][-][error][yii\base\ErrorException:1] exception 'yii\base\ErrorException' with message 'Cannot use object of type yii\db\DataReader as array' in /var/www/cruiseapi/components/MemberService.php:290
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): app\controllers\MembershipController->actionSalesreturn()
+#1 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): ::call_user_func_array()
+#2 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams()
+#3 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction()
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest()
+#6 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#7 {main}
+2016-03-10 17:46:20 [127.0.0.1][100][-][info][application] $_POST = [
+    'mcode' => '010000000203'
+    'order_num' => '2016030900010'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.cruiseapi.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '42'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at www.cruiseapi.com Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'www.cruiseapi.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '55864'
+    'REDIRECT_URL' => '/membership/salesreturn'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/membership/salesreturn'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/membership/salesreturn'
+    'PATH_TRANSLATED' => 'redirect:/index.php/membership/salesreturn/salesreturn'
+    'PHP_SELF' => '/index.php/membership/salesreturn'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1457603180.673
+    'REQUEST_TIME' => 1457603180
+]
+2016-03-10 17:47:01 [127.0.0.1][100][-][error][yii\base\ErrorException:1] exception 'yii\base\ErrorException' with message 'Cannot use object of type yii\db\DataReader as array' in /var/www/cruiseapi/components/MemberService.php:291
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): app\controllers\MembershipController->actionSalesreturn()
+#1 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): ::call_user_func_array()
+#2 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams()
+#3 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction()
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest()
+#6 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#7 {main}
+2016-03-10 17:47:01 [127.0.0.1][100][-][info][application] $_POST = [
+    'mcode' => '010000000203'
+    'order_num' => '2016030900010'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.cruiseapi.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '42'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at www.cruiseapi.com Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'www.cruiseapi.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '55866'
+    'REDIRECT_URL' => '/membership/salesreturn'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/membership/salesreturn'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/membership/salesreturn'
+    'PATH_TRANSLATED' => 'redirect:/index.php/membership/salesreturn/salesreturn'
+    'PHP_SELF' => '/index.php/membership/salesreturn'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1457603221.521
+    'REQUEST_TIME' => 1457603221
+]
+2016-03-10 17:50:40 [127.0.0.1][100][-][error][yii\base\ErrorException:1] exception 'yii\base\ErrorException' with message 'Cannot use object of type yii\db\DataReader as array' in /var/www/cruiseapi/components/MemberService.php:292
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): app\controllers\MembershipController->actionSalesreturn()
+#1 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): ::call_user_func_array()
+#2 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams()
+#3 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction()
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest()
+#6 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#7 {main}
+2016-03-10 17:50:40 [127.0.0.1][100][-][info][application] $_POST = [
+    'mcode' => '010000000203'
+    'order_num' => '2016030900010'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.cruiseapi.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '42'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at www.cruiseapi.com Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'www.cruiseapi.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '56276'
+    'REDIRECT_URL' => '/membership/salesreturn'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/membership/salesreturn'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/membership/salesreturn'
+    'PATH_TRANSLATED' => 'redirect:/index.php/membership/salesreturn/salesreturn'
+    'PHP_SELF' => '/index.php/membership/salesreturn'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1457603440.789
+    'REQUEST_TIME' => 1457603440
+]
+2016-03-10 17:50:46 [127.0.0.1][100][-][error][yii\base\ErrorException:1] exception 'yii\base\ErrorException' with message 'Cannot use object of type yii\db\DataReader as array' in /var/www/cruiseapi/components/MemberService.php:292
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): app\controllers\MembershipController->actionSalesreturn()
+#1 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): ::call_user_func_array()
+#2 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams()
+#3 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction()
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest()
+#6 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#7 {main}
+2016-03-10 17:50:46 [127.0.0.1][100][-][info][application] $_POST = [
+    'mcode' => '010000000203'
+    'order_num' => '2016030900010'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.cruiseapi.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '42'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at www.cruiseapi.com Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'www.cruiseapi.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '56278'
+    'REDIRECT_URL' => '/membership/salesreturn'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/membership/salesreturn'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/membership/salesreturn'
+    'PATH_TRANSLATED' => 'redirect:/index.php/membership/salesreturn/salesreturn'
+    'PHP_SELF' => '/index.php/membership/salesreturn'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1457603446.442
+    'REQUEST_TIME' => 1457603446
+]
+2016-03-10 17:51:03 [127.0.0.1][100][-][error][yii\base\UnknownPropertyException] exception 'yii\base\UnknownPropertyException' with message 'Getting unknown property: yii\db\DataReader::count' in /var/www/cruiseapi/vendor/yiisoft/yii2/base/Object.php:138
+Stack trace:
+#0 /var/www/cruiseapi/components/MemberService.php(292): yii\base\Object->__get('count')
+#1 /var/www/cruiseapi/controllers/MembershipController.php(100): app\components\MemberService::goodsreturn('010000000203', '2016030900010', Array)
+#2 [internal function]: app\controllers\MembershipController->actionSalesreturn()
+#3 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('salesreturn', Array)
+#6 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('membership/sale...', Array)
+#7 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#9 {main}
+2016-03-10 17:51:03 [127.0.0.1][100][-][info][application] $_POST = [
+    'mcode' => '010000000203'
+    'order_num' => '2016030900010'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.cruiseapi.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '42'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at www.cruiseapi.com Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'www.cruiseapi.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '56280'
+    'REDIRECT_URL' => '/membership/salesreturn'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/membership/salesreturn'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/membership/salesreturn'
+    'PATH_TRANSLATED' => 'redirect:/index.php/membership/salesreturn/salesreturn'
+    'PHP_SELF' => '/index.php/membership/salesreturn'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1457603463.853
+    'REQUEST_TIME' => 1457603463
+]
+2016-03-10 17:54:29 [127.0.0.1][100][-][error][yii\db\Exception] exception 'PDOException' with message 'SQLSTATE[01000]: Warning: 1265 Data truncated for column 'amount' at row 1' in /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php:781
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php(781): PDOStatement->execute()
+#1 /var/www/cruiseapi/components/MemberService.php(349): yii\db\Command->execute()
+#2 /var/www/cruiseapi/controllers/MembershipController.php(100): app\components\MemberService::goodsreturn('010000000203', '2016030900010', Array)
+#3 [internal function]: app\controllers\MembershipController->actionSalesreturn()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('salesreturn', Array)
+#7 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('membership/sale...', Array)
+#8 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#10 {main}
+
+Next exception 'yii\db\Exception' with message 'SQLSTATE[01000]: Warning: 1265 Data truncated for column 'amount' at row 1
+The SQL being executed was:  INSERT INTO vcos_order_return_log (member_code,order_num,amount,overdraft_amount,return_time)
+									VALUES (''010000000203'',''2016030900010'','80000',''70000'',''2016-03-10 17:54:29'')' in /var/www/cruiseapi/vendor/yiisoft/yii2/db/Schema.php:628
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php(791): yii\db\Schema->convertException(Object(PDOException), ' INSERT INTO vc...')
+#1 /var/www/cruiseapi/components/MemberService.php(349): yii\db\Command->execute()
+#2 /var/www/cruiseapi/controllers/MembershipController.php(100): app\components\MemberService::goodsreturn('010000000203', '2016030900010', Array)
+#3 [internal function]: app\controllers\MembershipController->actionSalesreturn()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('salesreturn', Array)
+#7 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('membership/sale...', Array)
+#8 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#10 {main}
+Additional Information:
+Array
+(
+    [0] => 01000
+    [1] => 1265
+    [2] => Data truncated for column 'amount' at row 1
+)
+
+2016-03-10 17:54:29 [127.0.0.1][100][-][info][application] $_POST = [
+    'mcode' => '010000000203'
+    'order_num' => '2016030900010'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.cruiseapi.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '42'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at www.cruiseapi.com Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'www.cruiseapi.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '56320'
+    'REDIRECT_URL' => '/membership/salesreturn'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/membership/salesreturn'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/membership/salesreturn'
+    'PATH_TRANSLATED' => 'redirect:/index.php/membership/salesreturn/salesreturn'
+    'PHP_SELF' => '/index.php/membership/salesreturn'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1457603669.415
+    'REQUEST_TIME' => 1457603669
+]
+2016-03-10 17:59:10 [127.0.0.1][100][-][error][yii\db\Exception] exception 'PDOException' with message 'SQLSTATE[01000]: Warning: 1265 Data truncated for column 'amount' at row 1' in /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php:781
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php(781): PDOStatement->execute()
+#1 /var/www/cruiseapi/components/MemberService.php(349): yii\db\Command->execute()
+#2 /var/www/cruiseapi/controllers/MembershipController.php(100): app\components\MemberService::goodsreturn('010000000203', '2016030900010', Array)
+#3 [internal function]: app\controllers\MembershipController->actionSalesreturn()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('salesreturn', Array)
+#7 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('membership/sale...', Array)
+#8 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#10 {main}
+
+Next exception 'yii\db\Exception' with message 'SQLSTATE[01000]: Warning: 1265 Data truncated for column 'amount' at row 1
+The SQL being executed was:  INSERT INTO vcos_order_return_log (member_code,order_num,amount,overdraft_amount,return_time)
+									VALUES (''010000000203'',''2016030900010'','80000',''70000'',''2016-03-10 17:59:10'')' in /var/www/cruiseapi/vendor/yiisoft/yii2/db/Schema.php:628
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php(791): yii\db\Schema->convertException(Object(PDOException), ' INSERT INTO vc...')
+#1 /var/www/cruiseapi/components/MemberService.php(349): yii\db\Command->execute()
+#2 /var/www/cruiseapi/controllers/MembershipController.php(100): app\components\MemberService::goodsreturn('010000000203', '2016030900010', Array)
+#3 [internal function]: app\controllers\MembershipController->actionSalesreturn()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('salesreturn', Array)
+#7 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('membership/sale...', Array)
+#8 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#10 {main}
+Additional Information:
+Array
+(
+    [0] => 01000
+    [1] => 1265
+    [2] => Data truncated for column 'amount' at row 1
+)
+
+2016-03-10 17:59:10 [127.0.0.1][100][-][info][application] $_POST = [
+    'mcode' => '010000000203'
+    'order_num' => '2016030900010'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.cruiseapi.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '42'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at www.cruiseapi.com Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'www.cruiseapi.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '56422'
+    'REDIRECT_URL' => '/membership/salesreturn'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/membership/salesreturn'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/membership/salesreturn'
+    'PATH_TRANSLATED' => 'redirect:/index.php/membership/salesreturn/salesreturn'
+    'PHP_SELF' => '/index.php/membership/salesreturn'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1457603950.582
+    'REQUEST_TIME' => 1457603950
+]
+2016-03-10 17:59:41 [127.0.0.1][100][-][error][yii\db\Exception] exception 'PDOException' with message 'SQLSTATE[01000]: Warning: 1265 Data truncated for column 'amount' at row 1' in /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php:781
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php(781): PDOStatement->execute()
+#1 /var/www/cruiseapi/components/MemberService.php(349): yii\db\Command->execute()
+#2 /var/www/cruiseapi/controllers/MembershipController.php(100): app\components\MemberService::goodsreturn('010000000203', '2016030900010', Array)
+#3 [internal function]: app\controllers\MembershipController->actionSalesreturn()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('salesreturn', Array)
+#7 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('membership/sale...', Array)
+#8 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#10 {main}
+
+Next exception 'yii\db\Exception' with message 'SQLSTATE[01000]: Warning: 1265 Data truncated for column 'amount' at row 1
+The SQL being executed was:  INSERT INTO vcos_order_return_log (member_code,order_num,amount,overdraft_amount,return_time)
+									VALUES (''010000000203'',''2016030900010'','80000',''70000'',''2016-03-10 17:59:41'')' in /var/www/cruiseapi/vendor/yiisoft/yii2/db/Schema.php:628
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php(791): yii\db\Schema->convertException(Object(PDOException), ' INSERT INTO vc...')
+#1 /var/www/cruiseapi/components/MemberService.php(349): yii\db\Command->execute()
+#2 /var/www/cruiseapi/controllers/MembershipController.php(100): app\components\MemberService::goodsreturn('010000000203', '2016030900010', Array)
+#3 [internal function]: app\controllers\MembershipController->actionSalesreturn()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('salesreturn', Array)
+#7 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('membership/sale...', Array)
+#8 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#10 {main}
+Additional Information:
+Array
+(
+    [0] => 01000
+    [1] => 1265
+    [2] => Data truncated for column 'amount' at row 1
+)
+
+2016-03-10 17:59:41 [127.0.0.1][100][-][info][application] $_POST = [
+    'mcode' => '010000000203'
+    'order_num' => '2016030900010'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.cruiseapi.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '42'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at www.cruiseapi.com Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'www.cruiseapi.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '56424'
+    'REDIRECT_URL' => '/membership/salesreturn'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/membership/salesreturn'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/membership/salesreturn'
+    'PATH_TRANSLATED' => 'redirect:/index.php/membership/salesreturn/salesreturn'
+    'PHP_SELF' => '/index.php/membership/salesreturn'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1457603981.158
+    'REQUEST_TIME' => 1457603981
+]
+2016-03-10 18:00:22 [127.0.0.1][100][-][error][yii\db\Exception] exception 'PDOException' with message 'SQLSTATE[01000]: Warning: 1265 Data truncated for column 'amount' at row 1' in /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php:781
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php(781): PDOStatement->execute()
+#1 /var/www/cruiseapi/components/MemberService.php(349): yii\db\Command->execute()
+#2 /var/www/cruiseapi/controllers/MembershipController.php(100): app\components\MemberService::goodsreturn('010000000203', '2016030900010', Array)
+#3 [internal function]: app\controllers\MembershipController->actionSalesreturn()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('salesreturn', Array)
+#7 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('membership/sale...', Array)
+#8 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#10 {main}
+
+Next exception 'yii\db\Exception' with message 'SQLSTATE[01000]: Warning: 1265 Data truncated for column 'amount' at row 1
+The SQL being executed was:  INSERT INTO vcos_order_return_log (member_code,order_num,amount,overdraft_amount,return_time)
+									VALUES (''010000000203'',''2016030900010'','80000',''70000'',''2016-03-10 18:00:22'')' in /var/www/cruiseapi/vendor/yiisoft/yii2/db/Schema.php:628
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php(791): yii\db\Schema->convertException(Object(PDOException), ' INSERT INTO vc...')
+#1 /var/www/cruiseapi/components/MemberService.php(349): yii\db\Command->execute()
+#2 /var/www/cruiseapi/controllers/MembershipController.php(100): app\components\MemberService::goodsreturn('010000000203', '2016030900010', Array)
+#3 [internal function]: app\controllers\MembershipController->actionSalesreturn()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('salesreturn', Array)
+#7 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('membership/sale...', Array)
+#8 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#10 {main}
+Additional Information:
+Array
+(
+    [0] => 01000
+    [1] => 1265
+    [2] => Data truncated for column 'amount' at row 1
+)
+
+2016-03-10 18:00:22 [127.0.0.1][100][-][info][application] $_POST = [
+    'mcode' => '010000000203'
+    'order_num' => '2016030900010'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.cruiseapi.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '42'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at www.cruiseapi.com Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'www.cruiseapi.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '56426'
+    'REDIRECT_URL' => '/membership/salesreturn'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/membership/salesreturn'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/membership/salesreturn'
+    'PATH_TRANSLATED' => 'redirect:/index.php/membership/salesreturn/salesreturn'
+    'PHP_SELF' => '/index.php/membership/salesreturn'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1457604022.524
+    'REQUEST_TIME' => 1457604022
+]
+2016-03-10 18:02:29 [127.0.0.1][100][-][error][yii\db\Exception] exception 'PDOException' with message 'SQLSTATE[01000]: Warning: 1265 Data truncated for column 'amount' at row 1' in /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php:781
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php(781): PDOStatement->execute()
+#1 /var/www/cruiseapi/components/MemberService.php(349): yii\db\Command->execute()
+#2 /var/www/cruiseapi/controllers/MembershipController.php(100): app\components\MemberService::goodsreturn('010000000203', '2016030900010', Array)
+#3 [internal function]: app\controllers\MembershipController->actionSalesreturn()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('salesreturn', Array)
+#7 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('membership/sale...', Array)
+#8 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#10 {main}
+
+Next exception 'yii\db\Exception' with message 'SQLSTATE[01000]: Warning: 1265 Data truncated for column 'amount' at row 1
+The SQL being executed was:  INSERT INTO vcos_order_return_log (member_code,order_num,amount,overdraft_amount,return_time)
+									VALUES (''010000000203'',''2016030900010'','80000',''70000'',''2016-03-10 18:02:29'')' in /var/www/cruiseapi/vendor/yiisoft/yii2/db/Schema.php:628
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php(791): yii\db\Schema->convertException(Object(PDOException), ' INSERT INTO vc...')
+#1 /var/www/cruiseapi/components/MemberService.php(349): yii\db\Command->execute()
+#2 /var/www/cruiseapi/controllers/MembershipController.php(100): app\components\MemberService::goodsreturn('010000000203', '2016030900010', Array)
+#3 [internal function]: app\controllers\MembershipController->actionSalesreturn()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('salesreturn', Array)
+#7 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('membership/sale...', Array)
+#8 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#10 {main}
+Additional Information:
+Array
+(
+    [0] => 01000
+    [1] => 1265
+    [2] => Data truncated for column 'amount' at row 1
+)
+
+2016-03-10 18:02:29 [127.0.0.1][100][-][info][application] $_POST = [
+    'mcode' => '010000000203'
+    'order_num' => '2016030900010'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.cruiseapi.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '42'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at www.cruiseapi.com Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'www.cruiseapi.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '56511'
+    'REDIRECT_URL' => '/membership/salesreturn'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/membership/salesreturn'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/membership/salesreturn'
+    'PATH_TRANSLATED' => 'redirect:/index.php/membership/salesreturn/salesreturn'
+    'PHP_SELF' => '/index.php/membership/salesreturn'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1457604149.149
+    'REQUEST_TIME' => 1457604149
+]
+2016-03-10 18:02:50 [127.0.0.1][100][-][error][yii\db\Exception] exception 'PDOException' with message 'SQLSTATE[01000]: Warning: 1265 Data truncated for column 'amount' at row 1' in /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php:781
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php(781): PDOStatement->execute()
+#1 /var/www/cruiseapi/components/MemberService.php(348): yii\db\Command->execute()
+#2 /var/www/cruiseapi/controllers/MembershipController.php(100): app\components\MemberService::goodsreturn('010000000203', '2016030900010', Array)
+#3 [internal function]: app\controllers\MembershipController->actionSalesreturn()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('salesreturn', Array)
+#7 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('membership/sale...', Array)
+#8 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#10 {main}
+
+Next exception 'yii\db\Exception' with message 'SQLSTATE[01000]: Warning: 1265 Data truncated for column 'amount' at row 1
+The SQL being executed was:  INSERT INTO vcos_order_return_log (member_code,order_num,amount,overdraft_amount,return_time)
+									VALUES (''010000000203'',''2016030900010'','80000',''70000'',''2016-03-10 18:02:50'')' in /var/www/cruiseapi/vendor/yiisoft/yii2/db/Schema.php:628
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php(791): yii\db\Schema->convertException(Object(PDOException), ' INSERT INTO vc...')
+#1 /var/www/cruiseapi/components/MemberService.php(348): yii\db\Command->execute()
+#2 /var/www/cruiseapi/controllers/MembershipController.php(100): app\components\MemberService::goodsreturn('010000000203', '2016030900010', Array)
+#3 [internal function]: app\controllers\MembershipController->actionSalesreturn()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('salesreturn', Array)
+#7 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('membership/sale...', Array)
+#8 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#10 {main}
+Additional Information:
+Array
+(
+    [0] => 01000
+    [1] => 1265
+    [2] => Data truncated for column 'amount' at row 1
+)
+
+2016-03-10 18:02:50 [127.0.0.1][100][-][info][application] $_POST = [
+    'mcode' => '010000000203'
+    'order_num' => '2016030900010'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.cruiseapi.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '42'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at www.cruiseapi.com Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'www.cruiseapi.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '56513'
+    'REDIRECT_URL' => '/membership/salesreturn'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/membership/salesreturn'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/membership/salesreturn'
+    'PATH_TRANSLATED' => 'redirect:/index.php/membership/salesreturn/salesreturn'
+    'PHP_SELF' => '/index.php/membership/salesreturn'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1457604170.926
+    'REQUEST_TIME' => 1457604170
+]
+2016-03-10 18:03:18 [127.0.0.1][100][-][error][yii\db\Exception] exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1366 Incorrect integer value: ':amount' for column 'amount' at row 1' in /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php:781
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php(781): PDOStatement->execute()
+#1 /var/www/cruiseapi/components/MemberService.php(348): yii\db\Command->execute()
+#2 /var/www/cruiseapi/controllers/MembershipController.php(100): app\components\MemberService::goodsreturn('010000000203', '2016030900010', Array)
+#3 [internal function]: app\controllers\MembershipController->actionSalesreturn()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('salesreturn', Array)
+#7 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('membership/sale...', Array)
+#8 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#10 {main}
+
+Next exception 'yii\db\Exception' with message 'SQLSTATE[HY000]: General error: 1366 Incorrect integer value: ':amount' for column 'amount' at row 1
+The SQL being executed was:  INSERT INTO vcos_order_return_log (member_code,order_num,amount,overdraft_amount,return_time)
+									VALUES (''010000000203'',''2016030900010'','80000',''70000'',''2016-03-10 18:03:18'')' in /var/www/cruiseapi/vendor/yiisoft/yii2/db/Schema.php:628
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php(791): yii\db\Schema->convertException(Object(PDOException), ' INSERT INTO vc...')
+#1 /var/www/cruiseapi/components/MemberService.php(348): yii\db\Command->execute()
+#2 /var/www/cruiseapi/controllers/MembershipController.php(100): app\components\MemberService::goodsreturn('010000000203', '2016030900010', Array)
+#3 [internal function]: app\controllers\MembershipController->actionSalesreturn()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('salesreturn', Array)
+#7 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('membership/sale...', Array)
+#8 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#10 {main}
+Additional Information:
+Array
+(
+    [0] => HY000
+    [1] => 1366
+    [2] => Incorrect integer value: ':amount' for column 'amount' at row 1
+)
+
+2016-03-10 18:03:18 [127.0.0.1][100][-][info][application] $_POST = [
+    'mcode' => '010000000203'
+    'order_num' => '2016030900010'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.cruiseapi.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '42'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at www.cruiseapi.com Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'www.cruiseapi.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '56516'
+    'REDIRECT_URL' => '/membership/salesreturn'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/membership/salesreturn'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/membership/salesreturn'
+    'PATH_TRANSLATED' => 'redirect:/index.php/membership/salesreturn/salesreturn'
+    'PHP_SELF' => '/index.php/membership/salesreturn'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1457604198.94
+    'REQUEST_TIME' => 1457604198
+]
+2016-03-10 18:05:35 [127.0.0.1][100][-][error][yii\db\Exception] exception 'PDOException' with message 'SQLSTATE[01000]: Warning: 1265 Data truncated for column 'amount' at row 1' in /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php:781
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php(781): PDOStatement->execute()
+#1 /var/www/cruiseapi/components/MemberService.php(348): yii\db\Command->execute()
+#2 /var/www/cruiseapi/controllers/MembershipController.php(100): app\components\MemberService::goodsreturn('010000000203', '2016030900010', Array)
+#3 [internal function]: app\controllers\MembershipController->actionSalesreturn()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('salesreturn', Array)
+#7 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('membership/sale...', Array)
+#8 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#10 {main}
+
+Next exception 'yii\db\Exception' with message 'SQLSTATE[01000]: Warning: 1265 Data truncated for column 'amount' at row 1
+The SQL being executed was:  INSERT INTO vcos_order_return_log (member_code,order_num,amount,overdraft_amount,return_time)
+									VALUES (''010000000203'',''2016030900010'','80000',''70000'',''2016-03-10 18:05:35'')' in /var/www/cruiseapi/vendor/yiisoft/yii2/db/Schema.php:628
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php(791): yii\db\Schema->convertException(Object(PDOException), ' INSERT INTO vc...')
+#1 /var/www/cruiseapi/components/MemberService.php(348): yii\db\Command->execute()
+#2 /var/www/cruiseapi/controllers/MembershipController.php(100): app\components\MemberService::goodsreturn('010000000203', '2016030900010', Array)
+#3 [internal function]: app\controllers\MembershipController->actionSalesreturn()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('salesreturn', Array)
+#7 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('membership/sale...', Array)
+#8 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#10 {main}
+Additional Information:
+Array
+(
+    [0] => 01000
+    [1] => 1265
+    [2] => Data truncated for column 'amount' at row 1
+)
+
+2016-03-10 18:05:35 [127.0.0.1][100][-][info][application] $_POST = [
+    'mcode' => '010000000203'
+    'order_num' => '2016030900010'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.cruiseapi.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '42'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at www.cruiseapi.com Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'www.cruiseapi.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '56522'
+    'REDIRECT_URL' => '/membership/salesreturn'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/membership/salesreturn'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/membership/salesreturn'
+    'PATH_TRANSLATED' => 'redirect:/index.php/membership/salesreturn/salesreturn'
+    'PHP_SELF' => '/index.php/membership/salesreturn'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1457604335.369
+    'REQUEST_TIME' => 1457604335
+]
+2016-03-10 18:08:04 [127.0.0.1][100][-][error][yii\db\Exception] exception 'PDOException' with message 'SQLSTATE[01000]: Warning: 1265 Data truncated for column 'amount' at row 1' in /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php:781
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php(781): PDOStatement->execute()
+#1 /var/www/cruiseapi/components/MemberService.php(348): yii\db\Command->execute()
+#2 /var/www/cruiseapi/controllers/MembershipController.php(100): app\components\MemberService::goodsreturn('010000000203', '2016030900010', Array)
+#3 [internal function]: app\controllers\MembershipController->actionSalesreturn()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('salesreturn', Array)
+#7 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('membership/sale...', Array)
+#8 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#10 {main}
+
+Next exception 'yii\db\Exception' with message 'SQLSTATE[01000]: Warning: 1265 Data truncated for column 'amount' at row 1
+The SQL being executed was:  INSERT INTO vcos_order_return_log (member_code,order_num,amount,overdraft_amount,return_time)
+									VALUES (''010000000203'',''2016030900010'','80000',''70000'',''2016-03-10 18:08:04'')' in /var/www/cruiseapi/vendor/yiisoft/yii2/db/Schema.php:628
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php(791): yii\db\Schema->convertException(Object(PDOException), ' INSERT INTO vc...')
+#1 /var/www/cruiseapi/components/MemberService.php(348): yii\db\Command->execute()
+#2 /var/www/cruiseapi/controllers/MembershipController.php(100): app\components\MemberService::goodsreturn('010000000203', '2016030900010', Array)
+#3 [internal function]: app\controllers\MembershipController->actionSalesreturn()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('salesreturn', Array)
+#7 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('membership/sale...', Array)
+#8 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#10 {main}
+Additional Information:
+Array
+(
+    [0] => 01000
+    [1] => 1265
+    [2] => Data truncated for column 'amount' at row 1
+)
+
+2016-03-10 18:08:04 [127.0.0.1][100][-][info][application] $_POST = [
+    'mcode' => '010000000203'
+    'order_num' => '2016030900010'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.cruiseapi.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '42'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at www.cruiseapi.com Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'www.cruiseapi.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '56526'
+    'REDIRECT_URL' => '/membership/salesreturn'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/membership/salesreturn'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/membership/salesreturn'
+    'PATH_TRANSLATED' => 'redirect:/index.php/membership/salesreturn/salesreturn'
+    'PHP_SELF' => '/index.php/membership/salesreturn'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1457604484.307
+    'REQUEST_TIME' => 1457604484
+]
+2016-03-10 18:21:11 [127.0.0.1][100][-][error][yii\base\ErrorException:1] exception 'yii\base\ErrorException' with message 'Cannot use object of type yii\db\DataReader as array' in /var/www/cruiseapi/components/MemberService.php:364
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): app\controllers\MembershipController->actionSalesreturn()
+#1 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): ::call_user_func_array()
+#2 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams()
+#3 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction()
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest()
+#6 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#7 {main}
+2016-03-10 18:21:11 [127.0.0.1][100][-][info][application] $_POST = [
+    'mcode' => '010000000203'
+    'order_num' => '2016030900010'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.cruiseapi.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '42'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at www.cruiseapi.com Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'www.cruiseapi.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '56553'
+    'REDIRECT_URL' => '/membership/salesreturn'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/membership/salesreturn'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/membership/salesreturn'
+    'PATH_TRANSLATED' => 'redirect:/index.php/membership/salesreturn/salesreturn'
+    'PHP_SELF' => '/index.php/membership/salesreturn'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1457605271.397
+    'REQUEST_TIME' => 1457605271
+]
+2016-03-11 08:46:19 [127.0.0.1][100][-][error][yii\base\ErrorException:1] exception 'yii\base\ErrorException' with message 'Cannot use object of type yii\db\DataReader as array' in /var/www/cruiseapi/components/MemberService.php:364
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): app\controllers\MembershipController->actionSalesreturn()
+#1 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): ::call_user_func_array()
+#2 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams()
+#3 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction()
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest()
+#6 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#7 {main}
+2016-03-11 08:46:19 [127.0.0.1][100][-][info][application] $_POST = [
+    'mcode' => '010000000203'
+    'order_num' => '2016030900010'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.cruiseapi.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '42'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at www.cruiseapi.com Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'www.cruiseapi.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '33737'
+    'REDIRECT_URL' => '/membership/salesreturn'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/membership/salesreturn'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/membership/salesreturn'
+    'PATH_TRANSLATED' => 'redirect:/index.php/membership/salesreturn/salesreturn'
+    'PHP_SELF' => '/index.php/membership/salesreturn'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1457657179.602
+    'REQUEST_TIME' => 1457657179
+]
+2016-03-11 08:48:22 [127.0.0.1][100][-][error][yii\base\ErrorException:1] exception 'yii\base\ErrorException' with message 'Cannot use object of type yii\db\DataReader as array' in /var/www/cruiseapi/components/MemberService.php:364
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): app\controllers\MembershipController->actionSalesreturn()
+#1 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): ::call_user_func_array()
+#2 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams()
+#3 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction()
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest()
+#6 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#7 {main}
+2016-03-11 08:48:22 [127.0.0.1][100][-][info][application] $_POST = [
+    'mcode' => '010000000203'
+    'order_num' => '2016030900010'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.cruiseapi.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '42'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at www.cruiseapi.com Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'www.cruiseapi.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '33743'
+    'REDIRECT_URL' => '/membership/salesreturn'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/membership/salesreturn'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/membership/salesreturn'
+    'PATH_TRANSLATED' => 'redirect:/index.php/membership/salesreturn/salesreturn'
+    'PHP_SELF' => '/index.php/membership/salesreturn'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1457657302.517
+    'REQUEST_TIME' => 1457657302
+]
+2016-03-11 08:48:49 [127.0.0.1][100][-][error][yii\base\ErrorException:1] exception 'yii\base\ErrorException' with message 'Cannot use object of type yii\db\DataReader as array' in /var/www/cruiseapi/components/MemberService.php:365
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): app\controllers\MembershipController->actionSalesreturn()
+#1 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): ::call_user_func_array()
+#2 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams()
+#3 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction()
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest()
+#6 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#7 {main}
+2016-03-11 08:48:49 [127.0.0.1][100][-][info][application] $_POST = [
+    'mcode' => '010000000203'
+    'order_num' => '2016030900010'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.cruiseapi.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '42'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at www.cruiseapi.com Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'www.cruiseapi.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '33747'
+    'REDIRECT_URL' => '/membership/salesreturn'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/membership/salesreturn'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/membership/salesreturn'
+    'PATH_TRANSLATED' => 'redirect:/index.php/membership/salesreturn/salesreturn'
+    'PHP_SELF' => '/index.php/membership/salesreturn'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1457657329.585
+    'REQUEST_TIME' => 1457657329
+]
+2016-03-11 09:07:57 [127.0.0.1][100][-][error][yii\db\Exception] exception 'PDOException' with message 'SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens' in /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php:781
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php(781): PDOStatement->execute()
+#1 /var/www/cruiseapi/components/MemberService.php(261): yii\db\Command->execute()
+#2 /var/www/cruiseapi/controllers/MembershipController.php(100): app\components\MemberService::goodsreturn('010000000203', '2016030900010', Array)
+#3 [internal function]: app\controllers\MembershipController->actionSalesreturn()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('salesreturn', Array)
+#7 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('membership/sale...', Array)
+#8 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#10 {main}
+
+Next exception 'yii\db\Exception' with message 'SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+The SQL being executed was:  UPDATE vcos_order_pay_log_detail SET1 count_return=3, status=2 WHERE member_code=:member_code AND order_num='2016030900010'
+							AND barcode='999999' ' in /var/www/cruiseapi/vendor/yiisoft/yii2/db/Schema.php:628
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php(791): yii\db\Schema->convertException(Object(PDOException), ' UPDATE vcos_or...')
+#1 /var/www/cruiseapi/components/MemberService.php(261): yii\db\Command->execute()
+#2 /var/www/cruiseapi/controllers/MembershipController.php(100): app\components\MemberService::goodsreturn('010000000203', '2016030900010', Array)
+#3 [internal function]: app\controllers\MembershipController->actionSalesreturn()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('salesreturn', Array)
+#7 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('membership/sale...', Array)
+#8 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#10 {main}
+Additional Information:
+Array
+(
+    [0] => HY093
+    [1] => 0
+)
+
+2016-03-11 09:07:57 [127.0.0.1][100][-][info][application] $_POST = [
+    'mcode' => '010000000203'
+    'order_num' => '2016030900010'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.cruiseapi.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '42'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at www.cruiseapi.com Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'www.cruiseapi.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '33833'
+    'REDIRECT_URL' => '/membership/salesreturn'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/membership/salesreturn'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/membership/salesreturn'
+    'PATH_TRANSLATED' => 'redirect:/index.php/membership/salesreturn/salesreturn'
+    'PHP_SELF' => '/index.php/membership/salesreturn'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1457658477.483
+    'REQUEST_TIME' => 1457658477
+]
+2016-03-11 09:09:49 [127.0.0.1][100][-][error][yii\db\Exception] exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'count_return=3, status=2 WHERE member_code='010000000203' AND order_num='2016030' at line 1' in /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php:781
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php(781): PDOStatement->execute()
+#1 /var/www/cruiseapi/components/MemberService.php(262): yii\db\Command->execute()
+#2 /var/www/cruiseapi/controllers/MembershipController.php(100): app\components\MemberService::goodsreturn('010000000203', '2016030900010', Array)
+#3 [internal function]: app\controllers\MembershipController->actionSalesreturn()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('salesreturn', Array)
+#7 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('membership/sale...', Array)
+#8 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#10 {main}
+
+Next exception 'yii\db\Exception' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'count_return=3, status=2 WHERE member_code='010000000203' AND order_num='2016030' at line 1
+The SQL being executed was:  UPDATE vcos_order_pay_log_detail SET1 count_return=3, status=2 WHERE member_code='010000000203' AND order_num='2016030900010'
+							AND barcode='999999' ' in /var/www/cruiseapi/vendor/yiisoft/yii2/db/Schema.php:628
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php(791): yii\db\Schema->convertException(Object(PDOException), ' UPDATE vcos_or...')
+#1 /var/www/cruiseapi/components/MemberService.php(262): yii\db\Command->execute()
+#2 /var/www/cruiseapi/controllers/MembershipController.php(100): app\components\MemberService::goodsreturn('010000000203', '2016030900010', Array)
+#3 [internal function]: app\controllers\MembershipController->actionSalesreturn()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('salesreturn', Array)
+#7 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('membership/sale...', Array)
+#8 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#10 {main}
+Additional Information:
+Array
+(
+    [0] => 42000
+    [1] => 1064
+    [2] => You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'count_return=3, status=2 WHERE member_code='010000000203' AND order_num='2016030' at line 1
+)
+
+2016-03-11 09:09:49 [127.0.0.1][100][-][info][application] $_POST = [
+    'mcode' => '010000000203'
+    'order_num' => '2016030900010'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.cruiseapi.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '42'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at www.cruiseapi.com Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'www.cruiseapi.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '33836'
+    'REDIRECT_URL' => '/membership/salesreturn'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/membership/salesreturn'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/membership/salesreturn'
+    'PATH_TRANSLATED' => 'redirect:/index.php/membership/salesreturn/salesreturn'
+    'PHP_SELF' => '/index.php/membership/salesreturn'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1457658589.195
+    'REQUEST_TIME' => 1457658589
+]
+2016-03-11 09:13:04 [127.0.0.1][100][-][error][yii\db\Exception] exception 'yii\db\Exception' with message 'Failed to commit transaction: transaction was inactive.' in /var/www/cruiseapi/vendor/yiisoft/yii2/db/Transaction.php:143
+Stack trace:
+#0 /var/www/cruiseapi/components/MemberService.php(265): yii\db\Transaction->commit()
+#1 /var/www/cruiseapi/controllers/MembershipController.php(100): app\components\MemberService::goodsreturn('010000000203', '2016030900010', Array)
+#2 [internal function]: app\controllers\MembershipController->actionSalesreturn()
+#3 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('salesreturn', Array)
+#6 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('membership/sale...', Array)
+#7 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#9 {main}
+Additional Information:
+Array
+(
+)
+
+2016-03-11 09:13:04 [127.0.0.1][100][-][info][application] $_POST = [
+    'mcode' => '010000000203'
+    'order_num' => '2016030900010'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.cruiseapi.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '42'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at www.cruiseapi.com Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'www.cruiseapi.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '33845'
+    'REDIRECT_URL' => '/membership/salesreturn'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/membership/salesreturn'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/membership/salesreturn'
+    'PATH_TRANSLATED' => 'redirect:/index.php/membership/salesreturn/salesreturn'
+    'PHP_SELF' => '/index.php/membership/salesreturn'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1457658784.228
+    'REQUEST_TIME' => 1457658784
+]
+2016-03-11 09:15:02 [127.0.0.1][100][-][error][yii\db\Exception] exception 'yii\db\Exception' with message 'Failed to commit transaction: transaction was inactive.' in /var/www/cruiseapi/vendor/yiisoft/yii2/db/Transaction.php:143
+Stack trace:
+#0 /var/www/cruiseapi/components/MemberService.php(265): yii\db\Transaction->commit()
+#1 /var/www/cruiseapi/controllers/MembershipController.php(100): app\components\MemberService::goodsreturn('010000000203', '2016030900010', Array)
+#2 [internal function]: app\controllers\MembershipController->actionSalesreturn()
+#3 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('salesreturn', Array)
+#6 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('membership/sale...', Array)
+#7 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#9 {main}
+Additional Information:
+Array
+(
+)
+
+2016-03-11 09:15:02 [127.0.0.1][100][-][info][application] $_POST = [
+    'mcode' => '010000000203'
+    'order_num' => '2016030900010'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.cruiseapi.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '42'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at www.cruiseapi.com Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'www.cruiseapi.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '33849'
+    'REDIRECT_URL' => '/membership/salesreturn'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/membership/salesreturn'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/membership/salesreturn'
+    'PATH_TRANSLATED' => 'redirect:/index.php/membership/salesreturn/salesreturn'
+    'PHP_SELF' => '/index.php/membership/salesreturn'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1457658902.115
+    'REQUEST_TIME' => 1457658902
+]
+2016-03-11 09:16:08 [127.0.0.1][100][-][error][yii\db\Exception] exception 'yii\db\Exception' with message 'Failed to commit transaction: transaction was inactive.' in /var/www/cruiseapi/vendor/yiisoft/yii2/db/Transaction.php:143
+Stack trace:
+#0 /var/www/cruiseapi/components/MemberService.php(266): yii\db\Transaction->commit()
+#1 /var/www/cruiseapi/controllers/MembershipController.php(100): app\components\MemberService::goodsreturn('010000000203', '2016030900010', Array)
+#2 [internal function]: app\controllers\MembershipController->actionSalesreturn()
+#3 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('salesreturn', Array)
+#6 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('membership/sale...', Array)
+#7 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#9 {main}
+Additional Information:
+Array
+(
+)
+
+2016-03-11 09:16:08 [127.0.0.1][100][-][info][application] $_POST = [
+    'mcode' => '010000000203'
+    'order_num' => '2016030900010'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.cruiseapi.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '42'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at www.cruiseapi.com Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'www.cruiseapi.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '33914'
+    'REDIRECT_URL' => '/membership/salesreturn'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/membership/salesreturn'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/membership/salesreturn'
+    'PATH_TRANSLATED' => 'redirect:/index.php/membership/salesreturn/salesreturn'
+    'PHP_SELF' => '/index.php/membership/salesreturn'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1457658968.222
+    'REQUEST_TIME' => 1457658968
+]
+2016-03-11 09:28:56 [127.0.0.1][100][-][error][yii\db\Exception] exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'count_return=3, status=2 WHERE member_code='010000000203' 
+							AND order_num' at line 1' in /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php:781
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php(781): PDOStatement->execute()
+#1 /var/www/cruiseapi/components/MemberService.php(263): yii\db\Command->execute()
+#2 /var/www/cruiseapi/controllers/MembershipController.php(100): app\components\MemberService::goodsreturn('010000000203', '2016030900088', Array)
+#3 [internal function]: app\controllers\MembershipController->actionSalesreturn()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('salesreturn', Array)
+#7 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('membership/sale...', Array)
+#8 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#10 {main}
+
+Next exception 'yii\db\Exception' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'count_return=3, status=2 WHERE member_code='010000000203' 
+							AND order_num' at line 1
+The SQL being executed was:  UPDATE vcos_order_pay_log_detail SET1 count_return=3, status=2 WHERE member_code='010000000203' 
+							AND order_num='2016030900088' AND barcode='111111' ' in /var/www/cruiseapi/vendor/yiisoft/yii2/db/Schema.php:628
+Stack trace:
+#0 /var/www/cruiseapi/vendor/yiisoft/yii2/db/Command.php(791): yii\db\Schema->convertException(Object(PDOException), ' UPDATE vcos_or...')
+#1 /var/www/cruiseapi/components/MemberService.php(263): yii\db\Command->execute()
+#2 /var/www/cruiseapi/controllers/MembershipController.php(100): app\components\MemberService::goodsreturn('010000000203', '2016030900088', Array)
+#3 [internal function]: app\controllers\MembershipController->actionSalesreturn()
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('salesreturn', Array)
+#7 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('membership/sale...', Array)
+#8 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#10 {main}
+Additional Information:
+Array
+(
+    [0] => 42000
+    [1] => 1064
+    [2] => You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'count_return=3, status=2 WHERE member_code='010000000203' 
+							AND order_num' at line 1
+)
+
+2016-03-11 09:28:56 [127.0.0.1][100][-][info][application] $_POST = [
+    'mcode' => '010000000203'
+    'order_num' => '2016030900088'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.cruiseapi.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '42'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at www.cruiseapi.com Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'www.cruiseapi.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '33946'
+    'REDIRECT_URL' => '/membership/salesreturn'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/membership/salesreturn'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/membership/salesreturn'
+    'PATH_TRANSLATED' => 'redirect:/index.php/membership/salesreturn/salesreturn'
+    'PHP_SELF' => '/index.php/membership/salesreturn'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1457659736.917
+    'REQUEST_TIME' => 1457659736
+]
+2016-03-11 09:31:13 [127.0.0.1][100][-][error][yii\db\Exception] exception 'yii\db\Exception' with message 'Failed to commit transaction: transaction was inactive.' in /var/www/cruiseapi/vendor/yiisoft/yii2/db/Transaction.php:143
+Stack trace:
+#0 /var/www/cruiseapi/components/MemberService.php(264): yii\db\Transaction->commit()
+#1 /var/www/cruiseapi/controllers/MembershipController.php(100): app\components\MemberService::goodsreturn('010000000203', '2016030900088', Array)
+#2 [internal function]: app\controllers\MembershipController->actionSalesreturn()
+#3 /var/www/cruiseapi/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#4 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#5 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('salesreturn', Array)
+#6 /var/www/cruiseapi/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('membership/sale...', Array)
+#7 /var/www/cruiseapi/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 /var/www/cruiseapi/web/index.php(12): yii\base\Application->run()
+#9 {main}
+Additional Information:
+Array
+(
+)
+
+2016-03-11 09:31:13 [127.0.0.1][100][-][info][application] $_POST = [
+    'mcode' => '010000000203'
+    'order_num' => '2016030900088'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.cruiseapi.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'
+    'HTTP_ACCEPT' => 'application/json'
+    'HTTP_ACCEPT_LANGUAGE' => 'null'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_CHARSET' => 'UTF-8'
+    'CONTENT_LENGTH' => '42'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at www.cruiseapi.com Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'www.cruiseapi.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/cruiseapi/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/cruiseapi/web/index.php'
+    'REMOTE_PORT' => '33950'
+    'REDIRECT_URL' => '/membership/salesreturn'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/membership/salesreturn'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/membership/salesreturn'
+    'PATH_TRANSLATED' => 'redirect:/index.php/membership/salesreturn/salesreturn'
+    'PHP_SELF' => '/index.php/membership/salesreturn'
+    'PHP_AUTH_USER' => '123456'
+    'PHP_AUTH_PW' => '123456'
+    'REQUEST_TIME_FLOAT' => 1457659873.206
+    'REQUEST_TIME' => 1457659873
+]

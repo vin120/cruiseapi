@@ -61,7 +61,9 @@ class SiteController extends Controller
     	$temp_value = OrderService::getBookingno();
     	echo '<pre>';
     	print_r($temp_value);
-    	echo phpinfo();
+        echo '<br/>';
+        echo date('Y-m-d H:i:s',time());
+    	// echo phpinfo();
     	// echo date('Ymd').substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 8);
     	exit;
         return $this->render('index');
