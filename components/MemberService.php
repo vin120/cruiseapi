@@ -429,6 +429,316 @@ class MemberService {
 		}
 	}
 	
+	public static function memberDishpay ( $code_or_passport, $amount,$order_num) {
+		// $amount 商品价格
+		//订餐系统下单
+		$response = array ();
+		if (self::checkMembershipCode ( $code_or_passport )) {
+			$member = Member::find ()->select ([
+					'member_money',
+					'member_code',
+					'passport_number',
+					'member_password',
+					'overdraft_limit',
+					'curr_overdraft_amount'
+			])->where ([
+					'member_code' => $code_or_passport
+			])->one ();
+		} else {
+			$member = Member::find ()->select ( [
+					'member_money',
+					'member_code',
+					'passport_number',
+					'member_password',
+					'overdraft_limit',
+					'curr_overdraft_amount'
+			] )->where ( [
+					'passport_number' => $code_or_passport
+			] )->one ();
+		}
+	
+		if ($member) {
+			
+			//判断  会员余额 + 信用额度 是否够支付账单
+			if ($amount <= $member->overdraft_limit - $member->curr_overdraft_amount + $member->member_money && $member->member_money >= 0) {
+	
+				// if   member_money > amout
+				//         member_money -= amount
+	
+				//会员余额够支付，直接支付
+				if ($amount <= $member->member_money) {
+					$money = $member->member_money - $amount;
+					$params_money = [
+							':member_money' => $money,
+							':member_code' => $member->member_code
+					];
+					$sql_money = ' UPDATE vcos_member SET member_money= :member_money WHERE member_code=:member_code';
+						
+					// 保存到 order_pay_log
+					$params_orderlog = [
+							':member_code' => $member->member_code,
+							':order_num' => $order_num,
+							':amount' => $amount,
+							':overdraft_amount' => 0,
+							':pay_time' => date ( "Y-m-d H:i:s", time () )
+					];
+					$sql_orderlog = ' INSERT INTO vcos_order_dishpay_log (member_code,order_num,amount,overdraft_amount,pay_time )
+							VALUES (:member_code,:order_num,:amount,:overdraft_amount,:pay_time)';
+						
+						
+					$response ['data'] = array (
+							'status' => 1,
+							'use_amount' => $amount/100,
+							'use_limit'=>0,
+					);
+						
+				} else {
+					//会员余额不够支付，使用会员余额+信用额度支付
+					$member_money = $member->member_money;
+					$overdraft = $amount - $member->member_money;
+					$member->member_money = 0;
+					$member->curr_overdraft_amount += $overdraft;
+					$params_money = [
+							':member_money' => $member->member_money,
+							':member_code' => $member->member_code,
+							':curr_overdraft_amount' => $member->curr_overdraft_amount
+					];
+					$sql_money = ' UPDATE vcos_member SET member_money= :member_money,curr_overdraft_amount=:curr_overdraft_amount
+							WHERE member_code=:member_code';
+						
+					// 保存到 order_pay_log
+					$params_orderlog = [
+							':member_code' => $member->member_code,
+							':order_num' => $order_num,
+							':amount' => $member_money,
+							':overdraft_amount' => $overdraft,
+							':pay_time' => date ( "Y-m-d H:i:s", time () )
+					];
+					$sql_orderlog = ' INSERT INTO vcos_order_dishpay_log (member_code,order_num,amount,overdraft_amount,pay_time )
+							VALUES (:member_code,:order_num,:amount,:overdraft_amount,:pay_time)';
+						
+					$response ['data'] = array (
+							'status' => 1,
+							'use_amount' => $member_money/100,
+							'use_limit'=>$overdraft/100,
+					);
+				}
+	
+	
+				Yii::$app->db->createCommand ( $sql_money, $params_money )->execute ();
+				Yii::$app->db->createCommand ( $sql_orderlog, $params_orderlog )->execute ();
+				Yii::$app->db->createCommand ()->insert ( 'vcos_pay_log', [
+						'member_code' => $member->member_code,
+						'passport_number' => $member->passport_number,
+						'order_num' => $order_num,
+						'amount' => $amount,
+						'pay_time' => date ( 'Y-m-d H:i:s', time () )
+				] )->execute ();
+					
+				return $response;
+			} else {
+				// failed
+				return $response ['error'] = array (
+						'error_code' => 2,
+						'message' => 'not enought money '
+				);
+			}
+		} else {
+			return $response ['error'] = array (
+					'error_code' => 1,
+					'message' => 'member does not exist'
+			);
+		}
+	}
+	
+	
+	//todo
+	public static function dishreturn($code_or_passport,$order_num,$data,$status)
+	{
+		$response = array ();
+		if (self::checkMembershipCode ( $code_or_passport )) {
+			$member = Member::find ()->select ( [
+					'member_money',
+					'member_code',
+					'passport_number',
+					'member_password',
+					'overdraft_limit',
+					'curr_overdraft_amount'
+			] )->where ( [
+					'member_code' => $code_or_passport
+			] )->one ();
+		} else {
+			$member = Member::find ()->select ( [
+					'member_money',
+					'member_code',
+					'passport_number',
+					'member_password',
+					'overdraft_limit',
+					'curr_overdraft_amount'
+			] )->where ( [
+					'passport_number' => $code_or_passport
+			] )->one ();
+		}
+		if($member){
+				
+			if($status == 1){
+				//$status == 1  ：单件退货
+				//先判断传递过来的数量 + 己退货数量   是否大于 商品数量，如果大于直接返回
+				$params_count = [
+						':order_num'=>$order_num,
+						':barcode'=>$data['barcode'],
+				];
+				$sql_count = 'SELECT count,count_return FROM vcos_order_pay_log_detail WHERE order_num=:order_num AND barcode=:barcode';
+				$count = Yii::$app->db->createCommand($sql_count,$params_count)->queryOne();
+	
+				if($data['count_return'] + $count['count_return'] > $count['count']){
+					return $response ['error'] = array (
+							'error_code' => 2,
+							'message' => 'count_return can not more than count ',
+					);
+					die();
+				}else {
+					//从vcos_order_pay_log_detail中找到订单，修改退货数量加$data['return_count'],修改状态为已退货
+					//事务处理
+					$transaction = Yii::$app->db->beginTransaction();
+					try {
+						$params_udetail = [
+								':count_return'=>$data['count_return']+$count['count_return'] ,
+								':status'=>2,
+								':order_num'=>$order_num,
+								':barcode'=>$data['barcode'],
+						];
+						$sql_udetail = " UPDATE vcos_order_pay_log_detail SET count_return=:count_return, status=:status WHERE order_num=:order_num
+							AND barcode=:barcode ";
+						Yii::$app->db->createCommand ( $sql_udetail, $params_udetail )->execute ();
+	
+						//退钱
+						//根据传递过来的参数，找出要退货的商品，
+						//根据商品价格，优先减少当前透支信誉额度，再添加member_money
+						$price = $data['count_return'] * $data['price'] * 100;  //要退的总金额
+	
+						//判断当前透支金额是否大于或等于总金额，如果大于或等于， 当前透支金额  -=  总金额
+						//如果当前透支金额小于总金额, member_money +=  (总金额- 当前透支金额), 当前透支金额 = 0
+	
+	
+						// if      当前透支金额小于$price
+						//           $price -= 当前透支金额 ， 当前透支金额 = 0 ，$member_money += $price
+						// elseif  当前透支金额大于或等于总金额
+						//           当前透支金额 -= $price,
+							
+						if($member->curr_overdraft_amount >= $price){
+							$member->curr_overdraft_amount -= $price;
+						}else {
+							$member->member_money += ($price - $member->curr_overdraft_amount);
+							$member->curr_overdraft_amount = 0;
+						}
+	
+						$params_money = [
+								':member_money' => $member->member_money,
+								':member_code' => $member->member_code,
+								':curr_overdraft_amount' => $member->curr_overdraft_amount
+						];
+						$sql_money = ' UPDATE vcos_member SET member_money= :member_money,curr_overdraft_amount=:curr_overdraft_amount WHERE member_code=:member_code';
+						Yii::$app->db->createCommand ( $sql_money, $params_money )->execute ();
+						$transaction->commit();
+						return $response ['data'] = array (
+								'code' => 1,
+								'message' => 'success'
+						);
+	
+					} catch (Exception $e) {
+						$transaction->rollBack();
+						return $response ['error'] = array (
+								'code_code' => 1,
+								'message' => 'wrong'
+						);
+					}
+				}
+			}else if($status == 2){
+				//$status == 2 ：整单退货
+				//根据 order_num找到所有订单,把status设置为己退货，把退货数量设置成商品数量
+				//查找vcos_order_pay_log ，退钱，退信誉额度
+	
+				$params_count = [
+						':order_num'=>$order_num,
+				];
+				$sql_count = 'SELECT count,count_return,barcode,status FROM vcos_order_pay_log_detail WHERE order_num=:order_num ';
+				$counts = Yii::$app->db->createCommand($sql_count,$params_count)->queryAll();
+	
+				foreach ($counts as $count){
+					//如果订单中有状态为2的，说明已经退货了
+					if($count['status'] == 2){
+						return $response ['error'] = array (
+								'code_code' => 1,
+								'message' => 'status have been change '
+						);
+						die();
+					}
+				}
+	
+				//事务处理
+				$transaction = Yii::$app->db->beginTransaction();
+				try {
+					//改变状态，退货数量
+					foreach ($counts as $count){
+						$params_udetail = [
+								':count_return'=>$count['count'],
+								':order_num'=>$order_num,
+								':barcode'=>$count['barcode'],
+								':status'=>2,
+						];
+						$sql_udetail = 'UPDATE vcos_order_pay_log_detail SET count_return=:count_return,status=:status WHERE order_num=:order_num AND barcode=:barcode';
+						Yii::$app->db->createCommand ( $sql_udetail, $params_udetail )->execute ();
+					}
+						
+					$params_log = [
+							':order_num'=>$order_num,
+					];
+					$sql_log = 'SELECT amount,overdraft_amount FROM vcos_order_pay_log WHERE order_num=:order_num ' ;
+					$log = Yii::$app->db->createCommand($sql_log,$params_log)->queryOne();
+						
+	
+					$member->member_money += $log['amount'];
+					$member->curr_overdraft_amount -= $log['overdraft_amount'];
+						
+					if($member->curr_overdraft_amount < 0){
+						$member->member_money -= $member->curr_overdraft_amount;
+						$member->curr_overdraft_amount = 0;
+					}
+	
+					$params_money = [
+							':member_money' => $member->member_money,
+							':member_code' => $member->member_code,
+							':curr_overdraft_amount' => $member->curr_overdraft_amount
+					];
+					$sql_money = ' UPDATE vcos_member SET member_money= :member_money,curr_overdraft_amount=:curr_overdraft_amount WHERE member_code=:member_code';
+					Yii::$app->db->createCommand ( $sql_money, $params_money )->execute ();
+						
+					$transaction->commit();
+					return $response ['data'] = array (
+							'code' => 1,
+							'message' => 'success'
+					);
+				} catch (Exception $e) {
+					$transaction->rollBack();
+					return $response ['error'] = array (
+							'code_code' => 1,
+							'message' => 'wrong'
+					);
+				}
+			}
+		}else{
+			return $response ['error'] = array (
+					'error_code' => 1,
+					'message' => 'member does not exist'
+			);
+		}
+	}
+	
+	
+	
+	
+	
 	
 	public static function getMemberBySearch($search) {
 		$response = array ();

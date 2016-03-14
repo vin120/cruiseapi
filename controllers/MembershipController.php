@@ -36,26 +36,27 @@ class MembershipController extends MyActiveController {
 		
 		return $response;
 	}
+	
 	public function actionCardpay() {
 		$mcode = isset ( $_POST ['mcode'] ) ? $_POST ['mcode'] : '';
 		$order_num = isset ( $_POST ['order_num'] ) ? $_POST ['order_num'] : ''; 	// 订单号
 		$passwd = isset ( $_POST ['passwd'] ) ? $_POST ['passwd'] : ''; 			// 密码
-//  		$datas = isset($_POST['datas']) ? $_POST['datas'] : '';						// 条形码
+ 		$datas = isset($_POST['datas']) ? $_POST['datas'] : '';						// 条形码
  		
  		//示例代码
-		$datas = '
-			{
-				"data":[{
-					"barcode":"111111",
-					"price":"500",
-					"count":"3"
-				},
-				{
-					"barcode":"222222",
-					"price":"200",
-					"count":"1"
-				}]
-			}';
+// 		$datas = '
+// 			{
+// 				"data":[{
+// 					"barcode":"111111",
+// 					"price":"500",
+// 					"count":"3"
+// 				},
+// 				{
+// 					"barcode":"222222",
+// 					"price":"200",
+// 					"count":"1"
+// 				}]
+// 			}';
 
 		$data_json = json_decode($datas,true);
 		$data_array = $data_json['data'];
@@ -77,22 +78,22 @@ class MembershipController extends MyActiveController {
 		$response = array ();
 		$mcode = isset ( $_POST ['mcode'] ) ? $_POST ['mcode'] : '';
 		$order_num = isset ( $_POST ['order_num'] ) ? $_POST ['order_num'] : '';
-// 		$datas = isset($_POST['datas']) ? $_POST['datas'] : '';
+		$datas = isset($_POST['datas']) ? $_POST['datas'] : '';
 
  		//示例代码
- 		$datas = '
-			{
-				"data":[{
-					"barcode":"111111",
-					"price":"500",
-					"count_return":"3"
-				},
-				{
-					"barcode":"222222",
-					"price":"200",
-					"count_return":"1"
-				}]
-			}';
+//  		$datas = '
+// 			{
+// 				"data":[{
+// 					"barcode":"111111",
+// 					"price":"500",
+// 					"count_return":"3"
+// 				},
+// 				{
+// 					"barcode":"222222",
+// 					"price":"200",
+// 					"count_return":"1"
+// 				}]
+// 			}';
 		
 		$data_json = json_decode($datas,true);
 		$data_array = $data_json['data'];
@@ -105,6 +106,56 @@ class MembershipController extends MyActiveController {
 			);
 		}
 		return $response;
+	}
+	
+	
+	
+	public function actionDishpay()
+	{
+		//点餐系统 支付
+		$mcode = isset ( $_POST ['mcode'] ) ? $_POST ['mcode'] : '';
+		$amount = isset ( $_POST ['amount'] ) ? $_POST ['amount'] * 100 : ''; 		// 总价
+		$order_num = isset ( $_POST ['order_num'] ) ? $_POST ['order_num'] : ''; 	// 订单号
+		
+		$response = array ();
+		
+		if (! empty ( $mcode ) && ! empty ( $amount ) && !empty($order_num)) {
+			$response = MemberService::memberDishpay ( $mcode, $amount,$order_num);
+		} else {
+			$response ['error'] = array (
+					'error_code' => 1,
+					'message' => 'mcode,amount,order_num can not be empty'
+			);
+		}
+		return $response;
+	}
+	
+	public function actionDishreturn()
+	{
+		// 点餐系统退货  
+		//todo
+// 		$response = array ();
+// 		$mcode = isset ( $_POST ['mcode'] ) ? $_POST ['mcode'] : '';
+// 		$order_num = isset ( $_POST ['order_num'] ) ? $_POST ['order_num'] : '';
+// 		$datas = isset($_POST['datas']) ? $_POST['datas'] : '';
+// 		$status = isset($_POST['status']) ? $_POST['status'] : ''; //1,单件退货    2.整单退货
+		
+// 		//示例代码
+// // 		$datas = [
+// // 				['barcode'=>333,'price'=>200,'count_return'=>1],
+// // 		];
+		
+// 		$data = isset($datas[0]) ? $datas[0] : '';
+		
+// 		if(!empty($status) && !empty($mcode)){
+// 			$response = MemberService::dishreturn($mcode,$order_num,$data,$status);
+// 		}else {
+// 			$response ['error'] = array (
+// 					'error_code' => 1,
+// 					'message' => 'status,barcode, can not be empty'
+// 			);
+// 		}
+// 		return $response;
 	}
 	
 	
