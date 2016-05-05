@@ -33,7 +33,7 @@ class MemberService {
 		
 		return $member;
 	}
-	
+
 	
 	public static function getMemberinfobysign($sign)
 	{
@@ -182,6 +182,63 @@ class MemberService {
 			return $response ['error'] = array ('error_code' => 1,'message' => 'member does not exist');
 		}
 	}
+	
+	
+	public static function getallmemberinfo($page,$page_size)
+	{
+		$response = array ();
+		
+		$member_array = Member::find ()->select ( [
+				'cn_name',
+				'member_code',
+				'passport_number',
+				'member_money',
+				'member_credit',
+				'overdraft_limit',
+				'curr_overdraft_amount',
+				'passport_number',
+				'date_of_birth'
+		] )->offset($page)->limit($page_size)->all ();
+		
+		$member_count = Member::find ()->select ( [
+				'cn_name',
+				'member_code',
+				'passport_number',
+				'member_money',
+				'member_credit',
+				'overdraft_limit',
+				'curr_overdraft_amount',
+				'passport_number',
+				'date_of_birth'
+		] )->count ();
+		
+		
+		
+		$cruise_line = CruiseLineService::getCruiseLineByCurrTime ();
+			
+		$temp_member_array = array ();
+		$temp_count = count ( $member_array );
+		for($i = 0; $i < $temp_count; $i ++) {
+			$member = $member_array [$i];
+			$temp_member_array [$i] ['member_code'] = $member->member_code;
+			$temp_member_array [$i] ['cn_name'] = $member->cn_name;
+			$temp_member_array [$i] ['member_money'] = $member->member_money / 100;
+			$temp_member_array [$i] ['member_credit'] = $member->member_credit;
+			$temp_member_array [$i] ['member_room'] = 5501; // CruiseLineService::getCruiseAddress($member->member_code, $cruise_line['trip_id'])['cabin_name_num'];
+			$temp_member_array [$i] ['overdraft'] = ($member->overdraft_limit - $member->curr_overdraft_amount) / 100;
+			$temp_member_array [$i] ['passport_number'] = $member->passport_number;
+			$temp_member_array [$i] ['date_of_birth'] = date ( 'Y-m-d ', $member->date_of_birth );
+		}
+		
+		$response['cur_page'] = $page;
+		$response['total_page'] =ceil($member_count / $page_size);
+		$response['total_count'] = $member_count;
+		$response['page_size'] = $page_size;
+		$response ['data'] = $temp_member_array;
+		return $response;
+	}
+	
+	
 	
 	public static function goodsreturn($code_or_passport,$order_num,$data_array)
 	{
@@ -552,7 +609,6 @@ class MemberService {
 	}
 	
 	
-	//todo
 	public static function dishreturn($code_or_passport,$order_num,$data,$status)
 	{
 		$response = array ();

@@ -59,7 +59,7 @@ $config = [
 		'mdb' => require (__DIR__ . '/member_db.php'),
 		'pdb' => require (__DIR__ . '/product_db.php'),
 		
-		'urlManager' => [ 
+		'urlManager' => [
 			'enablePrettyUrl' => true,
 			'showScriptName' => false,
 			'rules' => [ ] 

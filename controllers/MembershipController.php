@@ -110,7 +110,7 @@ class MembershipController extends MyActiveController {
 	
 	
 	
-	public function actionDishpay()
+	public function actionDishpsay()
 	{
 		//点餐系统 支付
 		$mcode = isset ( $_POST ['mcode'] ) ? $_POST ['mcode'] : '';
@@ -173,6 +173,19 @@ class MembershipController extends MyActiveController {
 		}
 		return $response;
 	}
+	
+	//获取所有会员的信息
+	public function actionGetallmemberinfo()
+	{
+		$page = isset($_POST['page']) ? $_POST['page'] : 1;
+		$page_size = isset($_POST['page_size']) ? $_POST['page_size'] : 20;
+		
+		$response = MemberService::getallmemberinfo($page,$page_size);
+		
+		return $response;
+ 	}
+	
+	
 	public function actionLogin() {
 		$name = isset ( $_POST ['name'] ) ? $_POST ['name'] : '';
 		$passwd = isset ( $_POST ['passwd'] ) ? $_POST ['passwd'] : '';
