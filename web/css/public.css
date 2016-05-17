@@ -1,0 +1,33 @@
+/*font media*/
+@media screen and (min-width: 320px) { html {font-size: 14px;} }
+@media screen and (min-width: 360px) { html {font-size: 16px;} }
+@media screen and (min-width: 400px) { html {font-size: 18px;} }
+@media screen and (min-width: 440px) { html {font-size: 20px;} }
+@media screen and (min-width: 480px) { html {font-size: 22px;} }
+@media screen and (min-width: 640px) { html {font-size: 28px;} }
+
+/*reset*/
+body,html { padding: 0; margin: 0; background-color: #f0f0f0; color: #4d4d4d; }
+h1,h2,h3,p { margin: 0; }
+ul { list-style: none; }
+a { text-decoration: none; }
+input { outline: none; }
+
+/*common*/
+.l { float: left; }
+.r { float: right; }
+.pBox { padding: 20px; }
+.em { font-style: normal; color: #f25721; }
+.btnBox { margin-top: 20px; text-align: center; }
+.btnBox input { width: 90%; line-height: 2.5em; background-color: #5592dc; border: none; border-radius: 10px; text-align: center; color: #fff; cursor: pointer; }
+.iconBox { margin: 20px 0; text-align: center; }
+.iconBox h2 { margin-bottom: 20px; }
+.iconBox .error { color: #f03331; }
+.iconBox .icon { display: inline-block; width: 40px; line-height: 40px; margin: 20px 0; border-radius: 100%; text-align: center; font-weight: bolder; font-size: 20px; color: #fff; }
+
+/*mainHeader*/
+#mainHeader ul { display: table; width: 100%; margin: 0; padding: 0; border-bottom: 4px solid #3b7dd3; }
+#mainHeader li { display: table-cell; width: 50%; line-height: 2.5em; background-color: #fff; text-align: center; }
+#mainHeader li a { color: #3b7dd3; display: block; }
+#mainHeader .active { background-color: #3b7dd3; }
+#mainHeader .active a { color: #fff; }

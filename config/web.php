@@ -6,6 +6,12 @@ $config = [
 	'basePath' => dirname ( __DIR__ ),
 	'timezone' => 'Asia/ShangHai',
 	'bootstrap' => ['log'],
+		
+	'modules' => [
+		'comst' => [
+			'class' => 'app\modules\comst',
+		],
+	],
 	'components' => [ 
 		'request' => [
 			// !!! insert a secret key in the following (if it is empty) - this is required by cookie validation

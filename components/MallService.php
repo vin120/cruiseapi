@@ -13,6 +13,7 @@ class MallService {
 	
 	public static function  getMainPage()
 	{
+		//Open 为打开，Close为关闭
 		$response = array(
 			'0' => 'Open',
 			'1' => 'Open',
@@ -29,7 +30,7 @@ class MallService {
 			'12' => 'Open',
 			'13' => 'Open',
 			'14' => 'Open',
-			'15' => 'Close',
+			'15' => 'Open',
 		);
 		return $response;
 	}
