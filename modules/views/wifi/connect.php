@@ -63,6 +63,7 @@ window.onload = function(){
 	        },
 	        error: function(XMLHttpRequest, textStatus, errorThrown) {
 				console.log("error");
+				alert("出现错误");
 	        }
 		});
 	});

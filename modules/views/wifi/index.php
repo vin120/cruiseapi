@@ -44,7 +44,6 @@
 
 <script type="text/javascript">
 window.onload = function(){
-
 	
 	$("#button").on("click",function(){
 		$.ajax({
@@ -55,6 +54,8 @@ window.onload = function(){
 	        success : function(response) {
 	        	if(response['success'] == true){
 	        		location.href ="<?php echo Url::toRoute(['wifi/connect']);?>?account=<?php echo $account?>";
+	        	}else{
+					alert(response['Info']);
 	        	}
 	        },
 	        error: function(XMLHttpRequest, textStatus, errorThrown) {
