@@ -14,7 +14,7 @@ class ServiceController extends Controller
 	//流量查询
     public function actionCheckoutflow()
     {
-    	$account = Yii::$app->request->post('account','abc123');
+    	$account = Yii::$app->request->post('account','');
     	
     	MyCurl::vlogin(Yii::$app->params['wifi_url'],'status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
     	$url = "http://192.168.9.250/jsp/fee_checkout/comstserver.awm";

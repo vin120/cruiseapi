@@ -44,11 +44,11 @@
 
 <script type="text/javascript">
 window.onload = function(){
-	
+	var account = '<?php echo $account;?>';
 	$("#button").on("click",function(){
 		$.ajax({
 			url: "<?php echo Url::toRoute(['service/checkoutflow']);?>",
-	        data: '',
+	        data: {account:account},
 	        type: 'post',
 	        dataType: 'json',
 	        success : function(response) {
