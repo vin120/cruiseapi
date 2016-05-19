@@ -1,5 +1,5 @@
 <?php
-	namespace app\modules\components;
+	namespace app\modules\wifiservice\components;
 
 	use Yii;
 	/*
@@ -17,7 +17,8 @@
 	
 		public static function topup($membership, $money)
 		{
-			MyCurl::vlogin(Yii::$app->params['wifi_url'],'status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
+			//login
+			MyCurl::vcurl(Yii::$app->params['wifi_url'],'status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
 	
 			$select_name_param = 'status=manage&opt=dbcs&subopt=recordByName&dbName=usermanage_umb&&account='.$membership->member_code;
 			$member_json = MyCurl::vpost(Yii::$app->params['wifi_url'],$select_name_param);

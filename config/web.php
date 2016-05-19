@@ -8,8 +8,8 @@ $config = [
 	'bootstrap' => ['log'],
 		
 	'modules' => [
-		'comst' => [
-			'class' => 'app\modules\comst',
+		'wifiservice' => [
+			'class' => 'app\modules\wifiservice\wifiservice',
 		],
 	],
 	'components' => [ 
