@@ -6,7 +6,7 @@ class MyCurl {
 	// 模拟登录获取Cookie函数
 	public static function vlogin($url,$data){ 
 //         $cookiepath = tempnam('./tmp','cookie');
-		$cookiepath = tempnam('/Users/cc/Sites/tmp/','cookie');
+		$cookiepath = tempnam('/Users/cc/Sites/cruiseapi/tmp','cookie');
         // 检测Cookie是否存在
         if(!file_exists($cookiepath)) { 
             $curl = curl_init(); 	// 启动一个CURL会话
@@ -40,7 +40,7 @@ class MyCurl {
     // 模拟获取内容函数
      public static function vget($url){ 
 //         $cookiepath = tempnam('./tmp','cookie');
-     	$cookiepath = tempnam('/Users/cc/Sites/tmp/','cookie');
+     	$cookiepath = tempnam('/Users/cc/Sites/cruiseapi/tmp','cookie');
         $curl = curl_init(); // 启动一个CURL会话
         curl_setopt($curl, CURLOPT_URL, $url); // 要访问的地址           
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0); // 对认证证书来源的检查
@@ -66,7 +66,7 @@ class MyCurl {
     // 模拟提交数据函数
      public static function vpost($url,$data){ 
 //         $cookiepath = tempnam('./tmp','cookie');
-     	$cookiepath = tempnam('/Users/cc/Sites/tmp/','cookie');
+     	$cookiepath = tempnam('/Users/cc/Sites/cruiseapi/tmp','cookie');
         $curl = curl_init(); // 启动一个CURL会话
         curl_setopt($curl, CURLOPT_URL, $url); // 要访问的地址           
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0); // 对认证证书来源的检查
@@ -98,7 +98,7 @@ class MyCurl {
 		$tmpInfo = '';   
 //    	$cookiepath = getcwd().'./'.$cookiejar;
 // 	    $cookiepath = tempnam('./tmp','cookie'); 
-		$cookiepath = tempnam('/Users/cc/Sites/tmp/','cookie');
+		$cookiepath = tempnam('/Users/cc/Sites/cruiseapi/tmp','cookie');
 	    $curl = curl_init();   
 	    curl_setopt($curl, CURLOPT_URL, $url);   
 	    curl_setopt($curl, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);   
