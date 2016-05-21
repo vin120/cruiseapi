@@ -5,7 +5,7 @@
     ThemeAsset::register($this);
     $baseUrl = $this->assetBundles[ThemeAsset::className()]->baseUrl . '/';
 
-    $this->title = "支付失败";
+    $this->title = "出错";
 ?>
 <body>
 	<!-- header start -->
@@ -19,8 +19,8 @@
 	<!-- content start -->
 	<div class="tabContent">
 		<div class="iconBox">
-			<h2 class="error">订单支付失败</h2>
-			<p>很抱歉，订单支付失败，</p>
+			<h2 class="error">错误</h2>
+			<p>很抱歉,出现错误,请联系管理员</p>
 		</div>
 		<div class="btnBox">
 			<input type="button" id="button" value="返回"></input>

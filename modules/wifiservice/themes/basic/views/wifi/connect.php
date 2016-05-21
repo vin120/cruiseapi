@@ -5,7 +5,7 @@
     ThemeAsset::register($this);
     $baseUrl = $this->assetBundles[ThemeAsset::className()]->baseUrl . '/';
 
-    $this->title = "网络练接";
+    $this->title = "网络连接";
 ?>
 
 <body id="selectPackage">
@@ -37,6 +37,11 @@
 window.onload = function(){
 	var mcode = '<?php echo $mcode;?>';
 	var csrfToken = '<?php echo Yii::$app->request->csrfToken?>';
+	var status = '<?php echo $status;?>';
+	if( status=='0'){
+		location.href ="<?php echo Url::toRoute(['wifi/disconnect']);?>?mcode=<?php echo $mcode;?>";
+	}
+	
 	$("#button").on("click",function(){
 		$.ajax({
 			url: "<?php echo Url::toRoute(['service/wificonnect']);?>",

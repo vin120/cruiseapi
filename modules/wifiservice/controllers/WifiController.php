@@ -24,6 +24,12 @@
 					'member_code' => $mcode 
 			] )->one ();
 
+			if(!$member){
+				return $this->render('error',['mcode'=>$mcode]);
+				die();
+			}
+			
+			
 			$sign = $member['sign'];
 			$membership = MemberService::getMemberbysign($sign);
 
@@ -61,6 +67,12 @@
 					'member_code' => $mcode 
 			] )->one ();
 
+			if(!$member){
+				return $this->render('error',['mcode'=>$mcode]);
+				die();
+			}
+			
+			
 			$sign = $member['sign'];
 
 			$response = MyWifi::WifiPay($sign,$wifi_id);
@@ -102,8 +114,11 @@
 			] )->where ( [ 
 					'member_code' => $mcode 
 			] )->one ();
-
-
+			
+			if(!$member){
+				return $this->render('error',['mcode'=>$mcode]);
+				die();
+			}
 
 			$sign = $member['sign'];
 			$membership = MemberService::getMemberbysign($sign);
@@ -111,9 +126,9 @@
 			$membership_code = $member->member_code;
 	
 			$log = MyWifi::FindWifiLoginLog($mcode);
-			
+			$status = MyWifi::FindWifiLoginStatus($mcode)['exit_type'];
 
-			return $this->render('connect',['mcode'=>$mcode,'log'=>$log]);
+			return $this->render('connect',['mcode'=>$mcode,'log'=>$log,'status'=>$status]);
 		}
 
 		
@@ -159,8 +174,18 @@
 			// $res =  json_decode($res,true);
 // 			$log = MyWifi::FindWifiLoginLog($mcode);
 // 			var_dump($log);
+			$mcode = '010000134559';
+			$member = Member::find ()->select ( [
+					'sign',
+			] )->where ( [
+					'member_code' => $mcode
+			] )->one ();
 
-
+			$sign = $member['sign'];
+			$membership = MemberService::getMemberbysign($sign);
+			
+			var_dump($membership);
+			
 		}
 	}
 

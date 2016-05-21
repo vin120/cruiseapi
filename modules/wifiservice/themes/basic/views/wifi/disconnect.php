@@ -58,7 +58,9 @@ window.onload = function(){
 	        success : function(response) {
 	        	if(response['success'] == true){
 	        		location.href ="<?php echo Url::toRoute(['wifi/loginstatus']);?>?mcode=<?php echo $mcode?>";
-	        	}
+	        	}else{
+					alert(response['Info']);
+		        }
 	        },
 	        error: function(XMLHttpRequest, textStatus, errorThrown) {
 				console.log("error");

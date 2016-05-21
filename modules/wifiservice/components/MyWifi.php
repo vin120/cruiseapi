@@ -154,7 +154,7 @@
 
 
 		//search user in comst system via passport
-		private static function FindWifiUserInComst($username)
+		public static function FindWifiUserInComst($username)
 		{
 			//模拟登录
 			MyCurl::vcurl(Yii::$app->params['wifi_url'],'status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
@@ -165,7 +165,6 @@
 			$find_json = MyCurl::vcurl($find_url,$find_params);
 			$find_json = iconv('GB2312', 'UTF-8', $find_json);
 			return $find_json;
-
 		}
 
 
@@ -250,11 +249,10 @@
 			$exit_reason = '';
 			$membership_id = $membership['member_id'];
 			$membership_code = $membership['member_code'];
-			
-			$params_logintime = [':membership_id'=>$membership_id,':membership_code'=>$membership_code];
-			$sql_logintime = 'SELECT wifi_login_time,id FROM vcos_wifi_connect_log_flow WHERE membership_id = :membership_id
+			$params = [':membership_id'=>$membership_id,':membership_code'=>$membership_code];
+			$sql = 'SELECT id FROM vcos_wifi_connect_log_flow WHERE membership_id = :membership_id
 							AND membership_code = :membership_code ORDER BY id DESC LIMIT 1 ';
-			$wifi_login_time = Yii::$app->db->createCommand($sql_logintime,$params_logintime)->queryOne();
+			$wifi = Yii::$app->db->createCommand($sql,$params)->queryOne();
 			
 			
 			$offline = Yii::$app->db->createCommand()->update('vcos_wifi_connect_log_flow', [
@@ -267,7 +265,7 @@
 			],[
 					'membership_id'=>$membership_id,
 					'membership_code'=>$membership_code,
-					'id'=>$wifi_login_time['id'],
+					'id'=>$wifi['id'],
 			])->execute();
 		}
 
