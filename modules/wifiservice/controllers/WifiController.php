@@ -138,6 +138,13 @@
 			$mcode = Yii::$app->request->get('mcode');
 			return $this->render('error',['mcode'=>$mcode]);
 		}
+		
+		//支付出错页面
+		public function actionPayerror()
+		{
+			$mcode = Yii::$app->request->get('mcode');
+			return $this->render('payerror',['mcode'=>$mcode]);
+		}
 
 
 	

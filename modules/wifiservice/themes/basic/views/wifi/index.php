@@ -56,7 +56,7 @@ window.onload = function(){
             	location.href ="<?php echo Url::toRoute(['wifi/loginstatus']);?>?mcode=<?php echo $mcode;?>";
             }else{
             	//显示出错页面
-            	location.href="<?php echo Url::toRoute(['wifi/error']);?>?mcode=<?php echo $mcode?>";
+            	location.href="<?php echo Url::toRoute(['wifi/payerror']);?>?mcode=<?php echo $mcode?>";
             }
 		}
 
