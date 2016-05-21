@@ -1,5 +1,5 @@
 <?php
-	namespace app\modules\wifiservice\themes\basic\asset;
+	namespace app\modules\wifiservice\themes\basic\assets;
 	use yii\web\AssetBundle;
 
 	class ThemeAsset extends AssetBundle
@@ -13,7 +13,7 @@
 
 		public $js=[
 			'js/jquery-2.2.2.min.js',
-			'js/buybackage.js',
+			'js/buypackage.js',
 			'js/selectPackage.js',
 		];
 	}
