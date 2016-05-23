@@ -39,14 +39,14 @@ $config = [
 			'transport'=>[
 				'class'=>'Swift_SmtpTransport',
 				'host'=>'smtp.163.com',
-				'username'=>'vin_120@163.com',
+				'username'=>'admin@163.com',
 				'password'=>'',
 				'port'=>'25',
 				'ecryption'=>'ssl',
-			], 
+			],
 			'messageConfig'=>[
 				'charset'=>'UTF-8',
-				'from'=>['vin_120@163.com'=>'admin'],
+				'from'=>['admin@163.com'=>'admin'],
 			],
 		],
 		'log' => [ 

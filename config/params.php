@@ -6,5 +6,4 @@ return [
 	'wifi_url'=>'http://192.168.9.250/jsp/comstserver.awm?',
 	'wifi_login_name'=>'bisheng',
 	'wifi_login_password'=>'bs566570',
-		
 ];

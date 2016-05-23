@@ -14,16 +14,16 @@ class MyCurl {
 	    
 	    if($referer) {   
 	   		curl_setopt($curl, CURLOPT_REFERER, $referer);   
-	    } else {   
+	    } else {
 	    	curl_setopt($curl, CURLOPT_AUTOREFERER, 1);    
-	    }   
-	    if($post) {   
+	    }
+	    if($post) {
 	    	curl_setopt($curl, CURLOPT_POST, 1);    
 	    	curl_setopt($curl, CURLOPT_POSTFIELDS, $post);   
-	    }   
-	    if($cookie) {   
-	    	curl_setopt($curl, CURLOPT_COOKIE, $cookie);   
-	    }  
+	    }
+	    if($cookie) {
+	    	curl_setopt($curl, CURLOPT_COOKIE, $cookie);
+	    }
 	    curl_setopt($curl, CURLOPT_TIMEOUT, 100);   
 	    curl_setopt($curl, CURLOPT_HEADER, 0);
 	    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
@@ -51,8 +51,6 @@ class MyCurl {
 		$check_out_json = iconv('GB2312', 'UTF-8', $check_out_json);
 		return $check_out_json;
 	}
-	
-	
 	
 	//网络链接
     public static function Connect($member)

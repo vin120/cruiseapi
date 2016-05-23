@@ -10,11 +10,10 @@
 
 	class MyWifi 
 	{
-
 		//Find All WifiService
 		public static function FindWifiService($my_lang='zh_cn')
 		{
-			$response = [];
+			$response = array();
 			$params = ['my_lang'=>$my_lang];
 			$sql = 'SELECT t1.wifi_id,(t1.sale_price/100) as sale_price,t1.wifi_flow,t2.wifi_name 
 					FROM vcos_wifi_item_flow t1,vcos_wifi_item_language_flow t2 
