@@ -10,12 +10,14 @@
 
 
 	class WifiController extends Controller
-	{
-		// public $enableCsrfValidation = false;
-		
+	{	
 		//上网购买页面
 		public function actionIndex()
 		{
+			
+			var_dump(\Yii::$app->user->isGuest);
+			var_dump(Yii::$app->user->identity);
+			exit;
 			$mcode = Yii::$app->request->get('mcode');
 
 			$member = Member::find ()->select ( [ 

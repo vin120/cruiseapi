@@ -3,7 +3,6 @@
 namespace app\modules\wifiservice;
 use Yii;
 use yii\base\Theme;
-use yii\filters\AccessControl;
 
 class Wifiservice extends \yii\base\Module
 {
@@ -20,24 +19,5 @@ class Wifiservice extends \yii\base\Module
             'pathMap' => ['@app/modules/wifiservice/views' => '@app/modules/wifiservice/themes/basic/views'],
             'baseUrl' => '@app/modules/wifiservice/themes/basic',
         ]);
-    }
-    
-    public function behaviors_()
-    {
-    	return [
-			'access' => [
- 				'class' => AccessControl::className(),
-				'rules' => [
-					[
-    					'actions' => ['login'],
-    					'allow' => true,
-    				],
-    				[
-    					'allow' => true,
-    					'roles' => ['@'],
-    				],
-    			],
-    		]
-    	];
     }
 }

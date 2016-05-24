@@ -11,8 +11,6 @@ use app\modules\wifiservice\components\MyWifi;
 
 class ServiceController extends Controller
 {
-// 	public $enableCsrfValidation = false; // csrf validation can't work
-	
 	//check out flow via comst system  api
     public function actionCheckoutflow()
     {

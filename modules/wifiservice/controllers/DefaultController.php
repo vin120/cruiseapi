@@ -10,6 +10,8 @@ use app\modules\wifiservice\components\MyWifi;
 
 class DefaultController extends Controller
 {
+
+	// 	public $enableCsrfValidation = false;
     public function actionIndex()
     {
     	// MyCurl::vcurl(Yii::$app->params['wifi_url'],'status=manage&opt=login&admin=bisheng&pwd=bs566570');
