@@ -25,11 +25,11 @@ $config = [
 			'enableAutoLogin' => true, 
 			'enableSession' => false
 		],
-		'admin' => [
-			'identityClass' => 'app\modules\wifiservice\models\Admin',
-			'enableAutoLogin' => true,
-			'enableSession' => true
-		],
+// 		'admin' => [
+// 			'identityClass' => 'app\modules\wifiservice\models\Admin',
+// 			'enableAutoLogin' => true,
+// 			'enableSession' => true
+// 		],
 		'errorHandler' => [ 
 			'errorAction' => 'site/error' 
 		],

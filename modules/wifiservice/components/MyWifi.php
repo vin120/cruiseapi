@@ -197,9 +197,14 @@
 			return $log;
 		}
 		
-		//find current login status in db 
+		//find current login status in  comst system and db 
 		public static function FindWifiLoginStatus($mcode)
 		{
+			//todo
+			//接口对接，查询当前在线状态
+			
+			
+			
 			$sql = " SELECT * FROM vcos_wifi_connect_log_flow WHERE membership_code='$mcode' ORDER BY `id` DESC ";
 			$status = Yii::$app->db->createCommand($sql)->queryOne();
 			return $status;

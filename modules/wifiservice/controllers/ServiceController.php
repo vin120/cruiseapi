@@ -96,7 +96,7 @@ class ServiceController extends Controller
     //disconnect wifi via comst system api
     public function actionWifidisconnect()
     {
-    	MyCurl::vcurl(Yii::$app->params['wifi_url'],'status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
+//     	MyCurl::vcurl(Yii::$app->params['wifi_url'],'status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
         $mcode = Yii::$app->request->post('mcode');
         $membership = Member::find ()->select ( [ 
             'sign',

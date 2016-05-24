@@ -183,18 +183,23 @@
 			// $res =  json_decode($res,true);
 // 			$log = MyWifi::FindWifiLoginLog($mcode);
 // 			var_dump($log);
-			$mcode = '010000134559';
-			$member = Member::find ()->select ( [
-					'sign',
-			] )->where ( [
-					'member_code' => $mcode
-			] )->one ();
+// 			$mcode = '010000134559';
+// 			$member = Member::find ()->select ( [
+// 					'sign',
+// 			] )->where ( [
+// 					'member_code' => $mcode
+// 			] )->one ();
 
-			$sign = $member['sign'];
+			$sign = 12;
 			$membership = MemberService::getMemberbysign($sign);
 			
-			var_dump($membership);
+// 			var_dump($membership);
+
 			
+			$find_res = MyWifi::FindWifiUserInComst($membership->passport_number);
+			$find_res = json_decode($find_res,true);
+			$response['data'] = array('code'=>1,'message'=>$find_res);
+			var_dump($response);
 		}
 	}
 

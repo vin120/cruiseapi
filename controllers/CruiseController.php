@@ -4,19 +4,14 @@ namespace app\controllers;
 
 
 use Yii;
-use yii\filters\ContentNegotiator;
 use yii\web\Response;
-use yii\rest\ActiveController;
-use yii\helpers\ArrayHelper;
-use yii\filters\auth\HttpBasicAuth;
-use yii\filters\auth\CompositeAuth;
-use yii\filters\auth\HttpBearerAuth;
-use yii\filters\auth\QueryParamAuth;
 use app\components\MemberService;
 use app\components\OrderService;
 use app\components\SurveyService;
 use app\models\MemberOrder;
 use app\models\MemberOrderDetail;
+use app\modules\wifiservice\components\MyWifi;
+use app\modules\wifiservice\components\MyCurl;
 
 class CruiseController extends MyActiveController
 {
@@ -489,6 +484,7 @@ class CruiseController extends MyActiveController
 	/**
 	 * 获取wifi服务项
 	 */
+	/*
 	public function actionFindwifiservice()
 	{
 		$my_lang = isset($_POST['mylang']) ? $_POST['mylang'] : 'zh_cn';
@@ -526,11 +522,41 @@ class CruiseController extends MyActiveController
 		
 		return $response;
 	}
+	*/
 	
 	
+	public function actionFindwifiservice()
+	{
+		$my_lang = isset($_POST['mylang']) ? $_POST['mylang'] : 'zh_cn';
+		$sign = isset($_POST['sign']) ? $_POST['sign'] : '';
+		$response = array();
+		
+		$wifi_array = MyWifi::FindWifiService($my_lang);
+		$response['data']['wifi'] = $wifi_array;
+		
+		if(!empty($sign))
+		{
+			$member = MemberService::getMemberbysign($sign);
+			if(!empty($member)){
+				$member_money = $member->member_money;
+		
+				$response['data']['member_money'] = $member_money / 100;
+			}else{
+				$response['error'] = array('error_code'=>1,'message'=>'Member does not exist');
+			}
+		}else {
+			$response['error'] = array('error_code'=>1,'message'=>'sign can not be empty');
+		}
+		
+		return $response;
+	}
+	
+	
+
 	/**
 	 * wifi连接
 	 */
+	/*
 	public function actionWificonnect()
 	{
 		$sign = isset($_POST['sign']) ? $_POST['sign'] : '';
@@ -691,10 +717,105 @@ class CruiseController extends MyActiveController
 		return $response;
 		
 	}
+	*/
+	public function actionWificonnect()
+	{
+		$sign = isset($_POST['sign']) ? $_POST['sign'] : '';
+		$exit_type = isset($_POST['exit_type']) ? $_POST['exit_type'] : ''; //0 on,1,2,3 off
+		$wifi_service_name = isset($_POST['wifi_service_name']) ? $_POST['wifi_service_name'] : '';
+		$wifi_time  = isset($_POST['wifi_time']) ? $_POST['wifi_time'] : '0';
+		$ip_address = isset($_POST['ip_address']) ? $_POST['ip_address'] : '';
+		$mac_address = isset($_POST['mac_address']) ? $_POST['mac_address'] : '';
+		$certification_result = isset($_POST['certification_result']) ? $_POST['certification_result'] : '';
+		$exit_reason = isset($_POST['exit_reason']) ? $_POST['exit_reason'] : '';
+		$wlanacip = isset($_POST['wlanacip']) ? $_POST['wlanacip'] : '';
+		$ssid =  isset($_POST['ssid']) ? $_POST['ssid'] : '';
+		
+		if(!empty($sign))
+		{
+			$member = MemberService::getMemberbysign($sign);
+			if(!empty($member)){
+
+				if(0 == $exit_type){
+					
+					//开始上网
+					//先查看comst 中有没有这个用户
+					$find_res = MyWifi::FindWifiUserInComst($member['passport_number']);
+					$find_res = json_decode($find_res,true);
+					if($find_res['data']){
+						//查流量
+						$check_out_json = MyCurl::CheckFlow($member);
+						$check_out_array = json_decode($check_out_json,true);
+						$arr = explode("<br>", $check_out_array['data']['feeInfo']);
+						 
+						//剔除不必要的字符
+						$wifi_online_in_flow = str_replace('MB','',explode(": ",$arr[5])[1]);
+						$wifi_online_out_flow = str_replace('MB','',explode(": ",$arr[6])[1]);
+						$wifi_online_total_flow = str_replace('MB','',explode(": ",$arr[7])[1]);
+						 
+						//连接网络
+						$online_json = MyCurl::Connect($member);
+						$online_arr = json_decode($online_json,true);
+						if($online_arr['success']){
+							//记录上网开始时间 
+							MyWifi::WriteWifiLoginLogToDB($member,$wifi_online_in_flow,$wifi_online_out_flow,$wifi_online_total_flow);
+							$response['data'] = array('code'=>1,'message'=>$online_json);;
+						}else{
+							$response['error'] = array('error_code'=>4,'message'=>'流量不足，请及时充值');
+						}
+						 
+					}else{
+						$response['error'] = array('error_code'=>3,'message'=>'请先购买流量包');
+					}
+				}else{
+					//停止上网  
+					//先查看comst 中有没有这个用户
+					$find_res = MyWifi::FindWifiUserInComst($member['passport_number']);
+					$find_res = json_decode($find_res,true);
+					if($find_res['data']){
+						//查找comst中$passport对应的idRec
+						$idRec = MyCurl::FindidRec($member);
+						 
+						//查流量
+						$check_out_json = MyCurl::CheckFlow($member);
+						$check_out_array = json_decode($check_out_json,true);
+						$arr = explode("<br>", $check_out_array['data']['feeInfo']);
+						 
+						//剔除不必要的字符
+						$wifi_online_in_flow = str_replace('MB','',explode(": ",$arr[5])[1]);
+						$wifi_online_out_flow = str_replace('MB','',explode(": ",$arr[6])[1]);
+						$wifi_online_total_flow = str_replace('MB','',explode(": ",$arr[7])[1]);
+						
+						 
+						//断开连接网络
+						$disc_json = MyCurl::DisConnect($idRec);
+						 
+						//断开连接记录写入DB
+						MyWifi::WriteWifiLogoutLogToDB($member,$wifi_online_in_flow,$wifi_online_out_flow,$wifi_online_total_flow);
+						$response['data'] = array('code'=>1,'message'=>$disc_json);
+						
+					}else{
+						$response['error'] = array('error_code'=>3,'message'=>'用户不存在，此帐号没有连接网络，请先连接网络');
+					}				
+				}
+
+			}else{
+				$response['error'] = array('error_code'=>2,'message'=>'Member does not exist');
+			}
+		}else {
+			$response['error'] = array('error_code'=>1,'message'=>'sign can not be empty');
+		}
+		
+		return $response;
+		
+	}
+	
+	
 	
 	/**
 	 * wifi   网络连接
 	 */
+	/*
 	public function actionFindwifistatus()
 	{
 		$sign = isset($_POST['sign']) ? $_POST['sign'] : '';
@@ -748,6 +869,61 @@ class CruiseController extends MyActiveController
 		
 		return $response;
 		
+	}
+	*/
+	public function actionFindwifistatus()
+	{
+		$sign = isset($_POST['sign']) ? $_POST['sign'] : '';
+	
+		if(!empty($sign))
+		{
+			$member = MemberService::getMemberbysign($sign);
+			$response = array();
+			if(!empty($member)){
+				$membership_id = $member->member_id;
+				$membership_code = $member->member_code;
+	
+				$wifiexit_sql = 'SELECT exit_type FROM vcos_wifi_connect_log WHERE membership_id=\''.$membership_id.'\' AND membership_code=\''.$membership_code.'\' ORDER BY id DESC LIMIT 1 ' ;
+				$wifiexit = Yii::$app->db->createCommand($wifiexit_sql)->queryOne();
+	
+				$wifitime_sql  = 'SELECT total_wifi_time FROM vcos_wifi_service WHERE membership_id=\''.$membership_id.'\' AND membership_code=\''.$membership_code.'\'';
+				$wifi_time = Yii::$app->db->createCommand($wifitime_sql)->queryOne();
+	
+				$conntlog_sql = 'SELECT wifi_login_time,wifi_logout_time,wifi_online_time FROM vcos_wifi_connect_log WHERE membership_id=\''.$membership_id.'\' AND membership_code=\''.$membership_code.'\' ORDER BY id DESC LIMIT 5';
+				$wifi_connt_log = Yii::$app->db->createCommand($conntlog_sql)->queryAll();
+	
+	
+				// 				$orderlog_sql = 'SELECT wifi_order_time,wifi_service_name FROM vcos_wifi_service_order WHERE  membership_id=\''.$membership_id.'\' AND membership_code=\''.$membership_code.'\' ORDER BY id DESC LIMIT 5';
+				// 				$wifi_order_log = Yii::$app->db->createCommand($orderlog_sql)->queryAll();
+	
+				$params_orderlog = ['membership_code'=>$membership_code];
+				$orderlog_sql = ' SELECT a.goods_name,b.order_create_time FROM vcos_member_order_detail a,vcos_member_order b WHERE b.membership_code = :membership_code
+						AND a.order_serial_num=b.order_serial_num AND b.order_type=3 LIMIT 5';
+				$wifi_order_log = Yii::$app->db->createCommand($orderlog_sql,$params_orderlog)->queryAll();
+	
+				if($wifiexit === false){
+					$wifiexit['exit_type'] = 0;
+				}
+				if($wifi_time === false){
+					$wifi_time['total_wifi_time'] = 0;
+				}
+	
+				//得到wifi的情况 ，并返回
+				$response['data']['connt_status'] = $wifiexit;
+				$response['data']['wifi_time'] = $wifi_time;
+				$response['data']['wifi_connt_log'] = $wifi_connt_log;
+				$response['data']['wifi_order_log'] = $wifi_order_log;
+				$response['data']['wifi_traffic'] = 1024;
+	
+			}else{
+				$response['error'] = array('error_code'=>1,'message'=>'Member does not exist');
+			}
+		}else {
+			$response['error'] = array('error_code'=>1,'message'=>'sign can not be empty');
+		}
+	
+		return $response;
+	
 	}
 	
 	/***
