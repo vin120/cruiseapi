@@ -14,6 +14,7 @@ class ServiceController extends Controller
 	//check out flow via comst system  api
     public function actionCheckoutflow()
     {
+    	
 //     	$mcode = Yii::$app->request->post('mcode');
 
 //         $membership = Member::find ()->select ( [ 
@@ -21,16 +22,14 @@ class ServiceController extends Controller
 //             ] )->where ( [ 
 //                     'member_code' => $mcode 
 //             ] )->one ();
-
 //         $sign = $membership['sign'];
 
-        $sign = Yii::$app->admin->identity->sign;
-        
-        $member = MemberService::getMemberbysign($sign);
 
+        $sign = Yii::$app->admin->identity->sign;
+        $member = MemberService::getMemberbysign($sign);
     	
         //查流量
-        $check_out_json = MyCurl::CheckFlow($member);
+        $check_out_json = MyCurl::CheckFlow($member['passport_number']);
    
     	$check_out_array = json_decode($check_out_json,true);
 		
@@ -41,10 +40,9 @@ class ServiceController extends Controller
             $check_out_array['data']['in_flow'] = str_replace('MB','',explode(": ",$arr[5])[1]);
             $check_out_array['data']['out_flow'] = str_replace('MB','',explode(": ",$arr[6])[1]);
 			$check_out_array['data']['total_flow'] = str_replace('MB','',explode(": ",$arr[7])[1]);
-
 			$json = json_encode($check_out_array);
-			echo $json;
 			
+			echo $json;
 		}else{
 			//出现错误时
 			echo $check_out_json;
@@ -54,23 +52,25 @@ class ServiceController extends Controller
     //wifi connect via comst system api
     public function actionWificonnect()
     { 
+    	
 //         $mcode = Yii::$app->request->post('mcode');
 //         $membership = Member::find ()->select ( [ 
 //             'sign',
 //         ] )->where ( [ 
 //             'member_code' => $mcode 
 //         ] )->one ();
-
 //         $sign = $membership['sign'];
+
+    	
     	$sign = Yii::$app->admin->identity->sign;
         $member = MemberService::getMemberbysign($sign);
         
         //先查看comst 中有没有这个用户
-        $find_res = MyWifi::FindWifiUserInComst($member['passport_number']);
+        $find_res = MyCurl::FindUser($member['passport_number']);
         $find_res = json_decode($find_res,true);
         if($find_res['data']){
         	//查流量
-        	$check_out_json = MyCurl::CheckFlow($member);
+        	$check_out_json = MyCurl::CheckFlow($member['passport_number']);
         	$check_out_array = json_decode($check_out_json,true);
         	$arr = explode("<br>", $check_out_array['data']['feeInfo']);
         	
@@ -80,7 +80,7 @@ class ServiceController extends Controller
         	$wifi_online_total_flow = str_replace('MB','',explode(": ",$arr[7])[1]);
         	
         	//连接网络
-        	$online_json = MyCurl::Connect($member);
+        	$online_json = MyCurl::Connect($member['passport_number']);
         	$online_arr = json_decode($online_json,true);
         	if($online_arr['success']){
         		//write login log to db
@@ -100,6 +100,7 @@ class ServiceController extends Controller
     //disconnect wifi via comst system api
     public function actionWifidisconnect()
     {
+    	
 //     	MyCurl::vcurl(Yii::$app->params['wifi_url'],'status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
 //         $mcode = Yii::$app->request->post('mcode');
 //         $membership = Member::find ()->select ( [ 
@@ -108,19 +109,21 @@ class ServiceController extends Controller
 //             'member_code' => $mcode 
 //         ] )->one ();
 
-//         $sign = $membership['sign'];
+//      $sign = $membership['sign'];
+
     	$sign = Yii::$app->admin->identity->sign;
         $member = MemberService::getMemberbysign($sign);
         //先查看comst 中有没有这个用户
-        $find_res = MyWifi::FindWifiUserInComst($member['passport_number']);
+//      $find_res = MyWifi::FindWifiUserInComst($member['passport_number']);
+        $find_res = MyCurl::FindUser($member['passport_number']);
         $find_res = json_decode($find_res,true);
         if($find_res['data']){
 
         	//查找comst中$passport对应的idRec
-        	$idRec = MyCurl::FindidRec($member);
+        	$idRec = MyCurl::FindidRec($member['passport_number']);
         	
         	//查流量
-        	$check_out_json = MyCurl::CheckFlow($member);
+        	$check_out_json = MyCurl::CheckFlow($member['passport_number']);
         	$check_out_array = json_decode($check_out_json,true);
         	$arr = explode("<br>", $check_out_array['data']['feeInfo']);
         	

@@ -4,7 +4,7 @@
 	use Yii;
 	use yii\web\Controller;
 	use app\components\MemberService;
-	use app\modules\wifiservice\components\MyCurl;
+// 	use app\modules\wifiservice\components\MyCurl;
 	use app\modules\wifiservice\components\MyWifi;
 	use app\models\Member;
 
@@ -102,6 +102,7 @@
 		{
 // 			$mcode = Yii::$app->request->get('mcode');
 			$mcode = Yii::$app->admin->identity->member_code;
+			$sign =  Yii::$app->admin->identity->sign;
 			$status = MyWifi::FindWifiLoginStatus($mcode)['exit_type'];
 			
 			return $this->render('loginstatus',['status'=>$status,'mcode'=>$mcode]);
@@ -152,7 +153,6 @@
 			return $this->render('payerror',['mcode'=>$mcode]);
 		}
 
-
 	
 		
 		//断开连接页面
@@ -162,7 +162,6 @@
 			$mcode = Yii::$app->admin->identity->member_code;
 			return $this->render('disconnect',['mcode'=>$mcode]);
 		}
-
 
 
 		//测试用的
@@ -195,16 +194,16 @@
 // 					'member_code' => $mcode
 // 			] )->one ();
 
-			$sign = 12;
-			$membership = MemberService::getMemberbysign($sign);
+// 			$sign = 12;
+// 			$membership = MemberService::getMemberbysign($sign);
 			
 // 			var_dump($membership);
 
 			
-			$find_res = MyWifi::FindWifiUserInComst($membership->passport_number);
-			$find_res = json_decode($find_res,true);
-			$response['data'] = array('code'=>1,'message'=>$find_res);
-			var_dump($response);
+// 			$find_res = MyWifi::FindWifiUserInComst($membership->passport_number);
+// 			$find_res = json_decode($find_res,true);
+// 			$response['data'] = array('code'=>1,'message'=>$find_res);
+// 			var_dump($response);
 		}
 	}
 

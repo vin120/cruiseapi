@@ -27,10 +27,10 @@ class Wifiservice extends \yii\base\Module
     {
     	return [
 			'access' => [
- 				'class' => MyAccessControl::className(),
+				'class' => MyAccessControl::className(),
 				'rules' => [
 					[
-    					'actions' => ['login','',''],
+						'actions' => ['login','',''],
     					'allow' => true,
     				],
     				[
@@ -38,12 +38,11 @@ class Wifiservice extends \yii\base\Module
     					'roles' => ['@'],
     				],
     			],
-					
     		],
     		'verbs' => [
     			'class' => VerbFilter::className(),
     				'actions' => [
-    					'logout' => ['get'],
+						'logout' => ['get'],
     				],
     		],
     	];

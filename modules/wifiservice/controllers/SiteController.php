@@ -82,8 +82,6 @@ class SiteController extends Controller
 
         $this->layout = 'login_loyout';
         if (!\Yii::$app->user->isGuest) {
-        	
-//             return $this->goHome();
             return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/index"));
         }
 
@@ -91,7 +89,6 @@ class SiteController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
         	   return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/index"));
-//             return $this->goBack();
         } else {
             return $this->render('agent_login', [
                 'model' => $model,
@@ -106,10 +103,7 @@ class SiteController extends Controller
      */
     public function actionLogout()
     {
-//         Yii::$app->user->logout(false);
         Yii::$app->admin->logout();
-
-//         return $this->goHome();
         return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/site/login"));
     }
 

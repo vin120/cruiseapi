@@ -58,10 +58,6 @@ class SiteController extends Controller
 
     public function actionIndex()
     {	
-    	var_dump(\Yii::$app->user->isGuest);
-    	var_dump(Yii::$app->user->identity);
-    	exit;
-    	
     	$temp_value = OrderService::getBookingno();
     	echo '<pre>';
     	print_r($temp_value);

@@ -3,13 +3,15 @@
 
 	use Yii;
 	use app\components\MemberService;
+	use app\models\Member;
 	use app\models\MemberOrder;
 	use app\models\MemberOrderDetail;
 	use app\components\OrderService;
-	use app\modules\wifiservice\components\MuCurl;
+	use app\modules\wifiservice\components\MyCurl;
 
 	class MyWifi 
 	{
+		
 		//Find All WifiService
 		public static function FindWifiService($my_lang='zh_cn')
 		{
@@ -22,7 +24,7 @@
 			return $wifi_array;
 		}
 
-
+		
 		//Find WifiService Via wifi_id
 		public static function FindWifiServiceById($wifi_id,$my_lang='zh_cn')
 		{
@@ -34,6 +36,7 @@
 			return $wifi_item;
 		}
 
+		
 		//WifiPayment,write pay log to db
 		public static function WifiPay($sign,$wifi_id)
 		{
@@ -52,12 +55,12 @@
 				if($member_money >= ($sale_price * 100) && $member_money >= 0){
 					//钱足够，进行支付
 					//查询用户是否存在
-					$find_res = self::FindWifiUserInComst($member->passport_number);
+					$find_res = MyCurl::FindUser($member->passport_number);
 					$find_res = json_decode($find_res,true);
 					if(!$find_res['data']){
 						//没找到用户
 						//创建用户,并加入组，对接接口
-						self::CreateWifiUserInComst($member);
+						$res = MyCurl::CreateUser($member);
 						$res =  json_decode($res,true);
 						if($res['success'] === false){
 							$response['error'] = ['code'=>2,'message'=>$res['Info']];
@@ -74,7 +77,7 @@
 						$member->save();
 
 						//充值wifi对应的钱，对接接口
-						self::RechargeWifiInComst($member->passport_number,$sale_price);
+						MyCurl::RechargeWifi($member->passport_number,$sale_price);
 
 						//记录购买Wifi记录
 						self::CreateWifiPayLog($sign,$membership_code,$wifi_item);
@@ -132,78 +135,118 @@
 			}
 		}
 
+		
+		
+		
+/*
 		//create user in comst system
 		private static function CreateWifiUserInComst($member)
 		{
 			//模拟登录
-			MyCurl::vcurl(Yii::$app->params['wifi_url'],'status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
+// 			MyCurl::vcurl(Yii::$app->params['wifi_url'],'status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
 
-			$create_url = "http://192.168.9.250/jsp/um_add/comstserver.awm?";
+// 			$create_url = "http://192.168.9.250/jsp/um_add/comstserver.awm?";
 
-			//UTF-8 转换为 GB2312
-			$date = iconv('UTF-8','GB2312', date('Y年m月d日',time()));
-			$LinkName = iconv('UTF-8','GB2312', $member['cn_name']);
+// 			//UTF-8 转换为 GB2312
+// 			$date = iconv('UTF-8','GB2312', date('Y年m月d日',time()));
+// 			$LinkName = iconv('UTF-8','GB2312', $member['cn_name']);
 
-			$create_user_param = "status=manage&opt=dbcs&dbName=usermanage_umb&subopt=add&Account=".$member['passport_number']."&pwd=".$member['passport_number']."&idUgb=1&isStartAcc=1&LinkName=".$LinkName."&paperType=6&paperNum=".$member['passport_number']."&phone=".$member['mobile_number']."&email=".$member['member_email']."&limitData=".$date;
+// 			$create_user_param = "status=manage&opt=dbcs&dbName=usermanage_umb&subopt=add&Account=".$member['passport_number']."&pwd=".$member['passport_number']."&idUgb=1&isStartAcc=1&LinkName=".$LinkName."&paperType=6&paperNum=".$member['passport_number']."&phone=".$member['mobile_number']."&email=".$member['member_email']."&limitData=".$date;
 
-			$create_json = MyCurl::vcurl($create_url,$create_user_param);
-			$create_json = iconv('GB2312', 'UTF-8', $create_json);
+// 			$create_json = MyCurl::vcurl($create_url,$create_user_param);
+// 			$create_json = iconv('GB2312', 'UTF-8', $create_json);
+
+			$create_json = MyCurl::CreateUser($member);
 			return $create_json;
 		}
-
-
+*/
+		
+/*
 		//search user in comst system via passport
 		public static function FindWifiUserInComst($username)
 		{
 			//模拟登录
-			MyCurl::vcurl(Yii::$app->params['wifi_url'],'status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
+// 			MyCurl::vcurl(Yii::$app->params['wifi_url'],'status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
 
-			$find_url = "http://192.168.9.250/jsp/um_query/comstserver.awm?";
-			$find_params = "status=manage&opt=dbcs&dbName=usermanage_umb&subopt=query&account=".$username."&IsAccount=1";
+// 			$find_url = "http://192.168.9.250/jsp/um_query/comstserver.awm?";
+// 			$find_params = "status=manage&opt=dbcs&dbName=usermanage_umb&subopt=query&account=".$username."&IsAccount=1";
 
-			$find_json = MyCurl::vcurl($find_url,$find_params);
-			$find_json = iconv('GB2312', 'UTF-8', $find_json);
+// 			$find_json = MyCurl::vcurl($find_url,$find_params);
+// 			$find_json = iconv('GB2312', 'UTF-8', $find_json);
+			$find_json = MyCurl::FindUser($username);
 			return $find_json;
 		}
+*/
 
-
+		
+/*
 		//recharge in comst system via passport 
 		private static function RechargeWifiInComst($passport,$price)
 		{
-			//模拟登录
-			MyCurl::vcurl(Yii::$app->params['wifi_url'],'status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
+// 			//模拟登录
+// 			MyCurl::vcurl(Yii::$app->params['wifi_url'],'status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
 
-			//查找comst中$passport对应的idRec
-			$url = "http://192.168.9.250/jsp/fee_checkout/comstserver.awm?";
-			$find_params = "status=manage&subopt=checkout&opt=dbcs&dbName=usermanage_umb&admin=".Yii::$app->params['wifi_login_name']."&account=".$passport;
-			$find_json = MyCurl::vcurl($url,$find_params);
-			$find_json = iconv('GB2312', 'UTF-8', $find_json);
-			$res = json_decode($find_json,true);
-			$idRec = $res['data']['userId'];
+// 			//查找comst中$passport对应的idRec
+// 			$url = "http://192.168.9.250/jsp/fee_checkout/comstserver.awm?";
+// 			$find_params = "status=manage&subopt=checkout&opt=dbcs&dbName=usermanage_umb&admin=".Yii::$app->params['wifi_login_name']."&account=".$passport;
+// 			$find_json = MyCurl::vcurl($url,$find_params);
+// 			$find_json = iconv('GB2312', 'UTF-8', $find_json);
+// 			$res = json_decode($find_json,true);
+// 			$idRec = $res['data']['userId'];
 
-			//在comst系统中充钱
-			$pay_params = "admin=".Yii::$app->params['wifi_login_name']."&opt=dbcs&status=manage&subopt=paymoney&dbName=usermanage_umb&idRec=".$idRec."&money=".$price;
-			$pay_json = MyCurl::vcurl($url,$pay_params);
-			$pay_json = iconv('GB2312', 'UTF-8', $pay_json);
+// 			//在comst系统中充钱
+// 			$pay_params = "admin=".Yii::$app->params['wifi_login_name']."&opt=dbcs&status=manage&subopt=paymoney&dbName=usermanage_umb&idRec=".$idRec."&money=".$price;
+// 			$pay_json = MyCurl::vcurl($url,$pay_params);
+// 			$pay_json = iconv('GB2312', 'UTF-8', $pay_json);
+			$find_json = MyCurl::RechargeWifi($passport,$price);
+			
 			return $find_json;
 		}
-
+*/
 
 		//find wifi login log in db
-		public static function FindWifiLoginLog($mcode)
+		public static function FindWifiLoginLog($mcode,$count=5)
 		{
-			$sql = " SELECT * FROM vcos_wifi_connect_log_flow WHERE membership_code='$mcode' ORDER BY `id` DESC  LIMIT 5 " ;
+			$sql = " SELECT * FROM vcos_wifi_connect_log_flow WHERE membership_code='$mcode' ORDER BY `id` DESC  LIMIT  $count" ;
 			$log = Yii::$app->db->createCommand($sql)->queryAll();
 			return $log;
 		}
 		
+		
 		//find current login status in  comst system and db 
 		public static function FindWifiLoginStatus($mcode)
 		{
-			//todo
-			//接口对接，查询当前在线状态
+			$member = Member::find ()->select ( [
+					'sign',
+			] )->where ( [
+					'member_code' => $mcode
+			] )->one ();
+			$sign = $member['sign'];
 			
+			$membership =  MemberService::getMemberbysign($sign);
+			$passport = $membership['passport'];
 			
+			//接口对接
+			//查询用户当前在线状态
+			$check_out_json = MyCurl::CheckFlow($passport);
+			 
+			$check_out_array = json_decode($check_out_json,true);
+			
+			if($check_out_array['success']){
+				$arr = explode("<br>", $check_out_array['data']['feeInfo']);
+					
+				//剔除不必要的字符
+				$wifi_online_in_flow = str_replace('MB','',explode(": ",$arr[5])[1]);
+				$wifi_online_out_flow = str_replace('MB','',explode(": ",$arr[6])[1]);
+				$wifi_online_total_flow = str_replace('MB','',explode(": ",$arr[7])[1]);
+				$status = $arr[9][1];
+				
+				//如果接口获取的状态是离线，设置数据库中的状态为离线
+				//TODO
+				if($status == 'lixian'){
+					self::WriteWifiLogoutLogToDB($membership,$wifi_online_in_flow,$wifi_online_out_flow,$wifi_online_total_flow);
+				}
+			}
 			
 			$sql = " SELECT * FROM vcos_wifi_connect_log_flow WHERE membership_code='$mcode' ORDER BY `id` DESC ";
 			$status = Yii::$app->db->createCommand($sql)->queryOne();
@@ -253,6 +296,7 @@
 			$exit_reason = '';
 			$membership_id = $membership['member_id'];
 			$membership_code = $membership['member_code'];
+			
 			$params = [':membership_id'=>$membership_id,':membership_code'=>$membership_code];
 			$sql = 'SELECT id FROM vcos_wifi_connect_log_flow WHERE membership_id = :membership_id
 							AND membership_code = :membership_code ORDER BY id DESC LIMIT 1 ';
@@ -272,6 +316,5 @@
 					'id'=>$wifi['id'],
 			])->execute();
 		}
-
 	}
 	
