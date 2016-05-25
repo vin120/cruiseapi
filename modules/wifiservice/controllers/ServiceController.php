@@ -14,15 +14,18 @@ class ServiceController extends Controller
 	//check out flow via comst system  api
     public function actionCheckoutflow()
     {
-    	$mcode = Yii::$app->request->post('mcode');
+//     	$mcode = Yii::$app->request->post('mcode');
 
-        $membership = Member::find ()->select ( [ 
-                    'sign',
-            ] )->where ( [ 
-                    'member_code' => $mcode 
-            ] )->one ();
+//         $membership = Member::find ()->select ( [ 
+//                     'sign',
+//             ] )->where ( [ 
+//                     'member_code' => $mcode 
+//             ] )->one ();
 
-        $sign = $membership['sign'];
+//         $sign = $membership['sign'];
+
+        $sign = Yii::$app->admin->identity->sign;
+        
         $member = MemberService::getMemberbysign($sign);
 
     	
@@ -51,14 +54,15 @@ class ServiceController extends Controller
     //wifi connect via comst system api
     public function actionWificonnect()
     { 
-        $mcode = Yii::$app->request->post('mcode');
-        $membership = Member::find ()->select ( [ 
-            'sign',
-        ] )->where ( [ 
-            'member_code' => $mcode 
-        ] )->one ();
+//         $mcode = Yii::$app->request->post('mcode');
+//         $membership = Member::find ()->select ( [ 
+//             'sign',
+//         ] )->where ( [ 
+//             'member_code' => $mcode 
+//         ] )->one ();
 
-        $sign = $membership['sign'];
+//         $sign = $membership['sign'];
+    	$sign = Yii::$app->admin->identity->sign;
         $member = MemberService::getMemberbysign($sign);
         
         //先查看comst 中有没有这个用户
@@ -97,14 +101,15 @@ class ServiceController extends Controller
     public function actionWifidisconnect()
     {
 //     	MyCurl::vcurl(Yii::$app->params['wifi_url'],'status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
-        $mcode = Yii::$app->request->post('mcode');
-        $membership = Member::find ()->select ( [ 
-            'sign',
-        ] )->where ([
-            'member_code' => $mcode 
-        ] )->one ();
+//         $mcode = Yii::$app->request->post('mcode');
+//         $membership = Member::find ()->select ( [ 
+//             'sign',
+//         ] )->where ([
+//             'member_code' => $mcode 
+//         ] )->one ();
 
-        $sign = $membership['sign'];
+//         $sign = $membership['sign'];
+    	$sign = Yii::$app->admin->identity->sign;
         $member = MemberService::getMemberbysign($sign);
         //先查看comst 中有没有这个用户
         $find_res = MyWifi::FindWifiUserInComst($member['passport_number']);
@@ -135,8 +140,6 @@ class ServiceController extends Controller
         	echo '{"success":false,"Info":"用户不存在，此帐号没有连接网络，请先连接网络"}';
         }
         
-       
     }
-
     
 }

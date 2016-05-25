@@ -12,8 +12,8 @@
 	<!-- header start -->
 	<header id="mainHeader">
 		<ul class="tabTitle">
-			<li><a href="<?php echo Url::toRoute(['wifi/index'])?>?mcode=<?php echo $mcode?>">上网购买</a></li>
-			<li class="active"><a href="<?php echo Url::toRoute(['wifi/loginstatus'])?>?mcode=<?php echo $mcode?>">上网连接</a></li>
+			<li><a href="<?php echo Url::toRoute(['wifi/index'])?>">上网购买</a></li>
+			<li class="active"><a href="<?php echo Url::toRoute(['wifi/loginstatus'])?>">上网连接</a></li>
 		</ul>
 	</header>
 	<!-- header end -->

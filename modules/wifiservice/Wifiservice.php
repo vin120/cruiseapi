@@ -3,7 +3,8 @@
 namespace app\modules\wifiservice;
 use Yii;
 use yii\base\Theme;
-use yii\filters\AccessControl;
+use app\modules\wifiservice\controllers\MyAccessControl;
+use yii\filters\VerbFilter;
 
 class Wifiservice extends \yii\base\Module
 {
@@ -22,14 +23,14 @@ class Wifiservice extends \yii\base\Module
         ]);
     }
     
-    public function behaviors_()
+    public function behaviors()
     {
     	return [
 			'access' => [
- 				'class' => AccessControl::className(),
+ 				'class' => MyAccessControl::className(),
 				'rules' => [
 					[
-    					'actions' => ['login'],
+    					'actions' => ['login','',''],
     					'allow' => true,
     				],
     				[
@@ -37,7 +38,14 @@ class Wifiservice extends \yii\base\Module
     					'roles' => ['@'],
     				],
     			],
-    		]
+					
+    		],
+    		'verbs' => [
+    			'class' => VerbFilter::className(),
+    				'actions' => [
+    					'logout' => ['get'],
+    				],
+    		],
     	];
     }
 }

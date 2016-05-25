@@ -4,20 +4,12 @@ namespace app\modules\wifiservice\controllers;
 
 use Yii;
 use app\modules\wifiservice\models\LoginForm;
-
-// use travelagent\models\LoginForm;
-// use travelagent\models\PasswordResetRequestForm;
-// use travelagent\models\ResetPasswordForm;
-// use travelagent\models\SignupForm;
-// use travelagent\models\ContactForm;
-
-
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 use yii\helpers\Url;
+use yii\filters\VerbFilter;
+
 
 /**
  * Site controller
@@ -27,29 +19,30 @@ class SiteController extends Controller
     /**
      * @inheritdoc
      */
-    public function behaviors()
+    public function behaviors_()
     {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['login'],
-                        'allow' => true,
-                    ],
-                    [
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['get'],
-                ],
-            ],
-        ];
+		return [
+			'access' => [
+ 				'class' => MyAccessControl::className(),
+				'rules' => [
+					[
+    					'actions' => ['login'],
+    					'allow' => true,
+    				],
+    				[
+    					'allow' => true,
+    					'roles' => ['@'],
+    				],
+    			],
+					
+    		],
+    		'verbs' => [
+    			'class' => VerbFilter::className(),
+    				'actions' => [
+    					'logout' => ['get'],
+    				],
+    		],
+    	];
     }
 
     /**
@@ -90,17 +83,15 @@ class SiteController extends Controller
         $this->layout = 'login_loyout';
         if (!\Yii::$app->user->isGuest) {
         	
-            return $this->goHome();
-//             return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/index"));
+//             return $this->goHome();
+            return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/index"));
         }
 
         $model = new LoginForm();
+
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-//         	var_dump(\Yii::$app->user->isGuest);
-// 			var_dump(Yii::$app->user->identity);
-// 			exit;
         	   return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/index"));
-            return $this->goBack();
+//             return $this->goBack();
         } else {
             return $this->render('agent_login', [
                 'model' => $model,
@@ -115,9 +106,11 @@ class SiteController extends Controller
      */
     public function actionLogout()
     {
-        Yii::$app->user->logout(false);
+//         Yii::$app->user->logout(false);
+        Yii::$app->admin->logout();
 
-        return $this->goHome();
+//         return $this->goHome();
+        return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/site/login"));
     }
 
     /**

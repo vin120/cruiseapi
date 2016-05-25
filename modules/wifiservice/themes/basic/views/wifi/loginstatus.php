@@ -13,9 +13,9 @@
 window.onload = function(){
 	var status = '<?php echo $status;?>';
 	if( status=='0'){
-		location.href ="<?php echo Url::toRoute(['wifi/disconnect']);?>?mcode=<?php echo $mcode;?>";
+		location.href ="<?php echo Url::toRoute(['wifi/disconnect']);?>";
 	}else{
-		location.href ="<?php echo Url::toRoute(['wifi/connect']);?>?mcode=<?php echo $mcode;?>";
+		location.href ="<?php echo Url::toRoute(['wifi/connect']);?>";
 	}
 }
 </script>

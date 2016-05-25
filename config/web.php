@@ -25,11 +25,13 @@ $config = [
 			'enableAutoLogin' => true, 
 			'enableSession' => false
 		],
-// 		'admin' => [
-// 			'identityClass' => 'app\modules\wifiservice\models\Admin',
-// 			'enableAutoLogin' => true,
-// 			'enableSession' => true
-// 		],
+		'admin' => [
+			'class' => '\yii\web\user',
+			'identityClass' => 'app\modules\wifiservice\models\Admin',
+			'enableAutoLogin' => true,
+			'enableSession' => true,
+			'loginUrl' => ['/wifiservice/site/login'],
+		],
 		'errorHandler' => [ 
 			'errorAction' => 'site/error' 
 		],

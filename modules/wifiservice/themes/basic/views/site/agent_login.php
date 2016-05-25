@@ -12,6 +12,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $baseUrl = $this->assetBundles[LoginAsset::className()]->baseUrl . '/';
 
+
+// print_r($model->getFirstError('password'));
+
+
 //$curr_language = Yii::$app->language;
 ?>
 
@@ -38,7 +42,7 @@ $baseUrl = $this->assetBundles[LoginAsset::className()]->baseUrl . '/';
                     </label>
                     <em class="wrongBox">Please ...</em>
                 </div>
-                <div>
+                <div id="passwordthis">
                     <label class="clearfix">
                         <?= Html::activePasswordInput($model, 'password',['class'=>"l",'maxlength'=>20,'required'=>'required',
                             'oninvalid'=>'setCustomValidity("'. \Yii::t('app', 'Password Can\'t be empty').'")',
@@ -61,3 +65,11 @@ $baseUrl = $this->assetBundles[LoginAsset::className()]->baseUrl . '/';
         <?php ActiveForm::end(); ?>
     </div>
 </main>
+<script type="text/javascript">
+var errorMessage = '<?php echo $model->getFirstError('password');?>';
+window.onload=function(){
+	if(errorMessage != ''){
+		$("#passwordthis").append("<strong class='' style='color:red;'>"+errorMessage+"</strong>");
+	}
+}
+</script>

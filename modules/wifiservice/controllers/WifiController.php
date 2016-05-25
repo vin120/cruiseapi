@@ -15,29 +15,29 @@
 		public function actionIndex()
 		{
 			
-			var_dump(\Yii::$app->user->isGuest);
-			var_dump(Yii::$app->user->identity);
-			exit;
-			$mcode = Yii::$app->request->get('mcode');
+// 			var_dump(\Yii::$app->admin->isGuest);
+// 			var_dump(Yii::$app->admin->identity);
+// 			exit;
+// 			$mcode = Yii::$app->request->get('mcode');
 
-			$member = Member::find ()->select ( [ 
-					'sign',
-			] )->where ( [ 
-					'member_code' => $mcode 
-			] )->one ();
+// 			$member = Member::find ()->select ( [ 
+// 					'sign',
+// 			] )->where ( [ 
+// 					'member_code' => $mcode 
+// 			] )->one ();
 
-			if(!$member){
-				return $this->render('error',['mcode'=>$mcode]);
-				die();
-			}
+// 			if(!$member){
+// 				return $this->render('error',['mcode'=>$mcode]);
+// 				die();
+// 			}
 			
 			
-			$sign = $member['sign'];
+			$mcode = Yii::$app->admin->identity->member_code;
+			$sign = Yii::$app->admin->identity->sign;
 			$membership = MemberService::getMemberbysign($sign);
 
 			$wifi_items = MyWifi::FindWifiService();
 
-			// var_dump($membership);
 			return $this->render('index',['membership'=>$membership,'wifi_items'=>$wifi_items,'mcode'=>$mcode]);
 
 
@@ -60,23 +60,24 @@
 		//支付
 		public function actionWifipayment()
 		{
-			$mcode = Yii::$app->request->post('mcode');
+// 			$mcode = Yii::$app->request->post('mcode');
+// 			$wifi_id = Yii::$app->request->post('wifi_id');
+			
+// 			$member = Member::find ()->select ( [ 
+// 					'sign',
+// 			] )->where ( [ 
+// 					'member_code' => $mcode 
+// 			] )->one ();
+
+// 			if(!$member){
+// 				return $this->render('error',['mcode'=>$mcode]);
+// 				die();
+// 			}
+			
+			
+// 			$sign = $member['sign'];
 			$wifi_id = Yii::$app->request->post('wifi_id');
-			
-			$member = Member::find ()->select ( [ 
-					'sign',
-			] )->where ( [ 
-					'member_code' => $mcode 
-			] )->one ();
-
-			if(!$member){
-				return $this->render('error',['mcode'=>$mcode]);
-				die();
-			}
-			
-			
-			$sign = $member['sign'];
-
+			$sign = Yii::$app->admin->identity->sign;
 			$response = MyWifi::WifiPay($sign,$wifi_id);
 
 			echo json_encode($response);
@@ -99,7 +100,8 @@
 		//判断当前是否在登录状态
 		public function actionLoginstatus()
 		{
-			$mcode = Yii::$app->request->get('mcode');
+// 			$mcode = Yii::$app->request->get('mcode');
+			$mcode = Yii::$app->admin->identity->member_code;
 			$status = MyWifi::FindWifiLoginStatus($mcode)['exit_type'];
 			
 			return $this->render('loginstatus',['status'=>$status,'mcode'=>$mcode]);
@@ -110,22 +112,22 @@
 		//登录页面
 		public function actionConnect()
 		{
-			$mcode = Yii::$app->request->get('mcode');
-			$member = Member::find ()->select ( [ 
-					'sign',
-			] )->where ( [ 
-					'member_code' => $mcode 
-			] )->one ();
+// 			$mcode = Yii::$app->request->get('mcode');
+// 			$member = Member::find ()->select ( [ 
+// 					'sign',
+// 			] )->where ( [ 
+// 					'member_code' => $mcode 
+// 			] )->one ();
 			
-			if(!$member){
-				return $this->render('error',['mcode'=>$mcode]);
-				die();
-			}
+// 			if(!$member){
+// 				return $this->render('error',['mcode'=>$mcode]);
+// 				die();
+// 			}
 
-			$sign = $member['sign'];
+// 			$sign = $member['sign'];
+			$mcode = Yii::$app->admin->identity->member_code;
+			$sign = Yii::$app->admin->identity->sign;
 			$membership = MemberService::getMemberbysign($sign);
-			$membership_id = $member->member_id;
-			$membership_code = $member->member_code;
 	
 			$log = MyWifi::FindWifiLoginLog($mcode);
 			$status = MyWifi::FindWifiLoginStatus($mcode)['exit_type'];
@@ -137,14 +139,16 @@
 		//出错页面
 		public function actionError()
 		{
-			$mcode = Yii::$app->request->get('mcode');
+// 			$mcode = Yii::$app->request->get('mcode');
+			$mcode = Yii::$app->admin->identity->member_code;
 			return $this->render('error',['mcode'=>$mcode]);
 		}
 		
 		//支付出错页面
 		public function actionPayerror()
 		{
-			$mcode = Yii::$app->request->get('mcode');
+// 			$mcode = Yii::$app->request->get('mcode');
+			$mcode = Yii::$app->admin->identity->member_code;
 			return $this->render('payerror',['mcode'=>$mcode]);
 		}
 
@@ -154,7 +158,8 @@
 		//断开连接页面
 		public function actionDisconnect()
 		{
-			$mcode = Yii::$app->request->get('mcode');
+// 			$mcode = Yii::$app->request->get('mcode');
+			$mcode = Yii::$app->admin->identity->member_code;
 			return $this->render('disconnect',['mcode'=>$mcode]);
 		}
 

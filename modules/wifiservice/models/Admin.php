@@ -7,6 +7,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
+
 class Admin extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
