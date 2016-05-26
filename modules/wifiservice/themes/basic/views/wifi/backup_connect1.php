@@ -48,7 +48,7 @@
 						<tr>
 							<td><?php echo $row['wifi_login_time']?></td>
 							<td><?php echo $row['wifi_logout_time']== '' ? '---' : $row['wifi_logout_time']?></td>
-							<td><?php echo $row['flow'] == '' ? '---' : $row['flow'].'M'?></td>
+							<td><?php echo $row['flow'] == '' ? '---' : $row['flow']?></td>
 						</tr>
 						<?php endforeach;?>
 					</tbody>
@@ -60,31 +60,26 @@
 </body>
 <script type="text/javascript">
 window.onload = function(){
-	var csrfToken = '<?php echo Yii::$app->request->csrfToken?>';
-	
-	var status = '<?php echo $status;?>';
-	if( status==true){
-		location.href ="<?php echo Url::toRoute(['wifi/disconnect']);?>";
+	var status = '<?php echo $status?>';
+
+	if(status == false){
+		$(".btnBox").removeClass("disconnect").find("input").val("立即连接");
+	}else{
+		$(".btnBox").addClass("disconnect").find("input").val("断开连接");
 	}
 	
-	$("#button").on("click",function(){
-		$.ajax({
-			url: "<?php echo Url::toRoute(['service/wificonnect']);?>",
-	        data: {_csrf:csrfToken},
-	        type: 'post',
-	        dataType: 'json',
-	        success : function(response) {
-	        	if(response['success'] == true){
-	        		location.href ="<?php echo Url::toRoute(['wifi/disconnect']);?>";
-	        	}else{
-	        		location.href = "<?php echo Url::toRoute(['wifi/connecterror'])?>";
-	        	}
-	        },
-	        error: function(XMLHttpRequest, textStatus, errorThrown) {
-	        	location.href = "<?php echo Url::toRoute(['wifi/connecterror'])?>";
-	        }
-		});
+	$(".btnBox input").on("click",function(){
+		if ($(this).parent().hasClass("disconnect")) {
+			
+			
+			$(this).val("立即连接").parent().removeClass("disconnect");
+		} else {
+
+			
+			$(this).val("断开连接").parent().addClass("disconnect");
+		}
 	});
+
 	
 }
 </script>

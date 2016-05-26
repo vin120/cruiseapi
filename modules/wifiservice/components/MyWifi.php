@@ -29,7 +29,7 @@
 		public static function FindWifiServiceById($wifi_id,$my_lang='zh_cn')
 		{
 			$params = [':my_lang'=>$my_lang,':wifi_id'=>$wifi_id];
-			$sql = 'SELECT t1.wifi_id,(t1.sale_price/100) as sale_price,t1.wifi_flow,t2.wifi_name 
+			$sql = 'SELECT t1.wifi_id,FORMAT(t1.sale_price/100,2) as sale_price,t1.wifi_flow,t2.wifi_name 
 					FROM vcos_wifi_item_flow t1,vcos_wifi_item_language_flow t2 
 					WHERE t1.wifi_id=t2.wifi_id AND t1.`status`=1 AND t2.iso=:my_lang AND t1.wifi_id=:wifi_id';
 			$wifi_item = Yii::$app->db->createCommand($sql,$params)->queryOne();
@@ -54,6 +54,7 @@
 				//判断用户的钱是否足够支付wifi套餐，
 				if($member_money >= ($sale_price * 100) && $member_money >= 0){
 					//钱足够，进行支付
+					
 					//查询用户是否存在
 					$find_res = MyCurl::FindUser($member->passport_number);
 					$find_res = json_decode($find_res,true);
@@ -63,7 +64,7 @@
 						$res = MyCurl::CreateUser($member);
 						$res =  json_decode($res,true);
 						if($res['success'] === false){
-							$response['error'] = ['code'=>2,'message'=>$res['Info']];
+							return $response['error'] = ['errorCode'=>2,'message'=>$res['Info']];
 							die();
 						}
 					}
@@ -86,14 +87,14 @@
 						$transaction->commit();
 					}catch (EXception $e){
 						$transaction->rollBack();
-						$response ['error'] = ['code_code' => 2,'message' => 'System Wrong!'];
+						$response ['error'] = ['errorCode' => 2,'message' => 'System Wrong!'];
 					}
 				}else{
 					//钱不够,返回错误信息
-					$response['error'] = ['code_code'=>'1','message'=>'Not Enought Money To Pay This Wifi Item!'];
+					$response['error'] = ['errorCode'=>'1','message'=>'Not Enought Money To Pay This Wifi Item!'];
 				}
 			}else{
-				$response['error'] = ['error_code'=>1,'message'=>'Member does not exist'];
+				$response['error'] = ['errorCode'=>2,'message'=>'Member does not exist'];
 			}
 			return $response;
 		}
@@ -207,7 +208,7 @@
 		//find wifi login log in db
 		public static function FindWifiLoginLog($mcode,$count=5)
 		{
-			$sql = " SELECT * FROM vcos_wifi_connect_log_flow WHERE membership_code='$mcode' ORDER BY `id` DESC  LIMIT  $count" ;
+			$sql = " SELECT wifi_login_time,wifi_logout_time,FORMAT(wifi_used_total_flow,2) as flow  FROM vcos_wifi_connect_log_flow WHERE membership_code='$mcode' ORDER BY `id` DESC  LIMIT  $count" ;
 			$log = Yii::$app->db->createCommand($sql)->queryAll();
 			return $log;
 		}
@@ -224,13 +225,14 @@
 			$sign = $member['sign'];
 			
 			$membership =  MemberService::getMemberbysign($sign);
-			$passport = $membership['passport'];
+			$passport = $membership['passport_number'];
 			
 			//接口对接
 			//查询用户当前在线状态
 			$check_out_json = MyCurl::CheckFlow($passport);
 			 
 			$check_out_array = json_decode($check_out_json,true);
+			$status = false;	//初始值为false 
 			
 			if($check_out_array['success']){
 				$arr = explode("<br>", $check_out_array['data']['feeInfo']);
@@ -239,17 +241,16 @@
 				$wifi_online_in_flow = str_replace('MB','',explode(": ",$arr[5])[1]);
 				$wifi_online_out_flow = str_replace('MB','',explode(": ",$arr[6])[1]);
 				$wifi_online_total_flow = str_replace('MB','',explode(": ",$arr[7])[1]);
-				$status = $arr[9][1];
-				
+				//获取当前的在线状态
+				$status = $check_out_array['data']['isOnline'];
 				//如果接口获取的状态是离线，设置数据库中的状态为离线
-				//TODO
-				if($status == 'lixian'){
+				if($status === false){
 					self::WriteWifiLogoutLogToDB($membership,$wifi_online_in_flow,$wifi_online_out_flow,$wifi_online_total_flow);
 				}
 			}
 			
-			$sql = " SELECT * FROM vcos_wifi_connect_log_flow WHERE membership_code='$mcode' ORDER BY `id` DESC ";
-			$status = Yii::$app->db->createCommand($sql)->queryOne();
+// 			$sql = " SELECT * FROM vcos_wifi_connect_log_flow WHERE membership_code='$mcode' ORDER BY `id` DESC ";
+// 			$db_status = Yii::$app->db->createCommand($sql)->queryOne();
 			return $status;
 		}
 		
@@ -262,7 +263,7 @@
 			$ip_address = '';
 			$mac_address = '';
 			$wifi_login_time = date("Y-m-d H:i:s",time());
-			$wifi_logout_time = '';
+// 			$wifi_logout_time = '';
 			$certification_result='';
 			$exit_reason='';
 			$exit_type=0;
@@ -275,10 +276,11 @@
 					'ip_address'=>$ip_address,
 					'mac_address'=>$mac_address,
 					'wifi_login_time'=>$wifi_login_time,
-					'wifi_logout_time'=>$wifi_logout_time,
+// 					'wifi_logout_time'=>$wifi_logout_time,
 					'wifi_online_in_flow'=>$wifi_online_in_flow,
 					'wifi_online_out_flow'=>$wifi_online_out_flow,
 					'wifi_online_total_flow'=>$wifi_online_total_flow,
+// 					'wifi_used_total_flow' => 0,
 					'certification_result'=>$certification_result,
 					'exit_reason'=>$exit_reason,
 					'exit_type'=>$exit_type,
@@ -298,10 +300,9 @@
 			$membership_code = $membership['member_code'];
 			
 			$params = [':membership_id'=>$membership_id,':membership_code'=>$membership_code];
-			$sql = 'SELECT id FROM vcos_wifi_connect_log_flow WHERE membership_id = :membership_id
-							AND membership_code = :membership_code ORDER BY id DESC LIMIT 1 ';
+			$sql = 'SELECT * FROM vcos_wifi_connect_log_flow WHERE membership_id = :membership_id
+							AND membership_code = :membership_code AND exit_type=0 ORDER BY id DESC LIMIT 1 ';
 			$wifi = Yii::$app->db->createCommand($sql,$params)->queryOne();
-			
 			
 			$offline = Yii::$app->db->createCommand()->update('vcos_wifi_connect_log_flow', [
 					'wifi_logout_time'=>$wifi_logout_time,
@@ -310,6 +311,7 @@
 					'wifi_online_in_flow'=>$wifi_online_in_flow,
 					'wifi_online_out_flow'=>$wifi_online_out_flow,
 					'wifi_online_total_flow'=>$wifi_online_total_flow,
+					'wifi_used_total_flow'=>$wifi_online_total_flow - $wifi['wifi_online_total_flow'],
 			],[
 					'membership_id'=>$membership_id,
 					'membership_code'=>$membership_code,

@@ -3,28 +3,18 @@
 namespace app\modules\wifiservice\controllers;
 
 use Yii;
+use app\models\Member;
 use yii\web\Controller;
 use app\components\MemberService;
-use app\models\Member;
 use app\modules\wifiservice\components\MyCurl;
 use app\modules\wifiservice\components\MyWifi;
 
 class ServiceController extends Controller
 {
+	
 	//check out flow via comst system  api
     public function actionCheckoutflow()
     {
-    	
-//     	$mcode = Yii::$app->request->post('mcode');
-
-//         $membership = Member::find ()->select ( [ 
-//                     'sign',
-//             ] )->where ( [ 
-//                     'member_code' => $mcode 
-//             ] )->one ();
-//         $sign = $membership['sign'];
-
-
         $sign = Yii::$app->admin->identity->sign;
         $member = MemberService::getMemberbysign($sign);
     	
@@ -52,16 +42,6 @@ class ServiceController extends Controller
     //wifi connect via comst system api
     public function actionWificonnect()
     { 
-    	
-//         $mcode = Yii::$app->request->post('mcode');
-//         $membership = Member::find ()->select ( [ 
-//             'sign',
-//         ] )->where ( [ 
-//             'member_code' => $mcode 
-//         ] )->one ();
-//         $sign = $membership['sign'];
-
-    	
     	$sign = Yii::$app->admin->identity->sign;
         $member = MemberService::getMemberbysign($sign);
         
@@ -100,21 +80,9 @@ class ServiceController extends Controller
     //disconnect wifi via comst system api
     public function actionWifidisconnect()
     {
-    	
-//     	MyCurl::vcurl(Yii::$app->params['wifi_url'],'status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
-//         $mcode = Yii::$app->request->post('mcode');
-//         $membership = Member::find ()->select ( [ 
-//             'sign',
-//         ] )->where ([
-//             'member_code' => $mcode 
-//         ] )->one ();
-
-//      $sign = $membership['sign'];
-
     	$sign = Yii::$app->admin->identity->sign;
         $member = MemberService::getMemberbysign($sign);
         //先查看comst 中有没有这个用户
-//      $find_res = MyWifi::FindWifiUserInComst($member['passport_number']);
         $find_res = MyCurl::FindUser($member['passport_number']);
         $find_res = json_decode($find_res,true);
         if($find_res['data']){
