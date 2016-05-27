@@ -17,7 +17,7 @@ class Admin extends ActiveRecord implements IdentityInterface
      */
     public static function tableName()
     {
-        return '{{%vcos_member}}';
+        return '{{%vcos_member_crew}}';
     }
     /**
      * @inheritdoc
@@ -52,8 +52,14 @@ class Admin extends ActiveRecord implements IdentityInterface
      */
     public static function findByUsername($username)
     {
-
-        return static::findOne(['passport_number' => $username]);
+		if((substr($username,0,3) == 'TS_') || (substr($username, 0,3) == 'ts_'))
+		{
+			//如果存在前缀,则是船员
+			return static::findOne(['member_code'=>$username]);
+		}else{
+			return static::findOne(['passport_number' => $username]);
+		}
+// 		return static::findOne(['passport_number' => $username]);
     }
 
     /**
@@ -96,7 +102,8 @@ class Admin extends ActiveRecord implements IdentityInterface
      */
     public function getId()
     {
-        return $this->getPrimaryKey();
+    	return $this->member_id;
+//         return $this->getPrimaryKey();
     }
 
     /**

@@ -33,6 +33,14 @@ class MemberService {
 		
 		return $member;
 	}
+	
+	public static function getCrewBySign($sign){
+		$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
+				crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount
+				FROM vcos_wifi_crew WHERE sign=\''.$sign.'\' ';
+		$member = Yii::$app->db->createCommand($sql)->queryOne();
+		return $member;
+	}
 
 	
 	public static function getMemberinfobysign($sign)

@@ -16,10 +16,17 @@ class ServiceController extends Controller
     public function actionCheckoutflow()
     {
         $sign = Yii::$app->admin->identity->sign;
-        $member = MemberService::getMemberbysign($sign);
+//         $member = MemberService::getMemberbysign($sign);
+        $type = Yii::$app->admin->identity->member_type;
+        if($type == 1){
+        	//会员
+        	$membership = MemberService::getMemberbysign($sign);
+        }else {
+        	$membership =  MemberService::getCrewBySign($sign);
+        }
     	
         //查流量
-        $check_out_json = MyCurl::CheckFlow($member['passport_number']);
+        $check_out_json = MyCurl::CheckFlow($membership['passport_number']);
    
     	$check_out_array = json_decode($check_out_json,true);
 		
@@ -43,14 +50,21 @@ class ServiceController extends Controller
     public function actionWificonnect()
     { 
     	$sign = Yii::$app->admin->identity->sign;
-        $member = MemberService::getMemberbysign($sign);
+//         $member = MemberService::getMemberbysign($sign);
+    	$type = Yii::$app->admin->identity->member_type;
+    	if($type == 1){
+    		//会员
+    		$membership = MemberService::getMemberbysign($sign);
+    	}else {
+    		$membership =  MemberService::getCrewBySign($sign);
+    	}
         
         //先查看comst 中有没有这个用户
-        $find_res = MyCurl::FindUser($member['passport_number']);
+        $find_res = MyCurl::FindUser($membership['passport_number']);
         $find_res = json_decode($find_res,true);
         if($find_res['data']){
         	//查流量
-        	$check_out_json = MyCurl::CheckFlow($member['passport_number']);
+        	$check_out_json = MyCurl::CheckFlow($membership['passport_number']);
         	$check_out_array = json_decode($check_out_json,true);
         	$arr = explode("<br>", $check_out_array['data']['feeInfo']);
         	
@@ -60,11 +74,11 @@ class ServiceController extends Controller
         	$wifi_online_total_flow = str_replace('MB','',explode(": ",$arr[7])[1]);
         	
         	//连接网络
-        	$online_json = MyCurl::Connect($member['passport_number']);
+        	$online_json = MyCurl::Connect($membership['passport_number']);
         	$online_arr = json_decode($online_json,true);
         	if($online_arr['success']){
         		//write login log to db
-        		MyWifi::WriteWifiLoginLogToDB($member,$wifi_online_in_flow,$wifi_online_out_flow,$wifi_online_total_flow);
+        		MyWifi::WriteWifiLoginLogToDB($membership,$wifi_online_in_flow,$wifi_online_out_flow,$wifi_online_total_flow);
         		echo $online_json;
         	}else{
         		echo '{"success":false,"Info":"流量不足，请及时充值"}';
@@ -81,17 +95,24 @@ class ServiceController extends Controller
     public function actionWifidisconnect()
     {
     	$sign = Yii::$app->admin->identity->sign;
-        $member = MemberService::getMemberbysign($sign);
+//         $member = MemberService::getMemberbysign($sign);
+        $type = Yii::$app->admin->identity->member_type;
+        if($type == 1){
+        	//会员
+        	$membership = MemberService::getMemberbysign($sign);
+        }else {
+        	$membership =  MemberService::getCrewBySign($sign);
+        }
         //先查看comst 中有没有这个用户
-        $find_res = MyCurl::FindUser($member['passport_number']);
+        $find_res = MyCurl::FindUser($membership['passport_number']);
         $find_res = json_decode($find_res,true);
         if($find_res['data']){
 
         	//查找comst中$passport对应的idRec
-        	$idRec = MyCurl::FindidRec($member['passport_number']);
+        	$idRec = MyCurl::FindidRec($membership['passport_number']);
         	
         	//查流量
-        	$check_out_json = MyCurl::CheckFlow($member['passport_number']);
+        	$check_out_json = MyCurl::CheckFlow($membership['passport_number']);
         	$check_out_array = json_decode($check_out_json,true);
         	$arr = explode("<br>", $check_out_array['data']['feeInfo']);
         	
@@ -105,7 +126,7 @@ class ServiceController extends Controller
         	$disc_json = MyCurl::DisConnect($idRec);
         	
         	//断开连接记录写入DB
-        	MyWifi::WriteWifiLogoutLogToDB($member,$wifi_online_in_flow,$wifi_online_out_flow,$wifi_online_total_flow);
+        	MyWifi::WriteWifiLogoutLogToDB($membership,$wifi_online_in_flow,$wifi_online_out_flow,$wifi_online_total_flow);
         	echo $disc_json;
         }else{
         	echo '{"success":false,"Info":"用户不存在，此帐号没有连接网络，请先连接网络"}';

@@ -14,9 +14,19 @@
 		//上网购买页面
 		public function actionIndex()
 		{
+			
 			$sign = Yii::$app->admin->identity->sign;
 			$mcode = Yii::$app->admin->identity->member_code;
-			$membership = MemberService::getMemberbysign($sign);
+			
+			$type = Yii::$app->admin->identity->member_type;
+			
+			if($type == 1){
+				//会员
+				$membership = MemberService::getMemberbysign($sign);
+			}else {
+				$membership =  MemberService::getCrewBySign($sign);
+			}
+			
 			$wifi_items = MyWifi::FindWifiService();
 			$passport = $membership['passport_number'];
 			
@@ -36,11 +46,21 @@
 		public function actionOrderconfirm()
 		{
 			$wifi_id = Yii::$app->request->get('wifi_id','');
+			$type = Yii::$app->admin->identity->member_type;
+			
 			if($wifi_id != ''){
 				//获取套餐信息
 				$wifi_item = MyWifi::FindWifiServiceById($wifi_id);		
 				$sign = Yii::$app->admin->identity->sign;
-				$membership = MemberService::getMemberbysign($sign);
+				if($type == 1){
+					//会员
+					$membership = MemberService::getMemberbysign($sign);
+				}else {
+					$membership =  MemberService::getCrewBySign($sign);
+				}
+				
+// 				$membership = MemberService::getMemberbysign($sign);
+
 				$passport = $membership['passport_number'];
 				//查询流量信息
 				$flow_info = MyCurl::CheckFlowAndParse($passport);
@@ -65,7 +85,15 @@
 		public function actionPaymenterror()
 		{
 			$sign = Yii::$app->admin->identity->sign;
-			$membership = MemberService::getMemberbysign($sign);
+// 			$membership = MemberService::getMemberbysign($sign);
+
+			$type = Yii::$app->admin->identity->member_type;
+			if($type == 1){
+				//会员
+				$membership = MemberService::getMemberbysign($sign);
+			}else {
+				$membership =  MemberService::getCrewBySign($sign);
+			}
 			$passport = $membership['passport_number'];
 			//查询流量信息
 			$flow_info = MyCurl::CheckFlowAndParse($passport);
@@ -77,7 +105,14 @@
 		public function actionPaymentfail()
 		{
 			$sign = Yii::$app->admin->identity->sign;
-			$membership = MemberService::getMemberbysign($sign);
+// 			$membership = MemberService::getMemberbysign($sign);
+			$type = Yii::$app->admin->identity->member_type;
+			if($type == 1){
+				//会员
+				$membership = MemberService::getMemberbysign($sign);
+			}else {
+				$membership =  MemberService::getCrewBySign($sign);
+			}
 			$passport = $membership['passport_number'];
 			//查询流量信息
 			$flow_info = MyCurl::CheckFlowAndParse($passport);
@@ -88,7 +123,14 @@
 		public function actionPaymentsuccess()
 		{
 			$sign = Yii::$app->admin->identity->sign;
-			$membership = MemberService::getMemberbysign($sign);
+// 			$membership = MemberService::getMemberbysign($sign);
+			$type = Yii::$app->admin->identity->member_type;
+			if($type == 1){
+				//会员
+				$membership = MemberService::getMemberbysign($sign);
+			}else {
+				$membership =  MemberService::getCrewBySign($sign);
+			}
 			$passport = $membership['passport_number'];
 			//查询流量信息
 			$flow_info = MyCurl::CheckFlowAndParse($passport);
@@ -101,7 +143,14 @@
 		{
 			$mcode = Yii::$app->admin->identity->member_code;
 			$sign =  Yii::$app->admin->identity->sign;
-			$membership = MemberService::getMemberbysign($sign);
+// 			$membership = MemberService::getMemberbysign($sign);
+			$type = Yii::$app->admin->identity->member_type;
+			if($type == 1){
+				//会员
+				$membership = MemberService::getMemberbysign($sign);
+			}else {
+				$membership =  MemberService::getCrewBySign($sign);
+			}
 			$passport = $membership['passport_number'];
 			//查询流量信息
 			$flow_info = MyCurl::CheckFlowAndParse($passport);
@@ -116,7 +165,14 @@
 		{
 			$mcode = Yii::$app->admin->identity->member_code;
 			$sign = Yii::$app->admin->identity->sign;
-			$membership = MemberService::getMemberbysign($sign);
+// 			$membership = MemberService::getMemberbysign($sign);
+			$type = Yii::$app->admin->identity->member_type;
+			if($type == 1){
+				//会员
+				$membership = MemberService::getMemberbysign($sign);
+			}else {
+				$membership =  MemberService::getCrewBySign($sign);
+			}
 			$passport = $membership['passport_number'];
 			//查询流量信息
 			$flow_info = MyCurl::CheckFlowAndParse($passport);
@@ -133,7 +189,14 @@
 		{
 			$mcode = Yii::$app->admin->identity->member_code;
 			$sign = Yii::$app->admin->identity->sign;
-			$membership = MemberService::getMemberbysign($sign);
+// 			$membership = MemberService::getMemberbysign($sign);
+			$type = Yii::$app->admin->identity->member_type;
+			if($type == 1){
+				//会员
+				$membership = MemberService::getMemberbysign($sign);
+			}else {
+				$membership =  MemberService::getCrewBySign($sign);
+			}
 			$passport = $membership['passport_number'];
 			//查询流量
 			$flow_info = MyCurl::CheckFlowAndParse($passport);
@@ -151,7 +214,14 @@
 	{
 		$mcode = Yii::$app->admin->identity->member_code;
 		$sign = Yii::$app->admin->identity->sign;
-		$membership = MemberService::getMemberbysign($sign);
+// 		$membership = MemberService::getMemberbysign($sign);
+		$type = Yii::$app->admin->identity->member_type;
+		if($type == 1){
+			//会员
+			$membership = MemberService::getMemberbysign($sign);
+		}else {
+			$membership =  MemberService::getCrewBySign($sign);
+		}
 		$passport = $membership['passport_number'];
 		//查询流量
 		$flow_info = MyCurl::CheckFlowAndParse($passport);
@@ -166,7 +236,14 @@
 	{
 		$mcode = Yii::$app->admin->identity->member_code;
 		$sign = Yii::$app->admin->identity->sign;
-		$membership = MemberService::getMemberbysign($sign);
+// 		$membership = MemberService::getMemberbysign($sign);
+		$type = Yii::$app->admin->identity->member_type;
+		if($type == 1){
+			//会员
+			$membership = MemberService::getMemberbysign($sign);
+		}else {
+			$membership =  MemberService::getCrewBySign($sign);
+		}
 		$passport = $membership['passport_number'];
 		//查询流量
 		$flow_info = MyCurl::CheckFlowAndParse($passport);
@@ -232,23 +309,28 @@
 			
 // 			}
 			
-			$passport = "E45218963";
+// 			$passport = "E45218963";
 			
-			//模拟登录
-			MyCurl::vcurl(Yii::$app->params['wifi_url'].'comstserver.awm?','status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
-			//查找comst中$passport对应的idRec
-			$url = Yii::$app->params['wifi_url']."fee_checkout/comstserver.awm?";
-			$find_params = "status=manage&subopt=checkout&opt=dbcs&dbName=usermanage_umb&admin=".Yii::$app->params['wifi_login_name']."&account=$passport";
-			$find_json = MyCurl::vcurl($url,$find_params);
-			$find_json = iconv('GB2312', 'UTF-8', $find_json);
-			$res = json_decode($find_json,true);
+// 			//模拟登录
+// 			MyCurl::vcurl(Yii::$app->params['wifi_url'].'comstserver.awm?','status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
+// 			//查找comst中$passport对应的idRec
+// 			$url = Yii::$app->params['wifi_url']."fee_checkout/comstserver.awm?";
+// 			$find_params = "status=manage&subopt=checkout&opt=dbcs&dbName=usermanage_umb&admin=".Yii::$app->params['wifi_login_name']."&account=$passport";
+// 			$find_json = MyCurl::vcurl($url,$find_params);
+// 			$find_json = iconv('GB2312', 'UTF-8', $find_json);
+// 			$res = json_decode($find_json,true);
 			
-			var_dump($res);			
+// 			var_dump($res);			
 			
 // 			var_dump($flow_array);
 			
 // 			$res = MyWifi::WifiPay($sign,$wifi_id);
 // 			var_dump($json);
+
+			$sign = 'fc1ea38de8f06bfb8492a551801cdfd3';
+			$wifi_id = '1';
+			$res = MyWifi::WifiPay($sign, $wifi_id);
+			var_dump($res);
 		}
 	}
 

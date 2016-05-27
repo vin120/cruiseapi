@@ -40,7 +40,15 @@
 		//WifiPayment,write pay log to db
 		public static function WifiPay($sign,$wifi_id)
 		{
-			$member = MemberService::getMemberbysign($sign);
+// 			$member = MemberService::getMemberbysign($sign);
+			$type = Yii::$app->admin->identity->member_type;
+			if($type == 1){
+				//会员
+				$member = MemberService::getMemberbysign($sign);
+			}else {
+				$member =  MemberService::getCrewBySign($sign);
+			}
+			
 			$wifi_item = self::FindWifiServiceById($wifi_id);
 
 			//获取wifi套餐的价格
@@ -48,15 +56,15 @@
 			if(!empty($member)){
 
 				//查找用户的余额
-				$membership_id = $member->member_id;
-				$membership_code = $member->member_code;
-				$member_money = $member->member_money;
+				$membership_id = $member['member_id'];
+				$membership_code = $member['member_code'];
+				$member_money = $member['member_money'];
 				//判断用户的钱是否足够支付wifi套餐，
 				if($member_money >= ($sale_price * 100) && $member_money >= 0){
 					//钱足够，进行支付
 					
 					//查询用户是否存在
-					$find_res = MyCurl::FindUser($member->passport_number);
+					$find_res = MyCurl::FindUser($member['passport_number']);
 					$find_res = json_decode($find_res,true);
 					if(!$find_res['data']){
 						//没找到用户
@@ -74,11 +82,17 @@
 					try {
 						//直接支付
 						$money = $member_money - ($sale_price * 100);	//注意转换单位 
-						$member->member_money = $money;
-						$member->save();
+						if($type == 1){
+							$member['member_money'] = $money;
+							$member->save();
+						}else{
+							$sql = " UPDATE vcos_wifi_crew SET money='$money' WHERE crew_id='{$member['member_id']}' ";
+							Yii::$app->db->createCommand($sql)->execute();
+						}
+						
 
 						//充值wifi对应的钱，对接接口
-						MyCurl::RechargeWifi($member->passport_number,$sale_price);
+						MyCurl::RechargeWifi($member['passport_number'],$sale_price);
 
 						//记录购买Wifi记录
 						self::CreateWifiPayLog($sign,$membership_code,$wifi_item);
@@ -217,14 +231,26 @@
 		//find current login status in  comst system and db 
 		public static function FindWifiLoginStatus($mcode)
 		{
-			$member = Member::find ()->select ( [
-					'sign',
-			] )->where ( [
-					'member_code' => $mcode
-			] )->one ();
-			$sign = $member['sign'];
+			$type = Yii::$app->admin->identity->member_type;
+			if($type == 1){
+				//会员
+				$member = Member::find ()->select ( [
+						'sign',
+				] )->where ( [
+						'member_code' => $mcode
+				] )->one ();
+				$sign = $member['sign'];
+				
+				$membership = MemberService::getMemberbysign($sign);
+			}else {
+				$sql = "SELECT sign FROM vcos_wifi_crew WHERE crew_code='$mcode'";
+				$sign = Yii::$app->db->createCommand($sql)->queryOne()['sign'];
+				
+				$membership =  MemberService::getCrewBySign($sign);
+			}
 			
-			$membership =  MemberService::getMemberbysign($sign);
+			
+// 			$membership =  MemberService::getMemberbysign($sign);
 			$passport = $membership['passport_number'];
 			
 			//接口对接
