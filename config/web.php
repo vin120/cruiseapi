@@ -11,6 +11,9 @@ $config = [
 		'wifiservice' => [
 			'class' => 'app\modules\wifiservice\wifiservice',
 		],
+		'wifi' => [
+			'class' => 'app\modules\wifi\wifi',
+		],	
 	],
 	'components' => [ 
 		'request' => [

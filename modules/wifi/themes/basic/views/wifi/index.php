@@ -13,15 +13,14 @@
 		<header id="mainHeader">
 			<div class="clearfix">
 				<span class="l">欢迎您，<?php echo $membership['cn_name']?></span>
-				<a href="<?php echo Url::toRoute(['site/logout'])?>" class="r">退出</a>
 			</div>
 			<div class="surplus">
 				<span>剩余流量：</span>
 				<span><em><?php echo $flow_info[0]?></em>.<?php echo $flow_info[1]?>M</span>
 			</div>
 			<ul>
-				<li class="active"><a href="<?php echo Url::toRoute(['wifi/index'])?>">上网购买</a></li>
-				<li><a href="<?php echo Url::toRoute(['wifi/loginstatus'])?>">上网连接</a></li>
+				<li class="active"><a href="<?php echo Url::toRoute(['wifi/index'])?>?mcode=<?php echo $mcode?>">上网购买</a></li>
+				<li><a href="<?php echo Url::toRoute(['wifi/loginstatus'])?>?mcode=<?php echo $mcode?>">上网连接</a></li>
 			</ul>
 		</header>
 		<!-- header end -->
@@ -68,7 +67,8 @@ window.onload = function(){
 	$("#button").on("click",function(){
 		
 		var wifi_id = $("input[name='wifi_id']:checked").val();
-		location.href ="<?php  echo Url::toRoute(['wifi/orderconfirm']);?>?wifi_id="+wifi_id;
+		var mcode = '<?php echo $mcode?>';
+		location.href ="<?php  echo Url::toRoute(['wifi/orderconfirm']);?>?wifi_id="+wifi_id+"&mcode="+mcode;
 		
 	});
 

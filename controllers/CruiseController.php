@@ -524,7 +524,7 @@ class CruiseController extends MyActiveController
 	}
 	*/
 	
-	
+	/*
 	public function actionFindwifiservice()
 	{
 		$my_lang = isset($_POST['mylang']) ? $_POST['mylang'] : 'zh_cn';
@@ -550,7 +550,7 @@ class CruiseController extends MyActiveController
 		
 		return $response;
 	}
-	
+	*/
 	
 
 	/**
@@ -718,6 +718,7 @@ class CruiseController extends MyActiveController
 		
 	}
 	*/
+	/*
 	public function actionWificonnect()
 	{
 		$sign = isset($_POST['sign']) ? $_POST['sign'] : '';
@@ -810,7 +811,7 @@ class CruiseController extends MyActiveController
 		
 	}
 	
-	
+	*/
 	
 	/**
 	 * wifi   网络连接
@@ -871,6 +872,7 @@ class CruiseController extends MyActiveController
 		
 	}
 	*/
+	/*
 	public function actionFindwifistatus()
 	{
 		$sign = isset($_POST['sign']) ? $_POST['sign'] : '';
@@ -925,11 +927,12 @@ class CruiseController extends MyActiveController
 		return $response;
 	
 	}
+	*/
 	
 	/***
 	 * wifi 网上订购
 	 */
-	 
+	 /*
 	public function actionWifipay()
 	{
 		$sign = isset($_POST['sign']) ? $_POST['sign'] : '';
@@ -1057,7 +1060,7 @@ class CruiseController extends MyActiveController
 		}
 		return $response;
 	}
-	
+	*/
 	
 	/***
 	 * 获取评价反馈项
@@ -1318,5 +1321,30 @@ class CruiseController extends MyActiveController
 		}
 		return $response;
 	}
+	
+	
+	/***
+	 *  客舱服务-->  服务提交
+	 */
+	public function actionCommitcabinservice()
+	{
+		//TODO
+	}
+	
+	
+	/***
+	 * 客舱服务--> 服务查询
+	 */
+	
+	public function actionFindcabinservice()
+	{
+		//TODO
+		$type = $_POST['type'] ? $_POST['type'] : '';
+		
+		
+		
+	}
+	
+	
 	
 }

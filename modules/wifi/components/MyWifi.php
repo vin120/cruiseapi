@@ -1,5 +1,5 @@
 <?php
-	namespace app\modules\wifiservice\components;
+	namespace app\modules\wifi\components;
 
 	use Yii;
 	use app\components\MemberService;
@@ -7,7 +7,7 @@
 	use app\models\MemberOrder;
 	use app\models\MemberOrderDetail;
 	use app\components\OrderService;
-	use app\modules\wifiservice\components\MyCurl;
+	use app\modules\wifi\components\MyCurl;
 
 	class MyWifi 
 	{
@@ -136,74 +136,6 @@
 			}
 		}
 
-		
-		
-		
-/*
-		//create user in comst system
-		private static function CreateWifiUserInComst($member)
-		{
-			//模拟登录
-// 			MyCurl::vcurl(Yii::$app->params['wifi_url'],'status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
-
-// 			$create_url = "http://192.168.9.250/jsp/um_add/comstserver.awm?";
-
-// 			//UTF-8 转换为 GB2312
-// 			$date = iconv('UTF-8','GB2312', date('Y年m月d日',time()));
-// 			$LinkName = iconv('UTF-8','GB2312', $member['cn_name']);
-
-// 			$create_user_param = "status=manage&opt=dbcs&dbName=usermanage_umb&subopt=add&Account=".$member['passport_number']."&pwd=".$member['passport_number']."&idUgb=1&isStartAcc=1&LinkName=".$LinkName."&paperType=6&paperNum=".$member['passport_number']."&phone=".$member['mobile_number']."&email=".$member['member_email']."&limitData=".$date;
-
-// 			$create_json = MyCurl::vcurl($create_url,$create_user_param);
-// 			$create_json = iconv('GB2312', 'UTF-8', $create_json);
-
-			$create_json = MyCurl::CreateUser($member);
-			return $create_json;
-		}
-*/
-		
-/*
-		//search user in comst system via passport
-		public static function FindWifiUserInComst($username)
-		{
-			//模拟登录
-// 			MyCurl::vcurl(Yii::$app->params['wifi_url'],'status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
-
-// 			$find_url = "http://192.168.9.250/jsp/um_query/comstserver.awm?";
-// 			$find_params = "status=manage&opt=dbcs&dbName=usermanage_umb&subopt=query&account=".$username."&IsAccount=1";
-
-// 			$find_json = MyCurl::vcurl($find_url,$find_params);
-// 			$find_json = iconv('GB2312', 'UTF-8', $find_json);
-			$find_json = MyCurl::FindUser($username);
-			return $find_json;
-		}
-*/
-
-		
-/*
-		//recharge in comst system via passport 
-		private static function RechargeWifiInComst($passport,$price)
-		{
-// 			//模拟登录
-// 			MyCurl::vcurl(Yii::$app->params['wifi_url'],'status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
-
-// 			//查找comst中$passport对应的idRec
-// 			$url = "http://192.168.9.250/jsp/fee_checkout/comstserver.awm?";
-// 			$find_params = "status=manage&subopt=checkout&opt=dbcs&dbName=usermanage_umb&admin=".Yii::$app->params['wifi_login_name']."&account=".$passport;
-// 			$find_json = MyCurl::vcurl($url,$find_params);
-// 			$find_json = iconv('GB2312', 'UTF-8', $find_json);
-// 			$res = json_decode($find_json,true);
-// 			$idRec = $res['data']['userId'];
-
-// 			//在comst系统中充钱
-// 			$pay_params = "admin=".Yii::$app->params['wifi_login_name']."&opt=dbcs&status=manage&subopt=paymoney&dbName=usermanage_umb&idRec=".$idRec."&money=".$price;
-// 			$pay_json = MyCurl::vcurl($url,$pay_params);
-// 			$pay_json = iconv('GB2312', 'UTF-8', $pay_json);
-			$find_json = MyCurl::RechargeWifi($passport,$price);
-			
-			return $find_json;
-		}
-*/
 
 		//find wifi login log in db
 		public static function FindWifiLoginLog($mcode,$count=5)
@@ -249,8 +181,6 @@
 				}
 			}
 			
-// 			$sql = " SELECT * FROM vcos_wifi_connect_log_flow WHERE membership_code='$mcode' ORDER BY `id` DESC ";
-// 			$db_status = Yii::$app->db->createCommand($sql)->queryOne();
 			return $status;
 		}
 		
@@ -263,7 +193,6 @@
 			$ip_address = '';
 			$mac_address = '';
 			$wifi_login_time = date("Y-m-d H:i:s",time());
-// 			$wifi_logout_time = '';
 			$certification_result='';
 			$exit_reason='';
 			$exit_type=0;
@@ -276,11 +205,9 @@
 					'ip_address'=>$ip_address,
 					'mac_address'=>$mac_address,
 					'wifi_login_time'=>$wifi_login_time,
-// 					'wifi_logout_time'=>$wifi_logout_time,
 					'wifi_online_in_flow'=>$wifi_online_in_flow,
 					'wifi_online_out_flow'=>$wifi_online_out_flow,
 					'wifi_online_total_flow'=>$wifi_online_total_flow,
-// 					'wifi_used_total_flow' => 0,
 					'certification_result'=>$certification_result,
 					'exit_reason'=>$exit_reason,
 					'exit_type'=>$exit_type,

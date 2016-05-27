@@ -793,9 +793,6 @@ class MemberService {
 	
 	
 	
-	
-	
-	
 	public static function getMemberBySearch($search) {
 		$response = array ();
 		if (is_numeric ( $search )) {
@@ -948,6 +945,8 @@ class MemberService {
 		}
 		return $response;
 	}
+	
+	//判断是否是member code
 	public static function checkMembershipCode($membership_code) {
 		$res_bool = false;
 		$len = strlen ( $membership_code );
@@ -961,6 +960,8 @@ class MemberService {
 		}
 		return $res_bool;
 	}
+	
+	
 	public static function createCheckValue($member_no) {
 		$odd_value = 0; // 奇数
 		$even_value = 0; // 偶数

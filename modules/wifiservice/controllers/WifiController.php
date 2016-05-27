@@ -41,7 +41,6 @@
 				$wifi_item = MyWifi::FindWifiServiceById($wifi_id);		
 				$sign = Yii::$app->admin->identity->sign;
 				$membership = MemberService::getMemberbysign($sign);
-				$wifi_items = MyWifi::FindWifiService();
 				$passport = $membership['passport_number'];
 				//查询流量信息
 				$flow_info = MyCurl::CheckFlowAndParse($passport);
@@ -178,11 +177,10 @@
 	}
 	
 	
-		
-		
 		//测试用的
 		public function actionTest()
 		{
+			
 // 			$mcode = Yii::$app->request->get('mcode');
 // 			$membership = Member::find ()->select ( [ 
 // 					'sign',
@@ -224,15 +222,29 @@
 // 			$passport_number = Yii::$app->admin->identity->passport_number;
 // 			$wifi_id = 8;
 // 			$res = MyCurl::FindUser($passport_number);
-			$passport = 'E19097510';
-			$json = MyCurl::CheckFlow($passport);
-			$flow_array = json_decode($json,true);
-			if($flow_array['success']){
-// 				$arr = explode("<br>", $flow_array['data']['feeInfo']);
-				$status = $flow_array['data']['isOnline'];
-				var_dump($status);
+// 			$passport = 'E19097510';
+// 			$json = MyCurl::CheckFlow($passport);
+// 			$flow_array = json_decode($json,true);
+// 			if($flow_array['success']){
+// // 				$arr = explode("<br>", $flow_array['data']['feeInfo']);
+// 				$status = $flow_array['data']['isOnline'];
+// 				var_dump($status);
 			
-			}
+// 			}
+			
+			$passport = "E45218963";
+			
+			//模拟登录
+			MyCurl::vcurl(Yii::$app->params['wifi_url'].'comstserver.awm?','status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
+			//查找comst中$passport对应的idRec
+			$url = Yii::$app->params['wifi_url']."fee_checkout/comstserver.awm?";
+			$find_params = "status=manage&subopt=checkout&opt=dbcs&dbName=usermanage_umb&admin=".Yii::$app->params['wifi_login_name']."&account=$passport";
+			$find_json = MyCurl::vcurl($url,$find_params);
+			$find_json = iconv('GB2312', 'UTF-8', $find_json);
+			$res = json_decode($find_json,true);
+			
+			var_dump($res);			
+			
 // 			var_dump($flow_array);
 			
 // 			$res = MyWifi::WifiPay($sign,$wifi_id);

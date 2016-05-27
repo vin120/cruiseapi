@@ -1,0 +1,45 @@
+/*font media*/
+@media screen and (min-width: 320px) { html {font-size: 14px;} }
+@media screen and (min-width: 360px) { html {font-size: 16px;} }
+@media screen and (min-width: 400px) { html {font-size: 18px;} }
+@media screen and (min-width: 440px) { html {font-size: 20px;} }
+@media screen and (min-width: 480px) { html {font-size: 22px;} }
+@media screen and (min-width: 640px) { html {font-size: 28px;} }
+
+/*reset*/
+body,html { padding: 0; margin: 0; color: #4d4d4d; }
+h1,h2,h3,p { margin: 0; }
+ul { list-style: none; }
+a { text-decoration: none; }
+input { outline: none; }
+div,ul { box-sizing: border-box; }
+
+table { width: 100%; line-height: 40px; background-color: #fff; border: 2px solid #dbdbdb; border-collapse: collapse; text-align: center; }
+th,td { border-bottom: 2px solid #dbdbdb; }
+
+/*common*/
+.l { float: left; }
+.r { float: right; }
+.clearfix{ *zoom: 1; }
+.clearfix:after{ content: ""; display: block; height:0; clear:both; }
+.bodyBox { max-width: 720px; min-height: 100vh; margin: 0 auto; background-color: #f0f0f0; border: 1px solid #dbdbdb; }
+.pBox { padding: 20px; }
+.em { font-style: normal; color: #f25721; }
+.point { font-size: .8rem; color: #f25721; }
+.btnBox { margin: 20px 0; text-align: center; }
+.btnBox input { width: 90%; line-height: 2.5em; background-color: #5592dc; border: none; border-radius: 10px; text-align: center; color: #fff; cursor: pointer; font-size: 1rem; }
+.iconBox { margin: 20px 0; text-align: center; }
+.iconBox h2 { margin-bottom: 20px; }
+.iconBox .error { color: #f03331; }
+.iconBox .icon { display: inline-block; width: 40px; line-height: 40px; margin: 20px 0; border-radius: 100%; text-align: center; font-weight: bolder; font-size: 20px; color: #fff; }
+
+/*mainHeader*/
+#mainHeader div { padding: 0 20px; line-height: 40px; background-color: #3b7dd3; color: #fff; }
+#mainHeader a { color: #fff; }
+#mainHeader .surplus { display: -webkit-flex; display: -ms-flexbox; display: flex; font-size: .8rem; }
+#mainHeader .surplus > span { -webkit-flex: 1; -ms-flex: 1; flex: 1; }
+#mainHeader .surplus em { font-size: 1.2rem; font-style: normal; }
+#mainHeader ul { display: table; width: 100%; margin: 0; padding: 0; border: 1px solid #dbdbdb; }
+#mainHeader li { display: table-cell; width: 50%; line-height: 2.5em; background-color: #fff; text-align: center; }
+#mainHeader li a { display: block; color: #4d4d4d; }
+#mainHeader .active { border-bottom: 4px solid #3b7dd3; }
