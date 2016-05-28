@@ -95,7 +95,7 @@
 						MyCurl::RechargeWifi($member['passport_number'],$sale_price);
 
 						//记录购买Wifi记录
-						self::CreateWifiPayLog($sign,$membership_code,$wifi_item);
+						self::CreateWifiPayLog($sign,$membership_code,$wifi_item,$type);
 
 						$response['data'] = ['code'=>1,'message'=>'Pay Success!'];
 						$transaction->commit();
@@ -115,7 +115,7 @@
 
 
 		//write wifi pay log to table vcos_member_order and table vcos_member_order_detail 
-		private static function CreateWifiPayLog($sign,$code,$wifi_item)
+		private static function CreateWifiPayLog($sign,$code,$wifi_item,$type)
 		{
 			$wifi_order_time = time();
 			$wifi_order_number  = OrderService::getMemberOrderNO();
@@ -129,6 +129,7 @@
 				$memberOrder = new MemberOrder();
 				$memberOrder->order_serial_num = $wifi_order_number;
 				$memberOrder->membership_code = $code;
+				$memberOrder->tender_type = $type;
 				$memberOrder->totale_price = $wifi_item['sale_price'] * 100;
 				$memberOrder->pay_type = $pay_type;
 				$memberOrder->order_check_num = $order_check_num;

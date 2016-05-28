@@ -1322,29 +1322,184 @@ class CruiseController extends MyActiveController
 		return $response;
 	}
 	
+
+	/**
+	 * 客舱服务 --->  获取服务项
+	 */
+	
+	public function actionGetcruiseservice()
+	{
+		$lang = isset($_POST['lang']) ? $_POST['lang'] : 'zh_cn';
+		
+		$response = array();
+		
+		$sql = " SELECT b.service_type_id,b.service_type_name FROM vcos_cruise_service_type a 
+				LEFT JOIN vcos_cruise_service_type_i18n b ON a.id=b.service_type_id 
+				WHERE b.i18n='$lang' AND a.service_status=1 ";
+		
+		$service_type = Yii::$app->db->createCommand($sql)->queryAll();
+	
+		$sql = " SELECT a.service_type_id, b.service_item_id,b.service_item_name FROM vcos_cruise_service_items a
+				LEFT JOIN vcos_cruise_service_items_i18n b ON a.id=b.service_item_id 
+				WHERE b.i18n='$lang' AND a.status=1";
+		$service_items = Yii::$app->db->createCommand($sql)->queryAll();
+		
+		$tmp = $service_type;
+		
+		foreach($tmp as $t_key => $t_value){
+			foreach($service_items as $i_key => $i_value){
+				if($t_value['service_type_id'] == $i_value['service_type_id']){
+					$tmp[$t_key]['service_items'][] = $i_value;
+				}
+			}
+		}
+		
+		//去除不必要的信息
+		for($i=0;$i<count($tmp);$i++){
+			for ($j=0;$j<count($tmp[$i]);$j++){
+				unset($tmp[$i]['service_items'][$j]['service_type_id']);
+			}
+		}
+		
+		$response['data'] = $tmp;
+		return $response;
+	}
+	
 	
 	/***
 	 *  客舱服务-->  服务提交
 	 */
 	public function actionCommitcabinservice()
 	{
-		//TODO
+		$sign = isset($_POST['sign']) ? $_POST['sign'] : '';
+		$service_item_id = isset($_POST['service_item_id']) ? $_POST['service_item_id'] : '';
+		$service_type_id = isset($_POST['service_type_id']) ? $_POST['service_type_id'] : '';
+		$m_remark  =isset($_POST['m_remark']) ? $_POST['m_remark'] : '';
+		
+		$response = array();
+		if(!empty($sign)){
+			$member = MemberService::getMemberbysign($sign);
+			if(!empty($member)){
+				$member_code = $member['member_code'];
+				$create_time = date("Y-m-d H:i:s",time());
+				$status = 1;
+				$sql = " INSERT INTO `vcos_member_service_record` (`m_code`,`service_type_id`,`service_item_id`,`m_remark`,`status`,`create_time`) 
+				VALUES ('$member_code','$service_type_id','$service_item_id','$m_remark','$status','$create_time') ";
+				Yii::$app->db->createCommand($sql)->execute();
+				
+				$response['data'] = array('code'=>1,'message'=>'commit success');
+			}else{
+				$response['error'] = array('error_code'=>2,'message'=>'Message does not exist');
+			}
+		}else {
+			$response['error'] = array('error_code'=>1,'message'=>'sign can not be blank');
+		}
+		return $response;
 	}
 	
 	
 	/***
 	 * 客舱服务--> 服务查询
 	 */
-	
-	public function actionFindcabinservice()
+	public function actionFindcruiseservice()
 	{
-		//TODO
-		$type = $_POST['type'] ? $_POST['type'] : '';
+		$response= array();
 		
+		$status = isset($_POST['status']) ? $_POST['status'] : 0;
+		$lang = isset($_POST['lang']) ? $_POST['lang'] : 'zh_cn';
+		$sign = isset($_POST['sign']) ? $_POST['sign'] : '';
 		
+		if(!empty($sign)){
+			$member = MemberService::getMemberbysign($sign);
+			if(!empty($member)){
+				$m_code = $member['member_code'];	
+				$sql = " SELECT service_item_id,m_remark,status,create_time FROM vcos_member_service_record WHERE m_code = '$m_code'  ORDER BY id DESC";
+				$record = Yii::$app->db->createCommand($sql)->queryAll();
+				
+				$tmp_record = $record;
+				
+				$tmp_service_item = array();	//用来保存 service_item_id 例如 1,2,3		
+				$tmp_item_array = array();		//用来保存 service_item_id 分割后的数组  "1,2,3"=> array(1,2,3);
+
+				foreach($tmp_record as $key => $value){
+					
+					$tmp_service_item[$key] = $value['service_item_id'];
+					$tmp_item_array[$key] = explode(",",$tmp_service_item[$key]);
+					
+					foreach ($tmp_item_array[$key] as $row){
+						
+						$sql = "SELECT b.service_item_name FROM vcos_cruise_service_items a
+								LEFT JOIN vcos_cruise_service_items_i18n b ON a.id=b.service_item_id 
+								WHERE b.i18n='$lang' AND a.status=1 AND a.id='$row'";
+						$item = Yii::$app->db->createCommand($sql)->queryOne();
+						$tmp_record[$key]['service_item'][] = $item;
+					}		
+				}
+				
+				//去除不必要的信息
+				$count = count($tmp_record);
+				for($i=0;$i<$count;$i++){
+					unset($tmp_record[$i]['service_item_id']);
+				}
+				
+				$response['data'] = $tmp_record;
+			}else {
+				$response['error'] = array('error_code'=>2,'message'=>' Member does not exist');
+			}
+		}else {
+			$response['error'] = array('error_code'=>1,'message'=>'Sign can not be blank');
+		}
 		
+		return $response;
 	}
 	
 	
+	/**
+	 * 开始进入界面的广告图
+	 */
+	public function actionAdscreen()
+	{
+		$response = array();
+		
+		$sql = " SELECT ad_img_url FROM vcos_ad WHERE ad_position=2";
+		$img_url = Yii::$app->db->createCommand($sql)->queryOne()['ad_img_url'];
+		
+		$response['data'] = $img_url;
+		
+		return 	$response;
+	}
+	
+	
+	/**
+	 *	消息动态
+	 */
+	public function actionGetcruisenotice()
+	{
+		$response  = array();
+		$sql = " SELECT id,notice_type_name,notice_title FROM vcos_notice ORDER BY id DESC";
+		$notice = Yii::$app->db->createCommand($sql)->queryAll();
+		$response['data'] = $notice;
+		return $response;
+	}
+	
+	
+	/***
+	 * 获取消息的详细内容
+	 */
+	public function actionGetcruisenoticebyid()
+	{
+		$id = isset($_POST['id']) ? $_POST['id'] : '';
+		$resposne = array();
+
+		if(!empty($id)){
+			$sql = " SELECT id,notice_title,notice_type_name,notice_content,notice_date,creator FROM vcos_notice WHERE id='$id'";
+			$notice = Yii::$app->db->createCommand($sql)->queryOne();
+			
+			$resposne['data'] = $notice;
+		}else {
+			$resposne['error'] = array('error_code'=>1,'message'=>'id can not be blank');
+		}
+		return $resposne;
+	}
 	
 }
