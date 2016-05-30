@@ -14,7 +14,6 @@
 		//上网购买页面
 		public function actionIndex()
 		{
-			
 			$sign = Yii::$app->admin->identity->sign;
 			$mcode = Yii::$app->admin->identity->member_code;
 			
@@ -59,8 +58,6 @@
 					$membership =  MemberService::getCrewBySign($sign);
 				}
 				
-// 				$membership = MemberService::getMemberbysign($sign);
-
 				$passport = $membership['passport_number'];
 				//查询流量信息
 				$flow_info = MyCurl::CheckFlowAndParse($passport);

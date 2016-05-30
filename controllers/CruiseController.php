@@ -1414,9 +1414,9 @@ class CruiseController extends MyActiveController
 			if(!empty($member)){
 				$m_code = $member['member_code'];	
 				if($status == 0){
-					$sql = " SELECT service_item_id,m_remark,status,create_time FROM vcos_member_service_record WHERE m_code = '$m_code'  ORDER BY id DESC";
+					$sql = " SELECT service_type_id,service_item_id,m_remark,status,create_time FROM vcos_member_service_record WHERE m_code = '$m_code'  ORDER BY id DESC";
 				}else {
-					$sql = " SELECT service_item_id,m_remark,status,create_time FROM vcos_member_service_record WHERE m_code = '$m_code' AND status='$status' ORDER BY id DESC";
+					$sql = " SELECT service_type_id,service_item_id,m_remark,status,create_time FROM vcos_member_service_record WHERE m_code = '$m_code' AND status='$status' ORDER BY id DESC";
 				}
 				
 				$record = Yii::$app->db->createCommand($sql)->queryAll();
@@ -1431,6 +1431,9 @@ class CruiseController extends MyActiveController
 					$tmp_service_item[$key] = $value['service_item_id'];
 					$tmp_item_array[$key] = explode(",",$tmp_service_item[$key]);
 					
+					$sql = " SELECT service_type_name FROM vcos_cruise_service_type_i18n WHERE service_type_id='". $value['service_type_id']."'" ;
+					$type = Yii::$app->db->createCommand($sql)->queryOne()['service_type_name'];
+					$tmp_record[$key]['type'] = $type;
 					foreach ($tmp_item_array[$key] as $row){
 						
 						$sql = "SELECT b.service_item_name FROM vcos_cruise_service_items a
@@ -1445,6 +1448,7 @@ class CruiseController extends MyActiveController
 				$count = count($tmp_record);
 				for($i=0;$i<$count;$i++){
 					unset($tmp_record[$i]['service_item_id']);
+					unset($tmp_record[$i]['service_type_id']);
 				}
 				
 				$response['data'] = $tmp_record;
@@ -1481,7 +1485,7 @@ class CruiseController extends MyActiveController
 	public function actionGetcruisenotice()
 	{
 		$response  = array();
-		$sql = " SELECT id,notice_type_name,notice_title FROM vcos_notice ORDER BY id DESC";
+		$sql = " SELECT id,notice_type_name,notice_title,notice_date FROM vcos_notice ORDER BY id DESC";
 		$notice = Yii::$app->db->createCommand($sql)->queryAll();
 		$response['data'] = $notice;
 		return $response;

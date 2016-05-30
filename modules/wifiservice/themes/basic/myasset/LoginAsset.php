@@ -8,11 +8,14 @@ class LoginAsset extends AssetBundle
 {
     public $sourcePath = '@app/modules/wifiservice/themes/basic/static';
     public $css = [
-        'css/my_public.css',
-        'css/login.css',
+        'css/public.css',
+		'css/pages.css',
+    	'css/login.css',
     ];
     public $js = [
-//        'js/jquery-2.2.2.min.js',
-//        'js/public.js'
+       'js/jquery-2.2.2.min.js',
+		'js/buypackage.js',
+		'js/selectPackage.js',
+    	'js/login.js'
     ];
 }

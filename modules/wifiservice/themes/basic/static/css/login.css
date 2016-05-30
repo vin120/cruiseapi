@@ -1,13 +1,25 @@
-html,body { background-color: #00706b; }
-#mainHeader { background-color: transparent; }
-#loginForm { width: 386px; margin: 100px auto 0 auto; background-color: #fff; text-align: center; }
-#loginForm h2 { line-height: 90px; background-color: #009e96; font-size: 24px; color: #fff; }
-#loginForm .formBox { padding: 40px; }
-#loginForm .formBox input[type="text"], #loginForm .formBox input[type="password"] { width: 250px; height: 50px; padding: 0 20px; font-size: 20px; }
-#loginForm .imgBox { width: 50px; height: 50px; padding: 10px; box-sizing: border-box; background-color: #b3b3b3; }
-#loginForm .imgBox img { width: 100%; height: 100%; }
-#loginForm .wrongBox { display: block; line-height: 20px; text-align: left; font-size: 14px; font-style: normal; color: #fe5d5d; visibility: hidden; }
-#loginForm #remember { text-align: right; margin-bottom: 20px; }
-#loginForm #remember input { width: 14px; height: 14px; }
-#loginForm #btnBox { margin-bottom: 0; }
-#loginForm #btnBox input { width: 150px; line-height: 40px; font-size: 20px; }
+img { width: 100%; height: 100%; }
+span { display: inline-block; }
+
+.tc { text-align: center; }
+.tabTitle { margin: 0; padding: 0; border-top: 2px solid #dbdbdb; border-bottom: 2px solid #dbdbdb; }
+.tabTitle li { display: inline-block; padding: 10px 40px; cursor: pointer; }
+.tabTitle .active { border-bottom: 4px solid #3b7dd3; }
+.tabContent > div { display: none; }
+.tabContent .active { display: block; }
+
+#welcome { padding: 20px 0; font-size: 1.6rem; }
+#welcome .imgBox { width: 12%; vertical-align: middle; }
+
+#download p { line-height: 40px; font-size: .8rem; }
+#download div { width: 90%; margin: 0 auto; padding: 20px; background-color: #fff; border: 2px solid #dbdbdb; border-radius: 10px; box-sizing: border-box; }
+#download div .imgBox { width: 12%; }
+#download div button { width: 40%; background: none; border: none; }
+
+#loginBox { margin: 20px 0; background-color: #fff; }
+#loginBox input { display: block; width: 80%; padding: 0 10px; margin: 20px auto; line-height: 40px; height: 40px; background-color: #fafafa; border: 2px solid #dbdbdb; border-radius: 10px; box-sizing: border-box; font-size: 1rem; }
+#loginBox input[type="button"] { border: none; background-color: #3b7dd3; color: #fff; }
+#loginBox .link { padding-bottom: 20px; }
+#loginBox .link a { text-decoration: underline; color: #3b7dd3; }
+#loginBox #passwordthis { width: 80%; margin: 0 auto; font-size: .5rem;}
+#loginBox #carderror { width: 80%; margin: 0 auto; font-size: .5rem;}

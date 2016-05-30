@@ -1,5 +1,5 @@
 <?php
-	namespace app\modules\wifiservice\components;
+	namespace app\modules\wificard\components;
 
 	use Yii;
 	use app\components\MemberService;
@@ -40,6 +40,7 @@
 		//WifiPayment,write pay log to db
 		public static function WifiPay($sign,$wifi_id)
 		{
+// 			$member = MemberService::getMemberbysign($sign);
 			$type = Yii::$app->admin->identity->member_type;
 			if($type == 1){
 				//会员
@@ -52,7 +53,6 @@
 
 			//获取wifi套餐的价格
 			$sale_price = $wifi_item['sale_price'];
-			
 			if(!empty($member)){
 
 				//查找用户的余额
@@ -94,7 +94,6 @@
 						//充值wifi对应的钱，对接接口
 // 						MyCurl::RechargeWifi($member['passport_number'],$sale_price);
 						MyCurl::RechargeWifi($member['passport_number'],$wifi_item['wifi_flow']);		//comst 充值时按照流量和金额1:1比例
-
 						//记录购买Wifi记录
 						self::CreateWifiPayLog($sign,$membership_code,$wifi_item,$type);
 

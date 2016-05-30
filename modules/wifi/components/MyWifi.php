@@ -78,8 +78,8 @@
 						$member->save();
 
 						//充值wifi对应的钱，对接接口
-						MyCurl::RechargeWifi($member->passport_number,$sale_price);
-
+// 						MyCurl::RechargeWifi($member['passport_number'],$sale_price);
+						MyCurl::RechargeWifi($member['passport_number'],$wifi_item['wifi_flow']);		//comst 充值时按照流量和金额1:1比例
 						//记录购买Wifi记录
 						self::CreateWifiPayLog($sign,$membership_code,$wifi_item);
 
