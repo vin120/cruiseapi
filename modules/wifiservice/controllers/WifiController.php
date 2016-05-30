@@ -326,11 +326,13 @@
 			
 // 			$res = MyWifi::WifiPay($sign,$wifi_id);
 // 			var_dump($json);
-
-			$sign = 'fc1ea38de8f06bfb8492a551801cdfd3';
-			$wifi_id = '1';
-			$res = MyWifi::WifiPay($sign, $wifi_id);
-			var_dump($res);
+			$passport = 'B1';
+			$find_res = MyCurl::FindUser($passport);
+			
+// 			$sign = 'fc1ea38de8f06bfb8492a551801cdfd3';
+// 			$wifi_id = '1';
+// 			$res = MyWifi::WifiPay($sign, $wifi_id);
+			var_dump($find_res);
 		}
 	}
 

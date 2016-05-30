@@ -422,7 +422,38 @@ class MembershipController extends MyActiveController {
 	}
 	
 	
+	//密码找回，修改密码 
+	public function actionResetpassword()
+	{
+		$passport_number = isset($_POST['passport_number']) ? $_POST['passport_number'] : '';
+		$passwd = isset($_POST['passwd']) ? $_POST['passwd'] : '';
+		$response = array();
+		if(!empty($passport_number) && !empty($passwd)){
+			$sql = ' SELECT member_code FROM vcos_member WHERE passport_number =\''.$passport_number .'\' ';
+			$member = Yii::$app->db->createCommand($sql)->queryOne();
+			
+			if($member){
+				$update_sql = 'UPDATE vcos_member SET member_password=\'' . md5 ( $passwd ) . '\' WHERE  member_code=\'' . $member['member_code'] . '\'';
+				$command = Yii::$app->db->createCommand ( $update_sql );
+				$command->execute ();
+				
+				$response['data'] = array('code'=>1,'message'=>'Password reset success');
+			}else {
+				$response['error'] =array(
+					'error_code' => 2,
+					'message' => 'Member does not exists',
+				);
+			}
+		}else{
+			$response['error'] =array(
+				'error_code' => 1,
+				'message' => ' Password and passport can not be blank',
+			);
+		}
+		return $response;
+	}
 	
+
 	
 	public function actionGetmemberinfo()
 	{

@@ -6,14 +6,16 @@ $config = [
 	'basePath' => dirname ( __DIR__ ),
 	'timezone' => 'Asia/ShangHai',
 	'bootstrap' => ['log'],
-		
 	'modules' => [
-		'wifiservice' => [
-			'class' => 'app\modules\wifiservice\wifiservice',
-		],
 		'wifi' => [
 			'class' => 'app\modules\wifi\wifi',
 		],	
+		'wifiservice' => [
+			'class' => 'app\modules\wifiservice\wifiservice',
+		],
+		'wificard' =>[
+			'class' => 'app\modules\wificard\wificard',	
+		],
 	],
 	'components' => [ 
 		'request' => [

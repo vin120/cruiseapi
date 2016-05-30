@@ -85,6 +85,7 @@
 			] )->one ();
 			
 			$sign =  $member['sign'];
+// 			$passport = $member['']
 			$response = MyWifi::WifiPay($sign,$wifi_id);
 			echo json_encode($response);
 		}

@@ -119,6 +119,7 @@ class MyCurl {
     {
     	//模拟登录
     	MyCurl::vcurl(Yii::$app->params['wifi_url'].'comstserver.awm?','status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
+    	
     	$create_url = Yii::$app->params['wifi_url']."um_add/comstserver.awm?";
     	
     	//UTF-8 转换为 GB2312
@@ -149,6 +150,7 @@ class MyCurl {
     {
     	//模拟登录
     	MyCurl::vcurl(Yii::$app->params['wifi_url'].'comstserver.awm?','status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
+    	
     	//查找comst中$passport对应的idRec
     	$url = Yii::$app->params['wifi_url']."fee_checkout/comstserver.awm?";
     	$find_params = "status=manage&subopt=checkout&opt=dbcs&dbName=usermanage_umb&admin=".Yii::$app->params['wifi_login_name']."&account=$passport";

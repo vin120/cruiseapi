@@ -1413,7 +1413,12 @@ class CruiseController extends MyActiveController
 			$member = MemberService::getMemberbysign($sign);
 			if(!empty($member)){
 				$m_code = $member['member_code'];	
-				$sql = " SELECT service_item_id,m_remark,status,create_time FROM vcos_member_service_record WHERE m_code = '$m_code'  ORDER BY id DESC";
+				if($status == 0){
+					$sql = " SELECT service_item_id,m_remark,status,create_time FROM vcos_member_service_record WHERE m_code = '$m_code'  ORDER BY id DESC";
+				}else {
+					$sql = " SELECT service_item_id,m_remark,status,create_time FROM vcos_member_service_record WHERE m_code = '$m_code' AND status='$status' ORDER BY id DESC";
+				}
+				
 				$record = Yii::$app->db->createCommand($sql)->queryAll();
 				
 				$tmp_record = $record;

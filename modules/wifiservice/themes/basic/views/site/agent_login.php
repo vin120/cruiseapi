@@ -58,7 +58,7 @@ $baseUrl = $this->assetBundles[LoginAsset::className()]->baseUrl . '/';
                     </label>
                 </div>
                 <div id="btnBox">
-                    <input type="submit" class="btn1" name="login-button" value="<?= \Yii::t('app', 'Login');?>" />
+                    <input type="button" class="btn1" id="button_login" name="login-button" value="<?= \Yii::t('app', 'Login');?>" />
                     <input type="reset" class="btn2" value="<?= \Yii::t('app', 'Reset');?>" />
                 </div>
             </div>
@@ -71,5 +71,12 @@ window.onload=function(){
 	if(errorMessage != ''){
 		$("#passwordthis").append("<strong class='' style='color:red;'>"+errorMessage+"</strong>");
 	}
+
+	$("#button_login").on("click",function(){
+		$("#login-form").submit();
+	});
+
+
+	
 }
 </script>
