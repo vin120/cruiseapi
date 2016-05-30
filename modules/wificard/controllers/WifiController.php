@@ -15,6 +15,7 @@ class WifiController extends Controller
 		$card = Yii::$app->request->post('card');
 		$password = Yii::$app->request->post('password');
 		
+		
 		//先查看comst 中有没有这个用户
 		$find_res = MyCurl::FindUser($card);
 		$find_res = json_decode($find_res,true);
@@ -24,14 +25,14 @@ class WifiController extends Controller
 			$online_json = MyCurl::Connect($card,$password);
 			$online_arr = json_decode($online_json,true);
 			if($online_arr['success']){
-				//写入数据库 TODO
+				//写入数据库 
 				$active_time = date("Y-m-d H:i:s",time());
 				$card_number = $card;
 				
 				$sql = "SELECT * FROM vcos_card_active_log WHERE card_number='$card'";
-				$card = Yii::$app->db->createCommand($sql)->queryAll();
+				$card_arr = Yii::$app->db->createCommand($sql)->queryAll();
 				
-				if(!$card){
+				if(!$card_arr){
 					//记录激活的卡号和时间，ip等字段
 					$sql = "INSERT INTO vcos_card_active_log (`card_number`,`active_time`) VALUES ('$card_number','$active_time')";
 					Yii::$app->db->createCommand($sql)->execute();
@@ -56,10 +57,15 @@ class WifiController extends Controller
     {
     	$card = Yii::$app->request->get('card');
     	
-    	//查询流量信息
-		$flow_info = MyCurl::CheckFlowAndParse($card);
-		
-        return $this->render('index',['flow_info'=>$flow_info]);
+    	if(!empty($card)){
+    		//查询流量信息
+    		$flow_info = MyCurl::CheckFlowAndParse($card);
+    		
+    		return $this->render('index',['flow_info'=>$flow_info]);
+    	}else{
+    		return $this->redirect(['/wifiservice/site/login']);
+    	}
+    	
     }
     
     public function actionDisconnect()
