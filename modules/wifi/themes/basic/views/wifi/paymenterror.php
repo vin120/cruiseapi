@@ -5,7 +5,7 @@
     ThemeAsset::register($this);
     $baseUrl = $this->assetBundles[ThemeAsset::className()]->baseUrl . '/';
 
-    $this->title = "出现错误";
+    $this->title = "支付错误";
 ?>
 <body>
 	<div id="buyPackage" class="bodyBox">

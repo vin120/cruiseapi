@@ -7,7 +7,7 @@ use yii\helpers\Url;
 
 LoginAsset::register($this);
 
-$this->title = 'Travel Agent Login';
+$this->title = 'wifi认证';
 $this->params['breadcrumbs'][] = $this->title;
 
 $baseUrl = $this->assetBundles[LoginAsset::className()]->baseUrl . '/';

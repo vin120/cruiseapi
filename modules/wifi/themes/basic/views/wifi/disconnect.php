@@ -5,7 +5,7 @@
     ThemeAsset::register($this);
     $baseUrl = $this->assetBundles[ThemeAsset::className()]->baseUrl . '/';
 
-    $this->title = "购买套餐";
+    $this->title = "断开连接";
 ?>
 <body>
 	<div id="disconnect" class="bodyBox">
