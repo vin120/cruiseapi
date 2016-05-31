@@ -192,7 +192,7 @@
 			$status = MyWifi::FindWifiLoginStatus($mcode);		// true为在线， false为离线
 			//连接记录
 			$log = MyWifi::FindWifiLoginLog($mcode);
-			return $this->render('connect',['mcode'=>$mcode,'log'=>$log,'status'=>$status,'membership'=>$membership,'flow_info'=>$flow_info,'mcode'=>$mcode]);
+			return $this->render('connect',['mcode'=>$mcode,'log'=>$log,'status'=>$status,'membership'=>$membership,'flow_info'=>$flow_info,'mcode'=>$mcode,'passport'=>$passport]);
 		}
 
 		

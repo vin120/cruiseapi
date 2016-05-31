@@ -84,6 +84,9 @@ window.onload=function(){
 	var url = "<?php echo Url::toRoute(['/wificard/wifi/login'])?>";
 	$("#card_login").on("click",function(){
 		var card = $("#card").val();
+		var password = $("#password").val();
+		var connect_url = "<?php echo Yii::$app->params['wifi_url']?>"+"comstserver.awm?status=login&opt=login&IsAjaxClient=1&account="+card+"&pwd="+password;
+		
 		$.ajax({
             cache: true,
             type: "POST",
@@ -97,6 +100,13 @@ window.onload=function(){
             success: function(response) {
 
 				if(response.data){
+					$.ajax({
+						url: connect_url,
+				        data: '',
+				        async:false,
+				        type: 'get',
+				        dataType: 'json',
+					});
 					location.href ="<?php echo Url::toRoute(['/wificard/wifi/index']);?>?card="+card;
 				}else if(response.error){
 					$("#carderror").html("<strong class='' style='color:red;'>卡号或者密码有误</strong>");
