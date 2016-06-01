@@ -3,7 +3,7 @@
 namespace app\models;
 
 use Yii;
-
+use app\components\MymemberActiveRecord;
 /**
  * This is the model class for table "vcos_member".
  *
@@ -47,7 +47,7 @@ use Yii;
  * @property integer $is_online_booking
  * @property string $sign
  */
-class Member extends \yii\db\ActiveRecord
+class Member extends MymemberActiveRecord
 {
     /**
      * @inheritdoc
