@@ -1485,7 +1485,8 @@ class CruiseController extends MyActiveController
 	public function actionGetcruisenotice()
 	{
 		$response  = array();
-		$sql = " SELECT id,notice_type_name,notice_title,notice_date FROM vcos_notice ORDER BY id DESC";
+		$time = date('Y-m-d H:i:s',time());
+		$sql = " SELECT id,notice_type_name,notice_title,notice_date FROM vcos_notice WHERE '$time' BETWEEN show_start_time AND show_end_time  ORDER BY id DESC";
 		$notice = Yii::$app->db->createCommand($sql)->queryAll();
 		$response['data'] = $notice;
 		return $response;
