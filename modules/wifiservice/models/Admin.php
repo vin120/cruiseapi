@@ -4,11 +4,11 @@ namespace app\modules\wifiservice\models;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
-use yii\db\ActiveRecord;
+// use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use app\components\MymemberActiveRecord;
 
-
-class Admin extends ActiveRecord implements IdentityInterface
+class Admin extends MymemberActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
