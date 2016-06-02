@@ -83,8 +83,9 @@ class MyCurl {
 	//网络链接
     public static function Connect($passport)
     {
+    	$userip = self::getIp();
     	MyCurl::vcurl(Yii::$app->params['wifi_url'].'comstserver.awm?','status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
-    	$online_param = "status=login&opt=login&IsAjaxClient=1&account=$passport&pwd=$passport";
+    	$online_param = "status=login&opt=login&IsAjaxClient=1&account=$passport&pwd=$passport&wlanuserip=$userip";
     	$online_json = MyCurl::vcurl(Yii::$app->params['wifi_url']."comstserver.awm?",$online_param);
     	$online_json = iconv('GB2312', 'UTF-8', $online_json);
     	return $online_json;
@@ -165,4 +166,15 @@ class MyCurl {
     	$pay_json = iconv('GB2312', 'UTF-8', $pay_json);
     	return $pay_json;
     }
+    
+    //获取用户ip
+    public static function getIp() {
+    	if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"), "unknown")) $ip = getenv("HTTP_CLIENT_IP");
+    	else if (getenv("HTTP_X_FORWARDED_FOR") && strcasecmp(getenv("HTTP_X_FORWARDED_FOR"), "unknown")) $ip = getenv("HTTP_X_FORWARDED_FOR");
+    	else if (getenv("REMOTE_ADDR") && strcasecmp(getenv("REMOTE_ADDR"), "unknown")) $ip = getenv("REMOTE_ADDR");
+    	else if (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], "unknown")) $ip = $_SERVER['REMOTE_ADDR'];
+    	else $ip = "unknown";
+    	return ($ip);
+    }
+    
 }

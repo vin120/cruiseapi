@@ -235,12 +235,12 @@ class MembershipController extends MyActiveController {
 			}else {
 				//passport Number
 				$where_name = 'passport_number = \'' . $name . '\'';
-			}
+			} 
 			
 			$sql_value = 'SELECT member_id,member_password,smart_card_number,member_code as code,cn_name as name,passport_number,
 				member_email as email,mobile_number as phone,(member_money/100) as money,member_credit as credit,sign,(overdraft_limit/100) as overdraft_limit,(curr_overdraft_amount/100) as curr_overdraft_amount
 				FROM vcos_member WHERE ' . $where_name . ' LIMIT 1';
-			$membership = Yii::$app->db->createCommand ( $sql_value )->queryOne ();
+			$membership = Yii::$app->mdb->createCommand ( $sql_value )->queryOne ();
 		}
 		
 		$response = array ();
@@ -307,7 +307,7 @@ class MembershipController extends MyActiveController {
 			
 			//判断sign是船员的sign还是会员的sign
 			$sql = ' SELECT member_type FROM vcos_member_crew WHERE sign= \''.$sign.'\'';
-			$member_type = Yii::$app->db->createCommand($sql)->queryOne()['member_type'];
+			$member_type = Yii::$app->mdb->createCommand($sql)->queryOne()['member_type'];
 			
 			if($member_type == 2){
 				//船员
@@ -352,7 +352,7 @@ class MembershipController extends MyActiveController {
 
 				$sql_value = 'SELECT member_id,member_code,passport_number,cn_name,member_password,sign
 					FROM vcos_member WHERE sign=\'' . $sign . '\'  LIMIT 1';
-				$membership = Yii::$app->db->createCommand ( $sql_value )->queryOne ();
+				$membership = Yii::$app->mdb->createCommand ( $sql_value )->queryOne ();
 				
 				if (! empty ( $membership )) {
 					
@@ -361,7 +361,7 @@ class MembershipController extends MyActiveController {
 						$new_sign = md5 ( md5 ( $membership ['member_code'] ) . md5 ( $membership ['passport_number'] ) . md5 ( md5 ( $new_passwd ) ) );
 						
 						$update_sql = 'UPDATE vcos_member SET member_password=\'' . md5 ( $new_passwd ) . '\' WHERE ( member_password=\'' . md5 ( $old_passwd ) . '\'  OR member_password=\'' . $old_passwd  . '\' ) AND sign=\'' . $sign . '\'';
-						$command = Yii::$app->db->createCommand ( $update_sql );
+						$command = Yii::$app->mdb->createCommand ( $update_sql );
 						$command->execute ();
 						
 						$response ['data'] ['sign'] = $new_sign;
@@ -397,7 +397,7 @@ class MembershipController extends MyActiveController {
 		$response = array();
 		if(!empty($passport_number) && !empty($mobile_number)){
 			$sql = ' SELECT member_id FROM vcos_member WHERE passport_number =\''.$passport_number .'\' AND mobile_number= \''.$mobile_number .'\'';
-			$member = Yii::$app->db->createCommand($sql)->queryOne();
+			$member = Yii::$app->mdb->createCommand($sql)->queryOne();
 			
 			if($member){
 				$response['data'] = array(
@@ -430,11 +430,11 @@ class MembershipController extends MyActiveController {
 		$response = array();
 		if(!empty($passport_number) && !empty($passwd)){
 			$sql = ' SELECT member_code FROM vcos_member WHERE passport_number =\''.$passport_number .'\' ';
-			$member = Yii::$app->db->createCommand($sql)->queryOne();
+			$member = Yii::$app->mdb->createCommand($sql)->queryOne();
 			
 			if($member){
 				$update_sql = 'UPDATE vcos_member SET member_password=\'' . md5 ( $passwd ) . '\' WHERE  member_code=\'' . $member['member_code'] . '\'';
-				$command = Yii::$app->db->createCommand ( $update_sql );
+				$command = Yii::$app->mdb->createCommand ( $update_sql );
 				$command->execute ();
 				
 				$response['data'] = array('code'=>1,'message'=>'Password reset success');

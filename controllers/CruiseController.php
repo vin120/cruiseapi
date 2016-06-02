@@ -1429,7 +1429,7 @@ class CruiseController extends MyActiveController
 				foreach($tmp_record as $key => $value){
 					
 					$tmp_service_item[$key] = $value['service_item_id'];
-					$tmp_item_array[$key] = explode(",",$tmp_service_item[$key]);
+					$tmp_item_array[$key] = explode(",",trim($tmp_service_item[$key],','));
 					
 					$sql = " SELECT service_type_name FROM vcos_cruise_service_type_i18n WHERE service_type_id='". $value['service_type_id']."'" ;
 					$type = Yii::$app->db->createCommand($sql)->queryOne()['service_type_name'];
@@ -1497,6 +1497,7 @@ class CruiseController extends MyActiveController
 	 */
 	public function actionGetcruisenoticebyid()
 	{
+		//todo
 		$id = isset($_POST['id']) ? $_POST['id'] : '';
 		$resposne = array();
 

@@ -66,8 +66,6 @@ window.onload = function(){
 	if( status==true){
 		location.href ="<?php echo Url::toRoute(['wifi/disconnect']);?>";
 	}
-
-	var url = "<?php echo Yii::$app->params['wifi_url']?>comstserver.awm?status=login&opt=login&IsAjaxClient=1&account=<?php echo $passport?>&pwd=<?php echo $passport?>";
 	
 	$("#button").on("click",function(){
 		$.ajax({
@@ -77,13 +75,6 @@ window.onload = function(){
 	        dataType: 'json',
 	        success : function(response) {
 	        	if(response['success'] == true){
-	        		$.ajax({
-	        			url: url,
-	        	        data: '',
-	        	        async:false,
-	        	        type: 'get',
-	        	        dataType: 'json',
-	        		});
 	        		location.href ="<?php echo Url::toRoute(['wifi/disconnect']);?>";
 	        	}else{
 	        		location.href = "<?php echo Url::toRoute(['wifi/connecterror'])?>";

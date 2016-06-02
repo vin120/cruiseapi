@@ -68,7 +68,6 @@ window.onload = function(){
 
 	var mcode = '<?php echo $mcode?>';
 	$("#button").on("click",function(){
-		var url = "<?php echo Yii::$app->params['wifi_url']?>comstserver.awm?status=login&opt=login&IsAjaxClient=1&account=<?php echo $passport?>&pwd=<?php echo $passport?>";
 		
 		$.ajax({
 			url: "<?php echo Url::toRoute(['service/wificonnect']);?>",
@@ -77,13 +76,6 @@ window.onload = function(){
 	        dataType: 'json',
 	        success : function(response) {
 	        	if(response['success'] == true){
-	        		$.ajax({
-	        			url: url,
-	        	        data: '',
-	        	        async:false,
-	        	        type: 'get',
-	        	        dataType: 'json',
-	        		});
 	        		location.href ="<?php echo Url::toRoute(['wifi/disconnect']);?>?mcode=<?php echo $mcode?>";
 	        	}else{
 	        		location.href = "<?php echo Url::toRoute(['wifi/connecterror'])?>?mcode=<?php echo $mcode?>";
