@@ -337,7 +337,7 @@ class MallService {
 			foreach ($comment_array as $k => $comment){
 				$member_code = $comment['member_code'];
 				$sql_passport = " SELECT passport_number FROM vcos_member WHERE member_code='{$member_code}'";
-				$passport = Yii::$app->db->createCommand($sql_passport)->queryOne()['passport_number'];
+				$passport = Yii::$app->mdb->createCommand($sql_passport)->queryOne()['passport_number'];
 				$sql_icon = "SELECT icon FROM vcos_im_member WHERE member_id='{$passport}'";
 				$icon = Yii::$app->db->createCommand($sql_icon)->queryOne()['icon'];
 				if($icon === null){

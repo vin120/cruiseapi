@@ -38,7 +38,7 @@ class MemberService {
 		$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
 				crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount
 				FROM vcos_wifi_crew WHERE sign=\''.$sign.'\' ';
-		$member = Yii::$app->db->createCommand($sql)->queryOne();
+		$member = Yii::$app->mdb->createCommand($sql)->queryOne();
 		return $member;
 	}
 
@@ -49,7 +49,7 @@ class MemberService {
 						member_email as email,mobile_number as phone,(member_money/100) as money,member_credit as credit,
 						sign,(overdraft_limit/100) as overdraft_limit,(curr_overdraft_amount/100) as curr_overdraft_amount
 						FROM vcos_member WHERE sign=\''.$sign.'\' ';
-		$member = Yii::$app->db->createCommand ($sql)->queryOne ();
+		$member = Yii::$app->mdb->createCommand ($sql)->queryOne ();
 		return $member;
 	}
 	
@@ -177,8 +177,7 @@ class MemberService {
 					Yii::$app->db->createCommand ( $sql_logdetail, $params_logdetail )->execute ();
 				}
 				
-				
-				Yii::$app->db->createCommand ( $sql_money, $params_money )->execute ();
+				Yii::$app->mdb->createCommand ( $sql_money, $params_money )->execute ();
 				Yii::$app->db->createCommand ( $sql_orderlog, $params_orderlog )->execute ();
 
 				return $response;
@@ -480,7 +479,7 @@ class MemberService {
 							':curr_overdraft_amount' => $member['curr_overdraft_amount']
 					];
 					$sql_money = ' UPDATE vcos_member SET member_money= :member_money,curr_overdraft_amount=:curr_overdraft_amount WHERE member_code=:member_code';
-					Yii::$app->db->createCommand ( $sql_money, $params_money )->execute ();
+					Yii::$app->mdb->createCommand ( $sql_money, $params_money )->execute ();
 				}
 				
 				$transaction->commit();
@@ -589,8 +588,7 @@ class MemberService {
 					);
 				}
 	
-	
-				Yii::$app->db->createCommand ( $sql_money, $params_money )->execute ();
+				Yii::$app->mdb->createCommand ( $sql_money, $params_money )->execute ();
 				Yii::$app->db->createCommand ( $sql_orderlog, $params_orderlog )->execute ();
 				Yii::$app->db->createCommand ()->insert ( 'vcos_pay_log', [
 						'member_code' => $member->member_code,

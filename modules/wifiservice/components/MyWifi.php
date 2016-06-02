@@ -87,7 +87,7 @@
 							$member->save();
 						}else{
 							$sql = " UPDATE vcos_wifi_crew SET money='$money' WHERE crew_id='{$member['member_id']}' ";
-							Yii::$app->db->createCommand($sql)->execute();
+							Yii::$app->mdb->createCommand($sql)->execute();
 						}
 						
 
@@ -246,7 +246,7 @@
 				$membership = MemberService::getMemberbysign($sign);
 			}else {
 				$sql = "SELECT sign FROM vcos_wifi_crew WHERE crew_code='$mcode'";
-				$sign = Yii::$app->db->createCommand($sql)->queryOne()['sign'];
+				$sign = Yii::$app->mdb->createCommand($sql)->queryOne()['sign'];
 				
 				$membership =  MemberService::getCrewBySign($sign);
 			}

@@ -225,7 +225,7 @@ class MembershipController extends MyActiveController {
 			$sql_value = 'SELECT crew_id as memebr_id,crew_password as member_password,smart_card_number,crew_code as code,cn_name as name,passport_number,
 				crew_email as email,mobile_number as phone,(money/100) as money,crew_credit as credit,sign,(overdraft_limit/100) as overdraft_limit,(curr_overdraft_amount/100) as curr_overdraft_amount
 				FROM vcos_wifi_crew  WHERE ' . $where_name . ' LIMIT 1';
-			$membership = Yii::$app->db->createCommand ( $sql_value )->queryOne ();
+			$membership = Yii::$app->mdb->createCommand ( $sql_value )->queryOne ();
 			
 		}else {
 			//普通会员
@@ -318,7 +318,7 @@ class MembershipController extends MyActiveController {
 				$sql_value = 'SELECT crew_id,crew_code,passport_number,cn_name,crew_password,sign
 					FROM vcos_wifi_crew WHERE sign=\'' . $sign . '\'  LIMIT 1';
 				
-				$membership = Yii::$app->db->createCommand ( $sql_value )->queryOne ();
+				$membership = Yii::$app->mdb->createCommand ( $sql_value )->queryOne ();
 				
 				if (! empty ( $membership )) {
 					
@@ -327,7 +327,7 @@ class MembershipController extends MyActiveController {
 						$new_sign = md5 ( md5 ( $membership ['crew_code'] ) . md5 ( $membership ['passport_number'] ) . md5 ( md5 ( $new_passwd ) ) );
 						
 						$update_sql = 'UPDATE vcos_wifi_crew SET crew_password=\'' . md5 ( $new_passwd ) . '\' WHERE ( crew_password=\'' . md5 ( $old_passwd ) . '\' OR  crew_password=\'' . $old_passwd . '\' ) AND sign=\'' . $sign . '\'';
-						$command = Yii::$app->db->createCommand ( $update_sql );
+						$command = Yii::$app->mdb->createCommand ( $update_sql );
 						$command->execute ();
 						
 						$response ['data'] ['sign'] = $new_sign;

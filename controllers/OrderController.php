@@ -229,7 +229,7 @@ class OrderController extends MyActiveController
 										$curr_overdraft_amount = $member->curr_overdraft_amount + $draft;
 										$update_sql = 'UPDATE vcos_member SET member_money=0 , curr_overdraft_amount='.$curr_overdraft_amount.'  WHERE member_code=\''.$member->member_code.'\'';					
 									}
-									$bool_value = Yii::$app->db->createCommand($update_sql)->execute();
+									$bool_value = Yii::$app->mdb->createCommand($update_sql)->execute();
 									if(!$bool_value){
 										$response['error'] = array('error_code'=>2,'message'=>'Membership amount update fail');
 									}else{
@@ -246,7 +246,7 @@ class OrderController extends MyActiveController
 								}else{
 									$draft = $member->curr_overdraft_amount + $member_order->totale_price;
 									$update_sql = 'UPDATE vcos_member SET curr_overdraft_amount='.$draft.' WHERE member_code=\''.$member->member_code.'\'';
-									$bool_value = Yii::$app->db->createCommand($update_sql)->execute();
+									$bool_value = Yii::$app->mdb->createCommand($update_sql)->execute();
 									if(!$bool_value){
 										$response['error'] = array('error_code'=>2,'message'=>'Membership amount update fail');
 									}else{
