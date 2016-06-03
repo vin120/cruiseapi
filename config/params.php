@@ -9,7 +9,7 @@ return [
 	'wifi_login_name'=>'bisheng',
 	'wifi_login_password'=>'bs566570',
 	'on_cruise' => false,//是否在船上
-	'deny_action' =>[
+	'deny_action' =>[	//403的页面
 			
 		//餐饮服务
 		'restaurant/findall',				
@@ -17,24 +17,10 @@ return [
 		'restaurant/findallfoodcategory',
 		'restaurant/findfoodbycategoryid',
 			
-			
 		//休闲服务
 		'lifeservice/findallcategory',
 		'lifeservice/findlifeservicebycategoryid',
 		'lifeservice/findlifeservicebyid',
-		
-		//通讯服务
-		'wifi/wifi/index',
-		'wifi/wifi/orderconfirm',
-		'wifi/wifi/wifipayment',
-		'wifi/wifi/paymenterror',
-		'wifi/wifi/paymentfail',
-		'wifi/wifi/paymentsuccess',
-		'wifi/wifi/loginstatus',
-		'wifi/wifi/connect',
-		'wifi/wifi/disconnect',
-		'wifi/wifi/connecterror',
-		'wifi/wifi/disconnecterror',
 		
 			
 		//托管行李
@@ -71,29 +57,9 @@ return [
 		'cruise/commitsurvey',
 		
 			
-			
 		//评价反馈	
 		'cruise/findsurvey',
 		'cruise/commitsurvey',
-			
-			
-		//我的预订	
-			
-			
-			
-		//我的订单
-// 		'order/createbooking',
-// 		'order/createorder',
-// 		'order/orderpayment',
-// 		'order/createproductorder',
-// 		'order/addshopcart',
-// 		'order/delshopcart',
-// 		'order/delallshopcart',
-// 		'order/myshopcart',
-// 		'order/cancelorder',
-// 		'order/delorder',
-			
-		
 			
 	]
 ];

@@ -11,32 +11,15 @@
 	
 	class WifiController extends Controller
 	{	
-		
-		public function beforeAction($action)
-		{
-			if (!parent::beforeAction($action)) {
-				return false;
-			}
-		
-			$_module = Yii::$app->controller->module->id;
-			$_controller = Yii::$app->controller->id;
-			$_action = Yii::$app->controller->action->id;
-			$permissionName = $_module.'/'.$_controller.'/'.$_action;
-		
-			$deny_action = Yii::$app->params['deny_action'];	//在岸上拒绝访问的接口
-			$on_cruise = Yii::$app->params['on_cruise'];		//是否在船上
-		
-			if( !$on_cruise && in_array($permissionName,$deny_action)){
-				return Yii::$app->getResponse()->redirect(Url::to("/wifi/wifi/403"));
-			}else{
-				return true;
-			}
-		}
-		
-		
 		//上网购买页面
 		public function actionIndex()
 		{
+			
+			$on_cruise = Yii::$app->params['on_cruise'];		//是否在船上
+			if(!$on_cruise){
+				return Yii::$app->getResponse()->redirect(Url::to("/wifi/wifi/403"));
+			}
+			
 			$mcode = Yii::$app->request->get('mcode');
 			
 			$membership = Member::find ()->select ( [
@@ -70,6 +53,12 @@
 		//确认支付页面
 		public function actionOrderconfirm()
 		{
+			$on_cruise = Yii::$app->params['on_cruise'];		//是否在船上
+			if(!$on_cruise){
+				return Yii::$app->getResponse()->redirect(Url::to("/wifi/wifi/403"));
+			}
+			
+			
 			$wifi_id = Yii::$app->request->get('wifi_id');
 			$mcode = Yii::$app->request->get('mcode');
 			
@@ -98,6 +87,11 @@
 		//支付
 		public function actionWifipayment()
 		{
+			$on_cruise = Yii::$app->params['on_cruise'];		//是否在船上
+			if(!$on_cruise){
+				return Yii::$app->getResponse()->redirect(Url::to("/wifi/wifi/403"));
+			}
+			
 			$wifi_id = Yii::$app->request->post('wifi_id');
 			$mcode = Yii::$app->request->post('mcode');
 			
@@ -117,6 +111,11 @@
 		//支付出错界面
 		public function actionPaymenterror()
 		{
+			$on_cruise = Yii::$app->params['on_cruise'];		//是否在船上
+			if(!$on_cruise){
+				return Yii::$app->getResponse()->redirect(Url::to("/wifi/wifi/403"));
+			}
+			
 			$mcode = Yii::$app->request->get('mcode');
 			
 			$member = Member::find ()->select ( [
@@ -137,6 +136,11 @@
 		//支付失败界面
 		public function actionPaymentfail()
 		{
+			$on_cruise = Yii::$app->params['on_cruise'];		//是否在船上
+			if(!$on_cruise){
+				return Yii::$app->getResponse()->redirect(Url::to("/wifi/wifi/403"));
+			}
+			
 			$mcode = Yii::$app->request->get('mcode');
 			
 			$member = Member::find ()->select ( [
@@ -156,6 +160,11 @@
 		//支付成功页面
 		public function actionPaymentsuccess()
 		{
+			$on_cruise = Yii::$app->params['on_cruise'];		//是否在船上
+			if(!$on_cruise){
+				return Yii::$app->getResponse()->redirect(Url::to("/wifi/wifi/403"));
+			}
+			
 			$mcode = Yii::$app->request->get('mcode');
 			
 			$member = Member::find ()->select ( [
@@ -176,6 +185,11 @@
 		//判断当前是否在登录状态
 		public function actionLoginstatus()
 		{
+			$on_cruise = Yii::$app->params['on_cruise'];		//是否在船上
+			if(!$on_cruise){
+				return Yii::$app->getResponse()->redirect(Url::to("/wifi/wifi/403"));
+			}
+			
 			$mcode = Yii::$app->request->get('mcode');
 			
 			$member = Member::find ()->select ( [
@@ -198,6 +212,11 @@
 		//上网连接页面
 		public function actionConnect()
 		{
+			$on_cruise = Yii::$app->params['on_cruise'];		//是否在船上
+			if(!$on_cruise){
+				return Yii::$app->getResponse()->redirect(Url::to("/wifi/wifi/403"));
+			}
+			
 			$mcode = Yii::$app->request->get('mcode');
 			
 			$member = Member::find ()->select ( [
@@ -222,6 +241,11 @@
 		//断开连接界面
 		public function actionDisconnect()
 		{
+			$on_cruise = Yii::$app->params['on_cruise'];		//是否在船上
+			if(!$on_cruise){
+				return Yii::$app->getResponse()->redirect(Url::to("/wifi/wifi/403"));
+			}
+			
 			$mcode = Yii::$app->request->get('mcode');
 			
 			$member = Member::find ()->select ( [
@@ -245,6 +269,11 @@
 		
 		public function actionConnecterror()
 		{
+			$on_cruise = Yii::$app->params['on_cruise'];		//是否在船上
+			if(!$on_cruise){
+				return Yii::$app->getResponse()->redirect(Url::to("/wifi/wifi/403"));
+			}
+			
 			$mcode = Yii::$app->request->get('mcode');
 				
 			$member = Member::find ()->select ( [
@@ -267,6 +296,11 @@
 		
 		public function actionDisconnecterror()
 		{
+			$on_cruise = Yii::$app->params['on_cruise'];		//是否在船上
+			if(!$on_cruise){
+				return Yii::$app->getResponse()->redirect(Url::to("/wifi/wifi/403"));
+			}
+			
 			$mcode = Yii::$app->request->get('mcode');
 			$member = Member::find ()->select ( [
 					'sign',
