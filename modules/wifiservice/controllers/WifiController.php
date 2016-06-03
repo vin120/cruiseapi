@@ -254,82 +254,36 @@
 		//测试用的
 		public function actionTest()
 		{
-			
-// 			$mcode = Yii::$app->request->get('mcode');
-// 			$membership = Member::find ()->select ( [ 
-// 					'sign',
-// 			] )->where ( [ 
-// 					'member_code' => $mcode 
-// 			] )->one ();
-// 			$sign = $membership['sign'];
-// 			$member = MemberService::getMemberbysign($sign);
-
-			// $res = MyWifi::CreateWifiUser($member);
-			// $res =  json_decode($res,true);
-			
-			// $res = MyWifi::FindWifiUserInComst($member->passport_number);
-			// $res =  json_decode($res,true);
-
-			
-			// $res = MyWifi::RechargeWifi($member->passport_number,100);
-			// $res =  json_decode($res,true);
-// 			$log = MyWifi::FindWifiLoginLog($mcode);
-// 			var_dump($log);
-// 			$mcode = '010000134559';
-// 			$member = Member::find ()->select ( [
-// 					'sign',
-// 			] )->where ( [
-// 					'member_code' => $mcode
-// 			] )->one ();
-
-// 			$sign = 12;
-// 			$membership = MemberService::getMemberbysign($sign);
-			
-// 			var_dump($membership);
-
-			
-// 			$find_res = MyWifi::FindWifiUserInComst($membership->passport_number);
-// 			$find_res = json_decode($find_res,true);
-// 			$response['data'] = array('code'=>1,'message'=>$find_res);
-// 			var_dump($response);
 // 			$sign = Yii::$app->admin->identity->sign;
-// 			$passport_number = Yii::$app->admin->identity->passport_number;
-// 			$wifi_id = 8;
-// 			$res = MyCurl::FindUser($passport_number);
-// 			$passport = 'E19097510';
-// 			$json = MyCurl::CheckFlow($passport);
-// 			$flow_array = json_decode($json,true);
-// 			if($flow_array['success']){
-// // 				$arr = explode("<br>", $flow_array['data']['feeInfo']);
-// 				$status = $flow_array['data']['isOnline'];
-// 				var_dump($status);
+// 			$member = MemberService::getMemberbysign($sign);
 			
+// 			$transaction = Yii::$app->mdb->beginTransaction();
+// 			try {
+// 				//直接支付
+// 				$money = 1000 - (1 * 100);	//注意转换单位
+// 				if($type == 1){
+// 					$member['member_money'] = $money;
+// 					$member->save();
+// 				}else{
+// 					$sql = " UPDATE vcos_wifi_crew SET money='$money' WHERE crew_id='{$member['member_id']}' ";
+// 					Yii::$app->mdb->createCommand($sql)->execute();
+// 				}
+			
+			
+// 				//充值wifi对应的钱，对接接口
+// 				// 						MyCurl::RechargeWifi($member['passport_number'],$sale_price);
+// 				MyCurl::RechargeWifi($member['passport_number'],$wifi_item['wifi_flow']);		//comst 充值时按照流量和金额1:1比例
+			
+// 				//记录购买Wifi记录
+// 				self::CreateWifiPayLog($sign,$membership_code,$wifi_item,$type);
+			
+// 				$response['data'] = ['code'=>1,'message'=>'Pay Success!'];
+// 				$transaction->commit();
+// 			}catch (EXception $e){
+// 				$transaction->rollBack();
+// 				$response ['error'] = ['errorCode' => 2,'message' => 'System Wrong!'];
 // 			}
 			
-// 			$passport = "E45218963";
-			
-// 			//模拟登录
-// 			MyCurl::vcurl(Yii::$app->params['wifi_url'].'comstserver.awm?','status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
-// 			//查找comst中$passport对应的idRec
-// 			$url = Yii::$app->params['wifi_url']."fee_checkout/comstserver.awm?";
-// 			$find_params = "status=manage&subopt=checkout&opt=dbcs&dbName=usermanage_umb&admin=".Yii::$app->params['wifi_login_name']."&account=$passport";
-// 			$find_json = MyCurl::vcurl($url,$find_params);
-// 			$find_json = iconv('GB2312', 'UTF-8', $find_json);
-// 			$res = json_decode($find_json,true);
-			
-// 			var_dump($res);			
-			
-// 			var_dump($flow_array);
-			
-// 			$res = MyWifi::WifiPay($sign,$wifi_id);
-// 			var_dump($json);
-			$passport = 'B1';
-			$find_res = MyCurl::FindUser($passport);
-			
-// 			$sign = 'fc1ea38de8f06bfb8492a551801cdfd3';
-// 			$wifi_id = '1';
-// 			$res = MyWifi::WifiPay($sign, $wifi_id);
-			var_dump($find_res);
 		}
 	}
 

@@ -81,7 +81,7 @@ class SiteController extends Controller
     {
 
         $this->layout = 'login_loyout';
-        if (!\Yii::$app->user->isGuest) {
+        if (!\Yii::$app->admin->isGuest) {
             return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/index"));
         }
 

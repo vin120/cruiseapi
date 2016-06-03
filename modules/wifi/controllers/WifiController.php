@@ -11,6 +11,29 @@
 	
 	class WifiController extends Controller
 	{	
+		
+		public function beforeAction($action)
+		{
+			if (!parent::beforeAction($action)) {
+				return false;
+			}
+		
+			$_module = Yii::$app->controller->module->id;
+			$_controller = Yii::$app->controller->id;
+			$_action = Yii::$app->controller->action->id;
+			$permissionName = $_module.'/'.$_controller.'/'.$_action;
+		
+			$deny_action = Yii::$app->params['deny_action'];	//在岸上拒绝访问的接口
+			$on_cruise = Yii::$app->params['on_cruise'];		//是否在船上
+		
+			if( !$on_cruise && in_array($permissionName,$deny_action)){
+				return Yii::$app->getResponse()->redirect(Url::to("/wifi/wifi/403"));
+			}else{
+				return true;
+			}
+		}
+		
+		
 		//上网购买页面
 		public function actionIndex()
 		{
@@ -259,6 +282,11 @@
 			$log = MyWifi::FindWifiLoginLog($mcode);
 			
 			return $this->render('disconnecterror',['membership'=>$membership,'flow_info'=>$flow_info,'mcode'=>$mcode]);
+		}
+		
+		public function action403()
+		{
+			return $this->render('403');
 		}
 	
 	}

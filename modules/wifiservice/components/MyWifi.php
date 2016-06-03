@@ -78,7 +78,7 @@
 					}
 
 					//事务处理
-					$transaction = Yii::$app->db->beginTransaction();
+					$transaction = Yii::$app->mdb->beginTransaction();
 					try {
 						//直接支付
 						$money = $member_money - ($sale_price * 100);	//注意转换单位 

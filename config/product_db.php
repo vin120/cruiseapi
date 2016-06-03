@@ -13,8 +13,8 @@
 return [
 		'class' => 'yii\db\Connection',
 // 		'dsn' => 'mysql:host=bisheng.8800.org:18671;dbname=vcos_product',
-		'dsn' => 'mysql:host=192.168.8.67;dbname=vcos_product',
-		'username' => 'root',
-		'password' => 'vonechina',
+		'dsn' => 'mysql:host=192.168.8.67;dbname=ts_ctone_mall',
+		'username' => 'bohai',
+		'password' => 'bh2468',
 		'charset' => 'utf8',
 ];

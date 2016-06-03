@@ -476,7 +476,7 @@ class CruiseController extends MyActiveController
 			$response['data'] = $img_array;
 		}else{
 			$response['error'] = array('error_code'=>1,'message'=>'position_id not is a number or not is a numeric string');
-		}	
+		}
 		
 		return $response;
 	}

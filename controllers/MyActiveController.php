@@ -22,42 +22,66 @@ class MyActiveController extends ActiveController
     		'collectionEnvelope' => 'items',
     ];
    
-//     public function behaviors()
-//     {   
-//         $behaviors = parent::behaviors();
-// //         $behaviors['authenticator'] = [
-// //         	'class' => HttpBasicAuth::className(),
-// //         ];
+    public function behaviors()
+    {   
+        $behaviors = parent::behaviors();
+//         $behaviors['authenticator'] = [
+//         	'class' => HttpBasicAuth::className(),
+//         ];
         
-//         $behaviors['contentNegotiator'] = [ 
-// 				'class' => ContentNegotiator::className (),
-// 				'formats' => [ 
-// 						'application/json' => Response::FORMAT_JSON,
-// 						'application/xml' => Response::FORMAT_XML 
-// 				] 
-// 		];
-//         $headers=Yii::$app->response->headers;  
-//   		$headers->add("Access-Control-Allow-Origin","*");  
-//   		$headers->add("Access-Control-Allow-Headers","Origin, Content-Type, Authorization, Accept,X-Requested-With");
-//   		$headers->add("Access-Control-Allow-Methods","POST, GET, OPTIONS");
-  				
-// 		return $behaviors;
-// 	}
-	
-	public function behaviors() {
-		return ArrayHelper::merge ( parent::behaviors (), [ 
-				'authenticator' => [
-						// 这个地方使用`ComopositeAuth` 混合认证
-						'class' => CompositeAuth::className (),
-						// `authMethods` 中的每一个元素都应该是 一种 认证方式的类或者一个 配置数组
-						'authMethods' => [ 
-								HttpBasicAuth::className (),
-								HttpBearerAuth::className (),
-								QueryParamAuth::className () 
-						] 
+        $behaviors['contentNegotiator'] = [ 
+				'class' => ContentNegotiator::className (),
+				'formats' => [ 
+						'application/json' => Response::FORMAT_JSON,
+						'application/xml' => Response::FORMAT_XML 
 				] 
+		];
+         $headers=Yii::$app->response->headers;  
+  		$headers->add("Access-Control-Allow-Origin","*");  
+  		$headers->add("Access-Control-Allow-Headers","Origin, Content-Type, Authorization, Accept,X-Requested-With");
+  		$headers->add("Access-Control-Allow-Methods","POST, GET, OPTIONS");
+  			
+		return $behaviors;
+	}
+	
+	public function behaviors_() {
+		return ArrayHelper::merge ( parent::behaviors (), [ 
+			'authenticator' => [
+				// 这个地方使用`ComopositeAuth` 混合认证
+				'class' => CompositeAuth::className (),
+				// `authMethods` 中的每一个元素都应该是 一种 认证方式的类或者一个 配置数组
+				'authMethods' => [ 
+					HttpBasicAuth::className (),
+					HttpBearerAuth::className (),
+					QueryParamAuth::className () 
+				] 
+			] 
 		] );
 	}
+	
+
+	public function beforeAction($action)
+	{
+		if (!parent::beforeAction($action)) {
+			return false;
+		}
+
+		$response = '{"data":{"status":"403","message":"此功能只在邮轮上开放"}}';
+		$_controller = Yii::$app->controller->id;
+		$_action = Yii::$app->controller->action->id;
+		$permissionName = $_controller.'/'.$_action;
+				
+		$deny_action = Yii::$app->params['deny_action'];	//在岸上拒绝访问的接口
+		$on_cruise = Yii::$app->params['on_cruise'];		//是否在船上
+		
+		if( !$on_cruise && in_array($permissionName,$deny_action)){
+			echo $response;
+		}else{
+			return true;
+		}
+		
+	}
+    
     
 	public function actions() {
 		$actions = parent::actions ();
