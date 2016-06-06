@@ -3,13 +3,12 @@
 return [
     'adminEmail' => 'rocklei@vonechina.com',
 	'img_save_url'=>"http://tsimg.cruisetone.com/",
-// 	'wifi_url'=>'http://192.168.9.250/jsp/comstserver.awm?',
-// 	'wifi_url' => 'http://192.168.8.107/jsp/',
-	'wifi_url'=>'http://192.168.9.250/jsp/',
+	'wifi_addr' =>"http://tsapi.cruisetone.com/wifi/wifi/index?mcode=",		//app中使用web-view嵌套的wifi上网链接
+	'wifi_url'=>'http://192.168.9.250/jsp/',								//wifi上网认证的地址
 	'wifi_login_name'=>'bisheng',
 	'wifi_login_password'=>'bs566570',
-	'on_cruise' => true,//是否在船上
-	'deny_action' =>[	//403的页面
+	'on_cruise' => true,//是否在船上 ，true表示在船上，false表示在岸上
+	'deny_action' =>[	//403的页面，在岸上显示的
 			
 		//餐饮服务
 		'restaurant/findall',				

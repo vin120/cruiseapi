@@ -1523,7 +1523,7 @@ class CruiseController extends MyActiveController
 		$mcode = isset($_POST['code']) ? $_POST['code'] : '';
 		$response = array();
 		if(!empty($mcode)){
-			$response ['data'] = "http://tsapi.cruisetone.com/wifi/wifi/index?mcode=".$mcode;
+			$response ['data'] = Yii::$app->params['wifi_addr'].$mcode;
 		}else {
 			$response['error'] = array('errorCode'=>'1','message'=>'code can not be blank');
 		}
