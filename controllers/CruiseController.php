@@ -1513,4 +1513,21 @@ class CruiseController extends MyActiveController
 		return $resposne;
 	}
 	
+	
+	/**
+	 *  获取wifi上网地址
+	 */
+	
+	public function actionGetwifiaddress()
+	{
+		$mcode = isset($_POST['code']) ? $_POST['code'] : '';
+		$response = array();
+		if(!empty($mcode)){
+			$response ['data'] = "http://tsapi.cruisetone.com/wifi/wifi/index?mcode=".$mcode;
+		}else {
+			$response['error'] = array('errorCode'=>'1','message'=>'code can not be blank');
+		}
+		return $response;
+	}
+	
 }

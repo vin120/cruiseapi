@@ -8,7 +8,7 @@ return [
 	'wifi_url'=>'http://192.168.9.250/jsp/',
 	'wifi_login_name'=>'bisheng',
 	'wifi_login_password'=>'bs566570',
-	'on_cruise' => false,//是否在船上
+	'on_cruise' => true,//是否在船上
 	'deny_action' =>[	//403的页面
 			
 		//餐饮服务

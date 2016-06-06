@@ -251,10 +251,19 @@ class MembershipController extends MyActiveController {
 					'value' => $_POST
 			);
 		} else {
-			if($passwd == $membership['member_password']){
+			if('888888' == $membership['member_password']){
 				//第一次登录的，使用默认密码
-				$response['status'] = 0 ;	//帐号状态，0表示是使用默认密码，1是已经改密码之后
-				$response['data'] = $_POST;
+				if ($passwd == substr($membership['passport_number'],-6)){
+					$response['status'] = 0 ;	//帐号状态，0表示是使用默认密码，1是已经改密码之后
+					$response['data'] = $_POST;
+				}else {
+					//密码不正确
+					$response ['error'] = array (
+							'error_code' => 2,
+							'message' => 'password wrong!',
+							'value' => $_POST
+					);
+				}
 			}else if( md5($passwd) == $membership['member_password']) {
 				//密码已经md5加密了，正常情况
 				$cruise_line = CruiseLineService::getCruiseLineByCurrTime ();
@@ -269,6 +278,14 @@ class MembershipController extends MyActiveController {
 				if($member_room == false){
 					$member_room = '';
 				}
+				
+				if(empty($membership['sign'])){
+					$sign = md5 ( md5 ( $membership ['code'] ) . md5 ( $membership ['passport_number'] ) . md5 ($membership ['member_password'] ) );
+					$update_sql = ' UPDATE vcos_member SET sign=\''.$sign.'\' WHERE member_code=\''.$membership['code'].'\'';
+					Yii::$app->mdb->createCommand($update_sql)->execute();
+					$membership['sign'] = $sign;
+				}
+				
 				$membership ['cruise_line'] = $cruise_line;
 				$membership ['member_room'] = $member_room; // $member_room ;
 				$membership ['icon'] = $icon ['icon'];

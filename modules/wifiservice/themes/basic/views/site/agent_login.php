@@ -25,7 +25,8 @@ $baseUrl = $this->assetBundles[LoginAsset::className()]->baseUrl . '/';
 			<span>中华泰山号邮轮欢迎您！</span>
 		</div>
 		<div id="download" class="tc">
-			<p>为了更好体验泰山号邮轮上网服务，请下载邮轮通APP进行上网。</p>
+			<p>为了更好体验泰山号邮轮上网服务，</p>
+			<p>请下载邮轮通APP进行上网。</p>
 			<div>
 				<span class="imgBox"><img src="<?= $baseUrl ?>/images/icon.png"></span>
 				<button style="cursor:pointer"><img src="<?= $baseUrl ?>/images/ios.png"></button>

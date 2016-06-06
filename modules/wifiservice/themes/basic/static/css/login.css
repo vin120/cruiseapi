@@ -11,7 +11,7 @@ span { display: inline-block; }
 #welcome { padding: 20px 0; font-size: 1.6rem; }
 #welcome .imgBox { width: 12%; vertical-align: middle; }
 
-#download p { line-height: 40px; font-size: .8rem; }
+#download p { line-height: 2em; font-size: .8rem; }
 #download div { width: 90%; margin: 0 auto; padding: 20px; background-color: #fff; border: 2px solid #dbdbdb; border-radius: 10px; box-sizing: border-box; }
 #download div .imgBox { width: 12%; }
 #download div button { width: 40%; background: none; border: none; }
