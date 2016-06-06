@@ -361,7 +361,7 @@ class MembershipController extends MyActiveController {
 					);
 				}
 				
-			}else if($member_type == 1){
+			}else {
 				//普通会员
 				
 // 				$sql_value = 'SELECT member_id,member_code,passport_number,cn_name,member_password,sign
