@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>wifi认证</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;" />
+	<style type="text/css">
+	img { width: 100%; height: 100%; }
+	span { display: inline-block; }
+	
+	.tc { text-align: center; }
+	.tabTitle { margin: 0; padding: 0; border-top: 2px solid #dbdbdb; border-bottom: 2px solid #dbdbdb; }
+	.tabTitle li { display: inline-block; padding: 10px 40px; cursor: pointer; }
+	.tabTitle .active { border-bottom: 4px solid #3b7dd3; }
+	.tabContent > div { display: none; }
+	.tabContent .active { display: block; }
+	
+	#welcome { padding: 20px 0; font-size: 1.6rem; }
+	#welcome .imgBox { width: 12%; vertical-align: middle; }
+	
+	#download p { line-height: 2em; font-size: .8rem; }
+	#download div { width: 90%; margin: 0 auto; padding: 20px; background-color: #fff; border: 2px solid #dbdbdb; border-radius: 10px; box-sizing: border-box; }
+	#download div .imgBox { width: 12%; }
+	#download div button { width: 40%; background: none; border: none; }
+	
+	#loginBox { margin: 20px 0; background-color: #fff; }
+	#loginBox input { display: block; width: 80%; padding: 0 10px; margin: 20px auto; line-height: 40px; height: 40px; background-color: #fafafa; border: 2px solid #dbdbdb; border-radius: 10px; box-sizing: border-box; font-size: 1rem; }
+	#loginBox input[type="button"] { border: none; background-color: #3b7dd3; color: #fff; }
+	#loginBox .link { padding-bottom: 20px; }
+	#loginBox .link a { text-decoration: underline; color: #3b7dd3; }
+	#loginBox #passwordthis { width: 80%; margin: 0 auto; font-size: .5rem;}
+	#loginBox #carderror { width: 80%; margin: 0 auto; font-size: .5rem;}
+	
+	
+	/*购买套餐*/
+	#buyPackage #packageList { margin: 20px 0 0; padding: 0 10px; background-color: #fff; }
+	#buyPackage #packageList li { line-height: 2.5em; border-bottom: 2px solid #dbdbdb; }
+	#buyPackage #packageList li:last-child { border-bottom: none; }
+	#buyPackage #history { margin-bottom: 20px; }
+	#buyPackage #history h3 { padding: 0 20px; line-height: 40px; }
+	
+	/*订单确认*/
+	#confirmOrder .title { background-color: #fff; border-bottom: 2px solid #c2c2c2; text-align: center; font-size: 1rem; }
+	#confirmOrder #orderInfo { line-height: 2em; background-color: #fff; }
+	#confirmOrder .point { padding: 10px 20px; line-height: 1.2em; background-color: #ffe6c0; }
+	
+	/*套餐卖完*/
+	#soldOut .iconBox .icon { background-color: #fc5847; }
+	
+	/*上网连接，断开连接*/
+	#internetAccess .point, #disconnect .point { padding: 10px 20px; line-height: 1.4em; }
+	#internetAccess .history, #disconnect .history { margin-bottom: 20px; }
+	#internetAccess .history h3, #disconnect .history h3 { padding: 0 20px; line-height: 40px; }
+	#internetAccess .history table, #disconnect .history table { font-size: .8rem; }
+	
+	#disconnect .btnBox input { background-color: #f25721; }
+	
+	/*无可用套餐*/
+	#noneAvailable .icon { background-color: #a0a0a0; }
+	
+	/*当前套餐*/
+	#currentPackage h2 { line-height: 2.5em; border-bottom: 1px solid #c2c2c2; text-align: center; font-size: 1rem; }
+	#currentPackage .packageInfo { background-color: #fff; }
+	#currentPackage .packageInfo:first-child { margin-bottom: 20px; }
+	#currentPackage .packageInfo p { padding: 0 20px; line-height: 2em; }
+	
+	/*重复登录*/
+	#repeatLogin .iconBox h2 { font-size: 1.2rem; }
+	#repeatLogin .iconBox p { line-height: 1.4em; }
+	#repeatLogin .btnBox input { width: 45%; }
+	/*font media*/
+	@media screen and (min-width: 320px) { html {font-size: 14px;} }
+	@media screen and (min-width: 360px) { html {font-size: 16px;} }
+	@media screen and (min-width: 400px) { html {font-size: 18px;} }
+	@media screen and (min-width: 440px) { html {font-size: 20px;} }
+	@media screen and (min-width: 480px) { html {font-size: 22px;} }
+	@media screen and (min-width: 640px) { html {font-size: 28px;} }
+	
+	/*reset*/
+	body,html { padding: 0; margin: 0; color: #4d4d4d; }
+	h1,h2,h3,p { margin: 0; }
+	ul { list-style: none; }
+	a { text-decoration: none; }
+	input,button { outline: none; }
+	div,ul { box-sizing: border-box; }
+	
+	table { width: 100%; line-height: 40px; background-color: #fff; border: 2px solid #dbdbdb; border-collapse: collapse; text-align: center; }
+	th,td { border-bottom: 2px solid #dbdbdb; }
+	
+	/*common*/
+	.l { float: left; }
+	.r { float: right; }
+	.clearfix{ *zoom: 1; }
+	.clearfix:after{ content: ""; display: block; height:0; clear:both; }
+	.bodyBox { max-width: 720px; min-height: 100vh; margin: 0 auto; background-color: #f0f0f0; border: 1px solid #dbdbdb; }
+	.pBox { padding: 20px; }
+	.em { font-style: normal; color: #f25721; }
+	.point { font-size: .8rem; color: #f25721; }
+	.btnBox { margin: 20px 0; text-align: center; }
+	.btnBox input { width: 90%; line-height: 2.5em; background-color: #5592dc; border: none; border-radius: 10px; text-align: center; color: #fff; cursor: pointer; font-size: 1rem; }
+	.iconBox { margin: 20px 0; text-align: center; }
+	.iconBox h2 { margin-bottom: 20px; }
+	.iconBox .error { color: #f03331; }
+	.iconBox .icon { display: inline-block; width: 40px; line-height: 40px; margin: 20px 0; border-radius: 100%; text-align: center; font-weight: bolder; font-size: 20px; color: #fff; }
+	
+	/*mainHeader*/
+	#mainHeader div { padding: 0 20px; line-height: 40px; background-color: #3b7dd3; color: #fff; }
+	#mainHeader a { color: #fff; }
+	#mainHeader .surplus { display: -webkit-flex; display: -ms-flexbox; display: flex; font-size: .8rem; }
+	#mainHeader .surplus > span { -webkit-flex: 1; -ms-flex: 1; flex: 1; }
+	#mainHeader .surplus em { font-size: 1.2rem; font-style: normal; }
+	#mainHeader ul { display: table; width: 100%; margin: 0; padding: 0; border: 1px solid #dbdbdb; }
+	#mainHeader li { display: table-cell; width: 50%; line-height: 2.5em; background-color: #fff; text-align: center; }
+	#mainHeader li a { display: block; color: #4d4d4d; }
+	#mainHeader .active { border-bottom: 4px solid #3b7dd3; }
+	
+	</style>
+</head>
+<body>
+	<div class="bodyBox">
+		<div id="welcome" class="tc">
+			<span class="imgBox"><img src="./images/logo.png"></span>
+			<span>中华泰山号邮轮欢迎您！</span>
+		</div>
+		<div id="download" class="tc">
+			<p>为了更好体验泰山号邮轮上网服务，</p>
+			<p>请下载邮轮通APP进行上网。</p>
+			<div>
+				<span class="imgBox"><img src="./images/icon.png"></span>
+				<button style="cursor:pointer" onclick="ios_download()"><img src="./images/ios.png"></button></a>
+				<button style="cursor:pointer" onclick="android_download()"><img src="./images/android.png"></button>
+			</div>
+		</div>
+		<div id="loginBox">
+			<ul class="tabTitle tc">
+				<li class="active">护照号登录</li>
+				<li>上网卡登录</li>
+			</ul>
+			<div class="tabContent">
+				<div class="active">
+				 	<form id="passport-form" action="/wifiservice/site/login" method="post">
+					<input id="loginform-username" type="text" placeholder="护照号" 
+					autofocus="autofocus" oninput="setCustomValidity('')" oninvalid="setCustomValidity('护照号不能为空')" 
+					required="required"  name="LoginForm[username]">
+					<input id="loginform-password"  type="password" placeholder="密码" 
+					oninput="setCustomValidity('')" oninvalid="setCustomValidity('密码不能为空')" 
+					required="required"  name="LoginForm[password]">
+					<div id="passwordthis">
+					</div>
+                    </form>				
+                    <input type="button" id="passport_login" value="登录" style="cursor:pointer">
+				</div>
+				<div>
+					<form id="card-form" action="/wificard/wifi/login" method="post">
+					<input type="text" placeholder="上网卡号" required="required" name="card" id="card">
+					<input type="password" placeholder="密码" required="required" name="password" id="password">
+					<div id="carderror">
+					</div>
+					</form> 
+					<input type="button" id="card_login"  value="登录" style="cursor:pointer">
+				</div>
+			</div>
+			<div class="link tc">
+				<a href="http://tsapi.cruisetone.com/notice.html">《上网须知》</a>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+var errorMessage = '';
+
+var ios_address = '';
+var android_address = 'http://tsimg.cruisetone.com/apk/ctone.apk';
+
+function ios_download()
+{
+	window.open(ios_address);
+}
+
+function android_download()
+{
+	window.open(android_address);
+}
+
+window.onload=function(){
+	
+	if(errorMessage != ''){
+		$("#passwordthis").append("<strong class='' style='color:red;'>护照号或者密码有误</strong>");
+	}
+
+	
+	$("#passport_login").on("click",function(){
+		$("#passport-form").submit();
+	});
+
+
+	var url = "/wificard/wifi/login";
+	$("#card_login").on("click",function(){
+		var card = $("#card").val();
+		
+		$.ajax({
+            cache: true,
+            type: "POST",
+            url:url,
+            dataType: 'json',
+            data:$('#card-form').serialize(),// 你的formid
+            async: false,
+            error: function(request) {
+            	$("#carderror").html("<strong class='' style='color:red;'>卡号或者密码有误</strong>");
+            },
+            success: function(response) {
+
+				if(response.data){
+					location.href ="/wificard/wifi/index?card="+card;
+				}else if(response.error){
+					$("#carderror").html("<strong class='' style='color:red;'>卡号或者密码有误</strong>");
+				}
+				
+           }
+        });
+	});
+
+}
+</script>
+<script src="./js/jquery-2.2.2.min.js"></script>
+<script src="./js/buypackage.js"></script>
+<script src="./js/selectPackage.js"></script>
+<script src="./js/login.js"></script>
+</html>
+ 

@@ -10,6 +10,7 @@ use app\modules\wificard\components\MyCurl;
 
 class WifiController extends Controller
 {
+	public $enableCsrfValidation = false; // csrf validation can't work
 	public function actionLogin()
 	{
 		$card = Yii::$app->request->post('card');
