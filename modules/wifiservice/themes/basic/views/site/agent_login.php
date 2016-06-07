@@ -29,8 +29,8 @@ $baseUrl = $this->assetBundles[LoginAsset::className()]->baseUrl . '/';
 			<p>请下载邮轮通APP进行上网。</p>
 			<div>
 				<span class="imgBox"><img src="<?= $baseUrl ?>/images/icon.png"></span>
-				<button style="cursor:pointer"><img src="<?= $baseUrl ?>/images/ios.png"></button>
-				<button style="cursor:pointer"><img src="<?= $baseUrl ?>/images/android.png"></button>
+				<button style="cursor:pointer" onclick="ios_download()"><img src="<?= $baseUrl ?>/images/ios.png"></button></a>
+				<button style="cursor:pointer" onclick="android_download()"><img src="<?= $baseUrl ?>/images/android.png"></button>
 			</div>
 		</div>
 		<div id="loginBox">
@@ -64,13 +64,27 @@ $baseUrl = $this->assetBundles[LoginAsset::className()]->baseUrl . '/';
 				</div>
 			</div>
 			<div class="link tc">
-				<a href="#">《上网须知》</a>
+				<a href="http://tsapi.cruisetone.com/notice.html">《上网须知》</a>
 			</div>
 		</div>
 	</div>
 </body>
 <script type="text/javascript">
 var errorMessage = '<?php echo $model->getFirstError('password');?>';
+
+var ios_address = '<?php echo Yii::$app->params['ios_address'];?>';
+var android_address = '<?php echo Yii::$app->params['android_address'];?>';
+
+function ios_download()
+{
+	window.open(ios_address);
+}
+
+function android_download()
+{
+	window.open(android_address);
+}
+
 window.onload=function(){
 	
 	if(errorMessage != ''){
@@ -81,6 +95,7 @@ window.onload=function(){
 	$("#passport_login").on("click",function(){
 		$("#passport-form").submit();
 	});
+
 
 	var url = "<?php echo Url::toRoute(['/wificard/wifi/login'])?>";
 	$("#card_login").on("click",function(){

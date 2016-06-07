@@ -7,6 +7,8 @@ return [
 	'wifi_url'=>'http://192.168.9.250/jsp/',								//wifi上网认证的地址
 	'wifi_login_name'=>'bisheng',
 	'wifi_login_password'=>'bs566570',
+	'ios_address'=>'',		//ios-app的下载地址
+	'android_address'=>'http://tsimg.cruisetone.com/apk/ctone.apk',	//android-app的下载地址
 	'on_cruise' => true,//是否在船上 ，true表示在船上，false表示在岸上
 	'deny_action' =>[	//403的页面，在岸上显示的
 			
