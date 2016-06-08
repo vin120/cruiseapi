@@ -131,9 +131,22 @@ class Admin extends MymemberActiveRecord implements IdentityInterface
      */
     public function validatePassword($password)
     {
-
-        return true;
+//         return true;
 //        return Yii::$app->security->validatePassword($password, $this->travel_agent_password);
+		if('888888' == $this->member_password){
+			//默认密码
+			if ($password == substr($this->passport_number,-6)){
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			if(md5($password) == $this->member_password){
+				return true;
+			}else{
+				return false;
+			}
+		}
     }
     
     /**

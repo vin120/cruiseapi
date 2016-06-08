@@ -119,16 +119,16 @@
 <body>
 	<div class="bodyBox">
 		<div id="welcome" class="tc">
-			<span class="imgBox"><img src="./images/logo.png"></span>
+			<span class="imgBox"><img src="http://www.cruise.com/images/logo.png"></span>
 			<span>中华泰山号邮轮欢迎您！</span>
 		</div>
 		<div id="download" class="tc">
 			<p>为了更好体验泰山号邮轮上网服务，</p>
 			<p>请下载邮轮通APP进行上网。</p>
 			<div>
-				<span class="imgBox"><img src="./images/icon.png"></span>
-				<button style="cursor:pointer" onclick="ios_download()"><img src="./images/ios.png"></button></a>
-				<button style="cursor:pointer" onclick="android_download()"><img src="./images/android.png"></button>
+				<span class="imgBox"><img src="http://www.cruise.com/images/icon.png"></span>
+				<button style="cursor:pointer" onclick="ios_download()"><img src="http://www.cruise.com/images/ios.png"></button></a>
+				<button style="cursor:pointer" onclick="android_download()"><img src="http://www.cruise.com/images/android.png"></button>
 			</div>
 		</div>
 		<div id="loginBox">
@@ -138,7 +138,7 @@
 			</ul>
 			<div class="tabContent">
 				<div class="active">
-				 	<form id="passport-form" action="/wifiservice/site/login" method="post">
+				 	<form id="passport-form" action="http://www.cruise.com/wifiservice/site/login" method="post">
 					<input id="loginform-username" type="text" placeholder="护照号" 
 					autofocus="autofocus" oninput="setCustomValidity('')" oninvalid="setCustomValidity('护照号不能为空')" 
 					required="required"  name="LoginForm[username]">
@@ -151,7 +151,7 @@
                     <input type="button" id="passport_login" value="登录" style="cursor:pointer">
 				</div>
 				<div>
-					<form id="card-form" action="/wificard/wifi/login" method="post">
+					<form id="card-form" action="http://www.cruise.com/wificard/wifi/login" method="post">
 					<input type="text" placeholder="上网卡号" required="required" name="card" id="card">
 					<input type="password" placeholder="密码" required="required" name="password" id="password">
 					<div id="carderror">
@@ -211,20 +211,19 @@ window.onload=function(){
             success: function(response) {
 
 				if(response.data){
-					location.href ="/wificard/wifi/index?card="+card;
+					location.href ="http://www.cruise.com/wificard/wifi/index?card="+card;
 				}else if(response.error){
 					$("#carderror").html("<strong class='' style='color:red;'>卡号或者密码有误</strong>");
 				}
-				
            }
         });
 	});
 
 }
 </script>
-<script src="./js/jquery-2.2.2.min.js"></script>
-<script src="./js/buypackage.js"></script>
-<script src="./js/selectPackage.js"></script>
-<script src="./js/login.js"></script>
+<script src="http://www.cruise.com/js/jquery-2.2.2.min.js"></script>
+<script src="http://www.cruise.com/js/buypackage.js"></script>
+<script src="http://www.cruise.com/js/selectPackage.js"></script>
+<script src="http://www.cruise.com/js/login.js"></script>
 </html>
  
