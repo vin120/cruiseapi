@@ -194,61 +194,25 @@ class MembershipController extends MyActiveController {
 		$name = isset ( $_POST ['name'] ) ? $_POST ['name'] : '';
 		$passwd = isset ( $_POST ['passwd'] ) ? $_POST ['passwd'] : '';
 		
-// 		$emailValidator = new EmailValidator ();
-		
-// 		$emall_bool = $emailValidator->validate ( $name );
-		
-// 		if ($emall_bool) {
-// 			$where_name = 'member_email = \'' . $name . '\'';
-// 		} elseif (MyString::validateMobile ( $name )) {
-// 			$where_name = 'mobile_number = \'' . $name . '\'';
-// 		} else {
-// 			$where_name = 'passport_number = \'' . $name . '\'';
-// 		}
-		
-		if((substr($name,0,3) == 'TS_') || (substr($name, 0,3) == 'ts_'))
-		{
-			//如果存在前缀,则是船员
-
-			// $name = str_replace(array('TS_','ts_'),'',$name);	//去除post过来的帐号前面的 TS_ 或者 ts_
-			
-			// if (MemberService::checkMembershipCode($name)) {
-			// 	//member code
-			// 	$where_name = 'crew_code = \''.$name. '\'';
-			// }else {
-			// 	//passport Number
-			// 	$where_name = 'passport_number = \'' . $name . '\'';
-			// }
-			
-			$where_name = 'crew_code = \''.$name. '\'';
-
-			$sql_value = 'SELECT crew_id as memebr_id,crew_password as member_password,smart_card_number,crew_code as code,cn_name as name,passport_number,
-				crew_email as email,mobile_number as phone,(money/100) as money,crew_credit as credit,sign,(overdraft_limit/100) as overdraft_limit,(curr_overdraft_amount/100) as curr_overdraft_amount
-				FROM vcos_wifi_crew  WHERE ' . $where_name . ' LIMIT 1';
-			$membership = Yii::$app->mdb->createCommand ( $sql_value )->queryOne ();
-			
+		if (MemberService::checkMembershipCode($name)) {
+			//member code
+			$where_name = 'member_code = \''.$name. '\'';
 		}else {
-			//普通会员
-			if (MemberService::checkMembershipCode($name)) {
-				//member code
-				$where_name = 'member_code = \''.$name. '\'';
-			}else {
-				//passport Number
-				$where_name = 'passport_number = \'' . $name . '\'';
-			} 
-			
-			$sql_value = 'SELECT member_id,member_password,smart_card_number,member_code as code,cn_name as name,passport_number,
-				member_email as email,mobile_number as phone,(member_money/100) as money,member_credit as credit,sign,(overdraft_limit/100) as overdraft_limit,(curr_overdraft_amount/100) as curr_overdraft_amount
-				FROM vcos_member WHERE ' . $where_name . ' LIMIT 1';
-			$membership = Yii::$app->mdb->createCommand ( $sql_value )->queryOne ();
-		}
+			//passport Number
+			$where_name = 'passport_number = \'' . $name . '\'';
+		} 
+		
+		$sql_value = 'SELECT member_id,member_password,smart_card_number,member_code as code,cn_name as name,passport_number,
+			member_email as email,mobile_number as phone,(member_money/100) as money,member_credit as credit,sign,(overdraft_limit/100) as overdraft_limit,(curr_overdraft_amount/100) as curr_overdraft_amount
+			FROM vcos_member WHERE ' . $where_name . ' LIMIT 1';
+		$membership = Yii::$app->mdb->createCommand ( $sql_value )->queryOne ();
 		
 		$response = array ();
 		if (empty ( $membership )) {
 			$response ['error'] = array (
-					'error_code' => 1,
-					'message' => 'membership does not exist',
-					'value' => $_POST
+				'error_code' => 1,
+				'message' => 'membership does not exist',
+				'value' => $_POST
 			);
 		} else {
 			if('888888' == $membership['member_password']){
@@ -259,9 +223,9 @@ class MembershipController extends MyActiveController {
 				}else {
 					//密码不正确
 					$response ['error'] = array (
-							'error_code' => 2,
-							'message' => 'password wrong!',
-							'value' => $_POST
+						'error_code' => 2,
+						'message' => 'password wrong!',
+						'value' => $_POST
 					);
 				}
 			}else if( md5($passwd) == $membership['member_password']) {
@@ -302,13 +266,6 @@ class MembershipController extends MyActiveController {
 				);
 			}
 		}
-		
-		
-// 		$sql_value = 'SELECT member_id,smart_card_number,member_code as code,cn_name as name,passport_number,
-// 				member_password,member_email as email,mobile_number as phone,(member_money/100) as money,member_credit as credit,sign,(overdraft_limit/100) as overdraft_limit,(curr_overdraft_amount/100) as curr_overdraft_amount 
-// 				FROM vcos_member WHERE member_password=\'' . md5 ( $passwd ) . '\' AND ' . $where_name . '  LIMIT 1';
-// 		$membership = Yii::$app->db->createCommand ( $sql_value )->queryOne ();
-		
 		return $response;
 	}
 	
@@ -322,80 +279,34 @@ class MembershipController extends MyActiveController {
 		
 		if (! empty ( $sign ) && ! empty ( $new_passwd ) && ! empty ( $old_passwd )) {
 			
-			//判断sign是船员的sign还是会员的sign
-			$sql = ' SELECT member_type FROM vcos_member_crew WHERE sign= \''.$sign.'\'';
-			$member_type = Yii::$app->mdb->createCommand($sql)->queryOne()['member_type'];
+			$sql_value = 'SELECT member_id,member_code,passport_number,cn_name,member_password,sign
+				FROM vcos_member WHERE sign=\'' . $sign . '\'  LIMIT 1';
+			$membership = Yii::$app->mdb->createCommand ( $sql_value )->queryOne ();
 			
-			if($member_type == 2){
-				//船员
+			if (! empty ( $membership )) {
 				
-// 				$sql_value = 'SELECT crew_id,crew_code,passport_number,cn_name,crew_password,sign
-// 					FROM vcos_wifi_crew WHERE crew_password=\'' . md5 ( $old_passwd ) . '\' AND sign=\'' . $sign . '\'  LIMIT 1';
-				
-				$sql_value = 'SELECT crew_id,crew_code,passport_number,cn_name,crew_password,sign
-					FROM vcos_wifi_crew WHERE sign=\'' . $sign . '\'  LIMIT 1';
-				
-				$membership = Yii::$app->mdb->createCommand ( $sql_value )->queryOne ();
-				
-				if (! empty ( $membership )) {
+				if($membership['member_password'] == md5 ( $old_passwd ) || $membership['member_password'] == $old_passwd ){
 					
-					if($membership['crew_password'] == md5 ($old_passwd ) || $membership['crew_password'] == $old_passwd ) {
-						
-						$new_sign = md5 ( md5 ( $membership ['crew_code'] ) . md5 ( $membership ['passport_number'] ) . md5 ( md5 ( $new_passwd ) ) );
-						
-						$update_sql = 'UPDATE vcos_wifi_crew SET crew_password=\'' . md5 ( $new_passwd ) . '\' WHERE ( crew_password=\'' . md5 ( $old_passwd ) . '\' OR  crew_password=\'' . $old_passwd . '\' ) AND sign=\'' . $sign . '\'';
-						$command = Yii::$app->mdb->createCommand ( $update_sql );
-						$command->execute ();
-						
-						$response ['data'] ['sign'] = $new_sign;
-					}else{
-						$response ['error'] = array (
-							'error_code' => 2,
-							'message' => 'ord password wrong'
-						);
-					}
-				} else {
+					$new_sign = md5 ( md5 ( $membership ['member_code'] ) . md5 ( $membership ['passport_number'] ) . md5 ( md5 ( $new_passwd ) ) );
+					
+					$update_sql = 'UPDATE vcos_member SET member_password=\'' . md5 ( $new_passwd ) . '\' WHERE ( member_password=\'' . md5 ( $old_passwd ) . '\'  OR member_password=\'' . $old_passwd  . '\' ) AND sign=\'' . $sign . '\'';
+					$command = Yii::$app->mdb->createCommand ( $update_sql );
+					$command->execute ();
+					
+					$response ['data'] ['sign'] = $new_sign;
+				}else{
 					$response ['error'] = array (
-						'error_code' => 1,
-						'message' => 'membership does not exist'
+						'error_code' => 2,
+						'message' => 'ord password wrong'
 					);
 				}
-				
-			}else {
-				//普通会员
-				
-// 				$sql_value = 'SELECT member_id,member_code,passport_number,cn_name,member_password,sign
-// 					FROM vcos_member WHERE member_password=\'' . md5 ( $old_passwd ) . '\' AND sign=\'' . $sign . '\'  LIMIT 1';
-
-				$sql_value = 'SELECT member_id,member_code,passport_number,cn_name,member_password,sign
-					FROM vcos_member WHERE sign=\'' . $sign . '\'  LIMIT 1';
-				$membership = Yii::$app->mdb->createCommand ( $sql_value )->queryOne ();
-				
-				if (! empty ( $membership )) {
-					
-					if($membership['member_password'] == md5 ( $old_passwd ) || $membership['member_password'] == $old_passwd ){
-						
-						$new_sign = md5 ( md5 ( $membership ['member_code'] ) . md5 ( $membership ['passport_number'] ) . md5 ( md5 ( $new_passwd ) ) );
-						
-						$update_sql = 'UPDATE vcos_member SET member_password=\'' . md5 ( $new_passwd ) . '\' WHERE ( member_password=\'' . md5 ( $old_passwd ) . '\'  OR member_password=\'' . $old_passwd  . '\' ) AND sign=\'' . $sign . '\'';
-						$command = Yii::$app->mdb->createCommand ( $update_sql );
-						$command->execute ();
-						
-						$response ['data'] ['sign'] = $new_sign;
-					}else{
-						$response ['error'] = array (
-							'error_code' => 2,
-							'message' => 'ord password wrong'
-						);
-					}
-				} else {
-					$response ['error'] = array (
-						'error_code' => 1,
-						'message' => 'membership does not exist'
-					);
-				}
+			} else {
+				$response ['error'] = array (
+					'error_code' => 1,
+					'message' => 'membership does not exist'
+				);
 			}
-			
+		
 		} else {
 			$response ['error'] = array (
 				'error_code' => 1,
@@ -470,7 +381,6 @@ class MembershipController extends MyActiveController {
 		return $response;
 	}
 	
-
 	
 	public function actionGetmemberinfo()
 	{
