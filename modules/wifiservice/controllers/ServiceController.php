@@ -74,7 +74,11 @@ class ServiceController extends Controller
         	$wifi_online_total_flow = str_replace('MB','',explode(": ",$arr[7])[1]);
         	
         	//连接网络
-        	$online_json = MyCurl::Connect($membership['passport_number']);
+        	$username = $membership['passport_number'];
+        	$sql = "SELECT * FROM vcos_comst_wifi WHERE username ='$username'";
+        	$password = Yii::$app->db->createCommand($sql)->queryOne()['password'];
+        	
+        	$online_json = MyCurl::Connect($membership['passport_number'],$password);
         	$online_arr = json_decode($online_json,true);
         	if($online_arr['success']){
         		//write login log to db

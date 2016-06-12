@@ -69,12 +69,20 @@
 					if(!$find_res['data']){
 						//没找到用户
 						//创建用户,并加入组，对接接口
-						$res = MyCurl::CreateUser($member);
+						//创建一个随机的6位密码，存放在comst
+						$comst_password  = rand(100000,999999);
+						$create_time = date("Y-m-d H:i:s",time());
+						$username = $member['passport_number'];
+						
+						$res = MyCurl::CreateUser($member,$comst_password);
 						$res =  json_decode($res,true);
 						if($res['success'] === false){
 							return $response['error'] = ['errorCode'=>2,'message'=>$res['Info']];
 							die();
 						}
+						//把用户写入本地数据库中
+						$sql = "INSERT INTO `vcos_comst_wifi` (`username`,`password`,`create_time`) VALUES('$username','$comst_password','$create_time')";
+						Yii::$app->db->createCommand($sql)->execute();
 					}
 
 					//事务处理

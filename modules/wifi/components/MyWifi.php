@@ -56,17 +56,25 @@
 					//钱足够，进行支付
 					
 					//查询用户是否存在
-					$find_res = MyCurl::FindUser($member->passport_number);
+					$find_res = MyCurl::FindUser($member['passport_number']);
 					$find_res = json_decode($find_res,true);
 					if(!$find_res['data']){
 						//没找到用户
 						//创建用户,并加入组，对接接口
-						$res = MyCurl::CreateUser($member);
+						//创建一个随机的6位密码，存放在comst
+						$comst_password  = rand(100000,999999);
+						$create_time = date("Y-m-d H:i:s",time());
+						$username = $member['passport_number'];
+						
+						$res = MyCurl::CreateUser($member,$comst_password);
 						$res =  json_decode($res,true);
 						if($res['success'] === false){
 							return $response['error'] = ['errorCode'=>2,'message'=>$res['Info']];
 							die();
 						}
+						//把用户写入本地数据库中
+						$sql = "INSERT INTO `vcos_comst_wifi` (`username`,`password`,`create_time`) VALUES('$username','$comst_password','$create_time')";
+						Yii::$app->db->createCommand($sql)->execute();
 					}
 
 					//事务处理
@@ -75,11 +83,13 @@
 						//直接支付
 						$money = $member_money - ($sale_price * 100);	//注意转换单位 
 						$member->member_money = $money;
-						$member->save();
+-                       $member->save();
+						
 
 						//充值wifi对应的钱，对接接口
 // 						MyCurl::RechargeWifi($member['passport_number'],$sale_price);
 						MyCurl::RechargeWifi($member['passport_number'],$wifi_item['wifi_flow']);		//comst 充值时按照流量和金额1:1比例
+
 						//记录购买Wifi记录
 						self::CreateWifiPayLog($sign,$membership_code,$wifi_item);
 
