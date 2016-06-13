@@ -7,7 +7,6 @@
 
     $this->title = "购买套餐";
 ?>
-<body>
 	<div id="buyPackage" class="bodyBox">
 		<!-- header start -->
 		<header id="mainHeader">
@@ -31,31 +30,36 @@
 		</div>
 		<!-- content end -->
 	</div>
-</body>
-<script type="text/javascript">
-window.onload = function(){
 	
-	var csrfToken = '<?php echo Yii::$app->request->csrfToken?>';
-	var card = '<?php echo Yii::$app->request->get('card')?>';
-	
-	$("#button").on("click",function(){
-		$.ajax({
-			url: "<?php echo Url::toRoute(['/wificard/wifi/disconnect']);?>",
-	        data: {_csrf:csrfToken,card:card},
-	        type: 'post',
-	        dataType: 'json',
-	        success : function(response) {
-	        	if(response['success'] == true){
-	        		location.href ="<?php echo Url::toRoute(['/wifiservice/site/login']);?>";
-	        	}else{
-	        		location.href ="<?php echo Url::toRoute(['/wifiservice/site/login']);?>";
-	        	}
-	        },
-	        error: function(XMLHttpRequest, textStatus, errorThrown) {
-	        	location.href ="<?php echo Url::toRoute(['/wifiservice/site/login']);?>";
-	        }
-		});
-	});
+<?php
 
-}
-</script>
+$this->registerJs('
+	window.onload = function(){	
+		var csrfToken = \''.Yii::$app->request->csrfToken.'\';
+			var card = \''. Yii::$app->request->get('card').'\';
+			
+			$("#button").on("click",function(){
+				$.ajax({
+					url: "'.Url::toRoute(['/wificard/wifi/disconnect']).'",
+			        data: {_csrf:csrfToken,card:card},
+			        type: \'post\',
+			        dataType: \'json\',
+			        success : function(response) {
+			        	if(response["success"] == true){
+			        		location.href ="'.Url::toRoute(['/wifiservice/site/login']).'";
+			        	}else{
+			        		location.href ="'. Url::toRoute(['/wifiservice/site/login']).'";
+			        	}
+			        },
+			        error: function(XMLHttpRequest, textStatus, errorThrown) {
+			        	location.href ="'. Url::toRoute(['/wifiservice/site/login']).'";
+			        }
+				});
+			});
+		}
+		
+', \yii\web\View::POS_END);
+
+?>
+	
+	
