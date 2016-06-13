@@ -18,7 +18,7 @@ $baseUrl = $this->assetBundles[LoginAsset::className()]->baseUrl . '/';
 
 //$curr_language = Yii::$app->language;
 ?>
-<body>
+
 	<div class="bodyBox">
 		<div id="welcome" class="tc">
 			<span class="imgBox"><img src="<?= $baseUrl ?>/images/logo.png"></span>
@@ -29,7 +29,7 @@ $baseUrl = $this->assetBundles[LoginAsset::className()]->baseUrl . '/';
 			<p>请下载邮轮通APP进行上网。</p>
 			<div>
 				<span class="imgBox"><img src="<?= $baseUrl ?>/images/icon.png"></span>
-				<button style="cursor:pointer" onclick="ios_download()"><img src="<?= $baseUrl ?>/images/ios.png"></button></a>
+				<button style="cursor:pointer" onclick="ios_download()"><img src="<?= $baseUrl ?>/images/ios.png"></button>
 				<button style="cursor:pointer" onclick="android_download()"><img src="<?= $baseUrl ?>/images/android.png"></button>
 			</div>
 		</div>
@@ -68,27 +68,31 @@ $baseUrl = $this->assetBundles[LoginAsset::className()]->baseUrl . '/';
 			</div>
 		</div>
 	</div>
-</body>
-<script type="text/javascript">
-var errorMessage = '<?php echo $model->getFirstError('password');?>';
 
-var ios_address = '<?php echo Yii::$app->params['ios_address'];?>';
-var android_address = '<?php echo Yii::$app->params['android_address'];?>';
+<?php
 
-function ios_download()
-{
-	window.open(ios_address);
-}
-
-function android_download()
-{
-	window.open(android_address);
-}
-
-window.onload=function(){
+$this->registerJs('
+		
+	var errorMessage = \''.$model->getFirstError('password') .'\';
+	var ios_address = \''.Yii::$app->params['ios_address'].'\';
+	var android_address = \''.Yii::$app->params['android_address'].'\';
+			
+			
+	function ios_download()
+	{
+		window.open(ios_address);
+	}
 	
-	if(errorMessage != ''){
-		$("#passwordthis").append("<strong class='' style='color:red;'>护照号或者密码有误</strong>");
+	function android_download()
+	{
+		window.open(android_address);
+	}
+		
+		
+	window.onload=function(){
+	
+	if(errorMessage != \'\'){
+		$("#passwordthis").append("<strong class=\'\' style=\'color:red;\'>护照号或者密码有误</strong>");
 	}
 
 	
@@ -97,7 +101,7 @@ window.onload=function(){
 	});
 
 
-	var url = "<?php echo Url::toRoute(['/wificard/wifi/login'])?>";
+	var url = \''.Url::toRoute(['/wificard/wifi/login']).'\';
 	$("#card_login").on("click",function(){
 		var card = $("#card").val();
 		
@@ -105,23 +109,29 @@ window.onload=function(){
             cache: true,
             type: "POST",
             url:url,
-            dataType: 'json',
-            data:$('#card-form').serialize(),// 你的formid
+            dataType: \'json\',
+            data:$(\'#card-form\').serialize(),// 你的formid
             async: false,
-            error: function(request) {
-            	$("#carderror").html("<strong class='' style='color:red;'>卡号或者密码有误</strong>");
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+             	$("#carderror").html("<strong class=\'\' style=\'color:red;\'>出现错误</strong>");
             },
             success: function(response) {
 
 				if(response.data){
-					location.href ="<?php echo Url::toRoute(['/wificard/wifi/index']);?>?card="+card;
-				}else if(response.error){
-					$("#carderror").html("<strong class='' style='color:red;'>卡号或者密码有误</strong>");
+					location.href ="'.Url::toRoute(['/wificard/wifi/index']).'?card="+card;
+				}else if(response.error["errorCode"] ==1 ){
+					$("#carderror").html("<strong class=\'\' style=\'color:red;\'>卡号或者密码有误</strong>");
+				}else if (response.error["errorCode"] ==2){
+					$("#carderror").html("<strong class=\'\' style=\'color:red;\'>卡号登录出现错误</strong>");
 				}
-				
            }
         });
 	});
-	
-}
-</script>
+}	
+		
+
+', \yii\web\View::POS_END);
+
+?>
+
+

@@ -11,6 +11,7 @@ use Yii;
  * @author Rock.Lei
  */
 class MemberService {
+	//通过sign获取会员信息
 	public static function getMemberbysign($sign) {
 		$member = Member::find ()->select ( [ 
 				'member_id',
@@ -34,6 +35,7 @@ class MemberService {
 		return $member;
 	}
 	
+	//通过sign获取船员信息
 	public static function getCrewBySign($sign){
 		$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
 				crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount

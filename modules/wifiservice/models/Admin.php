@@ -33,7 +33,7 @@ class Admin extends MymemberActiveRecord implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return static::findOne(['member_id' => $id]);
+        return static::findOne(['member_code' => $id]);
     }
 
     /**
@@ -102,7 +102,7 @@ class Admin extends MymemberActiveRecord implements IdentityInterface
      */
     public function getId()
     {
-    	return $this->member_id;
+    	return $this->member_code;
 //         return $this->getPrimaryKey();
     }
 

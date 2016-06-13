@@ -83,13 +83,23 @@ class SiteController extends Controller
 
         $this->layout = 'login_loyout';
         if (!\Yii::$app->admin->isGuest) {
-            return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/index"));
+//             return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/index"));
+        	if(Yii::$app->admin->identity->member_password === '888888'){
+        		return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/resetpassword"));
+        	}else{
+        		return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/index"));
+        	}
         }
 
         $model = new LoginForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-        	   return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/index"));
+        	if(Yii::$app->admin->identity->member_password === '888888'){
+        		return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/resetpassword"));
+        	}else{
+        		return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/index"));
+        	}
+//         	   return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/index"));
         } else {
             return $this->render('agent_login', [
                 'model' => $model,
