@@ -12,9 +12,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $baseUrl = $this->assetBundles[LoginAsset::className()]->baseUrl . '/';
 
+$page_active = isset($active) ? $active : 0;
 
 // print_r($model->getFirstError('password'));
-
 
 //$curr_language = Yii::$app->language;
 ?>
@@ -35,11 +35,11 @@ $baseUrl = $this->assetBundles[LoginAsset::className()]->baseUrl . '/';
 		</div>
 		<div id="loginBox">
 			<ul class="tabTitle tc">
-				<li class="active">护照号登录</li>
-				<li>上网卡登录</li>
+				<li<?= $page_active == 1 ? ' class="active"' : ''?> >护照号登录</li>
+				<li<?= $page_active == 0 ? ' class="active"' : ''?> >上网卡登录</li>
 			</ul>
 			<div class="tabContent">
-				<div class="active">
+				<div<?= $page_active == 1 ? ' class="active"' : ''?>>
 				 	<?php $form = ActiveForm::begin(['action' => ['/wifiservice/site/login'],'method'=>'post','id' => 'passport-form']); ?>
 					<input id="loginform-username" type="text" placeholder="护照号" 
 					autofocus="autofocus" oninput="setCustomValidity('')" oninvalid="setCustomValidity('护照号不能为空')" 
@@ -53,7 +53,7 @@ $baseUrl = $this->assetBundles[LoginAsset::className()]->baseUrl . '/';
                     <?php ActiveForm::end(); ?>
 					<input type="button" id="passport_login" value="登录" style="cursor:pointer">
 				</div>
-				<div>
+				<div<?= $page_active == 0 ? ' class="active"' : ''?>>
 					<?php $form = ActiveForm::begin(['action' => ['/wificard/wifi/login'],'method'=>'post','id' => 'card-form']); ?>
 					<input type="text" placeholder="上网卡号" required="required" name="card" id="card">
 					<input type="password" placeholder="密码" required="required" name="password" id="password">
@@ -76,7 +76,8 @@ $this->registerJs('
 	var errorMessage = \''.$model->getFirstError('password') .'\';
 	var ios_address = \''.Yii::$app->params['ios_address'].'\';
 	var android_address = \''.Yii::$app->params['android_address'].'\';
-			
+	
+	var response = \''. Yii::$app->request->get('response').'\';
 			
 	function ios_download()
 	{
@@ -94,39 +95,20 @@ $this->registerJs('
 	if(errorMessage != \'\'){
 		$("#passwordthis").append("<strong class=\'\' style=\'color:red;\'>护照号或者密码有误</strong>");
 	}
+		
+	if(response != \'\'){
+		$("#carderror").append("<strong class=\'\' style=\'color:red;\'>"+ response +"</strong>");
+	}
 
 	
 	$("#passport_login").on("click",function(){
 		$("#passport-form").submit();
 	});
 
-
-	var url = \''.Url::toRoute(['/wificard/wifi/login']).'\';
 	$("#card_login").on("click",function(){
-		var card = $("#card").val();
-		
-		$.ajax({
-            cache: true,
-            type: "POST",
-            url:url,
-            dataType: \'json\',
-            data:$(\'#card-form\').serialize(),// 你的formid
-            async: false,
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-             	$("#carderror").html("<strong class=\'\' style=\'color:red;\'>出现错误</strong>");
-            },
-            success: function(response) {
-
-				if(response.data){
-					location.href ="'.Url::toRoute(['/wificard/wifi/index']).'?card="+card;
-				}else if(response.error["errorCode"] ==1 ){
-					$("#carderror").html("<strong class=\'\' style=\'color:red;\'>卡号或者密码有误</strong>");
-				}else if (response.error["errorCode"] ==2){
-					$("#carderror").html("<strong class=\'\' style=\'color:red;\'>卡号登录出现错误</strong>");
-				}
-           }
-        });
+		$("#card-form").submit();
 	});
+
 }	
 		
 

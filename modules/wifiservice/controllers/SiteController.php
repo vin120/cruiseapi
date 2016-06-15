@@ -80,7 +80,7 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-
+		$active = Yii::$app->request->get("active",'1');
         $this->layout = 'login_loyout';
         if (!\Yii::$app->admin->isGuest) {
 //             return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/index"));
@@ -103,6 +103,7 @@ class SiteController extends Controller
         } else {
             return $this->render('agent_login', [
                 'model' => $model,
+            	'active'=> $active,
             ]);
         }
     }

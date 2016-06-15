@@ -74,7 +74,7 @@
 						$create_time = date("Y-m-d H:i:s",time());
 						$username = $member['passport_number'];
 						
-						$res = MyCurl::CreateUser($member,$comst_password);
+						$res = MyCurl::CreateUser($member,$comst_password,$type);
 						$res =  json_decode($res,true);
 						if($res['success'] === false){
 							return $response['error'] = ['errorCode'=>2,'message'=>$res['Info']];

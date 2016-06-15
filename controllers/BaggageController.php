@@ -24,7 +24,7 @@ class BaggageController extends MyActiveController
 			{
 				$cruise_line = CruiseLineService::getCruiseLineByCurrTime();
 				
-				$baggage_array = BaggageService::getAllbaggage($member->member_code, 277, $check_type);   //todo  277是固定写死的，应该用$cruise_line替换
+				$baggage_array = BaggageService::getAllbaggage($member->member_code, 277, $check_type);   //TODO  277是固定写死的，应该用$cruise_line替换
 				$response['data'] = $baggage_array;				
 			}else{
 				$response['error'] = array('error_code'=>1,'message'=>'Member does not exist');
