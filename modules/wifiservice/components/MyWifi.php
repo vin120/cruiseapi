@@ -13,13 +13,13 @@
 	{
 		
 		//Find All WifiService
-		public static function FindWifiService($my_lang='zh_cn')
+		public static function FindWifiService($type,$my_lang='zh_cn')
 		{
 			$response = array();
-			$params = ['my_lang'=>$my_lang];
+			$params = [':my_lang'=>$my_lang,':type'=>$type];
 			$sql = 'SELECT t1.wifi_id,FORMAT(t1.sale_price/100,2) as sale_price,t1.wifi_flow,t2.wifi_name 
 					FROM vcos_wifi_item_flow t1,vcos_wifi_item_language_flow t2 
-					WHERE t1.wifi_id=t2.wifi_id AND t1.`status`=1 AND t2.iso=:my_lang ';
+					WHERE t1.wifi_id=t2.wifi_id AND t1.`status`=1 AND t2.iso=:my_lang AND t1.type=:type';
 			$wifi_array = Yii::$app->db->createCommand($sql,$params)->queryAll();
 			return $wifi_array;
 		}

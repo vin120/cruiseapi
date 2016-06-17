@@ -36,7 +36,8 @@
 					'member_code' => $mcode
 			] )->one ();
 			
-			$wifi_items = MyWifi::FindWifiService();
+			$type=1;		//1是会员，2是船员
+			$wifi_items = MyWifi::FindWifiService($type);
 			$passport = $membership['passport_number'];
 			
 			//查询流量信息
@@ -73,7 +74,8 @@
 				$wifi_item = MyWifi::FindWifiServiceById($wifi_id);		
 				$sign = $member['sign'];
 				$membership = MemberService::getMemberbysign($sign);
-				$wifi_items = MyWifi::FindWifiService();
+				$type=1;	//$type=1 1是普通会员，2是船员
+				$wifi_items = MyWifi::FindWifiService($type);
 				$passport = $membership['passport_number'];
 				//查询流量信息
 				$flow_info = MyCurl::CheckFlowAndParse($passport);

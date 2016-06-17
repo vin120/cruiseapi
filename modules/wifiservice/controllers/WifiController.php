@@ -27,7 +27,7 @@
 				$membership =  MemberService::getCrewBySign($sign);
 			}
 			
-			$wifi_items = MyWifi::FindWifiService();
+			$wifi_items = MyWifi::FindWifiService($type);
 			$passport = $membership['passport_number'];
 			
 			//查询流量信息
