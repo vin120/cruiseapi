@@ -102,46 +102,17 @@ class SiteController extends Controller
         			Yii::$app->mdb->createCommand($sql)->execute();
         		}
         	}
-            return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/index"));
-//         	if(Yii::$app->admin->identity->member_password === '888888'){
-//         		return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/resetpassword"));
-//         	}else{
-//         		return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/index"));
-//         	}
-        	
-        	
-        	if(empty(Yii::$app->admin->identity->sign)){
-        		
-        		$type = Yii::$app->admin->identity->member_type;
-        		$member_code = Yii::$app->admin->identity->member_code;
-        		$passport_number = Yii::$app->admin->identity->passport_number;
-        		$member_password = Yii::$app->admin->identity->member_password;
-        		
-        		$sign = md5 ( md5 ( $member_code ) . md5 ( $passport_number ) . md5 ($member_password) );
-				
-        		if($type == 1){
-        			//会员
-        			$sql = " UPDATE `vcos_member` SET `sign`='$sign' WHERE `member_code`='$member_code'";
-        			Yii::$app->mdb->createCommand($sql)->execute();
-        		}else {
-        			//船员
-        			$sql = " UPDATE `vcos_wifi_crew` SET `sign`='$sign' WHERE `crew_code`='$member_code' ";
-        			Yii::$app->mdb->createCommand($sql)->execute();
-        		}
+//             return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/index"));
+        	if(Yii::$app->admin->identity->member_password === '888888'){
+        		return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/resetpassword"));
+        	}else{
+        		return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/index"));
         	}
-        	
-        	
-        	
         }
 
         $model = new LoginForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-//         	if(Yii::$app->admin->identity->member_password === '888888'){
-//         		return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/resetpassword"));
-//         	}else{
-//         		return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/index"));
-//         	}
         	if(empty(Yii::$app->admin->identity->sign)){
         	
         		$type = Yii::$app->admin->identity->member_type;
@@ -161,7 +132,12 @@ class SiteController extends Controller
         			Yii::$app->mdb->createCommand($sql)->execute();
         		}
         	}
-        	return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/index"));
+        	if(Yii::$app->admin->identity->member_password === '888888'){
+        		return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/resetpassword"));
+        	}else{
+        		return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/index"));
+        	}
+//         	return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/index"));
         } else {
             return $this->render('agent_login', [
                 'model' => $model,
@@ -284,5 +260,12 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+    
+    public function actionTest()
+    {
+    	Header("Access-Control-Allow-Origin: * ");
+    	Header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
+    	echo "About cruise ";
     }
 }

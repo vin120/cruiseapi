@@ -15,7 +15,8 @@ class LoginAsset extends AssetBundle
     public $js = [
  		'js/buypackage.js',
  		'js/selectPackage.js',
-     	'js/login.js'
+     	'js/login.js',
+    	'js/testajax.js',
     ];
     public $depends = [
     	'yii\web\YiiAsset',

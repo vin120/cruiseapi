@@ -30,7 +30,7 @@ class Wifiservice extends \yii\base\Module
 				'class' => MyAccessControl::className(),
 				'rules' => [
 					[
-						'actions' => ['login','',''],
+						'actions' => ['login','forgetpassword','forgetpasswordvalidate','test'],
     					'allow' => true,
     				],
     				[

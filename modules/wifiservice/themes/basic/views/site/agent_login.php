@@ -13,10 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 $baseUrl = $this->assetBundles[LoginAsset::className()]->baseUrl . '/';
 
 $page_active = isset($active) ? $active : 0;
-
-// print_r($model->getFirstError('password'));
-
-//$curr_language = Yii::$app->language;
 ?>
 
 	<div class="bodyBox">
@@ -25,15 +21,16 @@ $page_active = isset($active) ? $active : 0;
 			<span>中华泰山号邮轮欢迎您！</span>
 		</div>
 		<div id="download" class="tc">
-			<p>为了更好体验泰山号邮轮上网服务，</p>
-			<p>请下载邮轮通APP进行上网。</p>
+			<p>为了更好体验泰山号邮轮服务,请下载邮轮通APP</p>
+			<p>（邮轮通提供:自助上网、邮轮信息、旅行日程、</p>
+			<p> 服务介绍、内部聊天、旅游宝典、电子商务等服务）</p>
 			<div>
 				<span class="imgBox"><img src="<?= $baseUrl ?>/images/icon.png"></span>
-				<button style="cursor:pointer" onclick="ios_download()"><img src="<?= $baseUrl ?>/images/ios.png"></button>
 				<button style="cursor:pointer" onclick="android_download()"><img src="<?= $baseUrl ?>/images/android.png"></button>
+				<button style="cursor:pointer" onclick="ios_download()"><img src="<?= $baseUrl ?>/images/ios.png"></button>
 			</div>
 		</div>
-		<div id="loginBox">
+		<div id="loginBox" class="box">
 			<ul class="tabTitle tc">
 				<li<?= $page_active == 1 ? ' class="active"' : ''?> >护照号登录</li>
 				<li<?= $page_active == 0 ? ' class="active"' : ''?> >上网卡登录</li>
@@ -51,6 +48,7 @@ $page_active = isset($active) ? $active : 0;
 					<div id="passwordthis">
 					</div>
                     <?php ActiveForm::end(); ?>
+                    <a href= "<?php echo Url::toRoute(['/wifiservice/wifi/forgetpassword'])?>" class="remember">忘记密码？</a>
 					<input type="button" id="passport_login" value="登录" style="cursor:pointer">
 				</div>
 				<div<?= $page_active == 0 ? ' class="active"' : ''?>>
@@ -65,6 +63,7 @@ $page_active = isset($active) ? $active : 0;
 			</div>
 			<div class="link tc">
 				<a href="http://tsapi.cruisetone.com/notice.html">《上网须知》</a>
+				<a href="javascript:void(0);" onclick="tiplist(this,'post');">《邮轮须知》</a>
 			</div>
 		</div>
 	</div>
@@ -93,11 +92,11 @@ $this->registerJs('
 	window.onload=function(){
 	
 	if(errorMessage != \'\'){
-		$("#passwordthis").append("<strong class=\'\' style=\'color:red;\'>护照号或者密码有误</strong>");
+		$("#passwordthis").append("<strong class=\'point\' style=\'color:red;\'>护照号或者密码有误</strong>");
 	}
 		
 	if(response != \'\'){
-		$("#carderror").append("<strong class=\'\' style=\'color:red;\'>"+ response +"</strong>");
+		$("#carderror").append("<strong class=\'point\' style=\'color:red;\'>"+ response +"</strong>");
 	}
 
 	

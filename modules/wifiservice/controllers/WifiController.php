@@ -30,9 +30,8 @@
 			$wifi_items = MyWifi::FindWifiService($type);
 			$passport = $membership['passport_number'];
 			
-			//查询流量信息
+			//查询流量信息 
 			$flow_info = MyCurl::CheckFlowAndParse($passport);
-			
 			//最近5条购买记录
 			$sql = " SELECT a.pay_time,b.goods_name as name, FORMAT(b.goods_price * b.buy_num/100,2) as price FROM vcos_member_order a 
 			LEFT JOIN vcos_member_order_detail b ON a.order_serial_num = b.order_serial_num
@@ -84,8 +83,6 @@
 		public function actionPaymenterror()
 		{
 			$sign = Yii::$app->admin->identity->sign;
-// 			$membership = MemberService::getMemberbysign($sign);
-
 			$type = Yii::$app->admin->identity->member_type;
 			if($type == 1){
 				//普通会员
@@ -105,7 +102,6 @@
 		public function actionPaymentfail()
 		{
 			$sign = Yii::$app->admin->identity->sign;
-// 			$membership = MemberService::getMemberbysign($sign);
 			$type = Yii::$app->admin->identity->member_type;
 			if($type == 1){
 				//普通会员
@@ -124,7 +120,6 @@
 		public function actionPaymentsuccess()
 		{
 			$sign = Yii::$app->admin->identity->sign;
-// 			$membership = MemberService::getMemberbysign($sign);
 			$type = Yii::$app->admin->identity->member_type;
 			if($type == 1){
 				//普通会员
@@ -145,7 +140,6 @@
 		{
 			$mcode = Yii::$app->admin->identity->member_code;
 			$sign =  Yii::$app->admin->identity->sign;
-// 			$membership = MemberService::getMemberbysign($sign);
 			$type = Yii::$app->admin->identity->member_type;
 			if($type == 1){
 				//普通会员
@@ -168,7 +162,6 @@
 		{
 			$mcode = Yii::$app->admin->identity->member_code;
 			$sign = Yii::$app->admin->identity->sign;
-// 			$membership = MemberService::getMemberbysign($sign);
 			$type = Yii::$app->admin->identity->member_type;
 			if($type == 1){
 				//普通会员
@@ -193,7 +186,6 @@
 		{
 			$mcode = Yii::$app->admin->identity->member_code;
 			$sign = Yii::$app->admin->identity->sign;
-// 			$membership = MemberService::getMemberbysign($sign);
 			$type = Yii::$app->admin->identity->member_type;
 			if($type == 1){
 				//普通会员
@@ -214,133 +206,164 @@
 		
 		
 		
-	public function actionConnecterror()
-	{
-		$mcode = Yii::$app->admin->identity->member_code;
-		$sign = Yii::$app->admin->identity->sign;
-// 		$membership = MemberService::getMemberbysign($sign);
-		$type = Yii::$app->admin->identity->member_type;
-		if($type == 1){
-			//普通会员
-			$membership = MemberService::getMemberbysign($sign);
-		}else {
-			//船员
-			$membership =  MemberService::getCrewBySign($sign);
-		}
-		$passport = $membership['passport_number'];
-		//查询流量
-		$flow_info = MyCurl::CheckFlowAndParse($passport);
-		//连接记录
-		$log = MyWifi::FindWifiLoginLog($mcode);
-		
-		return $this->render('connecterror',['membership'=>$membership,'flow_info'=>$flow_info]);
-	}
-		
-		
-	public function actionDisconnecterror()
-	{
-		$mcode = Yii::$app->admin->identity->member_code;
-		$sign = Yii::$app->admin->identity->sign;
-// 		$membership = MemberService::getMemberbysign($sign);
-		$type = Yii::$app->admin->identity->member_type;
-		if($type == 1){
-			//普通会员
-			$membership = MemberService::getMemberbysign($sign);
-		}else {
-			//船员
-			$membership =  MemberService::getCrewBySign($sign);
-		}
-		$passport = $membership['passport_number'];
-		//查询流量
-		$flow_info = MyCurl::CheckFlowAndParse($passport);
-		//连接记录
-		$log = MyWifi::FindWifiLoginLog($mcode);
-		
-		return $this->render('disconnecterror',['membership'=>$membership,'flow_info'=>$flow_info]);
-	}
-	
-	
-	//重置密码
-	public function actionResetpassword()
-	{
-		$type = Yii::$app->admin->identity->member_type;
-		$mcode = Yii::$app->admin->identity->member_code;
-		$new_password = Yii::$app->request->post('password');
-		
-		if(!empty($new_password)){
+		public function actionConnecterror()
+		{
+			$mcode = Yii::$app->admin->identity->member_code;
+			$sign = Yii::$app->admin->identity->sign;
+			$type = Yii::$app->admin->identity->member_type;
 			if($type == 1){
 				//普通会员
-				//重新设置密码
-				$sql = "UPDATE `vcos_member` SET member_password = '".md5($new_password)."' WHERE member_code='$mcode'";
-				$response = Yii::$app->mdb->createCommand($sql)->execute;
-				
-			}else{
+				$membership = MemberService::getMemberbysign($sign);
+			}else {
 				//船员
-				//重新设置密码
-				$sql = "UPDATE `vcos_wifi_crew` SET crew_password ='".md5($new_password)."' WHERE crew_code='$mcode'";
-				$response = Yii::$app->mdb->createCommand($sql)->execute;
+				$membership =  MemberService::getCrewBySign($sign);
 			}
+			$passport = $membership['passport_number'];
+			//查询流量
+			$flow_info = MyCurl::CheckFlowAndParse($passport);
+			//连接记录
+			$log = MyWifi::FindWifiLoginLog($mcode);
 			
-			return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/site/logout"));
-			//TODO	逻辑处理没想好
-// 			if($response){
-// 				//修改成功,注销登录
-// 				return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/site/logout"));
-// 			}else {
-// 				//修改失败，跳转到修改失败界面，并注销登录
-// 				return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/site/logout"));
-// 			}
+			return $this->render('connecterror',['membership'=>$membership,'flow_info'=>$flow_info]);
+		}
+			
+			
+		public function actionDisconnecterror()
+		{
+			$mcode = Yii::$app->admin->identity->member_code;
+			$sign = Yii::$app->admin->identity->sign;
+			$type = Yii::$app->admin->identity->member_type;
+			if($type == 1){
+				//普通会员
+				$membership = MemberService::getMemberbysign($sign);
+			}else {
+				//船员
+				$membership =  MemberService::getCrewBySign($sign);
+			}
+			$passport = $membership['passport_number'];
+			//查询流量
+			$flow_info = MyCurl::CheckFlowAndParse($passport);
+			//连接记录
+			$log = MyWifi::FindWifiLoginLog($mcode);
+			
+			return $this->render('disconnecterror',['membership'=>$membership,'flow_info'=>$flow_info]);
+		}
+
+		//重置密码--第一次登录时
+		public function actionResetpassword()
+		{
+			return $this->render('resetpassword');
 		}
 		
-		return $this->render('resetpassword');
-	}
-	
-	
-	public  function actionChangepassword()
-	{
-		$passport = Yii::$app->request->post('passport');
-		$old_password = Yii::$app->request->post('old_password');
-		$new_password = Yii::$app->request->post('new_password');
-		//TODO	修改密码需要的字段没想好
 		
-	}
-	
-	
-	
-	
-		//测试用的
-		public function actionTest()
+		//重置密码---实现逻辑
+		public function actionResetpasswordvalidate()
 		{
-// 			$sign = Yii::$app->admin->identity->sign;
-// 			$member = MemberService::getMemberbysign($sign);
+			$password = Yii::$app->request->post('password');
+			$password_again = Yii::$app->request->post('password_again');
 			
-// 			$transaction = Yii::$app->mdb->beginTransaction();
-// 			try {
-// 				//直接支付
-// 				$money = 1000 - (1 * 100);	//注意转换单位
-// 				if($type == 1){
-// 					$member['member_money'] = $money;
-// 					$member->save();
-// 				}else{
-// 					$sql = " UPDATE vcos_wifi_crew SET money='$money' WHERE crew_id='{$member['member_id']}' ";
-// 					Yii::$app->mdb->createCommand($sql)->execute();
-// 				}
+			if(!empty($password) && !empty($password_again)){
+				if($password === $password_again){
+					if(strlen($password) < 13 && strlen($password) > 3){
+						$type = Yii::$app->admin->identity->member_type;
+						$passport_number = Yii::$app->admin->identity->passport_number;
+						if($type == 1){
+							//普通会员
+							$sql = " UPDATE  `vcos_member` SET `member_password`='".md5($password)."' WHERE `passport_number`='$passport_number' ";
+							Yii::$app->mdb->createCommand($sql)->execute();
+						}else {
+							//船员
+							$sql = " UPDATE `vcos_wifi_crew` SET `crew_password`='".md5($password)."' WHERE `passport_number`='$passport_number'";
+							Yii::$app->mdb->createCommand($sql)->execute();
+						}
+						return $this->render('resetpassword_right',['password'=>$password]);
+					}else {
+						return $this->render('resetpassword_wrong',['message'=>'密码长度请保持在4位到12位之间']);
+					}
+				}else {
+					return $this->render('resetpassword_wrong',['message'=>'两次密码不一致']);
+				}
+			}else{
+				return $this->render('resetpassword_wrong',['message'=>'修改的密码不能为空']);
+			}
+		}
+		
+		
+		//忘记密码界面
+		public function actionForgetpassword()
+		{
+			return $this->render('forgetpassword');
+		}
+		
+		
+		//忘记密码---修改密码逻辑实现---
+		public function actionForgetpasswordvalidate()
+		{
+			$passport_number = Yii::$app->request->post('passport_number');
+			$mobile_number = Yii::$app->request->post('mobile_number');
 			
+			if(!empty($passport_number) && !empty($mobile_number)){
+				$sql = "SELECT * FROM `vcos_member_crew` WHERE `passport_number`='$passport_number' AND `mobile_number`='$mobile_number'";
+				$member = Yii::$app->mdb->createCommand($sql)->queryOne();
+				if($member){
+					$type = $member['member_type'];
+					$new_password  = rand(100000,999999);
+					if($type == 1){
+						//普通会员
+						$sql = " UPDATE  `vcos_member` SET `member_password`='".md5($new_password)."' WHERE `passport_number`='$passport_number' ";
+						Yii::$app->mdb->createCommand($sql)->execute();
+					}else {
+						//船员
+						$sql = " UPDATE `vcos_wifi_crew` SET `crew_password`='".md5($new_password)."' WHERE `passport_number`='$passport_number'";
+						Yii::$app->mdb->createCommand($sql)->execute();
+					}
+					return $this->render('forgetpassword_right',['new_password'=>$new_password]);
+				}else {
+					return $this->render('forgetpassword_wrong');
+				}
+			}else {
+				return $this->render('forgetpassword_wrong');
+			}
+		}
+
+		
+		//修改密码
+		public  function actionChangepassword()
+		{
+			return $this->render('changepassword');
+		}
+		
+		
+		//修改密码---逻辑实现---
+		public function actionChangepasswordvalidate()
+		{
+			$password = Yii::$app->request->post('password');
+			$password_again = Yii::$app->request->post('password_again');
 			
-// 				//充值wifi对应的钱，对接接口
-// 				// 						MyCurl::RechargeWifi($member['passport_number'],$sale_price);
-// 				MyCurl::RechargeWifi($member['passport_number'],$wifi_item['wifi_flow']);		//comst 充值时按照流量和金额1:1比例
-			
-// 				//记录购买Wifi记录
-// 				self::CreateWifiPayLog($sign,$membership_code,$wifi_item,$type);
-			
-// 				$response['data'] = ['code'=>1,'message'=>'Pay Success!'];
-// 				$transaction->commit();
-// 			}catch (EXception $e){
-// 				$transaction->rollBack();
-// 				$response ['error'] = ['errorCode' => 2,'message' => 'System Wrong!'];
-// 			}
-			
+			if(!empty($password) && !empty($password_again)){
+				if($password === $password_again){
+					if(strlen($password) < 13 && strlen($password) > 3){
+						$type = Yii::$app->admin->identity->member_type;
+						$passport_number = Yii::$app->admin->identity->passport_number;
+						if($type == 1){
+							//普通会员
+							$sql = " UPDATE  `vcos_member` SET `member_password`='".md5($password)."' WHERE `passport_number`='$passport_number' ";
+							Yii::$app->mdb->createCommand($sql)->execute();
+						}else {
+							//船员
+							$sql = " UPDATE `vcos_wifi_crew` SET `crew_password`='".md5($password)."' WHERE `passport_number`='$passport_number'";
+							Yii::$app->mdb->createCommand($sql)->execute();
+						}
+						return $this->render('changepassword_right',['password'=>$password]);
+					}else {
+						return $this->render('changepassword_wrong',['message'=>'密码长度请保持在4位到12位之间']);
+					}
+				}else {
+					return $this->render('changepassword_wrong',['message'=>'两次密码不一致']);
+				}
+			}else{
+				return $this->render('changepassword_wrong',['message'=>'修改的密码不能为空']);
+			}
 		}
 	}
 

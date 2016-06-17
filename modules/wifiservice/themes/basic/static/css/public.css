@@ -11,19 +11,20 @@ body,html { padding: 0; margin: 0; color: #4d4d4d; }
 h1,h2,h3,p { margin: 0; }
 ul { list-style: none; }
 a { text-decoration: none; }
-input,button { outline: none; }
-input[type="button"] { -webkit-appearance:none; }
+input,button { outline: none; -webkit-appearance:none; }
 div,ul { box-sizing: border-box; }
 
 table { width: 100%; line-height: 40px; background-color: #fff; border: 2px solid #dbdbdb; border-collapse: collapse; text-align: center; }
 th,td { border-bottom: 2px solid #dbdbdb; }
+
+input[type="text"],input[type="password"] { display: block; width: 80%; padding: 0 10px; margin: 20px auto 0; line-height: 40px; height: 40px; background-color: #fafafa; border: 1px solid #dbdbdb; border-radius: 10px; box-sizing: border-box; font-size: 1rem; }
 
 /*common*/
 .l { float: left; }
 .r { float: right; }
 .clearfix{ *zoom: 1; }
 .clearfix:after{ content: ""; display: block; height:0; clear:both; }
-.bodyBox { max-width: 720px; min-height: 100vh; margin: 0 auto; background-color: #f0f0f0; border: 1px solid #dbdbdb; }
+.bodyBox { max-width: 720px; min-height: 100vh; margin: 0 auto; background-color: #ecedf1; border: 1px solid #dbdbdb; }
 .pBox { padding: 20px; }
 .em { font-style: normal; color: #f25721; }
 .point { font-size: .8rem; color: #f25721; }

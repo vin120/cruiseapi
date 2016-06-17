@@ -12,7 +12,7 @@
 		<!-- header start -->
 		<header id="mainHeader">
 			<div class="clearfix">
-				<span class="l">欢迎您，<?php echo $membership['cn_name']?></span>
+				<span class="l">欢迎您，<?php echo $membership['cn_name']?>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<?php echo Url::toRoute(['wifi/changepassword']);?>"><u>修改密码</u></a></span>
 				<a href="<?php echo Url::toRoute(['site/logout'])?>" class="r">退出</a>
 			</div>
 			<div class="surplus">
