@@ -77,11 +77,11 @@ window.onload = function(){
 	        	if(response['success'] == true){
 	        		location.href ="<?php echo Url::toRoute(['wifi/disconnect']);?>";
 	        	}else{
-	        		location.href = "<?php echo Url::toRoute(['wifi/connecterror'])?>";
+	        		location.href = "<?php echo Url::toRoute(['wifi/connecterror'])?>?error="+response['Info'];
 	        	}
 	        },
 	        error: function(XMLHttpRequest, textStatus, errorThrown) {
-	        	location.href = "<?php echo Url::toRoute(['wifi/connecterror'])?>";
+	        	location.href = "<?php echo Url::toRoute(['wifi/connecterror'])?>?error=连接失败";
 	        }
 		});
 	});

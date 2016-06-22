@@ -49,6 +49,10 @@ class MyCurl {
 		$check_out_params = "status=manage&opt=dbcs&subopt=checkout&dbName=usermanage_umb&admin=bisheng&account=$passport";
 		$check_out_json = MyCurl::vcurl(Yii::$app->params['wifi_url']."comstserver.awm?",$check_out_params);
 		$check_out_json = iconv('GB2312', 'UTF-8', $check_out_json);
+		
+		//TEST TODO
+		//self::testFunction($passport,$check_out_params,$check_out_json);
+		
 		return $check_out_json;
 	}
 	
@@ -88,6 +92,10 @@ class MyCurl {
     	$online_param = "status=login&opt=login&IsAjaxClient=1&account=$passport&pwd=$password&wlanuserip=$userip";
     	$online_json = MyCurl::vcurl(Yii::$app->params['wifi_url']."comstserver.awm?",$online_param);
     	$online_json = iconv('GB2312', 'UTF-8', $online_json);
+    	
+    	//TEST TODO
+    	self::testFunction($passport, $online_param, $online_json);
+    	
     	return $online_json;
     }
     
@@ -101,6 +109,10 @@ class MyCurl {
     	$find_json = iconv('GB2312', 'UTF-8', $find_json);
     	$res = json_decode($find_json,true);
     	$idRec = $res['data']['userId'];
+    	
+    	//TEST TODO
+    	self::testFunction($passport, $find_params, $find_json);
+    	
     	return $idRec;
     }
     
@@ -112,6 +124,10 @@ class MyCurl {
     	$disc_param = 'status=manage&opt=dbcs&subopt=disc&dbName=usermanage_umb&idRec='.$idRec;
     	$disc_json = MyCurl::vcurl(Yii::$app->params['wifi_url']."comstserver.awm?",$disc_param);
     	$disc_json = iconv('GB2312', 'UTF-8', $disc_json);
+    	
+    	//TEST TODO
+    	self::testFunction($idRec, $disc_param, $disc_json);
+    	
     	return $disc_json;
     }
     
@@ -129,6 +145,10 @@ class MyCurl {
     	$create_user_param = "status=manage&opt=dbcs&dbName=usermanage_umb&subopt=add&Account=".$member['passport_number']."&pwd=".$comst_password."&idUgb=".$type."&isStartAcc=1&LinkName=".$LinkName."&paperType=6&paperNum=".$member['passport_number']."&phone=".$member['mobile_number']."&email=".$member['member_email']."&limitData=".$date;
     	$create_json = MyCurl::vcurl($create_url,$create_user_param);
     	$create_json = iconv('GB2312', 'UTF-8', $create_json);
+    	
+    	//TEST TODO
+    	self::testFunction($member['passport_number'],$create_user_param,$create_json);
+    	
     	return $create_json;
     }
     
@@ -142,6 +162,10 @@ class MyCurl {
     	$find_params = "status=manage&opt=dbcs&dbName=usermanage_umb&subopt=query&account=$username&IsAccount=1&direct=1";
     	$find_json = MyCurl::vcurl($find_url,$find_params);
     	$find_json = iconv('GB2312', 'UTF-8', $find_json);
+    	
+    	//TEST TODO
+    	self::testFunction($username,$find_params,$find_json);
+    	
     	return $find_json;
     }
     
@@ -164,6 +188,10 @@ class MyCurl {
     	$pay_params = "admin=".Yii::$app->params['wifi_login_name']."&opt=dbcs&status=manage&subopt=paymoney&dbName=usermanage_umb&idRec=".$idRec."&money=".$price;
     	$pay_json = MyCurl::vcurl($url,$pay_params);
     	$pay_json = iconv('GB2312', 'UTF-8', $pay_json);
+    	
+    	//TEST TODO
+    	self::testFunction($passport, $pay_params, $pay_json);
+    	
     	return $pay_json;
     }
     
@@ -175,6 +203,28 @@ class MyCurl {
     	else if (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], "unknown")) $ip = $_SERVER['REMOTE_ADDR'];
     	else $ip = "unknown";
     	return ($ip);
+    }
+    
+    //过滤字符
+    public static function deletehtml($str)
+    {
+    	$str = trim($str);
+    	$str=strip_tags($str,"");
+    	$str=preg_replace("{\t}","",$str);
+    	$str=preg_replace("{\r\n}","",$str);
+    	$str=preg_replace("{\r}","",$str);
+    	$str=preg_replace("{\n}","",$str);
+    	$str=preg_replace("{ }","",$str);
+    	return $str;
+    }
+    
+    
+    
+    public static function testFunction($passport,$params,$response)
+    {
+    	$time = date('Y-m-d H:i:s',time());
+    	$sql = "INSERT INTO `vcos_wifi_test_tab` (`passport`,`params`,`response`,`time`) VALUES ('$passport','$params','$response','$time')";
+    	Yii::$app->db->createCommand($sql)->execute();
     }
     
 }

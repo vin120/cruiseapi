@@ -71,7 +71,7 @@ $page_active = isset($active) ? $active : 0;
 <?php
 
 $this->registerJs('
-		
+	var ipErrorMessage = \''.$model->getFirstError('ip') .'\';
 	var errorMessage = \''.$model->getFirstError('password') .'\';
 	var ios_address = \''.Yii::$app->params['ios_address'].'\';
 	var android_address = \''.Yii::$app->params['android_address'].'\';
@@ -91,6 +91,10 @@ $this->registerJs('
 		
 	window.onload=function(){
 	
+	if(ipErrorMessage != \'\'){
+		$("#passwordthis").append("<strong class=\'point\' style=\'color:red;\'>连接的IP有误</strong>");
+	}
+		
 	if(errorMessage != \'\'){
 		$("#passwordthis").append("<strong class=\'point\' style=\'color:red;\'>护照号或者密码有误</strong>");
 	}

@@ -80,12 +80,14 @@ class ServiceController extends Controller
         	
         	$online_json = MyCurl::Connect($membership['passport_number'],$password);
         	$online_arr = json_decode($online_json,true);
+        	$online_json = Mycurl::deletehtml($online_json);
         	if($online_arr['success']){
         		//write login log to db
         		MyWifi::WriteWifiLoginLogToDB($membership,$wifi_online_in_flow,$wifi_online_out_flow,$wifi_online_total_flow);
         		echo $online_json;
         	}else{
-        		echo '{"success":false,"Info":"流量不足，请及时充值"}';
+        		//echo '{"success":false,"Info":"流量不足，请及时充值"}';
+        		echo $online_json;
         	}
         	
         }else{

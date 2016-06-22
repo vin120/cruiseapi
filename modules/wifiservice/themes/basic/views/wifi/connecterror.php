@@ -28,9 +28,10 @@
 		<!-- content start -->
 		<div class="tabContent">
 			<div class="iconBox">
-				<h2 class="error">流量不足</h2>
-				<p>很抱歉，你的wifi剩余流量不足，</p>
-				<p>请及时充值</p>
+				<h2 class="error">连接出错</h2>
+				<p>很抱歉，连接出现</p>
+				<p>错误内容：<?php echo Yii::$app->request->get('error');?></p>
+				<p>请与前台服务反馈</p>
 			</div>
 			<div class="btnBox">
 				<input type="button" id="button" value="返回"></input>
@@ -46,6 +47,5 @@ window.onload = function(){
 	$("#button").on("click",function(){
 		location.href ="<?php echo Url::toRoute(['wifi/loginstatus']);?>";
 	});
-	
 }
 </script>
