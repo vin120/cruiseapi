@@ -52,7 +52,7 @@ class Admin extends MymemberActiveRecord implements IdentityInterface
      */
     public static function findByUsername($username)
     {
-		if((substr($username,0,3) == 'TS_') || (substr($username, 0,3) == 'ts_'))
+		if((substr($username,0,3) == 'TS@') || (substr($username, 0,3) == 'ts@') || (substr($username, 0,3) == 'TS_') || (substr($username, 0,3) == 'ts_') )
 		{
 			//如果存在前缀,则是船员
 			return static::findOne(['member_code'=>$username]);

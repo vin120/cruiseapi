@@ -29,7 +29,7 @@
 			<div>
 				<ul id="packageList">
 				<?php foreach($wifi_items as $key => $wifi_item):?>
-					<li><input type="radio" id="wifi_id"  name="wifi_id" value="<?php echo $wifi_item['wifi_id']?>"  <?php if($key == 0){?>  checked="checked" <?php }?>></input><?php echo $wifi_item['wifi_name']?><em class="em">（$<?php echo $wifi_item['sale_price']?>）</em></li>
+					<li><input type="radio" id="wifi_id"  name="wifi_id" value="<?php echo $wifi_item['wifi_id']?>"  <?php if($key == 0){?>  checked="checked" <?php }?>></input><?php echo $wifi_item['wifi_name']?><em class="em">（￥<?php echo $wifi_item['sale_price']?>）</em></li>
 				<?php endforeach;?>
 				</ul>
 				<div class="btnBox">
@@ -50,7 +50,7 @@
 					<?php foreach($pay_log as $row ):?>
 						<tr>
 							<td><?php echo $row['name'];?></td>
-							<td>$<?php echo $row['price'];?></td>
+							<td>￥<?php echo $row['price'];?></td>
 							<td><?php echo $row['pay_time']?></td>
 						</tr>
 					<?php endforeach;?>

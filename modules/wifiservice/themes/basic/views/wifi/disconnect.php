@@ -76,12 +76,12 @@ window.onload = function(){
 	        	if(response['success'] == true){
 	        		location.href ="<?php echo Url::toRoute(['wifi/connect']);?>";
 	        	}else{
-					location.href = "<?php echo Url::toRoute(['wifi/connecterror'])?>";
+					location.href = "<?php echo Url::toRoute(['wifi/disconnecterror'])?>";
 	        	}
 	        },
 	        error: function(XMLHttpRequest, textStatus, errorThrown) {
 // 				console.log("error");
-	        	location.href = "<?php echo Url::toRoute(['wifi/connecterror'])?>";
+	        	location.href = "<?php echo Url::toRoute(['wifi/disconnecterror'])?>";
 	        }
 		});
 	});

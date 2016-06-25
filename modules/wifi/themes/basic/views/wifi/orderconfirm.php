@@ -29,7 +29,7 @@
 			<h2 class="title pBox">Wifi订单确认</h2>
 			<div id="orderInfo" class="pBox">
 				<p>商品名称：<?php echo $wifi_item['wifi_name'];?></p>
-				<p>订单金额：<em class="em">$<?php echo $wifi_item['sale_price'];?></em></p>
+				<p>订单金额：<em class="em">￥<?php echo $wifi_item['sale_price'];?></em></p>
 			</div>
 			<div class="point pBox">
 				<p>1.购买前请确认您的房卡中余额充足。</p>

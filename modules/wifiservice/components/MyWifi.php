@@ -66,7 +66,7 @@
 					//查询用户是否存在
 					$find_res = MyCurl::FindUser($member['passport_number']);
 					$find_res = json_decode($find_res,true);
-					if(!$find_res['data']){
+					if($find_res['success']===false){
 						//没找到用户
 						//创建用户,并加入组，对接接口
 						//创建一个随机的6位密码，存放在comst
@@ -79,10 +79,18 @@
 						if($res['success'] === false){
 							return $response['error'] = ['errorCode'=>2,'message'=>$res['Info']];
 							die();
+						}else{
+							//把用户写入本地数据库中
+							$sql = "SELECT * FROM `vcos_comst_wifi` WHERE `username`='$username' ";
+							$comst_user = Yii::$app->db->createCommand($sql)->queryOne();
+							if($comst_user){
+								$sql = "UPDATE `vcos_comst_wifi` SET `password`='$comst_password' WHERE `username`='$username' ";
+								Yii::$app->db->createCommand($sql)->execute();
+							}else {
+								$sql = "INSERT INTO `vcos_comst_wifi` (`username`,`password`,`create_time`) VALUES('$username','$comst_password','$create_time')";
+								Yii::$app->db->createCommand($sql)->execute();
+							}
 						}
-						//把用户写入本地数据库中
-						$sql = "INSERT INTO `vcos_comst_wifi` (`username`,`password`,`create_time`) VALUES('$username','$comst_password','$create_time')";
-						Yii::$app->db->createCommand($sql)->execute();
 					}
 
 					//事务处理
@@ -98,9 +106,27 @@
 							Yii::$app->mdb->createCommand($sql)->execute();
 						}
 						
-
+						
+						//先断开连接,避免产生流量记录中会出现负数的情况，所以在充值之前要先断开网络
+						//查找comst中$passport对应的idRec
+						$idRec = MyCurl::FindidRec($member['passport_number']);
+						//断开连接网络
+						$disc_json = MyCurl::DisConnect($idRec);
+						//查流量
+						$check_out_json = MyCurl::CheckFlow($member['passport_number']);
+						$check_out_array = json_decode($check_out_json,true);
+						$arr = explode("<br>", $check_out_array['data']['feeInfo']);
+						//剔除不必要的字符
+						$wifi_online_in_flow = str_replace('MB','',explode(": ",$arr[5])[1]);
+						$wifi_online_out_flow = str_replace('MB','',explode(": ",$arr[6])[1]);
+						$wifi_online_total_flow = str_replace('MB','',explode(": ",$arr[7])[1]);
+						//断开连接记录写入DB
+						MyWifi::WriteWifiLogoutLogToDB($member,$wifi_online_in_flow,$wifi_online_out_flow,$wifi_online_total_flow);
+						
+						
+						
+						
 						//充值wifi对应的钱，对接接口
-// 						MyCurl::RechargeWifi($member['passport_number'],$sale_price);
 						MyCurl::RechargeWifi($member['passport_number'],$wifi_item['wifi_flow']);		//comst 充值时按照流量和金额1:1比例
 
 						//记录购买Wifi记录

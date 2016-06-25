@@ -105,7 +105,7 @@ class SiteController extends Controller
         	}
         	
         	
-        if($type == 2){
+        	if($type == 2){
         		//船员
         		
         		//获取数据库中的limit_ip
@@ -123,11 +123,23 @@ class SiteController extends Controller
         			foreach ($limit_ip_arr as $limit_ip_tmp){
         				$limit_ip_tmp_arr =  explode(".",$limit_ip_tmp);	//通过. 分割limit_ip
         				
-        				if($limit_ip_tmp_arr[3] == 0){
+        				if($limit_ip_tmp_arr[2] == 0){
+        					//截取前面的2段
+        					$limit_ip_segment = $limit_ip_tmp_arr[0].$limit_ip_tmp_arr[1];
+        					 
+        					//截取crew_online_ip
+        					$crew_onlie_ip_arr = explode(".", $crew_onlie_ip);
+        					$crew_onlie_ip_segment = $crew_onlie_ip_arr[0].$crew_onlie_ip_arr[1];
+        					//与船员的ip前面3段对比
+        					if($limit_ip_segment === $crew_onlie_ip_segment){
+        						$tag = 1;
+        						break;
+        					}
+        				}else if($limit_ip_tmp_arr[2] != 0 && $limit_ip_tmp_arr[3] == 0){
         					//截取到的是ip段
         					//截取前面的3段
         					$limit_ip_segment = $limit_ip_tmp_arr[0].$limit_ip_tmp_arr[1].$limit_ip_tmp_arr[2];
-        				
+        					
         					//截取crew_online_ip
         					$crew_onlie_ip_arr = explode(".", $crew_onlie_ip);
         					$crew_onlie_ip_segment = $crew_onlie_ip_arr[0].$crew_onlie_ip_arr[1].$crew_onlie_ip_arr[2];
@@ -144,7 +156,6 @@ class SiteController extends Controller
         					}
         				}
         			}
-        			
         			if($tag == 0){
         				//两个ip不相同
         				Yii::$app->admin->logout();
@@ -203,11 +214,23 @@ class SiteController extends Controller
         			foreach ($limit_ip_arr as $limit_ip_tmp){
         				$limit_ip_tmp_arr =  explode(".",$limit_ip_tmp);	//通过. 分割limit_ip
         				
-        				if($limit_ip_tmp_arr[3] == 0){
+        				if($limit_ip_tmp_arr[2] == 0){
+        					//截取前面的2段
+        					$limit_ip_segment = $limit_ip_tmp_arr[0].$limit_ip_tmp_arr[1];
+        					 
+        					//截取crew_online_ip
+        					$crew_onlie_ip_arr = explode(".", $crew_onlie_ip);
+        					$crew_onlie_ip_segment = $crew_onlie_ip_arr[0].$crew_onlie_ip_arr[1];
+        					//与船员的ip前面3段对比
+        					if($limit_ip_segment === $crew_onlie_ip_segment){
+        						$tag = 1;
+        						break;
+        					}
+        				}else if($limit_ip_tmp_arr[2] != 0 && $limit_ip_tmp_arr[3] == 0){
         					//截取到的是ip段
         					//截取前面的3段
         					$limit_ip_segment = $limit_ip_tmp_arr[0].$limit_ip_tmp_arr[1].$limit_ip_tmp_arr[2];
-        				
+        					
         					//截取crew_online_ip
         					$crew_onlie_ip_arr = explode(".", $crew_onlie_ip);
         					$crew_onlie_ip_segment = $crew_onlie_ip_arr[0].$crew_onlie_ip_arr[1].$crew_onlie_ip_arr[2];
@@ -224,7 +247,6 @@ class SiteController extends Controller
         					}
         				}
         			}
-        			
         			if($tag == 0){
         				//两个ip不相同
         				Yii::$app->admin->logout();

@@ -365,5 +365,10 @@
 				return $this->render('changepassword_wrong',['message'=>'修改的密码不能为空']);
 			}
 		}
+		
+		public function actionLowversion()
+		{
+			return $this->render('lowversion');
+		}
 	}
 

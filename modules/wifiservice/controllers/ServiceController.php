@@ -16,7 +16,6 @@ class ServiceController extends Controller
     public function actionCheckoutflow()
     {
         $sign = Yii::$app->admin->identity->sign;
-//         $member = MemberService::getMemberbysign($sign);
         $type = Yii::$app->admin->identity->member_type;
         if($type == 1){
         	//会员
@@ -50,7 +49,6 @@ class ServiceController extends Controller
     public function actionWificonnect()
     { 
     	$sign = Yii::$app->admin->identity->sign;
-//         $member = MemberService::getMemberbysign($sign);
     	$type = Yii::$app->admin->identity->member_type;
     	if($type == 1){
     		//会员
@@ -62,7 +60,7 @@ class ServiceController extends Controller
         //先查看comst 中有没有这个用户
         $find_res = MyCurl::FindUser($membership['passport_number']);
         $find_res = json_decode($find_res,true);
-        if($find_res['data']){
+        if($find_res['success']!==false){
         	//查流量
         	$check_out_json = MyCurl::CheckFlow($membership['passport_number']);
         	$check_out_array = json_decode($check_out_json,true);
@@ -86,12 +84,11 @@ class ServiceController extends Controller
         		MyWifi::WriteWifiLoginLogToDB($membership,$wifi_online_in_flow,$wifi_online_out_flow,$wifi_online_total_flow);
         		echo $online_json;
         	}else{
-        		//echo '{"success":false,"Info":"流量不足，请及时充值"}';
-        		echo $online_json;
+        		echo '{"success":false,"Info":"'.$online_json.'"}';
         	}
         	
         }else{
-        	echo '{"success":false,"Info":"用户不存在，请先购买流量包"}';
+        	echo '{"success":false,"Info":"请先购买流量包"}';
         }     
     }
     
@@ -101,7 +98,6 @@ class ServiceController extends Controller
     public function actionWifidisconnect()
     {
     	$sign = Yii::$app->admin->identity->sign;
-//         $member = MemberService::getMemberbysign($sign);
         $type = Yii::$app->admin->identity->member_type;
         if($type == 1){
         	//会员
@@ -112,10 +108,13 @@ class ServiceController extends Controller
         //先查看comst 中有没有这个用户
         $find_res = MyCurl::FindUser($membership['passport_number']);
         $find_res = json_decode($find_res,true);
-        if($find_res['data']){
+        if($find_res['success']!==false){
 
         	//查找comst中$passport对应的idRec
         	$idRec = MyCurl::FindidRec($membership['passport_number']);
+        	
+        	//断开连接网络
+        	$disc_json = MyCurl::DisConnect($idRec);
         	
         	//查流量
         	$check_out_json = MyCurl::CheckFlow($membership['passport_number']);
@@ -126,10 +125,6 @@ class ServiceController extends Controller
         	$wifi_online_in_flow = str_replace('MB','',explode(": ",$arr[5])[1]);
         	$wifi_online_out_flow = str_replace('MB','',explode(": ",$arr[6])[1]);
         	$wifi_online_total_flow = str_replace('MB','',explode(": ",$arr[7])[1]);
-        	 
-        	
-        	//断开连接网络
-        	$disc_json = MyCurl::DisConnect($idRec);
         	
         	//断开连接记录写入DB
         	MyWifi::WriteWifiLogoutLogToDB($membership,$wifi_online_in_flow,$wifi_online_out_flow,$wifi_online_total_flow);

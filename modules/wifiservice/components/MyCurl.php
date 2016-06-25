@@ -1,5 +1,6 @@
 <?php
 	namespace app\modules\wifiservice\components;
+	
 	use Yii;
 	
 class MyCurl {
@@ -24,7 +25,7 @@ class MyCurl {
 	    if($cookie) {
 	    	curl_setopt($curl, CURLOPT_COOKIE, $cookie);
 	    }
-	    curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+	    curl_setopt($curl, CURLOPT_TIMEOUT, 15);
 	    curl_setopt($curl, CURLOPT_HEADER, 0);
 	    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 	    $tmpInfo = curl_exec($curl);
@@ -111,7 +112,7 @@ class MyCurl {
     	$idRec = $res['data']['userId'];
     	
     	//TEST TODO
-    	self::testFunction($passport, $find_params, $find_json);
+    	//self::testFunction($passport, $find_params, $find_json);
     	
     	return $idRec;
     }
@@ -147,7 +148,7 @@ class MyCurl {
     	$create_json = iconv('GB2312', 'UTF-8', $create_json);
     	
     	//TEST TODO
-    	self::testFunction($member['passport_number'],$create_user_param,$create_json);
+    	//self::testFunction($member['passport_number'],$create_user_param,$create_json);
     	
     	return $create_json;
     }
@@ -159,12 +160,14 @@ class MyCurl {
     	//模拟登录
     	MyCurl::vcurl(Yii::$app->params['wifi_url'].'comstserver.awm?','status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
     	$find_url = Yii::$app->params['wifi_url']."um_query/comstserver.awm?";
-    	$find_params = "status=manage&opt=dbcs&dbName=usermanage_umb&subopt=query&account=$username&IsAccount=1&direct=1";
+    	//TODO
+    	$find_params = "status=manage&opt=dbcs&subopt=recordByName&dbName=usermanage_umb&account=$username";
+//     	$find_params = "status=manage&opt=dbcs&dbName=usermanage_umb&subopt=query&account=$username&IsAccount=1&direct=1";
     	$find_json = MyCurl::vcurl($find_url,$find_params);
     	$find_json = iconv('GB2312', 'UTF-8', $find_json);
     	
     	//TEST TODO
-    	self::testFunction($username,$find_params,$find_json);
+//     	self::testFunction($username,$find_params,$find_json);
     	
     	return $find_json;
     }
@@ -182,17 +185,46 @@ class MyCurl {
     	$find_json = MyCurl::vcurl($url,$find_params);
     	$find_json = iconv('GB2312', 'UTF-8', $find_json);
     	$res = json_decode($find_json,true);
-    	$idRec = $res['data']['userId'];
     	
-    	//在comst系统中充钱
-    	$pay_params = "admin=".Yii::$app->params['wifi_login_name']."&opt=dbcs&status=manage&subopt=paymoney&dbName=usermanage_umb&idRec=".$idRec."&money=".$price;
-    	$pay_json = MyCurl::vcurl($url,$pay_params);
-    	$pay_json = iconv('GB2312', 'UTF-8', $pay_json);
-    	
+    	if(isset($res['data']['userId'])){
+    		$idRec = $res['data']['userId'];
+    		//在comst系统中充钱
+    		$pay_params = "admin=".Yii::$app->params['wifi_login_name']."&opt=dbcs&status=manage&subopt=paymoney&dbName=usermanage_umb&idRec=".$idRec."&money=".$price;
+    		$pay_json = MyCurl::vcurl($url,$pay_params);
+    		$pay_json = iconv('GB2312', 'UTF-8', $pay_json);
+    	}else {
+    		$pay_json = '';
+    	}
     	//TEST TODO
-    	self::testFunction($passport, $pay_params, $pay_json);
+    	//self::testFunction($passport, $pay_params, $pay_json);
     	
     	return $pay_json;
+    }
+    
+    
+    //初始化账户
+    public static function InitAccount($passport)
+    {
+    	//模拟登录
+    	MyCurl::vcurl(Yii::$app->params['wifi_url'].'comstserver.awm?','status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
+    	
+    	//查找comst中$passport对应的idRec
+    	$url = Yii::$app->params['wifi_url']."fee_checkout/comstserver.awm?";
+    	$find_params = "status=manage&subopt=checkout&opt=dbcs&dbName=usermanage_umb&admin=".Yii::$app->params['wifi_login_name']."&account=$passport";
+    	$find_json = MyCurl::vcurl($url,$find_params);
+    	$find_json = iconv('GB2312', 'UTF-8', $find_json);
+    	$res = json_decode($find_json,true);
+    	
+    	if(isset($res['data']['userId'])){
+    		$idRec = $res['data']['userId'];
+    	
+    	$init_params = "status=manage&opt=dbcs&subopt=initAccount&dbName=usermanage_umb&idRec=".$idRec."&admin=".Yii::$app->params['wifi_login_name'];
+    	$init_json = MyCurl::vcurl($url,$init_params);
+    	$init_json = iconv('GB2312', 'UTF-8', $init_json);
+    	}else {
+    		$init_json = '';
+    	}
+    	return $init_json;
     }
     
     //获取用户ip
@@ -217,8 +249,6 @@ class MyCurl {
     	$str=preg_replace("{ }","",$str);
     	return $str;
     }
-    
-    
     
     public static function testFunction($passport,$params,$response)
     {

@@ -63,7 +63,6 @@ $page_active = isset($active) ? $active : 0;
 			</div>
 			<div class="link tc">
 				<a href="http://tsapi.cruisetone.com/notice.html">《上网须知》</a>
-				<a href="javascript:void(0);" onclick="tiplist(this,'post');">《邮轮须知》</a>
 			</div>
 		</div>
 	</div>

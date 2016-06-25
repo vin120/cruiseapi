@@ -9,7 +9,6 @@ class LoginAsset extends AssetBundle
     public $sourcePath = '@app/modules/wifiservice/themes/basic/static';
     public $css = [
         'css/public.css',
-		'css/pages.css',
     	'css/login.css',
     ];
     public $js = [

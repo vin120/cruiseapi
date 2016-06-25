@@ -3,13 +3,13 @@ use app\modules\wifiservice\themes\basic\myasset\LoginAsset;
 use yii\helpers\Url;
 LoginAsset::register($this);
 
-$this->title = '忘记密码';
+$this->title = '找回密码';
 $this->params['breadcrumbs'][] = $this->title;
 $baseUrl = $this->assetBundles[LoginAsset::className()]->baseUrl . '/';
 
 ?>
 	<div id="password" class="bodyBox">
-		<h1>修改密码</h1>
+		<h1>找回密码</h1>
 		<div class="formBox box">
 			<div class="message">填写如下相关以验证</div>
 			<div class="form">
