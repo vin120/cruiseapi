@@ -83,8 +83,6 @@ class MyCurl {
 		return $flow_info;
 	}
 	
-	
-	
 	//网络链接
     public static function Connect($passport,$password)
     {
@@ -227,6 +225,51 @@ class MyCurl {
     	return $init_json;
     }
     
+	
+	//初始化账户组
+	public static function InitAccountGroup($group_name)
+	{
+		//模拟登录
+		MyCurl::vcurl(Yii::$app->params['wifi_url'].'comstserver.awm?','status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
+
+		$url = Yii::$app->params['wifi_url']."fee_InitBatch/comstserver.awm?";
+		$find_params = "status=manage&subopt=query&opt=dbcs&dbName=usergroup_ugb&admin=".Yii::$app->params['wifi_login_name'];
+		$find_json = MyCurl::vcurl($url,$find_params);
+		$find_json = iconv('GB2312', 'UTF-8', $find_json);
+		$res = MyCurl::ext_json_decode($find_json,true);
+
+		$init_json = '初始化失败';
+
+		if(isset($res['total']))
+		{
+			$usergroup_array = isset($res['records']) ? $res['records'] : array();
+
+			foreach ($usergroup_array as $usergroup){
+
+				if( $group_name == $usergroup['name']){
+					$idUgb= $usergroup['idRec'];
+					$init_params = "status=manage&opt=dbcs&subopt=initBatch&dbName=usermanage_umb&ugName=".$group_name."&idUgb=".$idUgb."&admin=".Yii::$app->params['wifi_login_name'];
+					$init_json = MyCurl::vcurl($url,$init_params);
+					$init_json = iconv('GB2312', 'UTF-8', $init_json);
+					break;
+				}
+			}
+		}
+		return $init_json;
+	}
+
+	/** 兼容key没有双引括起来的JSON字符串解析
+	 * @param String $str JSON字符串
+	 * @param boolean $mod true:Array,false:Object
+	 * @return Array/Object
+	 */
+	public static function ext_json_decode($str, $mode=false){
+		if(preg_match('/\w:/', $str)){
+			$str = preg_replace('/(\w+):/is', '"$1":', $str);
+		}
+		return json_decode($str, $mode);
+	}
+	
     //获取用户ip
     public static function getIp() {
     	if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"), "unknown")) $ip = getenv("HTTP_CLIENT_IP");

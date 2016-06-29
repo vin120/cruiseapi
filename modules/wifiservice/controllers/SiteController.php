@@ -83,7 +83,7 @@ class SiteController extends Controller
     {
 		$active = Yii::$app->request->get("active",'1');
         $this->layout = 'login_loyout';
-        
+       
         if (!\Yii::$app->admin->isGuest) {
         	
         	$type = Yii::$app->admin->identity->member_type;
@@ -158,6 +158,7 @@ class SiteController extends Controller
         			}
         			if($tag == 0){
         				//两个ip不相同
+        				$model = new LoginForm();
         				Yii::$app->admin->logout();
         				$model->addError("ip","ip wrong");
         				return $this->render('agent_login', [
@@ -176,7 +177,6 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
-
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
         	$type = Yii::$app->admin->identity->member_type;
         	$member_code = Yii::$app->admin->identity->member_code;

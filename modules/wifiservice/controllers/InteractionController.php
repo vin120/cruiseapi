@@ -72,7 +72,7 @@ class InteractionController extends Controller
 			$response = '{"success":"false","message":"充值失败"}';
 		}
 		
-		$time = date('Y-m-d H:i:s',time());
+// 		$time = date('Y-m-d H:i:s',time());
 // 		$sql = "INSERT INTO vcos_wifi_test_tab (`passport`,`params`,`response`,`time`) VALUES ('$passport','recharge','$response','$time') ";
 // 		Yii::$app->db->createCommand($sql)->execute();
 		
@@ -83,8 +83,24 @@ class InteractionController extends Controller
 	public function actionInitaccount()
 	{
 		$passport = Yii::$app->request->post('passport');
+		$create_id = Yii::$app->request->post('create_id');	//操作员id
+		
+		$sql = " SELECT member_type FROM vcos_member_crew WHERE passport_number='$passport'";
+		$type = Yii::$app->mdb->createCommand($sql)->queryOne()['member_type'];
+		
+		$flow = MyCurl::CheckFlow($passport);
+		$flow_array = json_decode($flow,true);
+		//剩余余额
+		if($flow_array['success']){
+			$arr = explode("<br>", $flow_array['data']['feeInfo']);
+			$left_money = str_replace('元','',explode(": ",$arr[10])[1]);		//用户的当前余额
+		}else {
+			$left_money = 0;
+		}
+		
 		$init = MyCurl::InitAccount($passport);
 		$init_array = json_decode($init,true);
+		
 		if($init_array['success']){
 			$arr = explode("<br>", $init_array['data']['feeInfo']);
 			$title = explode(": ",$arr[0])[1];	//标题：按流量计费
@@ -99,10 +115,18 @@ class InteractionController extends Controller
 			$refund_money = str_replace('元','',explode(": ",$arr[9])[1]);		//期间退费
 			$money = str_replace('元','',explode(": ",$arr[10])[1]);		//用户的当前余额
 		
+			$time = time();
+			$init_date = date("Y-m-d",$time);
+			$init_time = date("H:i:s",$time);
+			
+			$sql = " INSERT INTO `vcos_wifi_account_init_log` (`init_type`,`passport_no`,`init_date`,`init_time`,`init_amount`,`account_info`,`create_id`) VALUES ('$type','$passport','$init_date','$init_time','$left_money','$init','$create_id')";
+			Yii::$app->db->createCommand($sql)->execute();
+			
 			$response = '{"success":"true","data":{"title":"'.$title.'","last_charge_time":"'.$last_charge_time.'","price":"'.$price.'","last_charge_money":"'.$last_charge_money.'","last_left_money":"'.$last_left_money.'","flow_in":"'.$flow_in.'","flow_out":"'.$flow_out.'","total_used_flow":"'.$total_used_flow.'","used_money":"'.$used_money.'","refund_money":"'.$refund_money.'","money":"'.$money.'"}}';
 		}else{
 			$response = '{"success":"false","message":"初始化失败"}';
 		}
+		
 		return $response;
 	}
 }

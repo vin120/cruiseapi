@@ -106,7 +106,6 @@
 							Yii::$app->mdb->createCommand($sql)->execute();
 						}
 						
-						
 						//先断开连接,避免产生流量记录中会出现负数的情况，所以在充值之前要先断开网络
 						//查找comst中$passport对应的idRec
 						$idRec = MyCurl::FindidRec($member['passport_number']);
@@ -122,9 +121,6 @@
 						$wifi_online_total_flow = str_replace('MB','',explode(": ",$arr[7])[1]);
 						//断开连接记录写入DB
 						MyWifi::WriteWifiLogoutLogToDB($member,$wifi_online_in_flow,$wifi_online_out_flow,$wifi_online_total_flow);
-						
-						
-						
 						
 						//充值wifi对应的钱，对接接口
 						MyCurl::RechargeWifi($member['passport_number'],$wifi_item['wifi_flow']);		//comst 充值时按照流量和金额1:1比例
@@ -322,7 +318,7 @@
 		{
 			$membership_id = $membership['member_id'];
 			$membership_code = $membership['member_code'];
-			$ip_address = '';
+			$ip_address = MyCurl::getIp();
 			$mac_address = '';
 			$wifi_login_time = date("Y-m-d H:i:s",time());
 // 			$wifi_logout_time = '';

@@ -30,7 +30,7 @@ input[type="text"],input[type="password"] { display: block; width: 80%; padding:
 .em { font-style: normal; color: #f25721; }
 .point { font-size: .8rem; color: #f25721; }
 .btnBox { margin: 20px 0; text-align: center; }
-.btnBox input { width: 90%; line-height: 2.5em; background-color: #5592dc; border: none; border-radius: 10px; text-align: center; color: #fff; cursor: pointer; font-size: 1rem; }
+.btnBox input { width: 90%; line-height: 2.5em; background-color: #5592dc; border: none; border-radius: 10px; text-align: center; color: #fff; cursor: pointer; font-size: 1rem; margin-bottom: 10px}
 .iconBox { margin: 20px 0; text-align: center; }
 .iconBox h2 { margin-bottom: 20px; }
 .iconBox .error { color: #f03331; }

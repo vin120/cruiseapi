@@ -370,5 +370,17 @@
 		{
 			return $this->render('lowversion');
 		}
+		
+		
+		public function actionTest()
+		{
+			
+			$name = '';
+			$response  = MyCurl::InitAccountGroup($name);
+			
+			var_dump($response);
+		}
+		
+		
 	}
 
