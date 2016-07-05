@@ -85,6 +85,22 @@
 						$member->member_money = $money;
 -                       $member->save();
 						
+						//先断开连接,避免产生流量记录中会出现负数的情况，所以在充值之前要先断开网络
+						//查找comst中$passport对应的idRec
+						$idRec = MyCurl::FindidRec($member['passport_number']);
+						//断开连接网络
+						$disc_json = MyCurl::DisConnect($idRec);
+						//查流量
+						$check_out_json = MyCurl::CheckFlow($member['passport_number']);
+						$check_out_array = json_decode($check_out_json,true);
+						$arr = explode("<br>", $check_out_array['data']['feeInfo']);
+						//剔除不必要的字符
+						$wifi_online_in_flow = str_replace('MB','',explode(": ",$arr[5])[1]);
+						$wifi_online_out_flow = str_replace('MB','',explode(": ",$arr[6])[1]);
+						$wifi_online_total_flow = str_replace('MB','',explode(": ",$arr[7])[1]);
+						//断开连接记录写入DB
+						MyWifi::WriteWifiLogoutLogToDB($member,$wifi_online_in_flow,$wifi_online_out_flow,$wifi_online_total_flow);
+
 
 						//充值wifi对应的钱，对接接口
 // 						MyCurl::RechargeWifi($member['passport_number'],$sale_price);
