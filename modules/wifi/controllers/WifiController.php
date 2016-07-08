@@ -14,7 +14,6 @@
 		//上网购买页面
 		public function actionIndex()
 		{
-			
 			$on_cruise = Yii::$app->params['on_cruise'];		//是否在船上
 			if(!$on_cruise){
 				return Yii::$app->getResponse()->redirect(Url::to("/wifi/wifi/403"));
@@ -22,21 +21,31 @@
 			
 			$mcode = Yii::$app->request->get('mcode');
 			
-			$membership = Member::find ()->select ( [
-					'member_id',
-					'member_code',
-					'cn_name',
-					'passport_number',
-					'member_password',
-					'member_email',
-					'mobile_number',
-					'member_money',
-					'sign',
-			] )->where ( [
-					'member_code' => $mcode
-			] )->one ();
+			if((substr($mcode,0,3) == 'TS@') || (substr($mcode, 0,3) == 'ts@') || (substr($mcode, 0,3) == 'TS_') || (substr($mcode, 0,3) == 'ts_')){
+				//船员
+				$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
+					crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount	
+					FROM vcos_wifi_crew WHERE crew_code=\''.$mcode.'\' ';
+				$membership = Yii::$app->mdb->createCommand($sql)->queryOne();
+				$type = 2;//1是会员，2是船员
+			} else {
+				//会员
+				$membership = Member::find ()->select ( [
+						'member_id',
+						'member_code',
+						'cn_name',
+						'passport_number',
+						'member_password',
+						'member_email',
+						'mobile_number',
+						'member_money',
+						'sign',
+				] )->where ( [
+						'member_code' => $mcode
+				] )->one ();
+				$type=1;		//1是会员，2是船员
+			}
 			
-			$type=1;		//1是会员，2是船员
 			$wifi_items = MyWifi::FindWifiService($type);
 			$passport = $membership['passport_number'];
 			
@@ -51,6 +60,7 @@
 			return $this->render('index',['membership'=>$membership,'wifi_items'=>$wifi_items,'flow_info'=>$flow_info,'pay_log'=>$pay_log,'mcode'=>$mcode]);
 		}
 		
+		
 		//确认支付页面
 		public function actionOrderconfirm()
 		{
@@ -59,22 +69,33 @@
 				return Yii::$app->getResponse()->redirect(Url::to("/wifi/wifi/403"));
 			}
 			
-			
 			$wifi_id = Yii::$app->request->get('wifi_id');
 			$mcode = Yii::$app->request->get('mcode');
 			
-			$member = Member::find ()->select ( [
-					'sign',
-			] )->where ( [
-					'member_code' => $mcode
-			] )->one ();
-			
 			if($wifi_id != ''){
+				
+				if((substr($mcode,0,3) == 'TS@') || (substr($mcode, 0,3) == 'ts@') || (substr($mcode, 0,3) == 'TS_') || (substr($mcode, 0,3) == 'ts_')){
+					//船员
+					$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
+					crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount
+					FROM vcos_wifi_crew WHERE crew_code=\''.$mcode.'\' ';
+					$membership = Yii::$app->mdb->createCommand($sql)->queryOne();
+					$type=2; //1是普通会员，2是船员
+				}else {
+					
+					//会员
+					$member = Member::find ()->select ( [
+							'sign',
+					] )->where ( [
+							'member_code' => $mcode
+					] )->one ();
+					$type=1;	//1是普通会员，2是船员
+					$sign = $member['sign'];
+					$membership = MemberService::getMemberbysign($sign);
+				}
+				
 				//获取套餐信息
 				$wifi_item = MyWifi::FindWifiServiceById($wifi_id);		
-				$sign = $member['sign'];
-				$membership = MemberService::getMemberbysign($sign);
-				$type=1;	//$type=1 1是普通会员，2是船员
 				$wifi_items = MyWifi::FindWifiService($type);
 				$passport = $membership['passport_number'];
 				//查询流量信息
@@ -97,15 +118,25 @@
 			$wifi_id = Yii::$app->request->post('wifi_id');
 			$mcode = Yii::$app->request->post('mcode');
 			
-			$member = Member::find ()->select ( [
-					'sign',
-			] )->where ( [
-					'member_code' => $mcode
-			] )->one ();
+			if((substr($mcode,0,3) == 'TS@') || (substr($mcode, 0,3) == 'ts@') || (substr($mcode, 0,3) == 'TS_') || (substr($mcode, 0,3) == 'ts_')){
+				//船员
+				$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
+					crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount
+					FROM vcos_wifi_crew WHERE crew_code=\''.$mcode.'\' ';
+				$member = Yii::$app->mdb->createCommand($sql)->queryOne();
+				$type = 2;
+			}else {
+				//会员
+				$member = Member::find ()->select ( [
+						'sign',
+				] )->where ( [
+						'member_code' => $mcode
+				] )->one ();
+				$type = 1;
+			}
 			
 			$sign =  $member['sign'];
-// 			$passport = $member['']
-			$response = MyWifi::WifiPay($sign,$wifi_id);
+			$response = MyWifi::WifiPay($sign,$wifi_id,$type);
 			echo json_encode($response);
 		}
 
@@ -120,14 +151,25 @@
 			
 			$mcode = Yii::$app->request->get('mcode');
 			
-			$member = Member::find ()->select ( [
+			if((substr($mcode,0,3) == 'TS@') || (substr($mcode, 0,3) == 'ts@') || (substr($mcode, 0,3) == 'TS_') || (substr($mcode, 0,3) == 'ts_')){
+				//船员
+				$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
+					crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount
+					FROM vcos_wifi_crew WHERE crew_code=\''.$mcode.'\' ';
+				$membership = Yii::$app->mdb->createCommand($sql)->queryOne();
+				$type = 2;
+			}else {
+				//会员
+				$member = Member::find ()->select ( [
 					'sign',
-			] )->where ( [
+				] )->where ( [
 					'member_code' => $mcode
-			] )->one ();
+				] )->one ();
+				$type = 1;
+				$sign =  $member['sign'];
+				$membership = MemberService::getMemberbysign($sign);
+			}
 			
-			$sign =  $member['sign'];
-			$membership = MemberService::getMemberbysign($sign);
 			$passport = $membership['passport_number'];
 			//查询流量信息
 			$flow_info = MyCurl::CheckFlowAndParse($passport);
@@ -145,14 +187,25 @@
 			
 			$mcode = Yii::$app->request->get('mcode');
 			
-			$member = Member::find ()->select ( [
+			if((substr($mcode,0,3) == 'TS@') || (substr($mcode, 0,3) == 'ts@') || (substr($mcode, 0,3) == 'TS_') || (substr($mcode, 0,3) == 'ts_')){
+				//船员
+				$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
+					crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount
+					FROM vcos_wifi_crew WHERE crew_code=\''.$mcode.'\' ';
+				$membership = Yii::$app->mdb->createCommand($sql)->queryOne();
+				$type = 2;
+			}else {
+				//会员
+				$member = Member::find ()->select ( [
 					'sign',
-			] )->where ( [
+				] )->where ( [
 					'member_code' => $mcode
-			] )->one ();
+				] )->one ();
+				$type = 1;
+				$sign =  $member['sign'];
+				$membership = MemberService::getMemberbysign($sign);
+			}
 			
-			$sign =  $member['sign'];
-			$membership = MemberService::getMemberbysign($sign);
 			$passport = $membership['passport_number'];
 			//查询流量信息
 			$flow_info = MyCurl::CheckFlowAndParse($passport);
@@ -169,14 +222,25 @@
 			
 			$mcode = Yii::$app->request->get('mcode');
 			
-			$member = Member::find ()->select ( [
+			if((substr($mcode,0,3) == 'TS@') || (substr($mcode, 0,3) == 'ts@') || (substr($mcode, 0,3) == 'TS_') || (substr($mcode, 0,3) == 'ts_')){
+				//船员
+				$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
+					crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount
+					FROM vcos_wifi_crew WHERE crew_code=\''.$mcode.'\' ';
+				$membership = Yii::$app->mdb->createCommand($sql)->queryOne();
+				$type = 2;
+			}else {
+				//会员
+				$member = Member::find ()->select ( [
 					'sign',
-			] )->where ( [
+				] )->where ( [
 					'member_code' => $mcode
-			] )->one ();
+				] )->one ();
+				$type = 1;
+				$sign =  $member['sign'];
+				$membership = MemberService::getMemberbysign($sign);
+			}
 			
-			$sign =  $member['sign'];
-			$membership = MemberService::getMemberbysign($sign);
 			$passport = $membership['passport_number'];
 			//查询流量信息
 			$flow_info = MyCurl::CheckFlowAndParse($passport);
@@ -194,14 +258,25 @@
 			
 			$mcode = Yii::$app->request->get('mcode');
 			
-			$member = Member::find ()->select ( [
+			if((substr($mcode,0,3) == 'TS@') || (substr($mcode, 0,3) == 'ts@') || (substr($mcode, 0,3) == 'TS_') || (substr($mcode, 0,3) == 'ts_')){
+				//船员
+				$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
+					crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount
+					FROM vcos_wifi_crew WHERE crew_code=\''.$mcode.'\' ';
+				$membership = Yii::$app->mdb->createCommand($sql)->queryOne();
+				$type = 2;
+			}else {
+				//会员
+				$member = Member::find ()->select ( [
 					'sign',
-			] )->where ( [
+				] )->where ( [
 					'member_code' => $mcode
-			] )->one ();
+				] )->one ();
+				$type = 1;
+				$sign =  $member['sign'];
+				$membership = MemberService::getMemberbysign($sign);
+			}
 			
-			$sign =  $member['sign'];
-			$membership = MemberService::getMemberbysign($sign);
 			$passport = $membership['passport_number'];
 			//查询流量信息
 			$flow_info = MyCurl::CheckFlowAndParse($passport);
@@ -221,14 +296,25 @@
 			
 			$mcode = Yii::$app->request->get('mcode');
 			
-			$member = Member::find ()->select ( [
+			if((substr($mcode,0,3) == 'TS@') || (substr($mcode, 0,3) == 'ts@') || (substr($mcode, 0,3) == 'TS_') || (substr($mcode, 0,3) == 'ts_')){
+				//船员
+				$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
+					crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount
+					FROM vcos_wifi_crew WHERE crew_code=\''.$mcode.'\' ';
+				$membership = Yii::$app->mdb->createCommand($sql)->queryOne();
+				$type = 2;
+			}else {
+				//会员
+				$member = Member::find ()->select ( [
 					'sign',
-			] )->where ( [
+				] )->where ( [
 					'member_code' => $mcode
-			] )->one ();
+				] )->one ();
+				$type = 1;
+				$sign =  $member['sign'];
+				$membership = MemberService::getMemberbysign($sign);
+			}
 			
-			$sign =  $member['sign'];
-			$membership = MemberService::getMemberbysign($sign);
 			$passport = $membership['passport_number'];
 			//查询流量信息
 			$flow_info = MyCurl::CheckFlowAndParse($passport);
@@ -250,14 +336,25 @@
 			
 			$mcode = Yii::$app->request->get('mcode');
 			
-			$member = Member::find ()->select ( [
+			if((substr($mcode,0,3) == 'TS@') || (substr($mcode, 0,3) == 'ts@') || (substr($mcode, 0,3) == 'TS_') || (substr($mcode, 0,3) == 'ts_')){
+				//船员
+				$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
+					crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount
+					FROM vcos_wifi_crew WHERE crew_code=\''.$mcode.'\' ';
+				$membership = Yii::$app->mdb->createCommand($sql)->queryOne();
+				$type = 2;
+			}else {
+				//会员
+				$member = Member::find ()->select ( [
 					'sign',
-			] )->where ( [
+				] )->where ( [
 					'member_code' => $mcode
-			] )->one ();
+				] )->one ();
+				$type = 1;
+				$sign =  $member['sign'];
+				$membership = MemberService::getMemberbysign($sign);
+			}
 			
-			$sign =  $member['sign'];
-			$membership = MemberService::getMemberbysign($sign);
 			$passport = $membership['passport_number'];
 			//查询流量
 			$flow_info = MyCurl::CheckFlowAndParse($passport);
@@ -278,14 +375,25 @@
 			
 			$mcode = Yii::$app->request->get('mcode');
 				
-			$member = Member::find ()->select ( [
+			if((substr($mcode,0,3) == 'TS@') || (substr($mcode, 0,3) == 'ts@') || (substr($mcode, 0,3) == 'TS_') || (substr($mcode, 0,3) == 'ts_')){
+				//船员
+				$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
+					crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount
+					FROM vcos_wifi_crew WHERE crew_code=\''.$mcode.'\' ';
+				$membership = Yii::$app->mdb->createCommand($sql)->queryOne();
+				$type = 2;
+			}else {
+				//会员
+				$member = Member::find ()->select ( [
 					'sign',
-			] )->where ( [
+				] )->where ( [
 					'member_code' => $mcode
-			] )->one ();
+				] )->one ();
+				$type = 1;
+				$sign =  $member['sign'];
+				$membership = MemberService::getMemberbysign($sign);
+			}
 			
-			$sign =  $member['sign'];
-			$membership = MemberService::getMemberbysign($sign);
 			$passport = $membership['passport_number'];
 			//查询流量
 			$flow_info = MyCurl::CheckFlowAndParse($passport);
@@ -304,13 +412,25 @@
 			}
 			
 			$mcode = Yii::$app->request->get('mcode');
-			$member = Member::find ()->select ( [
+			if((substr($mcode,0,3) == 'TS@') || (substr($mcode, 0,3) == 'ts@') || (substr($mcode, 0,3) == 'TS_') || (substr($mcode, 0,3) == 'ts_')){
+				//船员
+				$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
+					crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount
+					FROM vcos_wifi_crew WHERE crew_code=\''.$mcode.'\' ';
+				$membership = Yii::$app->mdb->createCommand($sql)->queryOne();
+				$type = 2;
+			}else {
+				//会员
+				$member = Member::find ()->select ( [
 					'sign',
-			] )->where ( [
+				] )->where ( [
 					'member_code' => $mcode
-			] )->one ();
-			$sign =  $member['sign'];
-			$membership = MemberService::getMemberbysign($sign);
+				] )->one ();
+				$type = 1;
+				$sign =  $member['sign'];
+				$membership = MemberService::getMemberbysign($sign);
+			}
+			
 			$passport = $membership['passport_number'];
 			//查询流量
 			$flow_info = MyCurl::CheckFlowAndParse($passport);

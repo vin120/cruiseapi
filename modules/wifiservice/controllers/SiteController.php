@@ -104,7 +104,6 @@ class SiteController extends Controller
         		}
         	}
         	
-        	
         	if($type == 2){
         		//船员
         		
@@ -166,6 +165,34 @@ class SiteController extends Controller
         						'active'=> $active,
         				]);
         			}
+        		}
+        	}else{
+        		//会员
+        		$limit_ip = Yii::$app->params['limit_ip'];
+        		$limit_ip_arr = explode(",", $limit_ip);
+        		$member_online_ip = MyCurl::getIp();
+        		$tag = 0;
+        		foreach ($limit_ip_arr as $limit_ip_tmp){
+        			$limit_ip_tmp_arr =  explode(".",$limit_ip_tmp);	//通过. 分割limit_ip
+        			$limit_ip_segment = $limit_ip_tmp_arr[0].$limit_ip_tmp_arr[1].$limit_ip_tmp_arr[2];
+        			
+        			//截取member_online_ip
+        			$member_online_ip_arr = explode(".", $member_online_ip);
+        			$member_onlie_ip_segment = $member_online_ip_arr[0].$member_online_ip_arr[1].$member_online_ip_arr[2];
+        			
+        			if($member_onlie_ip_segment == $limit_ip_segment){
+        				$tag = 1;
+        			}
+        		}
+        		
+        		if($tag == 1){
+        			$model = new LoginForm();
+        			Yii::$app->admin->logout();
+        			$model->addError("ip","ip wrong");
+        			return $this->render('agent_login', [
+        					'model' => $model,
+        					'active'=> $active,
+        			]);
         		}
         	}
         	
@@ -256,6 +283,34 @@ class SiteController extends Controller
         						'active'=> $active,
         				]);
         			}
+        		}
+        	}else{
+        		//会员
+        		$limit_ip = Yii::$app->params['limit_ip'];
+        		$limit_ip_arr = explode(",", $limit_ip);
+        		$member_online_ip = MyCurl::getIp();
+        		$tag = 0;
+        		foreach ($limit_ip_arr as $limit_ip_tmp){
+        			$limit_ip_tmp_arr =  explode(".",$limit_ip_tmp);	//通过. 分割limit_ip
+        			$limit_ip_segment = $limit_ip_tmp_arr[0].$limit_ip_tmp_arr[1].$limit_ip_tmp_arr[2];
+        			 
+        			//截取member_online_ip
+        			$member_online_ip_arr = explode(".", $member_online_ip);
+        			$member_onlie_ip_segment = $member_online_ip_arr[0].$member_online_ip_arr[1].$member_online_ip_arr[2];
+        			 
+        			if($member_onlie_ip_segment == $limit_ip_segment){
+        				$tag = 1;
+        			}
+        		}
+        		
+        		if($tag == 1){
+        			$model = new LoginForm();
+        			Yii::$app->admin->logout();
+        			$model->addError("ip","ip wrong");
+        			return $this->render('agent_login', [
+        					'model' => $model,
+        					'active'=> $active,
+        			]);
         		}
         	}
         	

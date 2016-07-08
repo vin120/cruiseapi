@@ -134,11 +134,21 @@ class MyCurl
     public static function FindUser($username)
     {
     	//模拟登录
+//     	MyCurl::vcurl(Yii::$app->params['wifi_url'].'comstserver.awm?','status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
+//     	$find_url = Yii::$app->params['wifi_url']."um_query/comstserver.awm?";
+//     	$find_params = "status=manage&opt=dbcs&dbName=usermanage_umb&subopt=query&account=$username&IsAccount=1";
+//     	$find_json = MyCurl::vcurl($find_url,$find_params);
+//     	$find_json = iconv('GB2312', 'UTF-8', $find_json);
+
+    	//模拟登录
     	MyCurl::vcurl(Yii::$app->params['wifi_url'].'comstserver.awm?','status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
     	$find_url = Yii::$app->params['wifi_url']."um_query/comstserver.awm?";
-    	$find_params = "status=manage&opt=dbcs&dbName=usermanage_umb&subopt=query&account=$username&IsAccount=1";
+    	//TODO
+    	$find_params = "status=manage&opt=dbcs&subopt=recordByName&dbName=usermanage_umb&account=$username";
+//     	$find_params = "status=manage&opt=dbcs&dbName=usermanage_umb&subopt=query&account=$username&IsAccount=1&direct=1";
     	$find_json = MyCurl::vcurl($find_url,$find_params);
     	$find_json = iconv('GB2312', 'UTF-8', $find_json);
+    	 
     	return $find_json;
     }
     

@@ -38,9 +38,15 @@
 
 		
 		//WifiPayment,write pay log to db
-		public static function WifiPay($sign,$wifi_id)
+		public static function WifiPay($sign,$wifi_id,$type)
 		{
-			$member = MemberService::getMemberbysign($sign);
+			if($type == 1){
+				//会员
+				$member = MemberService::getMemberbysign($sign);
+			}else {
+				$member =  MemberService::getCrewBySign($sign);
+			}
+			
 			$wifi_item = self::FindWifiServiceById($wifi_id);
 
 			//获取wifi套餐的价格
@@ -48,9 +54,9 @@
 			if(!empty($member)){
 
 				//查找用户的余额
-				$membership_id = $member->member_id;
-				$membership_code = $member->member_code;
-				$member_money = $member->member_money;
+				$membership_id = $member['member_id'];
+				$membership_code = $member['member_code'];
+				$member_money = $member['member_money'];
 				//判断用户的钱是否足够支付wifi套餐，
 				if($member_money >= ($sale_price * 100) && $member_money >= 0){
 					//钱足够，进行支付
@@ -58,7 +64,7 @@
 					//查询用户是否存在
 					$find_res = MyCurl::FindUser($member['passport_number']);
 					$find_res = json_decode($find_res,true);
-					if(!$find_res['data']){
+					if($find_res['success']===false){
 						//没找到用户
 						//创建用户,并加入组，对接接口
 						//创建一个随机的6位密码，存放在comst
@@ -73,8 +79,15 @@
 							die();
 						}
 						//把用户写入本地数据库中
-						$sql = "INSERT INTO `vcos_comst_wifi` (`username`,`password`,`create_time`) VALUES('$username','$comst_password','$create_time')";
-						Yii::$app->db->createCommand($sql)->execute();
+						$sql = "SELECT * FROM `vcos_comst_wifi` WHERE `username`='$username' ";
+						$comst_user = Yii::$app->db->createCommand($sql)->queryOne();
+						if($comst_user){
+							$sql = "UPDATE `vcos_comst_wifi` SET `password`='$comst_password' WHERE `username`='$username' ";
+							Yii::$app->db->createCommand($sql)->execute();
+						}else {
+							$sql = "INSERT INTO `vcos_comst_wifi` (`username`,`password`,`create_time`) VALUES('$username','$comst_password','$create_time')";
+							Yii::$app->db->createCommand($sql)->execute();
+						}
 					}
 
 					//事务处理
@@ -82,8 +95,13 @@
 					try {
 						//直接支付
 						$money = $member_money - ($sale_price * 100);	//注意转换单位 
-						$member->member_money = $money;
--                       $member->save();
+						if($type == 1){
+							$member['member_money'] = $money;
+							$member->save();
+						}else{
+							$sql = " UPDATE vcos_wifi_crew SET money='$money' WHERE crew_id='{$member['member_id']}' ";
+							Yii::$app->mdb->createCommand($sql)->execute();
+						}
 						
 						//先断开连接,避免产生流量记录中会出现负数的情况，所以在充值之前要先断开网络
 						//查找comst中$passport对应的idRec
@@ -101,13 +119,11 @@
 						//断开连接记录写入DB
 						MyWifi::WriteWifiLogoutLogToDB($member,$wifi_online_in_flow,$wifi_online_out_flow,$wifi_online_total_flow);
 
-
 						//充值wifi对应的钱，对接接口
-// 						MyCurl::RechargeWifi($member['passport_number'],$sale_price);
 						MyCurl::RechargeWifi($member['passport_number'],$wifi_item['wifi_flow']);		//comst 充值时按照流量和金额1:1比例
 
 						//记录购买Wifi记录
-						self::CreateWifiPayLog($sign,$membership_code,$wifi_item);
+						self::CreateWifiPayLog($sign,$membership_code,$wifi_item,$type);
 
 						$response['data'] = ['code'=>1,'message'=>'Pay Success!'];
 						$transaction->commit();
@@ -127,7 +143,7 @@
 
 
 		//write wifi pay log to table vcos_member_order and table vcos_member_order_detail 
-		private static function CreateWifiPayLog($sign,$code,$wifi_item)
+		private static function CreateWifiPayLog($sign,$code,$wifi_item,$type)
 		{
 			$wifi_order_time = time();
 			$wifi_order_number  = OrderService::getMemberOrderNO();
@@ -141,6 +157,7 @@
 				$memberOrder = new MemberOrder();
 				$memberOrder->order_serial_num = $wifi_order_number;
 				$memberOrder->membership_code = $code;
+				$memberOrder->tender_type = $type;
 				$memberOrder->totale_price = $wifi_item['sale_price'] * 100;
 				$memberOrder->pay_type = $pay_type;
 				$memberOrder->order_check_num = $order_check_num;
@@ -175,14 +192,24 @@
 		//find current login status in  comst system and db 
 		public static function FindWifiLoginStatus($mcode)
 		{
-			$member = Member::find ()->select ( [
-					'sign',
-			] )->where ( [
-					'member_code' => $mcode
-			] )->one ();
-			$sign = $member['sign'];
+			if((substr($mcode,0,3) == 'TS@') || (substr($mcode, 0,3) == 'ts@') || (substr($mcode, 0,3) == 'TS_') || (substr($mcode, 0,3) == 'ts_')){
+				//船员
+				$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
+					crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount
+					FROM vcos_wifi_crew WHERE crew_code=\''.$mcode.'\' ';
+				$membership = Yii::$app->mdb->createCommand($sql)->queryOne();
+			}else {
+				//会员
+				$member = Member::find ()->select ( [
+						'sign',
+				] )->where ( [
+						'member_code' => $mcode
+				] )->one ();
+				
+				$sign = $member['sign'];
+				$membership =  MemberService::getMemberbysign($sign);
+			}
 			
-			$membership =  MemberService::getMemberbysign($sign);
 			$passport = $membership['passport_number'];
 			
 			//接口对接
@@ -216,7 +243,7 @@
 		{
 			$membership_id = $membership['member_id'];
 			$membership_code = $membership['member_code'];
-			$ip_address = '';
+			$ip_address = MyCurl::getIp();
 			$mac_address = '';
 			$wifi_login_time = date("Y-m-d H:i:s",time());
 			$certification_result='';

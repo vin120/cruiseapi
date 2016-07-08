@@ -5,6 +5,7 @@ namespace app\modules\wifiservice\controllers;
 use Yii;
 use yii\web\Controller;
 use app\modules\wifiservice\components\MyCurl;
+use app\modules\wifiservice\components\MyWifi;
 
 
 class InteractionController extends Controller
@@ -48,6 +49,29 @@ class InteractionController extends Controller
 		$price = Yii::$app->request->post('price');
 		
 		if(is_numeric($price)){
+			
+			//先断开用户，防止出现连接记录负数的情况
+			MyCurl::DisConnect($passport);
+			
+			
+			$sql = " SELECT * FROM vcos_member_crew WHERE passport_number='$passport' LIMIT 1";
+			$member = Yii::$app->mdb->createCommand($sql)->queryOne();
+			
+			//查流量
+			$check_out_json = MyCurl::CheckFlow($member['passport_number']);
+			$check_out_array = json_decode($check_out_json,true);
+			
+			$arr = explode("<br>", $check_out_array['data']['feeInfo']);
+			
+			//剔除不必要的字符
+			$wifi_online_in_flow = str_replace('MB','',explode(": ",$arr[5])[1]);
+			$wifi_online_out_flow = str_replace('MB','',explode(": ",$arr[6])[1]);
+			$wifi_online_total_flow = str_replace('MB','',explode(": ",$arr[7])[1]);
+			//断开连接记录写入DB
+			MyWifi::WriteWifiLogoutLogToDB($member,$wifi_online_in_flow,$wifi_online_out_flow,$wifi_online_total_flow);
+			
+			
+			//充值
 			$recharge = MyCurl::RechargeWifi($passport,$price);
 			$recharge_array = json_decode($recharge,true);
 			if($recharge_array['success']){
@@ -97,6 +121,21 @@ class InteractionController extends Controller
 		}else {
 			$left_money = 0;
 		}
+		
+		//先断开用户，防止出现连接记录负数的情况
+		MyCurl::DisConnect($passport);
+		$sql = " SELECT * FROM vcos_member_crew WHERE passport_number='$passport' LIMIT 1";
+		$member = Yii::$app->mdb->createCommand($sql)->queryOne();
+		//查流量
+		$check_out_json = MyCurl::CheckFlow($member['passport_number']);
+		$check_out_array = json_decode($check_out_json,true);
+		$arr = explode("<br>", $check_out_array['data']['feeInfo']);
+		//剔除不必要的字符
+		$wifi_online_in_flow = str_replace('MB','',explode(": ",$arr[5])[1]);
+		$wifi_online_out_flow = str_replace('MB','',explode(": ",$arr[6])[1]);
+		$wifi_online_total_flow = str_replace('MB','',explode(": ",$arr[7])[1]);
+		//断开连接记录写入DB
+		MyWifi::WriteWifiLogoutLogToDB($member,$wifi_online_in_flow,$wifi_online_out_flow,$wifi_online_total_flow);
 		
 		$init = MyCurl::InitAccount($passport);
 		$init_array = json_decode($init,true);

@@ -10,6 +10,7 @@ return [
 	'ios_address'=>'https://appsto.re/cn/Uuva_.i',		//ios-app的下载地址
 	'android_address'=>'http://tsimg.cruisetone.com/apk/ctone.apk',	//android-app的下载地址
 	'on_cruise' => true,				//是否在船上 ，true表示在船上，false表示在岸上
+ 	'limit_ip'	=> '10.2.0.0,172.16.8.0,172.16.9.0',	//限制会员上网ip
 	'deny_action' =>[					//403的页面，在岸上显示的
 			
 		//餐饮服务
