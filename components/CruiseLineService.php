@@ -41,27 +41,23 @@ class CruiseLineService {
 			$cruise_trip = CruiseLineService::getCruiseLineByCurrTime();
 			$trip_id = $cruise_trip['trip_id'];
 	
-			$sql = "SELECT * FROM vcos_wifi_login_log WHERE login_type=$type AND trip_id='$trip_id' AND passport='$passport'";
-			$sql_result = Yii::$app->db->createCommand($sql)->queryOne();
-	
-			if (empty($sql_result)) {
-				$my_date = date('Y-m-d');
-				$my_time = date('H:i:s');
+			if(!empty($trip_id)){
 				
-				if(!empty($trip_id)){
+				$sql = "SELECT * FROM vcos_wifi_login_log WHERE login_type=$type AND trip_id='$trip_id' AND passport='$passport'";
+				$sql_result = Yii::$app->db->createCommand($sql)->queryOne();
+	
+				if (empty($sql_result)) {
+					
+					$my_date = date('Y-m-d');
+					$my_time = date('H:i:s');
+					
 					$sql = "INSERT INTO `vcos_wifi_login_log` (`login_date`,`login_time`,`login_type`,`trip_id`,`passport`)
 					VALUES ('$my_date','$my_time','$type','$trip_id','$passport')";
-				}else {
-					$sql = "INSERT INTO `vcos_wifi_login_log` (`login_date`,`login_time`,`login_type`,`passport`)
-					VALUES ('$my_date','$my_time','$type','$passport')";
+					Yii::$app->db->createCommand($sql)->execute();
+					
+					MyCurl::InitAccount($passport);
 				}
 				
-				Yii::$app->db->createCommand($sql)->execute();
-				MyCurl::InitAccount($passport);
-				
-// 				if($passport == 'E74166818'){
-// 					\app\modules\wifiservice\components\MyCurl::InitAccount($passport);
-// 				}
 			}
 	
 		}else{
@@ -78,11 +74,10 @@ class CruiseLineService {
 				VALUES ('$my_date','$my_time','$type','$passport')";
 	
 				Yii::$app->db->createCommand($sql)->execute();
-				MyCurl::InitAccount($passport);
+// 				MyCurl::InitAccount($passport);
 	
 			}
 		}
-	
 	
 	}
 	

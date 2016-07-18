@@ -8,6 +8,7 @@
 	use app\models\MemberOrderDetail;
 	use app\components\OrderService;
 	use app\modules\wifi\components\MyCurl;
+	use app\components\CruiseLineService;
 
 	class MyWifi 
 	{
@@ -119,6 +120,9 @@
 						//断开连接记录写入DB
 						MyWifi::WriteWifiLogoutLogToDB($member,$wifi_online_in_flow,$wifi_online_out_flow,$wifi_online_total_flow);
 
+						//初始化用户流量
+						CruiseLineService::getRunInitStatus($type, $member['passport_number']);
+						
 						//充值wifi对应的钱，对接接口
 						MyCurl::RechargeWifi($member['passport_number'],$wifi_item['wifi_flow']);		//comst 充值时按照流量和金额1:1比例
 
@@ -192,7 +196,7 @@
 		//find current login status in  comst system and db 
 		public static function FindWifiLoginStatus($mcode)
 		{
-			if((substr($mcode,0,3) == 'TS@') || (substr($mcode, 0,3) == 'ts@') || (substr($mcode, 0,3) == 'TS_') || (substr($mcode, 0,3) == 'ts_')){
+			if(MyWifi::CrewTypeBool($mcode)) {
 				//船员
 				$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
 					crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount
@@ -297,6 +301,21 @@
 					'membership_code'=>$membership_code,
 					'id'=>$wifi['id'],
 			])->execute();
+		}
+		
+		public static function CrewTypeBool($mcode)
+		{
+			$crew_bool = true;
+				
+			$sql  =' SELECT count(crew_code) FROM vcos_wifi_crew WHERE crew_code=\''.$mcode.'\' ';
+			$count_result = Yii::$app->mdb->createCommand($sql)->queryColumn();
+			
+			if($count_result[0] === "0") {
+				//找不到船员
+				$crew_bool = false;
+			}
+				
+			return $crew_bool;
 		}
 	}
 	

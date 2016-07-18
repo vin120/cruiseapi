@@ -8,6 +8,7 @@ use yii\web\Controller;
 use app\components\MemberService;
 use app\modules\wifi\components\MyCurl;
 use app\modules\wifi\components\MyWifi;
+use app\components\CruiseLineService;
 
 class ServiceController extends Controller
 {
@@ -17,13 +18,15 @@ class ServiceController extends Controller
     {
         $mcode = Yii::$app->request->post('mcode');
         
-        if((substr($mcode,0,3) == 'TS@') || (substr($mcode, 0,3) == 'ts@') || (substr($mcode, 0,3) == 'TS_') || (substr($mcode, 0,3) == 'ts_')){
+        if(MyWifi::CrewTypeBool($mcode)) {
+        	//船员
         	$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
 					crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount
 					FROM vcos_wifi_crew WHERE crew_code=\''.$mcode.'\' ';
         	$membership = Yii::$app->mdb->createCommand($sql)->queryOne();
         	
         }else {
+        	//会员
         	$member = Member::find ()->select ( [
         			'sign',
         	] )->where ( [
@@ -61,12 +64,16 @@ class ServiceController extends Controller
     { 
     	$mcode = Yii::$app->request->post('mcode');
     	
-    	if((substr($mcode,0,3) == 'TS@') || (substr($mcode, 0,3) == 'ts@') || (substr($mcode, 0,3) == 'TS_') || (substr($mcode, 0,3) == 'ts_')){
+    	if(MyWifi::CrewTypeBool($mcode)) {
+    		//船员
+    		$type = 2;
     		$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
 					crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount
 					FROM vcos_wifi_crew WHERE crew_code=\''.$mcode.'\' ';
     		$membership = Yii::$app->mdb->createCommand($sql)->queryOne();
     	}else {
+    		//会员
+    		$type = 1;
     		$member = Member::find ()->select ( [
     				'sign',
     		] )->where ( [
@@ -89,6 +96,9 @@ class ServiceController extends Controller
         	$wifi_online_in_flow = str_replace('MB','',explode(": ",$arr[5])[1]);
         	$wifi_online_out_flow = str_replace('MB','',explode(": ",$arr[6])[1]);
         	$wifi_online_total_flow = str_replace('MB','',explode(": ",$arr[7])[1]);
+        	
+        	//初始化用户流量
+        	CruiseLineService::getRunInitStatus($type, $membership['passport_number']);
         	
         	//连接网络
         	$username = $membership['passport_number'];
@@ -118,12 +128,16 @@ class ServiceController extends Controller
     {
     	$mcode = Yii::$app->request->post('mcode');
     	
-    	if((substr($mcode,0,3) == 'TS@') || (substr($mcode, 0,3) == 'ts@') || (substr($mcode, 0,3) == 'TS_') || (substr($mcode, 0,3) == 'ts_')){
+    	if(MyWifi::CrewTypeBool($mcode)) {
+    		//船员
+    		$type = 2;
     		$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
 					crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount
 					FROM vcos_wifi_crew WHERE crew_code=\''.$mcode.'\' ';
     		$membership = Yii::$app->mdb->createCommand($sql)->queryOne();
     	}else {
+    		//会员
+    		$type = 1;
     		$member = Member::find ()->select ( [
     				'sign',
     		] )->where ( [
@@ -154,6 +168,10 @@ class ServiceController extends Controller
         	$wifi_online_in_flow = str_replace('MB','',explode(": ",$arr[5])[1]);
         	$wifi_online_out_flow = str_replace('MB','',explode(": ",$arr[6])[1]);
         	$wifi_online_total_flow = str_replace('MB','',explode(": ",$arr[7])[1]);
+        	
+        	//初始化用户流量
+        	CruiseLineService::getRunInitStatus($type, $membership['passport_number']);
+        	
         	
         	
         	//断开连接记录写入DB

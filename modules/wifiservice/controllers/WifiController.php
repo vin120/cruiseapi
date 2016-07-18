@@ -8,6 +8,7 @@
 	use app\components\MemberService;
 	use app\modules\wifiservice\components\MyWifi;
 	use app\modules\wifiservice\components\MyCurl;
+	use app\components\CruiseLineService;
 	
 	class WifiController extends Controller
 	{	
@@ -37,6 +38,9 @@
 			
 			$wifi_items = MyWifi::FindWifiService($wifi_type);
 			$passport = $membership['passport_number'];
+			
+			//初始化用户流量
+			CruiseLineService::getRunInitStatus($type, $passport);
 			
 			//查询流量信息 
 			$flow_info = MyCurl::CheckFlowAndParse($passport);
@@ -68,6 +72,10 @@
 				}
 				
 				$passport = $membership['passport_number'];
+				
+				//初始化用户流量
+				CruiseLineService::getRunInitStatus($type, $passport);
+				
 				//查询流量信息
 				$flow_info = MyCurl::CheckFlowAndParse($passport);
 				return $this->render('orderconfirm',['membership'=>$membership,'flow_info'=>$flow_info,'wifi_item'=>$wifi_item]);
@@ -157,6 +165,10 @@
 				$membership =  MemberService::getCrewBySign($sign);
 			}
 			$passport = $membership['passport_number'];
+			
+			//初始化用户流量
+			CruiseLineService::getRunInitStatus($type, $passport);
+			
 			//查询流量信息
 			$flow_info = MyCurl::CheckFlowAndParse($passport);
 			//查询状态
@@ -179,6 +191,9 @@
 				$membership =  MemberService::getCrewBySign($sign);
 			}
 			$passport = $membership['passport_number'];
+			
+			//初始化用户流量
+			CruiseLineService::getRunInitStatus($type, $passport);
 			//查询流量信息
 			$flow_info = MyCurl::CheckFlowAndParse($passport);
 			//查询状态
@@ -203,6 +218,9 @@
 				$membership =  MemberService::getCrewBySign($sign);
 			}
 			$passport = $membership['passport_number'];
+
+			//初始化用户流量
+			CruiseLineService::getRunInitStatus($type, $passport);
 			//查询流量
 			$flow_info = MyCurl::CheckFlowAndParse($passport);
 			//查询状态

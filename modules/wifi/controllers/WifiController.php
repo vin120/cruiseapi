@@ -8,6 +8,7 @@
 	use app\components\MemberService;
 	use app\modules\wifi\components\MyWifi;
 	use app\modules\wifi\components\MyCurl;
+	use app\components\CruiseLineService;
 	
 	class WifiController extends Controller
 	{	
@@ -22,8 +23,7 @@
 			$mcode = Yii::$app->request->get('mcode');
 			$wifi_type = 1;	//wifi套餐类型：1为会员套餐类型，2为船员普通套餐类型，3为船员-半价-半流量套餐类型
 			
-			
-			if((substr($mcode,0,3) == 'TS@') || (substr($mcode, 0,3) == 'ts@') || (substr($mcode, 0,3) == 'TS_') || (substr($mcode, 0,3) == 'ts_')){
+			if(MyWifi::CrewTypeBool($mcode)) {
 				//船员
 				$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
 					crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount	
@@ -58,6 +58,9 @@
 			$wifi_items = MyWifi::FindWifiService($wifi_type);
 			$passport = $membership['passport_number'];
 			
+			//初始化用户流量
+			CruiseLineService::getRunInitStatus($type, $passport);
+			
 			//查询流量信息
 			$flow_info = MyCurl::CheckFlowAndParse($passport);
 			
@@ -83,7 +86,7 @@
 			
 			if($wifi_id != ''){
 				
-				if((substr($mcode,0,3) == 'TS@') || (substr($mcode, 0,3) == 'ts@') || (substr($mcode, 0,3) == 'TS_') || (substr($mcode, 0,3) == 'ts_')){
+				if(MyWifi::CrewTypeBool($mcode)) {
 					//船员
 					$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
 					crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount
@@ -107,6 +110,10 @@
 				$wifi_item = MyWifi::FindWifiServiceById($wifi_id);		
 				$wifi_items = MyWifi::FindWifiService($type);
 				$passport = $membership['passport_number'];
+				
+				//初始化用户流量
+				CruiseLineService::getRunInitStatus($type, $passport);
+				
 				//查询流量信息
 				$flow_info = MyCurl::CheckFlowAndParse($passport);
 				return $this->render('orderconfirm',['membership'=>$membership,'flow_info'=>$flow_info,'wifi_item'=>$wifi_item,'mcode'=>$mcode]);
@@ -127,7 +134,7 @@
 			$wifi_id = Yii::$app->request->post('wifi_id');
 			$mcode = Yii::$app->request->post('mcode');
 			
-			if((substr($mcode,0,3) == 'TS@') || (substr($mcode, 0,3) == 'ts@') || (substr($mcode, 0,3) == 'TS_') || (substr($mcode, 0,3) == 'ts_')){
+			if(MyWifi::CrewTypeBool($mcode)) {
 				//船员
 				$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
 					crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount
@@ -160,7 +167,7 @@
 			
 			$mcode = Yii::$app->request->get('mcode');
 			
-			if((substr($mcode,0,3) == 'TS@') || (substr($mcode, 0,3) == 'ts@') || (substr($mcode, 0,3) == 'TS_') || (substr($mcode, 0,3) == 'ts_')){
+			if(MyWifi::CrewTypeBool($mcode)) {
 				//船员
 				$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
 					crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount
@@ -196,7 +203,7 @@
 			
 			$mcode = Yii::$app->request->get('mcode');
 			
-			if((substr($mcode,0,3) == 'TS@') || (substr($mcode, 0,3) == 'ts@') || (substr($mcode, 0,3) == 'TS_') || (substr($mcode, 0,3) == 'ts_')){
+			if(MyWifi::CrewTypeBool($mcode)) {
 				//船员
 				$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
 					crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount
@@ -231,7 +238,7 @@
 			
 			$mcode = Yii::$app->request->get('mcode');
 			
-			if((substr($mcode,0,3) == 'TS@') || (substr($mcode, 0,3) == 'ts@') || (substr($mcode, 0,3) == 'TS_') || (substr($mcode, 0,3) == 'ts_')){
+			if(MyWifi::CrewTypeBool($mcode)) {
 				//船员
 				$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
 					crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount
@@ -267,7 +274,7 @@
 			
 			$mcode = Yii::$app->request->get('mcode');
 			
-			if((substr($mcode,0,3) == 'TS@') || (substr($mcode, 0,3) == 'ts@') || (substr($mcode, 0,3) == 'TS_') || (substr($mcode, 0,3) == 'ts_')){
+			if(MyWifi::CrewTypeBool($mcode)) {
 				//船员
 				$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
 					crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount
@@ -287,6 +294,10 @@
 			}
 			
 			$passport = $membership['passport_number'];
+			
+			//初始化用户流量
+			CruiseLineService::getRunInitStatus($type, $passport);
+			
 			//查询流量信息
 			$flow_info = MyCurl::CheckFlowAndParse($passport);
 			//查询状态
@@ -305,7 +316,7 @@
 			
 			$mcode = Yii::$app->request->get('mcode');
 			
-			if((substr($mcode,0,3) == 'TS@') || (substr($mcode, 0,3) == 'ts@') || (substr($mcode, 0,3) == 'TS_') || (substr($mcode, 0,3) == 'ts_')){
+			if(MyWifi::CrewTypeBool($mcode)) {
 				//船员
 				$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
 					crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount
@@ -325,6 +336,9 @@
 			}
 			
 			$passport = $membership['passport_number'];
+			
+			//初始化用户流量
+			CruiseLineService::getRunInitStatus($type, $passport);
 			//查询流量信息
 			$flow_info = MyCurl::CheckFlowAndParse($passport);
 			//查询状态
@@ -345,7 +359,7 @@
 			
 			$mcode = Yii::$app->request->get('mcode');
 			
-			if((substr($mcode,0,3) == 'TS@') || (substr($mcode, 0,3) == 'ts@') || (substr($mcode, 0,3) == 'TS_') || (substr($mcode, 0,3) == 'ts_')){
+			if(MyWifi::CrewTypeBool($mcode)) {
 				//船员
 				$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
 					crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount
@@ -365,6 +379,9 @@
 			}
 			
 			$passport = $membership['passport_number'];
+			
+			//初始化用户流量
+			CruiseLineService::getRunInitStatus($type, $passport);
 			//查询流量
 			$flow_info = MyCurl::CheckFlowAndParse($passport);
 			//查询状态
@@ -383,8 +400,8 @@
 			}
 			
 			$mcode = Yii::$app->request->get('mcode');
-				
-			if((substr($mcode,0,3) == 'TS@') || (substr($mcode, 0,3) == 'ts@') || (substr($mcode, 0,3) == 'TS_') || (substr($mcode, 0,3) == 'ts_')){
+			
+			if(MyWifi::CrewTypeBool($mcode)) {
 				//船员
 				$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
 					crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount
@@ -404,6 +421,9 @@
 			}
 			
 			$passport = $membership['passport_number'];
+			
+			//初始化用户流量
+			CruiseLineService::getRunInitStatus($type, $passport);
 			//查询流量
 			$flow_info = MyCurl::CheckFlowAndParse($passport);
 			//连接记录
@@ -421,7 +441,8 @@
 			}
 			
 			$mcode = Yii::$app->request->get('mcode');
-			if((substr($mcode,0,3) == 'TS@') || (substr($mcode, 0,3) == 'ts@') || (substr($mcode, 0,3) == 'TS_') || (substr($mcode, 0,3) == 'ts_')){
+			
+			if(MyWifi::CrewTypeBool($mcode)) {
 				//船员
 				$sql  =' SELECT crew_id as member_id,crew_code as member_code,cn_name,smart_card_number, passport_number, crew_password as member_password ,
 					crew_email as member_email,mobile_number,money as member_money,crew_credit as member_credit,sign,overdraft_limit,curr_overdraft_amount
@@ -441,6 +462,9 @@
 			}
 			
 			$passport = $membership['passport_number'];
+			
+			//初始化用户流量
+			CruiseLineService::getRunInitStatus($type, $passport);
 			//查询流量
 			$flow_info = MyCurl::CheckFlowAndParse($passport);
 			//连接记录
