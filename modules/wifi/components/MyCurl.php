@@ -121,8 +121,8 @@ class MyCurl
     	$create_url = Yii::$app->params['wifi_url']."um_add/comstserver.awm?";
     	
     	//UTF-8 转换为 GB2312
-    	$date = iconv('UTF-8','GB2312', date('Y年m月d日',time()));
-    	$LinkName = iconv('UTF-8','GB2312', $member['cn_name']);
+    	$date = iconv('UTF-8','GB2312//IGNORE', date('Y年m月d日',time()));
+    	$LinkName = iconv('UTF-8','GB2312//IGNORE', $member['cn_name']);
     	$create_user_param = "status=manage&opt=dbcs&dbName=usermanage_umb&subopt=add&Account=".$member['passport_number']."&pwd=".$comst_password."&idUgb=1&isStartAcc=1&LinkName=".$LinkName."&paperType=6&paperNum=".$member['passport_number']."&phone=".$member['mobile_number']."&email=".$member['member_email']."&limitData=".$date;
     	$create_json = MyCurl::vcurl($create_url,$create_user_param);
     	$create_json = iconv('GB2312', 'UTF-8', $create_json);

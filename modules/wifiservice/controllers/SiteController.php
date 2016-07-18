@@ -443,10 +443,10 @@ class SiteController extends Controller
         ]);
     }
     
-    public function actionTest()
-    {
-    	Header("Access-Control-Allow-Origin: * ");
-    	Header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
-    	echo "About cruise ";
-    }
+//     public function actionTest()
+//     {
+//     	Header("Access-Control-Allow-Origin: * ");
+//     	Header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
+//     	echo "About cruise ";
+//     }
 }

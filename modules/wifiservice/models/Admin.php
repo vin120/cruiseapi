@@ -12,6 +12,7 @@ class Admin extends MymemberActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
+    public $authKey;
     /**
      * @inheritdoc
      */
@@ -133,6 +134,8 @@ class Admin extends MymemberActiveRecord implements IdentityInterface
     {
 //         return true;
 //        return Yii::$app->security->validatePassword($password, $this->travel_agent_password);
+//     	  return Yii::$app->getSecurity()->validatePassword($password, $this->password);
+    	
 		if('888888' == $this->member_password){
 			//默认密码
 			if ($password == substr($this->passport_number,-6)){

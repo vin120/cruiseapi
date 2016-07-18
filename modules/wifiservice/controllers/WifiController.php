@@ -19,15 +19,23 @@
 			
 			$type = Yii::$app->admin->identity->member_type;
 			
+			$wifi_type = 1;	//wifi套餐类型：1为会员套餐类型，2为船员普通套餐类型，3为船员-半价-半流量套餐类型
+			
 			if($type == 1){
+				$wifi_type = 1;	//wifi套餐类型：1为会员套餐类型
 				//普通会员
 				$membership = MemberService::getMemberbysign($sign);
 			}else {
+				$wifi_type = 2;	//wifi套餐类型：2为船员普通套餐类型
 				//船员
 				$membership =  MemberService::getCrewBySign($sign);
+				
+				if(date('d',time()) >= Yii::$app->params['half_price_day']) {
+					$wifi_type = 3;	//wifi套餐类型: 3为船员-半价-半流量套餐类型
+				}
 			}
 			
-			$wifi_items = MyWifi::FindWifiService($type);
+			$wifi_items = MyWifi::FindWifiService($wifi_type);
 			$passport = $membership['passport_number'];
 			
 			//查询流量信息 

@@ -31,7 +31,7 @@ $config = [
 			'enableSession' => false
 		],
 		'admin' => [
-			'class' => '\yii\web\user',
+			'class' => '\yii\web\User',
 			'identityClass' => 'app\modules\wifiservice\models\Admin',
 			'enableAutoLogin' => true,
 			'enableSession' => true,

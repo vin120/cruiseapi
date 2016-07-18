@@ -8,8 +8,9 @@
 	use app\models\MemberOrderDetail;
 	use app\components\OrderService;
 	use app\modules\wifiservice\components\MyCurl;
+	use app\components\CruiseLineService;
 
-	class MyWifi 
+	class MyWifi
 	{
 		
 		//Find All WifiService
@@ -121,6 +122,9 @@
 						$wifi_online_total_flow = str_replace('MB','',explode(": ",$arr[7])[1]);
 						//断开连接记录写入DB
 						MyWifi::WriteWifiLogoutLogToDB($member,$wifi_online_in_flow,$wifi_online_out_flow,$wifi_online_total_flow);
+						
+						//初始化用户流量
+						CruiseLineService::getRunInitStatus($type, $member['passport_number']);
 						
 						//充值wifi对应的钱，对接接口
 						MyCurl::RechargeWifi($member['passport_number'],$wifi_item['wifi_flow']);		//comst 充值时按照流量和金额1:1比例
@@ -369,7 +373,7 @@
 					'wifi_online_in_flow'=>$wifi_online_in_flow,
 					'wifi_online_out_flow'=>$wifi_online_out_flow,
 					'wifi_online_total_flow'=>$wifi_online_total_flow,
-					'wifi_used_total_flow'=>$wifi_online_total_flow - $wifi['wifi_online_total_flow'],
+					'wifi_used_total_flow'=> abs($wifi_online_total_flow - $wifi['wifi_online_total_flow']),
 			],[
 					'membership_id'=>$membership_id,
 					'membership_code'=>$membership_code,

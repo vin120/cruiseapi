@@ -3,11 +3,11 @@
 namespace app\modules\wifiservice\controllers;
 
 use Yii;
-use app\models\Member;
 use yii\web\Controller;
 use app\components\MemberService;
 use app\modules\wifiservice\components\MyCurl;
 use app\modules\wifiservice\components\MyWifi;
+use app\components\CruiseLineService;
 
 class ServiceController extends Controller
 {
@@ -71,6 +71,9 @@ class ServiceController extends Controller
         	$wifi_online_out_flow = str_replace('MB','',explode(": ",$arr[6])[1]);
         	$wifi_online_total_flow = str_replace('MB','',explode(": ",$arr[7])[1]);
         	
+        	//初始化用户流量
+        	CruiseLineService::getRunInitStatus($type, $membership['passport_number']);
+        	
         	//连接网络
         	$username = $membership['passport_number'];
         	$sql = "SELECT * FROM vcos_comst_wifi WHERE username ='$username'";
@@ -125,6 +128,9 @@ class ServiceController extends Controller
         	$wifi_online_in_flow = str_replace('MB','',explode(": ",$arr[5])[1]);
         	$wifi_online_out_flow = str_replace('MB','',explode(": ",$arr[6])[1]);
         	$wifi_online_total_flow = str_replace('MB','',explode(": ",$arr[7])[1]);
+			
+        	//初始化用户流量
+        	CruiseLineService::getRunInitStatus($type, $membership['passport_number']);
         	
         	//断开连接记录写入DB
         	MyWifi::WriteWifiLogoutLogToDB($membership,$wifi_online_in_flow,$wifi_online_out_flow,$wifi_online_total_flow);

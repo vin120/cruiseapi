@@ -291,7 +291,7 @@
 					'wifi_online_in_flow'=>$wifi_online_in_flow,
 					'wifi_online_out_flow'=>$wifi_online_out_flow,
 					'wifi_online_total_flow'=>$wifi_online_total_flow,
-					'wifi_used_total_flow'=>$wifi_online_total_flow - $wifi['wifi_online_total_flow'],
+					'wifi_used_total_flow'=>abs($wifi_online_total_flow - $wifi['wifi_online_total_flow']),
 			],[
 					'membership_id'=>$membership_id,
 					'membership_code'=>$membership_code,
