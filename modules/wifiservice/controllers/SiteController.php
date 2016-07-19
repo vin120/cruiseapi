@@ -317,6 +317,20 @@ class SiteController extends Controller
         	if(Yii::$app->admin->identity->member_password === '888888'){
         		return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/resetpassword"));
         	}else{
+        		
+        		$cookies = Yii::$app->response->cookies;
+        		$data = Yii::$app->request->post('LoginForm');
+        		$cookies->add(new \yii\web\Cookie([
+        				'name' => "username",
+        				'value' => $data['username'],
+        				'expire'=>time()+3600*24*7
+        		]));
+        		$cookies->add(new \yii\web\Cookie([
+        				'name' => 'password',
+        				'value' => $data['password'],
+        				'expire'=>time()+3600*24*7
+        		]));
+        		
         		return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/index"));
         	}
         } else {
@@ -337,6 +351,18 @@ class SiteController extends Controller
     public function actionLogout()
     {
         Yii::$app->admin->logout();
+        //设置cookie为空
+        $cookies = Yii::$app->response->cookies;
+        $cookies->add(new \yii\web\Cookie([
+        		'name' => "username",
+        		'value' => '',
+        		'expire'=>time()-3600
+        ]));
+        $cookies->add(new \yii\web\Cookie([
+        		'name' => 'password',
+        		'value' =>'',
+        		'expire'=>time()-3600
+        ]));
         return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/site/login"));
     }
 

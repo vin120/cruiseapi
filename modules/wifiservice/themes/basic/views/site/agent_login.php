@@ -40,10 +40,10 @@ $page_active = isset($active) ? $active : 0;
 				 	<?php $form = ActiveForm::begin(['action' => ['/wifiservice/site/login'],'method'=>'post','id' => 'passport-form']); ?>
 					<input id="loginform-username" type="text" placeholder="护照号" 
 					autofocus="autofocus" oninput="setCustomValidity('')" oninvalid="setCustomValidity('护照号不能为空')" 
-					required="required"  name="LoginForm[username]">
+					required="required"  name="LoginForm[username]" value="<?php $cookies = Yii::$app->request->cookies; if ($cookies->has('username')){ echo $cookies['username']; }?>">
 					<input id="loginform-password"  type="password" placeholder="密码" 
 					oninput="setCustomValidity('')" oninvalid="setCustomValidity('密码不能为空')" 
-					required="required"  name="LoginForm[password]">
+					required="required"  name="LoginForm[password]" value="<?php $cookies = Yii::$app->request->cookies; if ($cookies->has('password')){ echo $cookies['password']; }?>">
 					
 					<div id="passwordthis">
 					</div>
