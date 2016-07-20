@@ -41,7 +41,7 @@ class WifiController extends Controller
 			//连接网络(本身包含了用户名及密码的验证)
 			$online_json = MyCurl::Connect($card,$password);
 			$online_json_trim = str_replace("\r\n\r\n","",$online_json);	//过滤分行
-			$online_json_trim = substr($online_json_trim,0,strlen($online_json_trim)-1);	//过滤最后一个分行
+			$online_json_trim = str_replace("\n","",$online_json_trim);	//过滤最后一个分行
 
 			$online_arr = json_decode($online_json,true);
 				
