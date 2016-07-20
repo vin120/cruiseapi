@@ -24,11 +24,11 @@ class WifiController extends Controller
 		$check_sell_and_active = MyCurl::CheckSellAndActive($card);
 		// var_dump($check_sell_and_active);die();
 
-		if (empty($check_sell_and_active['sell_date'])) {
+		if (empty($check_sell_and_active['sell_date']) || ($check_sell_and_active['is_cancel'] == 1)) {
 			//错误的 卡未出售
 			return Yii::$app->getResponse()->redirect(Url::toRoute(['/wifiservice/site/login',
 					'active'=> 0,
-					'response'=> '非法操作（此卡未出售）']));
+					'response'=> '非法操作（此卡未出售或已取消）']));
 		}
 
 		//查看是否存在该用户，验证是否已导入设备

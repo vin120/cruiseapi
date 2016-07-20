@@ -215,7 +215,7 @@ class MyCurl {
 
     public static function CheckSellAndActive($card_number)
     {
-        $sql = "SELECT sell_date,active_time FROM vcos_sell_card_records a 
+        $sql = "SELECT sell_date,active_time,is_cancel FROM vcos_sell_card_records a 
             LEFT JOIN vcos_card_active_log b ON a.card_number = b.card_number
             WHERE a.card_number='$card_number'";
         $sql_result = Yii::$app->db->createCommand($sql)->queryOne();
