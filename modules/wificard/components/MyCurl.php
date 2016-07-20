@@ -176,4 +176,51 @@ class MyCurl {
     	else $ip = "unknown";
     	return ($ip);
     }
+
+
+    //验证卡是否已售
+    public static function CheckSell($card)
+    {
+        $sql = "SELECT * FROM vcos_sell_card_records WHERE card_number='$card'";
+        $sql_result = Yii::$app->db->createCommand($sql)->queryOne();
+        return $sql_result;
+    }
+
+    //查看是否存在该卡 (取消使用，改用CheckSellAndActive联表查询)
+    // public static function FindCard($card)
+    // {
+    //     $sql = "SELECT * FROM vcos_card WHERE card_number='$card'";
+    //     $sql_result = Yii::$app->db->createCommand($sql)->queryOne();
+    //     return $sql_result;
+    // }
+
+    //验证该卡是否已激活 (取消使用，改用CheckSellAndActive联表查询)
+    // public static function FindCardActiveLog($card)
+    // {
+    //     $sql = "SELECT * FROM vcos_card_active_log WHERE card_number='$card'";
+    //     $sql_result = Yii::$app->db->createCommand($sql)->queryOne();
+    //     return $sql_result;
+    // }
+
+    //write card active log to db
+    public static function WriteCardActiveLogToDB($card_number, $ip_address)
+    {   
+        $active_time = date("Y-m-d H:i:s",time());
+        //记录激活的卡号和时间，ip等字段
+        $sql = "INSERT INTO vcos_card_active_log (`card_number`,`active_time`,`ip_address`) VALUES ('$card_number','$active_time','$ip_address')";
+        $sql_result = Yii::$app->db->createCommand($sql)->execute();
+
+        return $sql_result;
+    }
+
+    public static function CheckSellAndActive($card_number)
+    {
+        $sql = "SELECT sell_date,active_time FROM vcos_sell_card_records a 
+            LEFT JOIN vcos_card_active_log b ON a.card_number = b.card_number
+            WHERE a.card_number='$card_number'";
+        $sql_result = Yii::$app->db->createCommand($sql)->queryOne();
+
+        return $sql_result;
+    }
+
 }
