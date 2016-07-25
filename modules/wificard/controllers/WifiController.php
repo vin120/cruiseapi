@@ -20,7 +20,7 @@ class WifiController extends Controller
 		
 		
  		//验证该卡是否已经出售
-		$find_card_sell = MyCurl::CheckSell($card);
+		// $find_card_sell = MyCurl::CheckSell($card);var_dump($find_card_sell);die();
 		$check_sell_and_active = MyCurl::CheckSellAndActive($card);
 		// var_dump($check_sell_and_active);die();
 
@@ -74,10 +74,47 @@ class WifiController extends Controller
 						'response'=>$online_json_trim,]));
 			}
 		}else{
-			//卡号不存在时
-			return Yii::$app->getResponse()->redirect(Url::toRoute(['/wifiservice/site/login',
-					'active'=> 0,
-					'response'=>'非法卡号',]));
+			//查找卡类型及流量数（流量数以price来计算）
+			$type_and_price = MyCurl::FindCardTypeAndPrice($card);
+			// var_dump($type_and_price);die();
+
+			//处理联表查询失败的报错
+			if (empty($type_and_price['type_name']) || empty($type_and_price['price'])) {
+				return Yii::$app->getResponse()->redirect(Url::toRoute(['/wifiservice/site/login',
+						'active'=> 0,
+						'response'=>'非法卡号',]));
+			}
+
+			//用户信息初始化
+			$member = [
+				'passport_number' => $card,
+				'pwd' => $password,
+				'ugName' => $type_and_price['type_name'],
+				'cn_name' => '',
+				'mobile_number' => '',
+				'member_email' => '',
+			];
+
+			//创建用户
+			$create_user =  MyCurl::CreateCardUser($member);//var_dump($create_user);die();
+			$create_user = json_decode($create_user,true);
+// var_dump($create_user);
+			//用户充值
+			$recharge_wifi = MyCurl::RechargeWifi($card, $type_and_price['price']);
+			$recharge_wifi = json_decode($recharge_wifi,true);
+// var_dump($recharge_wifi);die();
+
+			if (empty($create_user['data']) || empty($recharge_wifi['data'])) {
+				//创建卡或充值操作失败
+				return Yii::$app->getResponse()->redirect(Url::toRoute(['/wifiservice/site/login',
+						'active'=> 0,
+						'response'=>'操作失败，请重试',]));
+			}else{
+				//正确的
+				return Yii::$app->getResponse()->redirect(Url::toRoute(['/wificard/wifi/index',
+						'active'=> 0,
+						'card'=>$card,]));
+			}
 		}
 	}
 	

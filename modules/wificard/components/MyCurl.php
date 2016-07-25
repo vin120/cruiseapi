@@ -178,7 +178,7 @@ class MyCurl {
     }
 
 
-    //验证卡是否已售
+    //验证卡是否已售 (取消使用，改用CheckSellAndActive联表查询)
     public static function CheckSell($card)
     {
         $sql = "SELECT * FROM vcos_sell_card_records WHERE card_number='$card'";
@@ -186,7 +186,7 @@ class MyCurl {
         return $sql_result;
     }
 
-    //查看是否存在该卡 (取消使用，改用CheckSellAndActive联表查询)
+    // 查看是否存在该卡
     // public static function FindCard($card)
     // {
     //     $sql = "SELECT * FROM vcos_card WHERE card_number='$card'";
@@ -213,14 +213,44 @@ class MyCurl {
         return $sql_result;
     }
 
+    //查询卡销售记录及是否激活
     public static function CheckSellAndActive($card_number)
     {
         $sql = "SELECT sell_date,active_time,is_cancel FROM vcos_sell_card_records a 
             LEFT JOIN vcos_card_active_log b ON a.card_number = b.card_number
-            WHERE a.card_number='$card_number'";
+            WHERE a.card_number='$card_number' ORDER BY a.id DESC";
         $sql_result = Yii::$app->db->createCommand($sql)->queryOne();
 
         return $sql_result;
+    }
+
+    //查看卡套餐类型名称及流量数（以price来计算）
+    public static function FindCardTypeAndPrice($card)
+    {
+        $sql = "SELECT type_name,price FROM vcos_card a
+            LEFT JOIN vcos_card_batch b ON a.batch_id = b.batch_id
+            LEFT JOIN vcos_card_type c ON b.card_type_id = c.card_type_id
+            WHERE card_number='$card'";
+        $sql_result = Yii::$app->db->createCommand($sql)->queryOne();
+        return $sql_result;
+    }
+
+    //创建卡用户
+    public static function CreateCardUser($member)
+    {
+        //模拟登录
+        MyCurl::vcurl(Yii::$app->params['wifi_url'].'comstserver.awm?','status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
+        
+        $create_url = Yii::$app->params['wifi_url']."um_add/comstserver.awm?";
+        
+        //UTF-8 转换为 GB2312
+        $date = iconv('UTF-8','GB2312', date('Y年m月d日',time()));
+        $ugName = iconv('UTF-8', 'GB2312', $member['ugName']);
+        $LinkName = iconv('UTF-8','GB2312', $member['cn_name']);
+        $create_user_param = "status=manage&opt=dbcs&dbName=usermanage_umb&subopt=add&Account=".$member['passport_number']."&pwd=".$member['pwd']."&ugName=".$ugName."&idUgb=1&isStartAcc=1&LinkName=".$LinkName."&paperType=6&paperNum=".$member['passport_number']."&phone=".$member['mobile_number']."&email=".$member['member_email']."&limitData=".$date;
+        $create_json = MyCurl::vcurl($create_url,$create_user_param);
+        $create_json = iconv('GB2312', 'UTF-8', $create_json);
+        return $create_json;
     }
 
 }

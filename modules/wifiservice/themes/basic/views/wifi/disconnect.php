@@ -67,6 +67,7 @@ window.onload = function(){
 	}
 	
 	$("#button").on("click",function(){
+		$("#button").attr("disabled", true);
 		$.ajax({
 			url: "<?php echo Url::toRoute(['service/wifidisconnect']);?>",
 	        data: {_csrf:csrfToken},

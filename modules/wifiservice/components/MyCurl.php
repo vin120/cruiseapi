@@ -215,10 +215,26 @@ class MyCurl {
     	
     	if(isset($res['data']['userId'])){
     		$idRec = $res['data']['userId'];
-    	
-    	$init_params = "status=manage&opt=dbcs&subopt=initAccount&dbName=usermanage_umb&idRec=".$idRec."&admin=".Yii::$app->params['wifi_login_name'];
-    	$init_json = MyCurl::vcurl($url,$init_params);
-    	$init_json = iconv('GB2312', 'UTF-8', $init_json);
+    		
+    		//先断开用户，防止出现连接记录负数的情况
+    		MyCurl::DisConnect($passport);
+    		$sql = " SELECT * FROM vcos_member_crew WHERE passport_number='$passport' LIMIT 1";
+    		$member = Yii::$app->mdb->createCommand($sql)->queryOne();
+    		//查流量
+    		$check_out_json = MyCurl::CheckFlow($member['passport_number']);
+    		$check_out_array = json_decode($check_out_json,true);
+    		$arr = explode("<br>", $check_out_array['data']['feeInfo']);
+    		//剔除不必要的字符
+    		$wifi_online_in_flow = str_replace('MB','',explode(": ",$arr[5])[1]);
+    		$wifi_online_out_flow = str_replace('MB','',explode(": ",$arr[6])[1]);
+    		$wifi_online_total_flow = str_replace('MB','',explode(": ",$arr[7])[1]);
+    		//断开连接记录写入DB
+    		MyWifi::WriteWifiLogoutLogToDB($member,$wifi_online_in_flow,$wifi_online_out_flow,$wifi_online_total_flow);
+    		 		
+    		//初始化
+	    	$init_params = "status=manage&opt=dbcs&subopt=initAccount&dbName=usermanage_umb&idRec=".$idRec."&admin=".Yii::$app->params['wifi_login_name'];
+	    	$init_json = MyCurl::vcurl($url,$init_params);
+	    	$init_json = iconv('GB2312', 'UTF-8', $init_json);
     	}else {
     		$init_json = '';
     	}

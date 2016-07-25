@@ -68,6 +68,7 @@ window.onload = function(){
 
 	var mcode = '<?php echo $mcode?>';
 	$("#button").on("click",function(){
+		$("#button").attr("disabled", true);
 		
 		$.ajax({
 			url: "<?php echo Url::toRoute(['service/wificonnect']);?>",
