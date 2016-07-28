@@ -64,35 +64,35 @@
 				if($member_money >= ($sale_price * 100) && $member_money >= 0){
 					//钱足够，进行支付
 					
-					//查询用户是否存在
-					$find_res = MyCurl::FindUser($member['passport_number']);
-					$find_res = json_decode($find_res,true);
-					if($find_res['success']===false){
-						//没找到用户
-						//创建用户,并加入组，对接接口
-						//创建一个随机的6位密码，存放在comst
-						$comst_password  = rand(100000,999999);
-						$create_time = date("Y-m-d H:i:s",time());
-						$username = $member['passport_number'];
+// 					//查询用户是否存在
+// 					$find_res = MyCurl::FindUser($member['passport_number']);
+// 					$find_res = json_decode($find_res,true);
+// 					if($find_res['success']===false){
+// 						//没找到用户
+// 						//创建用户,并加入组，对接接口
+// 						//创建一个随机的6位密码，存放在comst
+// 						$comst_password  = rand(100000,999999);
+// 						$create_time = date("Y-m-d H:i:s",time());
+// 						$username = $member['passport_number'];
 						
-						$res = MyCurl::CreateUser($member,$comst_password,$type);
-						$res =  json_decode($res,true);
-						if($res['success'] === false){
-							return $response['error'] = ['errorCode'=>2,'message'=>$res['Info']];
-							die();
-						}else{
-							//把用户写入本地数据库中
-							$sql = "SELECT * FROM `vcos_comst_wifi` WHERE `username`='$username' ";
-							$comst_user = Yii::$app->db->createCommand($sql)->queryOne();
-							if($comst_user){
-								$sql = "UPDATE `vcos_comst_wifi` SET `password`='$comst_password' WHERE `username`='$username' ";
-								Yii::$app->db->createCommand($sql)->execute();
-							}else {
-								$sql = "INSERT INTO `vcos_comst_wifi` (`username`,`password`,`create_time`) VALUES('$username','$comst_password','$create_time')";
-								Yii::$app->db->createCommand($sql)->execute();
-							}
-						}
-					}
+// 						$res = MyCurl::CreateUser($member,$comst_password,$type);
+// 						$res =  json_decode($res,true);
+// 						if($res['success'] === false){
+// 							return $response['error'] = ['errorCode'=>2,'message'=>$res['Info']];
+// 							die();
+// 						}else{
+// 							//把用户写入本地数据库中
+// 							$sql = "SELECT * FROM `vcos_comst_wifi` WHERE `username`='$username' ";
+// 							$comst_user = Yii::$app->db->createCommand($sql)->queryOne();
+// 							if($comst_user){
+// 								$sql = "UPDATE `vcos_comst_wifi` SET `password`='$comst_password' WHERE `username`='$username' ";
+// 								Yii::$app->db->createCommand($sql)->execute();
+// 							}else {
+// 								$sql = "INSERT INTO `vcos_comst_wifi` (`username`,`password`,`create_time`) VALUES('$username','$comst_password','$create_time')";
+// 								Yii::$app->db->createCommand($sql)->execute();
+// 							}
+// 						}
+// 					}
 
 					//事务处理
 					$transaction = Yii::$app->mdb->beginTransaction();

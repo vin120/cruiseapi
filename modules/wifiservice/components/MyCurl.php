@@ -230,7 +230,10 @@ class MyCurl {
     		$wifi_online_total_flow = str_replace('MB','',explode(": ",$arr[7])[1]);
     		//断开连接记录写入DB
     		MyWifi::WriteWifiLogoutLogToDB($member,$wifi_online_in_flow,$wifi_online_out_flow,$wifi_online_total_flow);
-    		 		
+    		
+            //写入剩余流量记录
+            self::WriteLeftFlowLogToDB($passport);
+             		
     		//初始化
 	    	$init_params = "status=manage&opt=dbcs&subopt=initAccount&dbName=usermanage_umb&idRec=".$idRec."&admin=".Yii::$app->params['wifi_login_name'];
 	    	$init_json = MyCurl::vcurl($url,$init_params);
@@ -241,6 +244,27 @@ class MyCurl {
     	return $init_json;
     }
     
+
+    //记录剩余流量
+    public static function WriteLeftFlowLogToDB($passport)
+    {
+        //查询剩余流量
+        $left_flow = self::CheckFlowAndParse($passport);
+
+        $ip_address = MyCurl::getIp();
+        $init_time = date("Y-m-d H:i:s",time());
+
+        //写入剩余流量到表
+        $log = Yii::$app->db->createCommand()->insert('vcos_wifi_left_flow_log', [
+                    'passport_number' =>$passport,
+                    'left_flow' => $left_flow[0],
+                    'ip_address'=>$ip_address,
+                    'init_time'=>$init_time,
+            ])->execute();
+
+        return $log;
+    }
+
 	
 	//初始化账户组
 	public static function InitAccountGroup($group_name)

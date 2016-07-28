@@ -168,4 +168,70 @@ class InteractionController extends Controller
 		
 		return $response;
 	}
+
+	/**
+     * 查询网站访问记录
+     *
+     * @return array
+     */
+    public function actionCheckuserwebaccesslog()
+    {//echo "111";die();
+    	$account = Yii::$app->request->post("account");	//帐户名
+    	$begTime = Yii::$app->request->post("begTime"); //起始时间
+    	$endTime = Yii::$app->request->post("endTime"); //截止时间
+    	$path = Yii::$app->request->post("path"); //地址，第一次查询时不传，点击下一页必传
+    	$recPos = Yii::$app->request->post("recPos"); //起始id号，第一次查询时不传，点击下一页必传
+
+        //模拟登录
+        MyCurl::vcurl(Yii::$app->params['wifi_url'].'comstserver.awm?','status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
+
+        //格式转换，将y-m-d格式换成y年m月d日
+        $change_begTime = date('y-m-d', strtotime($begTime));
+        $change_endTime = date('y-m-d', strtotime($endTime));
+        $begTime = preg_replace('/-/', '月', preg_replace('/-/', '年', $change_begTime, 1), 1).'日';
+        $endTime = preg_replace('/-/', '月', preg_replace('/-/', '年', $change_endTime, 1), 1).'日';
+        $begTime = iconv('UTF-8','GB2312//IGNORE', $begTime);
+        $endTime = iconv('UTF-8','GB2312//IGNORE', $endTime);
+
+        $find_params = "status=manage&subopt=query&opt=dbcs&dbName=userlog_ulb&direct=1&IsAccount=on&account=$account
+                        &begTime=$begTime&endTime=$begTime&path=$path&idRec=$recPos&admin=".Yii::$app->params['wifi_login_name'];
+        $url = Yii::$app->params['wifi_url']."fee_checkout/comstserver.awm?";
+        $find_json = MyCurl::vcurl($url,$find_params);
+        // $find_json = json_decode($find_json,true);
+
+        return $find_json;
+    }    
+
+    /**
+     * 导出网站访问记录
+     *
+     * @return array
+     */
+    public static function actionExportuserwebaccesslog()
+    {
+    	$account = Yii::$app->request->post("account");	//帐户名
+    	$begTime = Yii::$app->request->post("begTime"); //起始时间
+    	$endTime = Yii::$app->request->post("endTime"); //截止时间
+    	$path = Yii::$app->request->post("path"); //地址，第一次查询时不传，点击下一页必传
+    	$recPos = Yii::$app->request->post("recPos"); //起始id号，第一次查询时不传，点击下一页必传
+
+        //模拟登录
+        MyCurl::vcurl(Yii::$app->params['wifi_url'].'comstserver.awm?','status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
+
+        //格式转换，将y-m-d格式换成y年m月d日
+        $change_begTime = date('y-m-d', strtotime($begTime));
+        $change_endTime = date('y-m-d', strtotime($endTime));
+        $begTime = preg_replace('/-/', '月', preg_replace('/-/', '年', $change_begTime, 1), 1).'日';
+        $endTime = preg_replace('/-/', '月', preg_replace('/-/', '年', $change_endTime, 1), 1).'日';
+        $begTime = iconv('UTF-8','GB2312//IGNORE', $begTime);
+        $endTime = iconv('UTF-8','GB2312//IGNORE', $endTime);
+
+        $find_params = "status=manage&subopt=query&opt=dbcs&dbName=userlog_ulb&direct=1&IsAccount=on&account=$account
+                        &begTime=$begTime&endTime=$begTime&path=$path&idRec=$recPos&admin=".Yii::$app->params['wifi_login_name'];
+        $url = Yii::$app->params['wifi_url']."fee_checkout/comstserver.awm?";
+        $find_json = MyCurl::vcurl($url,$find_params);
+        $find_json = json_decode($find_json,true);
+
+        return $find_json;
+    }     
 }

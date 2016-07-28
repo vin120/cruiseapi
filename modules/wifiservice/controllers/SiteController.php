@@ -10,7 +10,7 @@ use yii\web\Controller;
 use yii\helpers\Url;
 use yii\filters\VerbFilter;
 use app\modules\wifiservice\components\MyCurl;
-
+use app\components\MemberService;
 
 /**
  * Site controller
@@ -199,6 +199,45 @@ class SiteController extends Controller
         	if(Yii::$app->admin->identity->member_password === '888888'){
         		return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/resetpassword"));
         	}else{
+        		
+        		//查询用户是否存在
+        		$type = Yii::$app->admin->identity->member_type;
+        		$sign = Yii::$app->admin->identity->sign;
+        		if($type == 1){
+        			//会员
+        			
+        			$member = MemberService::getMemberbysign($sign);
+        		}else {
+        			$member =  MemberService::getCrewBySign($sign);
+        		}
+        		
+        		$find_res = MyCurl::FindUser($member['passport_number']);
+        		$find_res = json_decode($find_res,true);
+        		if($find_res['success']===false){
+        			//没找到用户
+        			//创建用户,并加入组，对接接口
+        			//创建一个随机的6位密码，存放在comst
+        			$comst_password  = rand(100000,999999);
+        			$create_time = date("Y-m-d H:i:s",time());
+        			$username = $member['passport_number'];
+        		
+        			$res = MyCurl::CreateUser($member,$comst_password,$type);
+        			$res =  json_decode($res,true);
+        			if($res['success'] === false){
+        				die();
+        			}else{
+        				//把用户写入本地数据库中
+        				$sql = "SELECT * FROM `vcos_comst_wifi` WHERE `username`='$username' ";
+        				$comst_user = Yii::$app->db->createCommand($sql)->queryOne();
+        				if($comst_user){
+        					$sql = "UPDATE `vcos_comst_wifi` SET `password`='$comst_password' WHERE `username`='$username' ";
+        					Yii::$app->db->createCommand($sql)->execute();
+        				}else {
+        					$sql = "INSERT INTO `vcos_comst_wifi` (`username`,`password`,`create_time`) VALUES('$username','$comst_password','$create_time')";
+        					Yii::$app->db->createCommand($sql)->execute();
+        				}
+        			}
+        		}
         		return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/index"));
         	}
         }
@@ -331,6 +370,45 @@ class SiteController extends Controller
         				'expire'=>time()+3600*24*7
         		]));
         		
+        		
+        		//查询用户是否存在
+        		$type = Yii::$app->admin->identity->member_type;
+        		$sign = Yii::$app->admin->identity->sign;
+        		if($type == 1){
+        			//会员
+        			$member = MemberService::getMemberbysign($sign);
+        		}else {
+        			$member =  MemberService::getCrewBySign($sign);
+        		}
+        		
+        		$find_res = MyCurl::FindUser($member['passport_number']);
+        		$find_res = json_decode($find_res,true);
+        		if($find_res['success']===false){
+        			//没找到用户
+        			//创建用户,并加入组，对接接口
+        			//创建一个随机的6位密码，存放在comst
+        			$comst_password  = rand(100000,999999);
+        			$create_time = date("Y-m-d H:i:s",time());
+        			$username = $member['passport_number'];
+        		
+        			$res = MyCurl::CreateUser($member,$comst_password,$type);
+        			$res =  json_decode($res,true);
+        			if($res['success'] === false){
+        				die();
+        			}else{
+        				//把用户写入本地数据库中
+        				$sql = "SELECT * FROM `vcos_comst_wifi` WHERE `username`='$username' ";
+        				$comst_user = Yii::$app->db->createCommand($sql)->queryOne();
+        				if($comst_user){
+        					$sql = "UPDATE `vcos_comst_wifi` SET `password`='$comst_password' WHERE `username`='$username' ";
+        					Yii::$app->db->createCommand($sql)->execute();
+        				}else {
+        					$sql = "INSERT INTO `vcos_comst_wifi` (`username`,`password`,`create_time`) VALUES('$username','$comst_password','$create_time')";
+        					Yii::$app->db->createCommand($sql)->execute();
+        				}
+        			}
+        		}
+
         		return Yii::$app->getResponse()->redirect(Url::to("/wifiservice/wifi/index"));
         	}
         } else {
