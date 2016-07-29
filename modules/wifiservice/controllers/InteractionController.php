@@ -236,6 +236,7 @@ class InteractionController extends Controller
                         &begTime=$begTime&endTime=$begTime&path=".$path."&idRec=".$recPos."&admin=".Yii::$app->params['wifi_login_name'];
         
 	        $find_json = MyCurl::vcurl($url,$find_params);
+	        $find_json = iconv('UTF-8','GB2312//IGNORE', $find_json);
 	        $find_json = json_decode($find_json,true);
 	        $result_data = array_merge($result_data, $find_json['data']); //追加数组
 	        $path = $find_json['path'];
