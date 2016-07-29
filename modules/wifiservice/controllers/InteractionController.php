@@ -172,7 +172,7 @@ class InteractionController extends Controller
 	/**
      * 查询网站访问记录
      *
-     * @return array
+     * @return json
      */
     public function actionCheckuserwebaccesslog()
     {//echo "111";die();
@@ -195,7 +195,7 @@ class InteractionController extends Controller
 
         $find_params = "status=manage&subopt=query&opt=dbcs&dbName=userlog_ulb&direct=1&IsAccount=on&account=$account
                         &begTime=$begTime&endTime=$begTime&path=$path&idRec=$recPos&admin=".Yii::$app->params['wifi_login_name'];
-        $url = Yii::$app->params['wifi_url']."fee_checkout/comstserver.awm?";
+        $url = Yii::$app->params['wifi_url']."log_manage/comstserver.awm?";
         $find_json = MyCurl::vcurl($url,$find_params);
         // $find_json = json_decode($find_json,true);
 
@@ -203,17 +203,20 @@ class InteractionController extends Controller
     }    
 
     /**
-     * 导出网站访问记录
+     * 导出网站访问记录,根据条件查询记录总量
      *
-     * @return array
+     * @return json
      */
     public static function actionExportuserwebaccesslog()
     {
+    	//初始化参数
     	$account = Yii::$app->request->post("account");	//帐户名
     	$begTime = Yii::$app->request->post("begTime"); //起始时间
     	$endTime = Yii::$app->request->post("endTime"); //截止时间
-    	$path = Yii::$app->request->post("path"); //地址，第一次查询时不传，点击下一页必传
-    	$recPos = Yii::$app->request->post("recPos"); //起始id号，第一次查询时不传，点击下一页必传
+    	$path = ''; //地址，第一次查询为空，后续页数查询时，其为上一次查询结果的返回参数
+    	$recPos = ''; //起始id号，第一次查询为空，后续页数查询时，其为上一次查询结果的返回参数
+        $url = Yii::$app->params['wifi_url']."log_manage/comstserver.awm?";
+        $per_page_num = 15;
 
         //模拟登录
         MyCurl::vcurl(Yii::$app->params['wifi_url'].'comstserver.awm?','status=manage&opt=login&admin='.Yii::$app->params['wifi_login_name'].'&pwd='.Yii::$app->params['wifi_login_password']);
@@ -226,12 +229,20 @@ class InteractionController extends Controller
         $begTime = iconv('UTF-8','GB2312//IGNORE', $begTime);
         $endTime = iconv('UTF-8','GB2312//IGNORE', $endTime);
 
-        $find_params = "status=manage&subopt=query&opt=dbcs&dbName=userlog_ulb&direct=1&IsAccount=on&account=$account
-                        &begTime=$begTime&endTime=$begTime&path=$path&idRec=$recPos&admin=".Yii::$app->params['wifi_login_name'];
-        $url = Yii::$app->params['wifi_url']."fee_checkout/comstserver.awm?";
-        $find_json = MyCurl::vcurl($url,$find_params);
-        $find_json = json_decode($find_json,true);
+    	$result_data = array();
+    	$i = 1;
+        do {
+        	$find_params = "status=manage&subopt=query&opt=dbcs&dbName=userlog_ulb&direct=1&IsAccount=on&account=$account
+                        &begTime=$begTime&endTime=$begTime&path=".$path."&idRec=".$recPos."&admin=".Yii::$app->params['wifi_login_name'];
+        
+	        $find_json = MyCurl::vcurl($url,$find_params);
+	        $find_json = json_decode($find_json,true);
+	        $result_data = array_merge($result_data, $find_json['data']); //追加数组
+	        $path = $find_json['path'];
+    		$recPos = $find_json['recPos'];
+    		$i++;
+        } while (count($find_json['data']) == $per_page_num);
 
-        return $find_json;
+        return json_encode($result_data);
     }     
 }
